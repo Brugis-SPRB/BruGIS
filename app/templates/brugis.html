@@ -31,9 +31,6 @@
 		
 /*		
 ///////////////////////////////////////////////////////////////////////////////
-// DocG - Genre qu'ici on ferait un truc différent pour chaque browser ////////
-// DocG - Qu'on pourrait aussi adapter l'interface pour les tablette //////////
-// DocG - que ce serait carrément bien ça hein Georges? ///////////////////////
 		if (OpenLayers.Util) {
 			//console.log(OpenLayers.Util.getBrowserName());
 			if (OpenLayers.Util.getBrowserName() == 'msie') {
@@ -100,7 +97,7 @@
         	// layer sources
         	defaultSourceType: "gxp_wmssource",
         	
-			
+			/*
 			sources: {
 				'BruGIS WMS - Geoserver': {
 					url: "http://svappmavw019:8080/geoserver/ows",
@@ -118,8 +115,8 @@
 					ptype: "gxp_wmscsource"
 				}
 			}, 
+			*/
 			
-			/*
 			sources: {
 				'BruGIS WMS - Geoserver': {
 					url: "/geoserver/ows",
@@ -137,7 +134,7 @@
 					ptype: "gxp_wmscsource"
 				}
 			},
-			*/
+			
 			
 		    map: {
 				id: "mymap", // id needed to reference map in portalConfig above
