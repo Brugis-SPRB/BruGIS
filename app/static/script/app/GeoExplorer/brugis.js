@@ -113,22 +113,10 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
                 id: "featuremanager",
                 maxFeatures: 20,
                 paging: false
-            }/*, {
-				ptype: "gxp_snappingagent_mod",
-				id: "snapping-agent",
-				autoActivate: false,
-				targets: [{
-					source: 'BruGIS WMS - Geoserver',
-					name: "AATL:Parcelle_2012",
-					restrictedLayers: [
-						{ source: 'BruGIS WMS - Geoserver' , name: "AATL:Affectations" }
-					]
-				}]
-			}*/,{
+            }, {
                 ptype: "gxp_featureeditor",
                 featureManager: "featuremanager",
                 autoLoadFeature: true,
-				//snappingAgent: "snapping-agent",
                 toggleGroup: this.toggleGroup,
                 actionTarget: {target: "paneltbar", index: 8}
             }, {
@@ -191,8 +179,9 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
 				alwaysDisplayOnMap: true,
 				selectOnMap: true
 			}, {
-				ptype: "gxp_queryform",
+				ptype: "ux_queryform",
 				featureManager: "featuremanager",
+				id: "uxQueryForm",
 				outputConfig: {
 					title: "Query",
 					spatialQuery: false,
@@ -259,12 +248,6 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
                 tool.disable();
             }
         });
-		Ext.getCmp('layers.tbar').items.each(function(tool) {
-            if (tool.needsAuthorization === true) {
-                tool.disable();
-            }
-        });
-		
         this.showLogin();
 		window.location.reload();
     },
@@ -336,11 +319,6 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
                             tool.enable();
                         }
                     });
-					Ext.getCmp('layers.tbar').items.each(function(tool) {
-						if (tool.needsAuthorization === true) {
-							tool.enable();
-						}
-					});
                     var user = form.findField('username').getValue();
                     this.setCookieValue(this.cookieParamName, user);
                     this.setAuthorizedRoles(["ROLE_ADMINISTRATOR"]);
@@ -445,12 +423,7 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
 					xtype: "container",
 					autoScroll: true
 				}]
-			}/*,
-			{
-				id: "west3",
-				xtype: "container",
-				height: 220
-			}*/]
+			}]
         });
 
         this.toolbar = new Ext.Toolbar({
@@ -760,68 +733,7 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
         }];
         GeoExplorer.superclass.initPortal.apply(this, arguments);  
     },
-	
-	//DocG/////////////////////////////////////////////////////////////////////////
-    /**
-     * api: method[addLocaleTools]
-     * Add locale buttons in the received tools.
-     */
-	addLocaleTools: function(tools) {
-		var frButton = new Ext.Button({
-			text: 'fr',
-			tooltip: this.frenchText,
-			handler: function() {
-				console.log('--fr--');
-				console.log(GeoExt.Lang.locale);
-				GeoExt.Lang.locale = 'fr'
-				GeoExt.Lang.set(GeoExt.Lang.locale);
-				//window.location.reload();
-				console.log(GeoExt.Lang.locale);
-				console.log(window.location);
-				GeoExplorer.superclass.initPortal.apply(this, arguments); 
-			},
-			scope: this
-		});
-		var nlButton = new Ext.Button({
-			text: 'nl',
-			tooltip: this.deutchText,
-			handler: function() {
-				console.log('--nl--');
-				console.log(GeoExt.Lang.locale);
-				GeoExt.Lang.locale = 'nl'
-				GeoExt.Lang.set(GeoExt.Lang.locale);
-				//window.location.reload();
-				console.log(GeoExt.Lang.locale);
-				console.log(window.location);
-				GeoExplorer.superclass.initPortal.apply(this, arguments); 
-			},
-			scope: this
-		});
-		var enButton = new Ext.Button({
-			text: 'en',
-			tooltip: this.englishText,
-			handler: function() {
-				console.log('--en--');
-				console.log(GeoExt.Lang.locale);
-				GeoExt.Lang.locale = 'en'
-				GeoExt.Lang.set(GeoExt.Lang.locale);
-				//window.location.reload();
-				console.log(GeoExt.Lang.locale);
-				console.log(window.location);
-				GeoExplorer.superclass.initPortal.apply(this, arguments); 
-			},
-			scope: this
-		});
-		tools.push("-");
-		tools.push(frButton);
-		tools.push("-");
-		tools.push(nlButton);
-		tools.push("-");
-		tools.push(enButton);
-        return tools;
-	},
-	//DocG/////////////////////////////////////////////////////////////////////////
-	
+
     /**
      * api: method[createTools]
      * Create the toolbar configuration for the main view.
@@ -918,9 +830,6 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
 					    xtype: "tbtext"
 						}
 				]);
-		
-		//tools = this.addLocaleTools(tools);	
-		
         return tools;
     },
 	///////////////////////////////////////////////////////////////////////////

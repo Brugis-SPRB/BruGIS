@@ -28,9 +28,9 @@ Ext.namespace("ux.plugins");
  *    TODO Replace this tool with something that is less like GeoEditor and
  *    more like filtering.
  */
-gxp.plugins.QueryForm = Ext.extend(gxp.plugins.Tool, {
+ux.plugins.QueryForm = Ext.extend(gxp.plugins.Tool, {
     
-    /** api: ptype = gxp_queryform */
+    /** api: ptype = ux_queryform */
     ptype: "ux_queryform",
 
     /** api: config[featureManager]
@@ -134,28 +134,10 @@ gxp.plugins.QueryForm = Ext.extend(gxp.plugins.Tool, {
                 disabled: true
             }]
         });
-        gxp.plugins.QueryForm.superclass.constructor.apply(this, arguments);
+        ux.plugins.QueryForm.superclass.constructor.apply(this, arguments);
     },
 	
-    /** private: method[onAuthorizationChange]
-     */
-    onAuthorizationChange: function() {
-        // we don't want to return false here, otherwise we would abort the
-        // event chain.
-        this.enableOrDisable();
-		console.log('tagada');
-    },
-	
-    /**
-     * private: method[enableOrDisable]
-     */
-    enableOrDisable: function() {
-        // disable editing if no schema
-        var disable = !this.schema;
-        this.actions[0].setDisabled(disable);
-        this.actions[1].setDisabled(disable);
-        return disable;
-    },
+
     
     /** api: method[addActions]
      */
@@ -165,7 +147,9 @@ gxp.plugins.QueryForm = Ext.extend(gxp.plugins.Tool, {
         if (this.actions) {
             this.target.tools[this.featureManager].on("layerchange", function(mgr, rec, schema) {
                 for (var i=this.actions.length-1; i>=0; --i) {
-                    this.actions[i].setDisabled(!schema);
+					if(this.target.authorizedRoles && this.target.authorizedRoles[0] == "ROLE_ADMINISTRATOR") {
+						this.actions[i].setDisabled(!schema);
+					} 
                 }
             }, this);
         }
@@ -242,7 +226,7 @@ gxp.plugins.QueryForm = Ext.extend(gxp.plugins.Tool, {
                 scope: this
             }]
         }, config || {});
-        var queryForm = gxp.plugins.QueryForm.superclass.addOutput.call(this, config);
+        var queryForm = ux.plugins.QueryForm.superclass.addOutput.call(this, config);
         
         var addFilterBuilder = function(mgr, rec, schema) {
             queryForm.attributeFieldset.removeAll();
