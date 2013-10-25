@@ -1,0 +1,24 @@
+[submodule "externals/ringojs"]
+	path = externals/ringojs
+	url = http://github.com/ringo/ringojs.git
+[submodule "externals/buildkit"]
+	path = externals/buildkit
+	url = http://github.com/tschaub/buildkit.git
+[submodule "app/static/externals/gxp"]
+	path = app/static/externals/gxp
+	url = http://github.com/opengeo/gxp.git
+[submodule "app/static/externals/GeoExt"]
+	path = app/static/externals/GeoExt
+	url = http://github.com/geoext/geoext.git
+[submodule "app/static/externals/openlayers"]
+	path = app/static/externals/openlayers
+	url = http://github.com/openlayers/openlayers.git
+[submodule "app/static/externals/PrintPreview"]
+	path = app/static/externals/PrintPreview
+	url = http://github.com/GeoNode/PrintPreview.git
+[submodule "externals/stick"]
+	path = externals/stick
+	url = https://github.com/hns/stick.git
+[submodule "externals/ringojs-fork"]
+	path = externals/ringojs-fork
+	url = http://github.com/tschaub/ringojs.git

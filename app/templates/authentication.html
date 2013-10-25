@@ -1,0 +1,119 @@
+    <!-- GeoExplorer resources -->
+    <link rel="stylesheet" type="text/css" href="../theme/app/geoexplorer.css" />
+    <!--[if IE]><link rel="stylesheet" type="text/css" href="../theme/app/ie.css"/><![endif]-->        
+    <link rel="stylesheet" type="text/css" href="../theme/ux/colorpicker/color-picker.ux.css" />
+    <link rel="stylesheet" type="text/css" href="../theme/ux/Geolocator/Geolocator.ux.css" />
+    <script type="text/javascript" src="../script/GeoExplorer.js"></script>
+
+    <!-- PrintPreview resources -->
+    <link rel="stylesheet" type="text/css" href="../externals/PrintPreview/resources/css/printpreview.css">
+
+    <script type="text/javascript">
+        // optionally set locale based on query string parameter
+        if (GeoExt.Lang) {
+            GeoExt.Lang.set(OpenLayers.Util.getParameters()["locale"] || GeoExt.Lang.locale);
+        }
+		
+        Ext.BLANK_IMAGE_URL = "../theme/app/img/blank.gif";
+        OpenLayers.ImgPath = "../theme/app/img/";
+		OpenLayers.IMAGE_RELOAD_ATTEMPTS = 3;
+        // optionally set locale based on query string parameter
+        if (GeoExt.Lang) {
+            GeoExt.Lang.set(OpenLayers.Util.getParameters()["locale"] || GeoExt.Lang.locale);
+        }
+		
+				Ext.onReady(function(){		
+	
+			var panel = new Ext.FormPanel({
+				url: "../login/",
+				frame: true,
+				labelWidth: 80,
+				width: 350,
+				defaultType: "textfield",
+				errorReader: {
+					read: function(response) {
+						var success = false;
+						var records = [];
+						if (response.status === 200) {
+							success = true;
+						} else {
+							records = [
+								{data: {id: "username", msg: this.loginErrorText}},
+								{data: {id: "password", msg: this.loginErrorText}}
+							];
+						}
+						return {
+							success: success,
+							records: records
+						};
+					}
+				},
+				items: [
+				{
+					fieldLabel: "USER",
+					name: "username",
+					allowBlank: false,
+					listeners: {
+						render: function() {
+							this.focus(true, 100);
+						}
+					}
+				}, {
+					fieldLabel: "PASSWORD",
+					name: "password",
+					inputType: "password",
+					allowBlank: false
+				}],
+				buttons: [{
+					text: "Login",
+					formBind: true,
+					handler: submitLogin,
+					scope: this
+				}],
+				keys: [{ 
+					key: [Ext.EventObject.ENTER], 
+					handler: submitLogin,
+					scope: this
+				}]
+			});
+
+			function submitLogin() {
+				panel.buttons[0].disable();
+				panel.getForm().submit({
+					success: function(form, action) {
+						var user = form.findField('username').getValue();
+						document.cookie = 'geoexplorer-user=' + escape(user);
+						window.location = "../";
+					},
+					failure: function(form, action) {
+						panel.buttons[0].enable();
+						form.markInvalid({
+							"username": this.loginErrorText,
+							"password": this.loginErrorText
+						});
+					},
+					scope: this
+				});
+			}
+			
+			
+			panel.render(document.body);
+		
+		});
+	
+    </script>
+	
+	<script type="text/javascript">
+
+	  var _gaq = _gaq || [];
+	  _gaq.push(['_setAccount', 'UA-21637975-4']);
+	  _gaq.push(['_trackPageview']);
+
+	  (function() {
+		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	  })();
+
+	</script>
+	

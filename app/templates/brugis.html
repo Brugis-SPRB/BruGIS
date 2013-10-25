@@ -1,0 +1,236 @@
+﻿    <!-- GeoExplorer resources -->
+    <link rel="stylesheet" type="text/css" href="../theme/app/geoexplorer.css" />
+    <!--[if IE]><link rel="stylesheet" type="text/css" href="../theme/app/ie.css"/><![endif]-->        
+    <link rel="stylesheet" type="text/css" href="../theme/ux/colorpicker/color-picker.ux.css" />
+    <link rel="stylesheet" type="text/css" href="../theme/ux/Geolocator/Geolocator.ux.css" />
+    <script type="text/javascript" src="../script/GeoExplorer.js"></script>
+
+    <!-- PrintPreview resources -->
+    <link rel="stylesheet" type="text/css" href="../externals/PrintPreview/resources/css/printpreview.css">
+
+    <script>
+        // optionally set locale based on query string parameter
+        if (GeoExt.Lang) {
+            GeoExt.Lang.set(OpenLayers.Util.getParameters()["locale"] || GeoExt.Lang.locale);
+			//GeoExt.Lang.set("nl");
+		}
+        Ext.BLANK_IMAGE_URL = "../theme/app/img/blank.gif";
+        OpenLayers.ImgPath = "../theme/app/img/";
+		OpenLayers.IMAGE_RELOAD_ATTEMPTS = 3;
+        // optionally set locale based on query string parameter
+        if (GeoExt.Lang) {
+            GeoExt.Lang.set(OpenLayers.Util.getParameters()["locale"] || GeoExt.Lang.locale);
+			//GeoExt.Lang.set("nl");
+        }
+		var geoextLangFr = (GeoExt.Lang.locale == "fr")?true:false;
+		var geoextLangNl = (GeoExt.Lang.locale == "nl")?true:false;
+		var geoextLangEn = (GeoExt.Lang.locale == "en")?true:false;
+		if (!(geoextLangFr) == true && !(geoextLangNl) == true && !(geoextLangEn) == true){
+			geoextLangFr = true;
+		}
+		
+/*		
+///////////////////////////////////////////////////////////////////////////////
+// DocG - Genre qu'ici on ferait un truc différent pour chaque browser ////////
+// DocG - Qu'on pourrait aussi adapter l'interface pour les tablette //////////
+// DocG - que ce serait carrément bien ça hein Georges? ///////////////////////
+		if (OpenLayers.Util) {
+			//console.log(OpenLayers.Util.getBrowserName());
+			if (OpenLayers.Util.getBrowserName() == 'msie') {
+				// display a popup explaining the interest to install Firefox or Chrome :-)
+			}
+			else if (OpenLayers.Util.getBrowserName() == 'firefox') {
+				//console.log("good good");
+			}
+			else if (OpenLayers.Util.getBrowserName() == 'safari') {
+				//console.log("good good");
+			}
+			else if (OpenLayers.Util.getBrowserName() == 'chrome') {
+				//console.log("good good");
+			}
+		}
+///////////////////////////////////////////////////////////////////////////////
+*/	
+		var localeHelp = 
+			(geoextLangFr)?
+				"<a href='http://urbanisme.irisnet.be/cartographie/brugis/brugis-r-fait-peau-neuve/mode-demploi-brugis'target= '_blank'>Click here</a>"
+				:
+			(geoextLangNl)?
+				"<a href='http://stedenbouw.irisnet.be/cartografie/brugis/gebruiksaanwijzing-brugis?set_language=nl'target= '_blank'>Click here</a>"
+				:
+			(geoextLangEn)?
+				"<a href='http://urbanisme.irisnet.be/cartographie/brugis/brugis-r-fait-peau-neuve/mode-demploi-brugis'target= '_blank'>Click here</a>"
+				:
+				"";
+
+		var abstractText = 
+			(geoextLangFr)?
+				"BruGIS, plateforme cartographique de Bruxelles Développement urbain (SPRB)."
+				:
+			(geoextLangNl)?
+				"BruGIS, cartografische platform van Brussel Stedelijke Ontwikkeling (GOB)."
+				:
+			(geoextLangEn)?
+				"BruGIS, cartographic platform of Brussels Urban Development (BRPS)."
+				:
+				"";
+			
+		var contactText = 
+			(geoextLangFr)?
+				"e-mail: <a href='mailto:brugis@mrbc.irisnet.be'>brugis@mrbc.irisnet.be</a>."
+				:
+			(geoextLangNl)?
+				"e-mail: <a href='mailto:brugis@mrbc.irisnet.be'>brugis@mrbc.irisnet.be</a>."
+				:
+			(geoextLangEn)?
+				"e-mail: <a href='mailto:brugis@mrbc.irisnet.be'>brugis@mrbc.irisnet.be</a>."
+				:
+				"";
+				
+        var app = new GeoExplorer.Brugis({
+            authStatus: {{status}},
+            proxy: "../proxy/?url=",
+            printService: "/geoserver/pdf/",
+            about: {
+                title: "MyBruGIS v 1.00",
+                "abstract": abstractText,
+				"help": localeHelp,
+		        contact: contactText
+            },
+        	// layer sources
+        	defaultSourceType: "gxp_wmssource",
+        	
+			/*
+			sources: {
+				'BruGIS WMS - Geoserver': {
+					url: "http://svappmavw019:8080/geoserver/ows",
+					version: "1.1.1",
+					ptype: "gxp_wmscsource"
+				},
+				'IBGE WMS - Mapserver': {
+					url: "http://wms.ibgebim.be/cgi-bin/ibgewms.exe",
+					ptype: "gxp_wmscsource",
+					version: "1.1.1"
+				},
+				'Cadastre WMS': {
+					url: "http://ccff02.minfin.fgov.be/cadgisWMS/CP_CadastralParcels/Mapserver/WMSServer",
+					version: "1.1.1",
+					ptype: "gxp_wmssource"
+				},
+            	'GeoWebCacheLocal': {
+					url: "http://svappmavw019:8080/geoserver/www/wmsaatl/geoweb_brugis.xml",
+					version: "1.1.1",
+					ptype: "gxp_wmscsource"
+				}
+			}, 
+			*/
+			
+			sources: {
+				'BruGIS WMS - Geoserver': {
+					url: "/geoserver/ows",
+					version: "1.1.1",
+					ptype: "gxp_wmscsource"
+				},
+				'IBGE WMS - Mapserver': {
+					url: "http://wms.ibgebim.be/cgi-bin/ibgewms.exe",
+					version: "1.1.1",
+					ptype: "gxp_wmscsource"
+				},
+            	'GeoWebCacheLocal': {
+					url: "/geoserver/www/wmsaatl/geoweb_brugis.xml",
+					version: "1.1.1",
+					ptype: "gxp_wmscsource"
+				}
+			},
+			
+		    map: {
+				id: "mymap", // id needed to reference map in portalConfig above
+				projection: 'EPSG:31370',
+				units: 'm',
+				resolutions: [	49,		// 1/175.000
+								42, 	// 1/150.000
+								28, 	// 1/100.000
+								21, 	// 1/75.000
+								14, 	// 1/50.000
+								7, 		// 1/25.000
+								5.6,	// 1/20.000
+								3.5, 	// 1/12.500
+								2.8, 	// 1/10.000
+								2.1, 	// 1/7.500
+								1.4, 	// 1/5.000
+								0.7, 	// 1/2.500
+								0.56,	// 1/2.000
+								0.28, 	// 1/1.000
+								0.14, 	// 1/500
+								0.07, 	// 1/250
+								0.056,	// 1/200
+								0.035, 	// 1/125
+								0.028, 	// 1/100
+								0.014  	// 1/50
+							  ],
+				maxResolution: 49,
+				//maxExtent: [129800, 158000, 167800, 181100],
+				maxExtent:   [120000, 140000, 180000, 200000],
+				center: [149360, 170450],
+				zoom:2,
+				layers: [
+				/*{
+					source: "Cadastre WMS",
+					name:   "CP_Cadastral_Parcels",
+					title:  "CP_Cadastral_Parcels"
+				},*/
+				{
+					source: "GeoWebCacheLocal",
+					name:   "urbisFR",
+					title:  "Urbis Fr",
+					id: "frBackground",
+					group:  "background",
+					fixed: true,
+					visibility: geoextLangFr
+				}, {
+					source: "GeoWebCacheLocal",
+					name:   "urbisNL",
+					title:  "Urbis Nl",
+					id: "nlBackground",
+					group:  "background",
+					fixed: true,
+					visibility: geoextLangNl
+				}, {
+					source: "GeoWebCacheLocal",
+					name:   "urbis:ortho2004",
+					title:  "Orthophotoplans 2004",
+					visibility: false,
+					format: "image/jpeg",
+					transparent : "false"
+				}, {
+					source: "GeoWebCacheLocal",
+					name:   "urbisORTHO",
+					title:  "Orthophotoplans 2009",
+					visibility: false,
+					format: "image/jpeg",
+					transparent : "false"
+				}, {
+					source: "GeoWebCacheLocal",
+					name:   "ortho2012",
+					title:  "Orthophotoplans 2012",
+					visibility: false,
+					format: "image/png",
+					transparent : "true"
+				}]
+			}
+        });
+    </script>
+	<script type="text/javascript">
+
+	  var _gaq = _gaq || [];
+	  _gaq.push(['_setAccount', 'UA-21637975-4']);
+	  _gaq.push(['_trackPageview']);
+
+	  (function() {
+		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	  })();
+
+	</script>
+	

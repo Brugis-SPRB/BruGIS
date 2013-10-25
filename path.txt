@@ -1,0 +1,3 @@
+C:\Users\brugis\AppData\Local\GitHub\PortableGit_0812189c12ccff4584523d6efce294a33dd2332a\cmd
+
+PATH
