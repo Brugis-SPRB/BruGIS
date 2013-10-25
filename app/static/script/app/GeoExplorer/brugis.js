@@ -191,7 +191,7 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
 				alwaysDisplayOnMap: true,
 				selectOnMap: true
 			}, {
-				ptype: "ux_queryform",
+				ptype: "gxp_queryform",
 				featureManager: "featuremanager",
 				outputConfig: {
 					title: "Query",

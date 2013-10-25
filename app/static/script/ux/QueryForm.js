@@ -136,11 +136,31 @@ gxp.plugins.QueryForm = Ext.extend(gxp.plugins.Tool, {
         });
         gxp.plugins.QueryForm.superclass.constructor.apply(this, arguments);
     },
+	
+    /** private: method[onAuthorizationChange]
+     */
+    onAuthorizationChange: function() {
+        // we don't want to return false here, otherwise we would abort the
+        // event chain.
+        this.enableOrDisable();
+		console.log('tagada');
+    },
+	
+    /**
+     * private: method[enableOrDisable]
+     */
+    enableOrDisable: function() {
+        // disable editing if no schema
+        var disable = !this.schema;
+        this.actions[0].setDisabled(disable);
+        this.actions[1].setDisabled(disable);
+        return disable;
+    },
     
     /** api: method[addActions]
      */
     addActions: function(actions) {
-        gxp.plugins.QueryForm.superclass.addActions.apply(this, arguments);
+        ux.plugins.QueryForm.superclass.addActions.apply(this, arguments);
         // support custom actions
         if (this.actions) {
             this.target.tools[this.featureManager].on("layerchange", function(mgr, rec, schema) {
