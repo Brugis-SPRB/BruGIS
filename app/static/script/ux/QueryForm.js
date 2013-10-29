@@ -137,8 +137,6 @@ ux.plugins.QueryForm = Ext.extend(gxp.plugins.Tool, {
         ux.plugins.QueryForm.superclass.constructor.apply(this, arguments);
     },
 	
-
-    
     /** api: method[addActions]
      */
     addActions: function(actions) {
