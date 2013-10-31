@@ -58,24 +58,6 @@ ux.form.CirbGeocoderComboBox = Ext.extend(Ext.form.ComboBox, {
      */
     listWidth: 350,
 
-    /** api: config[zoom]
-     *  ``Number`` Zoom level for recentering the map after search, if set to
-     *  a negative number the map isn't recentered, defaults to 8.
-     */
-    /** private: property[zoom]
-     *  ``Number``
-     */
-    zoom: 9,
-
-    /** api: config[zoomToPolNum]
-     *  ``Number`` Zoom level for recentering the map after search, if set to
-     *  a negative number the map isn't recentered, defaults to 10.
-     */
-    /** private: property[zoom]
-     *  ``Number``
-     */
-    zoomToPolNum: 12,
-
     /** api: config[minChars]
      *  ``Number`` Minimum number of characters to be typed before
      *  search occurs, defaults to 1.
