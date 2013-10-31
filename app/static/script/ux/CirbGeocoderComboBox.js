@@ -97,12 +97,6 @@ ux.form.CirbGeocoderComboBox = Ext.extend(Ext.form.ComboBox, {
      */
     maxRows: '20',
 	
-	/**
-	 *
-	 *
-	 */
-	//controlOptions: {}, //gvds 2012/10/24
-
     /** api: config[tpl]
      *  ``Ext.XTemplate or String`` Template for presenting the result in the
      *  list (see http://www.dev.sencha.com/deploy/dev/docs/output/Ext.XTemplate.html),
@@ -153,7 +147,6 @@ ux.form.CirbGeocoderComboBox = Ext.extend(Ext.form.ComboBox, {
             }),
             baseParams: {
 				language: this.language,
-				//callback: 'callback',
 				address: this.queryParam
             },
             reader: new Ext.data.JsonReader({
@@ -181,53 +174,7 @@ ux.form.CirbGeocoderComboBox = Ext.extend(Ext.form.ComboBox, {
                 ]
             })
         });
-        if(this.zoom > 0) {
-            this.on("select", function(combo, record, index) {
-				var myPoint = record.data.point;
-				var adnc    = record.data.adNc;
-				var p = new Proj4js.Point(myPoint.x, myPoint.y);
-				var streetName = record.data.streetName;
-				Proj4js.transform(source, dest, p);
-				var layerName = 'Search';
-				//var layerName = streetName;
-				if(this.map.getLayersByName(layerName).length > 0){
-					var vectorLayer = this.map.getLayersByName(layerName)[0];
-					//console.log("1");
-					//console.log(this.map.getLayersByName(layerName));
-					vectorLayer.addFeatures(
-						new OpenLayers.Feature.Vector(
-						new OpenLayers.Geometry.Point(myPoint.x, myPoint.y)
-						)
-					);
-				}
-				else{
-					//console.log("2");
-					var vectorLayer = new OpenLayers.Layer.Vector(layerName);
-					vectorLayer.addFeatures(
-						new OpenLayers.Feature.Vector(
-						new OpenLayers.Geometry.Point(myPoint.x, myPoint.y)
-						)
-					);
-					this.map.addLayer(vectorLayer);
-				}
-				
-				if (record.data.addressNumber === ""){
-					 var position = new OpenLayers.LonLat(
-							myPoint.x, myPoint.y
-					 );
-					this.map.setCenter(position, this.zoom);
-				}
-				else {
-					 var position = new OpenLayers.LonLat(
-							myPoint.x, myPoint.y
-					 );
-					this.map.setCenter(position, this.zoomToPolNum);
-				}				
-            }, this);
-        }
     }
 });
     
-
-
 Ext.reg("ux_cirbgeocodercombo", ux.form.CirbGeocoderComboBox);

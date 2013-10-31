@@ -119,9 +119,6 @@ ux.plugins.CirbGeocoder = Ext.extend(gxp.plugins.Tool, {
 						myPoint.x, myPoint.y
 				 );
 				map.setCenter(position, this.zoomToPolNum);
-				/*if (bbar_ADNC) {
-					bbar_ADNC.setText("AdNC: " + adnc);
-				}*/
 				
 			}
         }
