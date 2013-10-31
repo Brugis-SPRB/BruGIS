@@ -84,7 +84,6 @@
             },
         	// layer sources
         	defaultSourceType: "gxp_wmssource",
-			
 			/*
 			sources: {
 				'BruGIS WMS - Geoserver': {
