@@ -352,6 +352,9 @@ ux.plugins.WMSGetFeatureInfo = Ext.extend(gxp.plugins.Tool, {
 					
 					var type = n_attribute.type;
 					switch(type) {
+							case "eval":
+								labelTemplate = eval(labelTemplate);
+								break;
 							case "string":
 								//do nothing
 								break;

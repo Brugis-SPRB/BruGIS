@@ -1,18 +1,3 @@
-﻿    <!-- GeoExplorer resources -->
-    <link rel="stylesheet" type="text/css" href="../theme/app/geoexplorer.css" />
-    <!--[if IE]><link rel="stylesheet" type="text/css" href="../theme/app/ie.css"/><![endif]-->        
-    <link rel="stylesheet" type="text/css" href="../theme/ux/colorpicker/color-picker.ux.css" />
-    <link rel="stylesheet" type="text/css" href="../theme/ux/Geolocator/Geolocator.ux.css" />
-    <script type="text/javascript" src="../script/GeoExplorer.js"></script>
-
-    <!-- PrintPreview resources -->
-    <link rel="stylesheet" type="text/css" href="../externals/PrintPreview/resources/css/printpreview.css">
-
-	<script type="text/javascript" > var globalAuthStatus = {{status}}</script>
-	
-    <script type="text/javascript" src="../script/app/brugis_setup.js"></script>
-	
-    <!--script>
         // optionally set locale based on query string parameter
 		
         if (GeoExt.Lang) {
@@ -65,7 +50,7 @@
 
 		var abstractText = 
 			(geoextLangFr)?
-				"BruGIS, plateforme cartographique de Bruxelles Développement urbain (SPRB)."
+				"BruGIS, plateforme cartographique de Bruxelles D�veloppement urbain (SPRB)."
 				:
 			(geoextLangNl)?
 				"BruGIS, cartografische platform van Brussel Stedelijke Ontwikkeling (GOB)."
@@ -88,7 +73,7 @@
 				"";
 				
         var app = new GeoExplorer.Brugis({
-            authStatus: {{status}},
+            authStatus: globalAuthStatus,
             proxy: "../proxy/?url=",
             printService: "/geoserver/pdf/",
             about: {
@@ -224,6 +209,3 @@
 				}]
 			}
         });
-    </script-->
-	<script type="text/javascript" src="../script/app/google_analytics_setup.js"></script>
-

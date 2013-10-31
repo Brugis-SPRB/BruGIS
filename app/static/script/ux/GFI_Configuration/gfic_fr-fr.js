@@ -102,6 +102,22 @@ ux.gfi['fr-fr'] = {
 				{ "name": "NB"				, "label" : "[NB]"				, "type" : "string"}
 			]
 		},
+		"AATL:Patrimoine_New": {
+			"actiontype" : "GRID",
+			"attributes" : [
+				{ "name": "Dénomination"			, "label" : "[BENAMING_PAT_VW_FR]"								, "type" : "string"},
+				{ "name": "Addresse du bien"		, "label" : "[NUMMER_VAN], [STRAAT_FR], [POSTCODE] [GEMEENTE_FR]", "type" : "string"},
+				{ "name": "Type de protection"		, "label" : "[TYPE_VRIJWARING_FR]"								, "type" : "string"},
+				{ "name": "Protégé en temps que"	, "label" : "[BESCHERMD_ALS_FR]"								, "type" : "string"},
+				{ "name": "Date du premier arrêté"	, "label" : "[DATUM_AG1]"										, "type" : "string"},
+				{ "name": "Date du dernier arrêté"	, "label" : "[DATUM_AG2]"										, "type" : "string"},
+				{ "name": "Premier arrêté"			, "label" : "[DOCUM_AG1]"										, "type" : "link"},
+				{ "name": "Dernier arrêté"			, "label" : "[DOCUM_AG2]"										, "type" : "link"},
+				{ "name": "Photo"					, "label" : "[FOTO]"											, "type" : "picture"},
+				{ "name": "Zone de Protection"		, "label" : "['Oui','Non'][[VRIJWARINGSZONE]]"					, "type" : "eval"},
+				{ "name": "Référence DMS"			, "label" : "[NUMMER_DOSSIER]/[CODE_DOSSIER]"					, "type" : "string"}
+			]
+		},
 		"AATL_DMS_SITE_ARBR:Visites_arbres": {
 			"actiontype" : "GRID",
 			"attributes" : [
