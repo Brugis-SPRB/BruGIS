@@ -60,11 +60,27 @@ ux.plugins.BrugisSearcher = Ext.extend(gxp.plugins.Tool, {
 				 scope: this,
 				 'select': function(a) {
 					if(this.typecombo.getValue() == "ADR") {
-						this.combo.typeAhead = true;
+						this.cadtext.hide();
+						this.combo.show();
 					} else {
-						this.combo.destroy();
+						this.combo.hide();
+						this.cadtext.show();
 					}
 				 }
+			}
+		});
+		
+		var cadTextField = new Ext.form.TextField({
+			hidden : true,
+			width: 300,
+			emptyText: 'CAPAKEY : 21562A0329/00X010',
+			listeners: {
+				scope:this,
+				'keypress' : function(textfield,eventObject){
+					if (eventObject.getCharCode() == Ext.EventObject.ENTER) {
+						console.log("DOOOO");
+					}
+				}
 			}
 		});
 		
@@ -81,7 +97,8 @@ ux.plugins.BrugisSearcher = Ext.extend(gxp.plugins.Tool, {
         }
         this.combo = combo;
 		this.typecombo = searchTypeCombo;
-        
+        this.cadtext = cadTextField;
+		
         return ux.plugins.BrugisSearcher.superclass.init.apply(this, arguments);
     },
 	
@@ -91,11 +108,11 @@ ux.plugins.BrugisSearcher = Ext.extend(gxp.plugins.Tool, {
      */
 
     addOutput: function(config) {
-		 var myGroup = new Ext.ButtonGroup({
-			items : [this.combo,this.typecombo]
+		 this.btGroup = new Ext.ButtonGroup({
+			items : [this.combo,this.cadtext,this.typecombo]
 		 });
 
-        return ux.plugins.BrugisSearcher.superclass.addOutput.call(this, myGroup);
+        return ux.plugins.BrugisSearcher.superclass.addOutput.call(this, this.btGroup);
     },
 
     /** private: method[onComboSelect]
