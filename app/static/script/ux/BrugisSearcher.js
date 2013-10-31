@@ -28,6 +28,8 @@ ux.plugins.BrugisSearcher = Ext.extend(gxp.plugins.Tool, {
 
     // Begin i18n.
     // End i18n.
+	zoom : 9,
+	zoomToPolNum: 12,
 
     /** api: config[updateField]
      *  ``String``
@@ -88,6 +90,14 @@ ux.plugins.BrugisSearcher = Ext.extend(gxp.plugins.Tool, {
 			}
 		});
 		
+		this.wpsclient = new OpenLayers.WPSClient({
+			servers: {
+				brugisgeo: 'http://svappmavw019:9090/geoserver/wps'
+			}
+		});
+		
+		
+		
         var bounds = target.mapPanel.map.restrictedExtent;
         if (bounds && !combo.bounds) {
             target.on({
@@ -121,7 +131,22 @@ ux.plugins.BrugisSearcher = Ext.extend(gxp.plugins.Tool, {
 
 	onCapaKeySelect: function(keyText){
 		console.log(keyText);
-		
+		 this.wpsclient.execute({
+			server: "brugisgeo",
+			process: "py:cadsearch",
+			// spatial input can be a feature or a geometry or an array of
+			// features or geometries
+			inputs: {
+				key: '21562A0329/00X010'
+			},
+			success: function(outputs) {
+				// outputs.result is a feature or an array of features for spatial
+				// processes.
+				var map = this.target.mapPanel.map;
+				console.log(outputs.result);
+			},
+			scope:this
+		});
 	},
 	
     /** private: method[onComboSelect]
