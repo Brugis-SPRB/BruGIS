@@ -120,11 +120,11 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
                 toggleGroup: this.toggleGroup,
                 actionTarget: {target: "paneltbar", index: 8}
             }, {
-				ptype: "ux_CirbGeocoder",
+				ptype: "ux_BrugisSearcher",
 				outputTarget: "paneltbar",
 				outputConfig: {
-							map: null,
-							width: 300
+					map: null,
+					width: 300
 				}
 			}, {
                 ptype: "gxux_measure", toggleGroup: this.toggleGroup,

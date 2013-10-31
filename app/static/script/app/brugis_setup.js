@@ -84,7 +84,7 @@
             },
         	// layer sources
         	defaultSourceType: "gxp_wmssource",
-			/*
+			
 			sources: {
 				'BruGIS WMS - Geoserver': {
 					url: "http://svappmavw019:8080/geoserver/ows",
@@ -107,8 +107,8 @@
 					ptype: "gxp_wmscsource"
 				}
 			}, 
-			*/
 			
+			/*
 			sources: {
 				'BruGIS WMS - Geoserver': {
 					url: "/geoserver/ows",
@@ -131,7 +131,7 @@
 					ptype: "gxp_wmscsource"
 				}
 			},
-			
+			*/
 			
 		    map: {
 				id: "mymap", // id needed to reference map in portalConfig above
