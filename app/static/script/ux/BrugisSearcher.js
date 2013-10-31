@@ -67,8 +67,10 @@ ux.plugins.BrugisSearcher = Ext.extend(gxp.plugins.Tool, {
 						this.cadtext.show();
 					}
 				 }
-			}
+			},
+			value : "ADR"
 		});
+		
 		
 		var cadTextField = new Ext.form.TextField({
 			hidden : true,
@@ -76,10 +78,12 @@ ux.plugins.BrugisSearcher = Ext.extend(gxp.plugins.Tool, {
 			emptyText: 'CAPAKEY : 21562A0329/00X010',
 			listeners: {
 				scope:this,
-				'keypress' : function(textfield,eventObject){
-					if (eventObject.getCharCode() == Ext.EventObject.ENTER) {
-						console.log("DOOOO");
-					}
+				'render': function(c) {
+				  c.getEl().on('keypress', function(eventObject,textField) {
+						if (eventObject.getCharCode() == Ext.EventObject.ENTER) {
+							this.onCapaKeySelect(this.cadtext.getValue());
+						}
+				  }, this);
 				}
 			}
 		});
@@ -115,6 +119,11 @@ ux.plugins.BrugisSearcher = Ext.extend(gxp.plugins.Tool, {
         return ux.plugins.BrugisSearcher.superclass.addOutput.call(this, this.btGroup);
     },
 
+	onCapaKeySelect: function(keyText){
+		console.log(keyText);
+		
+	},
+	
     /** private: method[onComboSelect]
      *  Listener for combo's select event.
      */
