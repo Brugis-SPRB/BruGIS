@@ -252,7 +252,7 @@ ux.plugins.WMSGetFeatureInfo = Ext.extend(gxp.plugins.Tool, {
 							feature.attributes[attribute].indexOf(".gif") >=0){
 							var attrib = feature.attributes[attribute];
 							customRenderers[attribute] = function(attrib){
-								return '<A href="' + attrib + '" target="_blank"><img height=100 width=100 src="' + attrib + '"/></A>';
+								return '<A href="' + attrib + '" target="_blank"><img height=100 src="' + attrib + '"/></A>';
 							};
 						}
 						else  
@@ -373,7 +373,7 @@ ux.plugins.WMSGetFeatureInfo = Ext.extend(gxp.plugins.Tool, {
 								break;
 							case "picture":
 								customRenderers[n_attribute.name] = function(attrib){
-									return '<A href="' + attrib + '" target="_blank"><img height=100 width=100 src="' + attrib + '"/></A>';
+									return '<A href="' + attrib + '" target="_blank"><img height=100 src="' + attrib + '"/></A>';
 								};
 								break;
 					}

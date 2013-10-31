@@ -56,8 +56,8 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
 	deutchText: "in het nederlands",
 	englishText: "in english",
 	disclaimerText:  "Indicative map - Realized by BruGIS team with Brussels UrbIS",
-	wmsTreeLegendSourceText: "localhost:8080/geoserver/www/wmsaatl/wmsaatl.xml",
-	//wmsTreeLegendSourceText: "svappmavw019:8080/geoserver/www/wmsaatl/wmsaatl.xml",
+	wmsTreeLegendSourceText: "localhost:9090/geoserver/www/wmsaatl/wmsaatl.xml",
+	//wmsTreeLegendSourceText: "svappmavw019:9090/geoserver/www/wmsaatl/wmsaatl.xml",
 	//wmsTreeLegendSourceText: "http://mybrugis.irisnetlab.be/geoserver/www/wmsaatl/wmsaatl.xml",
 	//wmsTreeLegendSourceText: "http://www.mybrugis.irisnet.be/geoserver/www/wmsaatl/wmsaatl.xml",
     // End i18n.

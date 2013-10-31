@@ -88,7 +88,7 @@
 			/*
 			sources: {
 				'BruGIS WMS - Geoserver': {
-					url: "http://svappmavw019:8080/geoserver/ows",
+					url: "http://svappmavw019:9090/geoserver/ows",
 					version: "1.1.1",
 					ptype: "gxp_wmscsource"
 				},
@@ -103,7 +103,7 @@
 					ptype: "gxp_wmscsource"
 				},
             	'GeoWebCacheLocal': {
-					url: "http://svappmavw019:8080/geoserver/www/wmsaatl/geoweb_brugis.xml",
+					url: "http://svappmavw019:9090/geoserver/www/wmsaatl/geoweb_brugis.xml",
 					version: "1.1.1",
 					ptype: "gxp_wmscsource"
 				}
