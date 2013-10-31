@@ -343,7 +343,6 @@ ux.plugins.WMSGetFeatureInfo = Ext.extend(gxp.plugins.Tool, {
 				{
 					var n_attribute = layerConfiguration.attributes[cpt];
 					var labelTemplate = n_attribute.label;
-					
 					for(var attribute in feature.attributes)
 					{
 						var pattern = "\["+attribute+"\]";
@@ -378,6 +377,8 @@ ux.plugins.WMSGetFeatureInfo = Ext.extend(gxp.plugins.Tool, {
 								};
 								break;
 					}
+					labelTemplate = labelTemplate.replace(/\[(.*?)\]/g, "");
+					
 					new_attributes[n_attribute.name] = labelTemplate;		
 				}
 				//console.log(feature.geometry.getCentroid());
