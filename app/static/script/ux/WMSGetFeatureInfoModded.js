@@ -280,7 +280,8 @@ ux.plugins.WMSGetFeatureInfo = Ext.extend(gxp.plugins.Tool, {
 					}
 				}
                 config.push(Ext.apply({
-                    xtype: "propertygrid",
+                    //xtype: "propertygrid",
+					xtype: "gxp_featuregrid",
                     listeners: {
                         'beforeedit': function (e) { 
                             return false; 
@@ -430,7 +431,12 @@ ux.plugins.WMSGetFeatureInfo = Ext.extend(gxp.plugins.Tool, {
 					listeners: {
 						'beforeedit': function (e) { 
 							return false; 
-						} 
+						},
+						'celldblclick': function (e, rowIndex, columnIndex) {
+							var name  = e.store.data.items[rowIndex].data.name;
+							var value = e.store.data.items[rowIndex].data.value;
+							window.prompt ("Copy to clipboard: Ctrl+C, Enter", name + ': ' + value);
+						}
 					},
 					title: feature.fid ? feature.fid.replace('.',' ') : title,
 					customRenderers : customRenderers
@@ -439,8 +445,7 @@ ux.plugins.WMSGetFeatureInfo = Ext.extend(gxp.plugins.Tool, {
 				delete p.getStore().sortInfo; // Remove default sorting
 				p.getColumnModel().getColumnById('name').sortable = false; // set sorting of first column to false
 				p.setSource(feature.attributes); // Now load data
-				
-				config.push(Ext.apply(p, this.itemConfig));		
+				config.push(Ext.apply(p, this.itemConfig));
 			}
         } else if (text) {
             config.push(Ext.apply({
@@ -465,6 +470,7 @@ ux.plugins.WMSGetFeatureInfo = Ext.extend(gxp.plugins.Tool, {
  */		
 		popup.add(config);
         popup.doLayout();
+		//console.log(popup);
     },
 	
 	redirect : function(evt, title, layerConfiguration) {	
