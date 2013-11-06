@@ -1,4 +1,4 @@
-        // optionally set locale based on query string parameter
+﻿        // optionally set locale based on query string parameter
 		
         if (GeoExt.Lang) {
             GeoExt.Lang.set(OpenLayers.Util.getParameters()["locale"] || GeoExt.Lang.locale);
@@ -50,7 +50,7 @@
 
 		var abstractText = 
 			(geoextLangFr)?
-				"BruGIS, plateforme cartographique de Bruxelles D�veloppement urbain (SPRB)."
+				"BruGIS, plateforme cartographique de Bruxelles Développement urbain (SPRB)."
 				:
 			(geoextLangNl)?
 				"BruGIS, cartografische platform van Brussel Stedelijke Ontwikkeling (GOB)."
