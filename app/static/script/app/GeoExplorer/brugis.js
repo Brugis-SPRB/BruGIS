@@ -1,6 +1,6 @@
 
 ///////////////////////////////////////////////////////////////////////////////
-// DocG - Nouveau controleur pour intercepter le click même sur une tablette //
+// DocG - Nouveau contrôleur pour intercepter le click même sur une tablette //
 
 OpenLayers.Control.Click = OpenLayers.Class(OpenLayers.Control, { 
 	defaultHandlerOptions: { 
@@ -220,7 +220,6 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
         document.cookie = param + "=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/";
     },
 
-
     /** private: method[getCookieValue]
      *  Get the value of a certain cookie parameter. Returns null if not found.
      */
@@ -253,7 +252,6 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
 		window.location.reload();
     },
 
- 
     /** private: method[authenticate]
      * Show the login dialog for the user to login.
      */
@@ -633,64 +631,6 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
 		click.activate();
 		///////////////////////DOCG////////////////////////////////////////////
 		
-        var googleEarthPanel = new gxp.GoogleEarthPanel({
-            mapPanel: this.mapPanel,
-            listeners: {
-                beforeadd: function(record) {
-                    return record.get("group") !== "background";
-                }
-            }
-        });
-        
-        // TODO: continue making this Google Earth Panel more independent
-        // Currently, it's too tightly tied into the viewer.
-        // In the meantime, we keep track of all items that the were already
-        // disabled when the panel is shown.
-        var preGoogleDisabled = [];
-
-        googleEarthPanel.on("show", function() {
-            preGoogleDisabled.length = 0;
-            this.toolbar.items.each(function(item) {
-                if (item.disabled) {
-                    preGoogleDisabled.push(item);
-                }
-            });
-            this.toolbar.disable();
-            // loop over all the tools and remove their output
-            for (var key in this.tools) {
-                var tool = this.tools[key];
-                if (tool.outputTarget === "map") {
-                    tool.removeOutput();
-                }
-            }
-            var layersContainer = Ext.getCmp("tree");
-            var layersToolbar = layersContainer && layersContainer.getTopToolbar();
-            if (layersToolbar) {
-                layersToolbar.items.each(function(item) {
-                    if (item.disabled) {
-                        preGoogleDisabled.push(item);
-                    }
-                });
-                layersToolbar.disable();
-            }
-        }, this);
-
-        googleEarthPanel.on("hide", function() {
-            // re-enable all tools
-            this.toolbar.enable();
-            
-            var layersContainer = Ext.getCmp("tree");
-            var layersToolbar = layersContainer && layersContainer.getTopToolbar();
-            if (layersToolbar) {
-                layersToolbar.enable();
-            }
-            // now go back and disable all things that were disabled previously
-            for (var i=0, ii=preGoogleDisabled.length; i<ii; ++i) {
-                preGoogleDisabled[i].disable();
-            }
-
-        }, this);
-	
         this.mapPanelContainer = new Ext.Panel({
             layout: "card",
             region: "center",
@@ -699,8 +639,7 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
             },
 			tbar: this.toolbar,
             items: [
-                this.mapPanel,
-                googleEarthPanel
+                this.mapPanel
             ],
 			bbar: this.bottomtoolbar,
             activeItem: 0
@@ -899,20 +838,7 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
     /** private: method[showEmbedWindow]
      */
     showEmbedWindow: function() {
-       var validAPIKey = false;
-       for (var key in this.tools) {
-           var tool = this.tools[key];
-           if (tool instanceof gxp.plugins.GoogleEarth) {
-               validAPIKey = (tool.hasValidAPIKey() !== undefined);
-           }
-       }
-       for (var i=0, len=this.viewerTools.length; i<len; ++i) {
-           if (this.viewerTools[i].ptype === gxp.plugins.GoogleEarth.prototype.ptype) {
-               this.viewerTools[i].disabled = !validAPIKey;
-               this.viewerTools[i].checked = validAPIKey;
-           }
-       } 
-       var toolsArea = new Ext.tree.TreePanel({title: this.toolsTitle, 
+        var toolsArea = new Ext.tree.TreePanel({title: this.toolsTitle, 
            autoScroll: true,
            root: {
                nodeType: 'async', 

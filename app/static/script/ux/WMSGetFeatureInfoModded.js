@@ -285,7 +285,12 @@ ux.plugins.WMSGetFeatureInfo = Ext.extend(gxp.plugins.Tool, {
                     listeners: {
                         'beforeedit': function (e) { 
                             return false; 
-                        } 
+                        },
+						'celldblclick': function (e, rowIndex, columnIndex) {
+							var name  = e.store.data.items[rowIndex].data.name;
+							var value = e.store.data.items[rowIndex].data.value;
+							window.prompt (name + ': ', value);
+						} 
                     },
                     title: feature.fid ? feature.fid : title,
                     source: feature.attributes,
@@ -435,7 +440,7 @@ ux.plugins.WMSGetFeatureInfo = Ext.extend(gxp.plugins.Tool, {
 						'celldblclick': function (e, rowIndex, columnIndex) {
 							var name  = e.store.data.items[rowIndex].data.name;
 							var value = e.store.data.items[rowIndex].data.value;
-							window.prompt ("Copy to clipboard: Ctrl+C, Enter", name + ': ' + value);
+							window.prompt (name + ': ', value);
 						}
 					},
 					title: feature.fid ? feature.fid.replace('.',' ') : title,
@@ -454,23 +459,8 @@ ux.plugins.WMSGetFeatureInfo = Ext.extend(gxp.plugins.Tool, {
             }, this.itemConfig));
         }
 		
-/* 		var titles = [];
-		if (popup.items.items) {
-			for (var i=0; i<popup.items.items.length; ++i) {
-				//console.log(popup.items);
-				titles[i] = popup.items.items[i].title;
-			}
-		}
-		//titles = titles.substring(0, titles.length - 1);
-		for (var i=0; i<config.length; ++i) {
-			if (!(titles.indexOf(config[0])>=0)) {
-				popup.add(config);
-			}
-		}
- */		
 		popup.add(config);
         popup.doLayout();
-		//console.log(popup);
     },
 	
 	redirect : function(evt, title, layerConfiguration) {	
