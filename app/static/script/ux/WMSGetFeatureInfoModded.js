@@ -280,8 +280,7 @@ ux.plugins.WMSGetFeatureInfo = Ext.extend(gxp.plugins.Tool, {
 					}
 				}
                 config.push(Ext.apply({
-                    //xtype: "propertygrid",
-					xtype: "gxp_featuregrid",
+                    xtype: "propertygrid",
                     listeners: {
                         'beforeedit': function (e) { 
                             return false; 
@@ -294,6 +293,7 @@ ux.plugins.WMSGetFeatureInfo = Ext.extend(gxp.plugins.Tool, {
                     },
                     title: feature.fid ? feature.fid : title,
                     source: feature.attributes,
+					dateFormat: "d/m/Y",
 					customRenderers : customRenderers
                 }, this.itemConfig));
 				
@@ -444,6 +444,7 @@ ux.plugins.WMSGetFeatureInfo = Ext.extend(gxp.plugins.Tool, {
 						}
 					},
 					title: feature.fid ? feature.fid.replace('.',' ') : title,
+					dateFormat: "d/m/Y",
 					customRenderers : customRenderers
 				});
 

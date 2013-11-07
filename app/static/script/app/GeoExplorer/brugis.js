@@ -163,13 +163,14 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
 					url : this.wmsTreeLegendSourceText
 				}
 			}, {
-				ptype: "gxp_featuregrid",
+				ptype: "ux_featuregrid",
 				featureManager: "featuremanager",
 				outputConfig: {
 					id: "featuregrid",
 					autoExpand: true,
 					autoCollapse: true,
 					showTotalResults: true,
+					zoomOnSelect: true,
 					alwaysDisplayOnMap: true,
 					selectOnMap: true
 				},
@@ -177,6 +178,7 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
 				autoExpand: true,
 				autoCollapse: true,
 				showTotalResults: true,
+				zoomOnSelect: true,
 				alwaysDisplayOnMap: true,
 				selectOnMap: true
 			}, {
