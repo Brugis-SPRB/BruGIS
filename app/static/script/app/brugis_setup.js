@@ -1,4 +1,4 @@
-        // optionally set locale based on query string parameter
+﻿        // optionally set locale based on query string parameter
 		
         if (GeoExt.Lang) {
             GeoExt.Lang.set(OpenLayers.Util.getParameters()["locale"] || GeoExt.Lang.locale);
@@ -50,7 +50,7 @@
 
 		var abstractText = 
 			(geoextLangFr)?
-				"BruGIS, plateforme cartographique de Bruxelles D�veloppement urbain (SPRB)."
+				"BruGIS, plateforme cartographique de Bruxelles Développement urbain (SPRB)."
 				:
 			(geoextLangNl)?
 				"BruGIS, cartografische platform van Brussel Stedelijke Ontwikkeling (GOB)."
@@ -85,7 +85,7 @@
         	// layer sources
         	defaultSourceType: "gxp_wmssource",
 			
-			
+			/*
 			sources: {
 				'BruGIS WMS - Geoserver': {
 					url: "http://svappmavw019:9090/geoserver/ows",
@@ -108,8 +108,8 @@
 					ptype: "gxp_wmscsource"
 				}
 			}, 
+			*/
 			
-			/*
 			sources: {
 				'BruGIS WMS - Geoserver': {
 					url: "/geoserver/ows",
@@ -132,7 +132,7 @@
 					ptype: "gxp_wmscsource"
 				}
 			},
-			*/
+			
 			
 		    map: {
 				id: "mymap", // id needed to reference map in portalConfig above

@@ -61,6 +61,13 @@ ux.plugins.WMSGetFeatureInfo = Ext.extend(gxp.plugins.Tool, {
      *  Default is "html".
      */
     format: "html",
+	
+	/** api: config[unique]
+	 * ``Boolean`` true or false. If set to True, only one popup window
+	 * is allowed at a time.
+	 * DocG - 05/11/2013
+	 */
+	 unique: false,
     
     /** api: method[addActions]
      */
@@ -184,6 +191,14 @@ ux.plugins.WMSGetFeatureInfo = Ext.extend(gxp.plugins.Tool, {
      * :arg text: ``String`` Body text.
      */
     displayPopup: function(evt, title, text) {
+		/** DocG
+		 *	Gestion des popup uniques ou non
+		 */
+		if (this.unique) {
+			for (var each in this.popupCache) {
+				this.popupCache[each].close();
+			}
+		}
 	
         var popup;
         var popupKey = evt.xy.x + "." + evt.xy.y;
@@ -269,10 +284,16 @@ ux.plugins.WMSGetFeatureInfo = Ext.extend(gxp.plugins.Tool, {
                     listeners: {
                         'beforeedit': function (e) { 
                             return false; 
-                        } 
+                        },
+						'celldblclick': function (e, rowIndex, columnIndex) {
+							var name  = e.store.data.items[rowIndex].data.name;
+							var value = e.store.data.items[rowIndex].data.value;
+							window.prompt (name + ': ', value);
+						} 
                     },
                     title: feature.fid ? feature.fid : title,
                     source: feature.attributes,
+					dateFormat: "d/m/Y",
 					customRenderers : customRenderers
                 }, this.itemConfig));
 				
@@ -295,9 +316,18 @@ ux.plugins.WMSGetFeatureInfo = Ext.extend(gxp.plugins.Tool, {
      * :arg text: ``String`` Body text.
      */
     displaySmartPopup: function(evt, title, layerConfiguration, text) {
+		/** DocG
+		 *	Gestion des popup uniques ou non
+		 */
+		if (this.unique) {
+			for (var each in this.popupCache) {
+				this.popupCache[each].close();
+			}
+		}
+		
         var popup;
         var popupKey = evt.xy.x + "." + evt.xy.y;
-
+		
         if (!(popupKey in this.popupCache)) {
             popup = this.addOutput({
                 xtype: "gx_popup",
@@ -406,25 +436,31 @@ ux.plugins.WMSGetFeatureInfo = Ext.extend(gxp.plugins.Tool, {
 					listeners: {
 						'beforeedit': function (e) { 
 							return false; 
-						} 
+						},
+						'celldblclick': function (e, rowIndex, columnIndex) {
+							var name  = e.store.data.items[rowIndex].data.name;
+							var value = e.store.data.items[rowIndex].data.value;
+							window.prompt (name + ': ', value);
+						}
 					},
 					title: feature.fid ? feature.fid.replace('.',' ') : title,
+					dateFormat: "d/m/Y",
 					customRenderers : customRenderers
 				});
 
 				delete p.getStore().sortInfo; // Remove default sorting
 				p.getColumnModel().getColumnById('name').sortable = false; // set sorting of first column to false
 				p.setSource(feature.attributes); // Now load data
-				
-				config.push(Ext.apply(p, this.itemConfig));		
+				config.push(Ext.apply(p, this.itemConfig));
 			}
         } else if (text) {
             config.push(Ext.apply({
                 title: title,
                 html: text
             }, this.itemConfig));
-        }		
-        popup.add(config);
+        }
+		
+		popup.add(config);
         popup.doLayout();
     },
 	
