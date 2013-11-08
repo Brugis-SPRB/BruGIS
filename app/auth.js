@@ -26,6 +26,7 @@ function getAuthUrl(request) {
 function parseStatus(exchange) {
     var status = 200;
     var location = exchange.headers.get("Location");
+	print(exchange.headers.get("Location"));
     if (/error=true/.test(location)) {
         status = 401;
     }
@@ -63,9 +64,11 @@ exports.authenticate = function(request) {
             }
         });
         exchange.wait();
+		print(exchange); 
         status = parseStatus(exchange);
         if (status === 200) {
             var cookie = exchange.headers.get("Set-Cookie");
+			print(exchange.headers.get("Set-Cookie"));
             if (cookie) {
                 token = cookie.split(";").shift();
             }

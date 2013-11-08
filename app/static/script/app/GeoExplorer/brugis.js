@@ -46,6 +46,8 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
     loginText: "Login",
     logoutText: "Logout, {user}",
     loginErrorText: "Invalid username or password.",
+    logoutConfirmTitle: "Warning",
+    logoutConfirmMessage: "Logging out will undo any unsaved changes, remove any layers you may have added, and reset the map composition. Do you want to save your composition first?",
     userFieldText: "User",
     passwordFieldText: "Password", 
     saveErrorText: "Trouble saving: ",
@@ -240,25 +242,37 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
         return null;
     },
 
+
     /** private: method[logout]
      *  Log out the current user from the application.
      */
     logout: function() {
-        this.clearCookieValue("JSESSIONID");
-        this.clearCookieValue(this.cookieParamName);
-        this.setAuthorizedRoles([]);
-        Ext.getCmp('paneltbar').items.each(function(tool) {
-            if (tool.needsAuthorization === true) {
-                tool.disable();
-            }
+        var callback = function() {
+            this.clearCookieValue("JSESSIONID");
+            this.clearCookieValue(this.cookieParamName);
+            this.setAuthorizedRoles([]);
+            window.location.reload();
+        };
+        Ext.Msg.show({
+            title: this.logoutConfirmTitle, 
+            msg: this.logoutConfirmMessage, 
+            buttons: Ext.Msg.YESNOCANCEL,
+            icon: Ext.MessageBox.WARNING,
+            fn: function(btn) {
+                if (btn === 'yes') {
+                    this.save(callback, this);
+                } else if (btn === 'no') {
+                    callback.call(this);
+                }
+            },
+            scope: this
         });
-        this.showLogin();
-		window.location.reload();
     },
 
     /** private: method[authenticate]
      * Show the login dialog for the user to login.
      */
+	 /*
     authenticate: function() {
         var panel = new Ext.FormPanel({
             url: "../login/",
@@ -345,6 +359,108 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
             title: this.loginText,
             layout: "fit",
             width: 255,
+            height: 130,
+            plain: true,
+            border: false,
+            modal: true,
+            items: [panel],
+            listeners: {
+                beforedestroy: this.cancelAuthentication,
+                scope: this
+            }
+        });
+        win.show();
+    },*/
+
+    /** private: method[authenticate]
+     * Show the login dialog for the user to login.
+     */
+    authenticate: function() {
+        var panel = new Ext.FormPanel({
+            url: "../login/",
+            frame: true,
+            labelWidth: 60,
+            defaultType: "textfield",
+            errorReader: {
+                read: function(response) {
+                    var success = false;
+                    var records = [];
+                    if (response.status === 200) {
+                        success = true;
+                    } else {
+                        records = [
+                            {data: {id: "username", msg: this.loginErrorText}},
+                            {data: {id: "password", msg: this.loginErrorText}}
+                        ];
+                    }
+                    return {
+                        success: success,
+                        records: records
+                    };
+                }
+            },
+            items: [{
+                fieldLabel: this.userFieldText,
+                name: "username",
+                width: 137,
+                allowBlank: false,
+                listeners: {
+                    render: function() {
+                        this.focus(true, 100);
+                    }
+                }
+            }, {
+                fieldLabel: this.passwordFieldText,
+                name: "password",
+                width: 137,
+                inputType: "password",
+                allowBlank: false
+            }],
+            buttons: [{
+                text: this.loginText,
+                formBind: true,
+                handler: submitLogin,
+                scope: this
+            }],
+            keys: [{ 
+                key: [Ext.EventObject.ENTER], 
+                handler: submitLogin,
+                scope: this
+            }]
+        });
+
+        function submitLogin() {
+            panel.buttons[0].disable();
+            panel.getForm().submit({
+                success: function(form, action) {
+                    Ext.getCmp('paneltbar').items.each(function(tool) {
+                        if (tool.needsAuthorization === true) {
+                            tool.enable();
+                        }
+                    });
+                    var user = form.findField('username').getValue();
+                    this.setCookieValue(this.cookieParamName, user);
+                    this.setAuthorizedRoles(["ROLE_ADMINISTRATOR"]);
+                    this.showLogout(user);
+                    win.un("beforedestroy", this.cancelAuthentication, this);
+                    win.close();
+                },
+                failure: function(form, action) {
+                    this.authorizedRoles = [];
+                    panel.buttons[0].enable();
+                    form.markInvalid({
+                        "username": this.loginErrorText,
+                        "password": this.loginErrorText
+                    });
+                },
+                scope: this
+            });
+        }
+                
+        var win = new Ext.Window({
+            title: this.loginText,
+            layout: "fit",
+            width: 235,
             height: 130,
             plain: true,
             border: false,
