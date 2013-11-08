@@ -28,6 +28,7 @@ ux.plugins.BrugisSearcher = Ext.extend(gxp.plugins.Tool, {
 
     // Begin i18n.
     // End i18n.
+	wpsserver : '/geoserver/wps',
 	zoom : 9,
 	zoomToPolNum: 12,
 
@@ -92,7 +93,7 @@ ux.plugins.BrugisSearcher = Ext.extend(gxp.plugins.Tool, {
 		
 		this.wpsclient = new OpenLayers.WPSClient({
 			servers: {
-				brugisgeo: 'http://svappmavw019:9090/geoserver/wps'
+				brugisgeo: this.wpsserver
 			}
 		});
 		
@@ -130,25 +131,50 @@ ux.plugins.BrugisSearcher = Ext.extend(gxp.plugins.Tool, {
     },
 
 	onCapaKeySelect: function(keyText){
-		console.log(keyText);
+
 		 this.wpsclient.execute({
 			server: "brugisgeo",
 			process: "py:cadsearch",
 			// spatial input can be a feature or a geometry or an array of
 			// features or geometries
 			inputs: {
-				key: '21562A0329/00X010'
+				key: keyText // '21562A0329/00X010'
 			},
 			success: function(outputs) {
 				// outputs.result is a feature or an array of features for spatial
 				// processes.
-				var map = this.target.mapPanel.map;
-				console.log(outputs.result);
+				this.onCapaKeyFound(outputs.result);
 			},
 			scope:this
 		});
+		
 	},
 	
+	onCapaKeyFound : function(result) {
+		if(result && result.length  > 0) {
+			var map = this.target.mapPanel.map;
+			myPoint =  result[0].geometry;
+
+			if(map.getLayersByName('Search').length > 0){
+				var vectorLayer = map.getLayersByName('Search')[0];
+				vectorLayer.addFeatures(new OpenLayers.Feature.Vector(
+					new OpenLayers.Geometry.Point(myPoint.x, myPoint.y)
+				));
+			}
+			else{
+				var vectorLayer = new OpenLayers.Layer.Vector("Search");
+				vectorLayer.addFeatures(new OpenLayers.Feature.Vector(
+					new OpenLayers.Geometry.Point(myPoint.x, myPoint.y)
+				));
+				map.addLayer(vectorLayer);
+			}
+			//the array should consist of four values (left, bottom, right, top)
+			map.zoomToExtent(result[0].data.bounds);
+		}
+		else {
+			Ext.Msg.alert('CAD Search', 'Your query did not return any result');
+		}
+	},
     /** private: method[onComboSelect]
      *  Listener for combo's select event.
      */
@@ -164,7 +190,7 @@ ux.plugins.BrugisSearcher = Ext.extend(gxp.plugins.Tool, {
 				var vectorLayer = map.getLayersByName('Search')[0];
 				vectorLayer.addFeatures(
 					new OpenLayers.Feature.Vector(
-					new OpenLayers.Geometry.Point(myPoint.x, myPoint.y)
+						new OpenLayers.Geometry.Point(myPoint.x, myPoint.y)
 					)
 				);
 			}
@@ -172,7 +198,7 @@ ux.plugins.BrugisSearcher = Ext.extend(gxp.plugins.Tool, {
 				var vectorLayer = new OpenLayers.Layer.Vector("Search");
 				vectorLayer.addFeatures(
 					new OpenLayers.Feature.Vector(
-					new OpenLayers.Geometry.Point(myPoint.x, myPoint.y)
+						new OpenLayers.Geometry.Point(myPoint.x, myPoint.y)
 					)
 				);
 				map.addLayer(vectorLayer);

@@ -57,6 +57,7 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
 	englishText: "in english",
 	disclaimerText:  "Indicative map - Realized by BruGIS team with Brussels UrbIS",
 	wmsTreeLegendSourceText: "localhost:9090/geoserver/www/wmsaatl/wmsaatl.xml",
+	wpsserver :'http://svappmavw019:9090/geoserver/wps',
 	//wmsTreeLegendSourceText: "svappmavw019:9090/geoserver/www/wmsaatl/wmsaatl.xml",
 	//wmsTreeLegendSourceText: "http://mybrugis.irisnetlab.be/geoserver/www/wmsaatl/wmsaatl.xml",
 	//wmsTreeLegendSourceText: "http://www.mybrugis.irisnet.be/geoserver/www/wmsaatl/wmsaatl.xml",
@@ -122,6 +123,7 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
             }, {
 				ptype: "ux_BrugisSearcher",
 				outputTarget: "paneltbar",
+				wpsserver : this.wpsserver,
 				outputConfig: {
 					map: null,
 					width: 300
