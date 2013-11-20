@@ -50,13 +50,13 @@
 
 		var abstractText = 
 			(geoextLangFr)?
-				"BruGIS, plateforme cartographique de Bruxelles Développement urbain (SPRB)."
+				"BruGIS, Portail d'Information Géographique pour Bruxelles Développement urbain (SPRB)."
 				:
 			(geoextLangNl)?
-				"BruGIS, cartografische platform van Brussel Stedelijke Ontwikkeling (GOB)."
+				"BruGIS, Geografische Informatie Portaal voor Brussel Stedelijke Ontwikkeling (GOB)."
 				:
 			(geoextLangEn)?
-				"BruGIS, cartographic platform of Brussels Urban Development (BRPS)."
+				"BruGIS, Geographic Information Portal for Brussels Urban Development (BRPS)."
 				:
 				"";
 			
@@ -77,7 +77,7 @@
             proxy: "../proxy/?url=",
             printService: "/geoserver/pdf/",
             about: {
-                title: "MyBruGIS v 1.00",
+                title: "MyBruGIS v 1.10",
                 "abstract": abstractText,
 				"help": localeHelp,
 		        contact: contactText
