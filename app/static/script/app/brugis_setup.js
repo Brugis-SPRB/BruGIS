@@ -17,7 +17,7 @@
 			geoextLangFr = true;
 		}
 		
-/*		
+/*
 ///////////////////////////////////////////////////////////////////////////////
 		if (OpenLayers.Util) {
 			//console.log(OpenLayers.Util.getBrowserName());
@@ -77,7 +77,7 @@
             proxy: "../proxy/?url=",
             printService: "/geoserver/pdf/",
             about: {
-                title: "MyBruGIS v 1.00",
+                title: "MyBruGIS v 1.10",
                 "abstract": abstractText,
 				"help": localeHelp,
 		        contact: contactText
@@ -107,8 +107,9 @@
 					version: "1.1.1",
 					ptype: "gxp_wmscsource"
 				}
-			}, 
+			},
 			*/
+			
 			
 			sources: {
 				'BruGIS WMS - Geoserver': {
