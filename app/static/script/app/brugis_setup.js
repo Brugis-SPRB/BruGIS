@@ -9,7 +9,7 @@
         // optionally set locale based on query string parameter
         if (GeoExt.Lang) {
             GeoExt.Lang.set(OpenLayers.Util.getParameters()["locale"] || GeoExt.Lang.locale);
-       }
+        }
 		var geoextLangFr = ((GeoExt.Lang.locale == "fr")||(GeoExt.Lang.locale == "fr-be")||(GeoExt.Lang.locale == "fr-fr"))?true:false;
 		var geoextLangNl = ((GeoExt.Lang.locale == "nl")||(GeoExt.Lang.locale == "nl-be")||(GeoExt.Lang.locale == "nl-nl"))?true:false;
 		var geoextLangEn = ((GeoExt.Lang.locale == "en")||(GeoExt.Lang.locale == "en-gb")||(GeoExt.Lang.locale == "en-us")||(GeoExt.Lang.locale == "en-en"))?true:false;
@@ -17,7 +17,7 @@
 			geoextLangFr = true;
 		}
 		
-/*		
+/*
 ///////////////////////////////////////////////////////////////////////////////
 		if (OpenLayers.Util) {
 			//console.log(OpenLayers.Util.getBrowserName());
@@ -50,13 +50,13 @@
 
 		var abstractText = 
 			(geoextLangFr)?
-				"BruGIS, plateforme cartographique de Bruxelles Développement urbain (SPRB)."
+				"BruGIS, Portail d'Information Géographique pour Bruxelles Développement urbain (SPRB)."
 				:
 			(geoextLangNl)?
-				"BruGIS, cartografische platform van Brussel Stedelijke Ontwikkeling (GOB)."
+				"BruGIS, Geografische Informatie Portaal voor Brussel Stedelijke Ontwikkeling (GOB)."
 				:
 			(geoextLangEn)?
-				"BruGIS, cartographic platform of Brussels Urban Development (BRPS)."
+				"BruGIS, Geographic Information Portal for Brussels Urban Development (BRPS)."
 				:
 				"";
 			
@@ -77,7 +77,7 @@
             proxy: "../proxy/?url=",
             printService: "/geoserver/pdf/",
             about: {
-                title: "MyBruGIS v 1.00",
+                title: "MyBruGIS v 1.10",
                 "abstract": abstractText,
 				"help": localeHelp,
 		        contact: contactText
@@ -85,7 +85,7 @@
         	// layer sources
         	defaultSourceType: "gxp_wmssource",
 			
-			/*
+			
 			sources: {
 				'BruGIS WMS - Geoserver': {
 					url: "http://svappmavw019:9090/geoserver/ows",
@@ -99,7 +99,7 @@
 				},
 				'CIRB WMS - Geoserver': {
 					url: "http://geoserver.gis.irisnet.be/geoserver/ows",
-					version: "1.1.1",
+					version: "1.3.0",
 					ptype: "gxp_wmscsource"
 				},
             	'GeoWebCacheLocal': {
@@ -107,9 +107,10 @@
 					version: "1.1.1",
 					ptype: "gxp_wmscsource"
 				}
-			}, 
-			*/
+			},
 			
+			
+			/*
 			sources: {
 				'BruGIS WMS - Geoserver': {
 					url: "/geoserver/ows",
@@ -123,7 +124,7 @@
 				},
 				'CIRB WMS - Geoserver': {
 					url: "http://geoserver.gis.irisnet.be/geoserver/ows",
-					version: "1.1.1",
+					version: "1.3.0",
 					ptype: "gxp_wmscsource"
 				},
             	'GeoWebCacheLocal': {
@@ -132,7 +133,7 @@
 					ptype: "gxp_wmscsource"
 				}
 			},
-			
+			*/
 			
 		    map: {
 				id: "mymap", // id needed to reference map in portalConfig above

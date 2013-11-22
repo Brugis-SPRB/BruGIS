@@ -440,7 +440,7 @@ ux.plugins.WMSGetFeatureInfo = Ext.extend(gxp.plugins.Tool, {
 						'celldblclick': function (e, rowIndex, columnIndex) {
 							var name  = e.store.data.items[rowIndex].data.name;
 							var value = e.store.data.items[rowIndex].data.value;
-							window.prompt (name + ': ', value);
+							window.prompt(name + ': ', value);
 						}
 					},
 					title: feature.fid ? feature.fid.replace('.',' ') : title,

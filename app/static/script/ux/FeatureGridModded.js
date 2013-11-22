@@ -130,7 +130,7 @@ ux.plugins.FeatureGrid = Ext.extend(gxp.plugins.ClickableFeatures, {
      *  String template for showing total number of records (i18n).
      */
     totalMsg: "Total: {0} records",
-
+	
     /** private: method[displayTotalResults]
      */
     displayTotalResults: function() {
@@ -144,7 +144,7 @@ ux.plugins.FeatureGrid = Ext.extend(gxp.plugins.ClickableFeatures, {
             );
         }
     },
-    
+    	
     /** api: method[addOutput]
      */
     addOutput: function(config) {
@@ -205,6 +205,7 @@ ux.plugins.FeatureGrid = Ext.extend(gxp.plugins.ClickableFeatures, {
             };
         }
         this.displayItem = new Ext.Toolbar.TextItem({});
+		
 		
 		/** DocG - 07/11/2013 gxp_featuregrid peut recevoir un
 		 * customRenderers. Ne peut-on pas exploiter le même
@@ -288,6 +289,7 @@ ux.plugins.FeatureGrid = Ext.extend(gxp.plugins.ClickableFeatures, {
                         "query": function(tool, store) {
                             if (store && store.getCount()) {
                                 onPopulate.call(this);
+								
                             } else {
                                 onClear.call(this);
                             }
@@ -316,7 +318,7 @@ ux.plugins.FeatureGrid = Ext.extend(gxp.plugins.ClickableFeatures, {
         if (this.alwaysDisplayOnMap || this.selectOnMap) {
             featureManager.showLayer(this.id, this.displayMode);
         }
-		      
+		
         featureManager.paging && featureManager.on({
             "beforesetpage": function() {
                 featureGrid.zoomToPageButton.disable();
