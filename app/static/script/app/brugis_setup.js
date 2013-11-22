@@ -9,7 +9,7 @@
         // optionally set locale based on query string parameter
         if (GeoExt.Lang) {
             GeoExt.Lang.set(OpenLayers.Util.getParameters()["locale"] || GeoExt.Lang.locale);
-       }
+        }
 		var geoextLangFr = ((GeoExt.Lang.locale == "fr")||(GeoExt.Lang.locale == "fr-be")||(GeoExt.Lang.locale == "fr-fr"))?true:false;
 		var geoextLangNl = ((GeoExt.Lang.locale == "nl")||(GeoExt.Lang.locale == "nl-be")||(GeoExt.Lang.locale == "nl-nl"))?true:false;
 		var geoextLangEn = ((GeoExt.Lang.locale == "en")||(GeoExt.Lang.locale == "en-gb")||(GeoExt.Lang.locale == "en-us")||(GeoExt.Lang.locale == "en-en"))?true:false;
@@ -85,7 +85,7 @@
         	// layer sources
         	defaultSourceType: "gxp_wmssource",
 			
-			/*
+			
 			sources: {
 				'BruGIS WMS - Geoserver': {
 					url: "http://svappmavw019:9090/geoserver/ows",
@@ -99,7 +99,7 @@
 				},
 				'CIRB WMS - Geoserver': {
 					url: "http://geoserver.gis.irisnet.be/geoserver/ows",
-					version: "1.1.1",
+					version: "1.3.0",
 					ptype: "gxp_wmscsource"
 				},
             	'GeoWebCacheLocal': {
@@ -108,9 +108,9 @@
 					ptype: "gxp_wmscsource"
 				}
 			},
-			*/
 			
 			
+			/*
 			sources: {
 				'BruGIS WMS - Geoserver': {
 					url: "/geoserver/ows",
@@ -124,7 +124,7 @@
 				},
 				'CIRB WMS - Geoserver': {
 					url: "http://geoserver.gis.irisnet.be/geoserver/ows",
-					version: "1.1.1",
+					version: "1.3.0",
 					ptype: "gxp_wmscsource"
 				},
             	'GeoWebCacheLocal': {
@@ -133,7 +133,7 @@
 					ptype: "gxp_wmscsource"
 				}
 			},
-			
+			*/
 			
 		    map: {
 				id: "mymap", // id needed to reference map in portalConfig above

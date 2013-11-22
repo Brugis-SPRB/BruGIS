@@ -212,6 +212,72 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
         GeoExplorer.Composer.superclass.destroy.apply(this, arguments);
     },
 
+	/** api: method[loadConfig]
+	 *	DocG - 2013/11/21
+	 */
+        loadConfig: function(config) {
+        var mapUrl = window.location.hash.substr(1);
+        var match = mapUrl.match(/^maps\/(\d+)$/);
+		var query = Ext.urlDecode(document.location.search.substr(1));
+        if (match) {
+            this.id = Number(match[1]);
+            OpenLayers.Request.GET({
+                url: "../" + mapUrl,
+                success: function(request) {
+                    var addConfig = Ext.util.JSON.decode(request.responseText);
+                    // Don't use persisted tool configurations from old maps
+                    delete addConfig.tools;
+                    this.applyConfig(Ext.applyIf(addConfig, config));
+                },
+                failure: function(request) {
+                    var obj;
+                    try {
+                        obj = Ext.util.JSON.decode(request.responseText);
+                    } catch (err) {
+                        // pass
+                    }
+                    var msg = this.loadConfigErrorText;
+                    if (obj && obj.error) {
+                        msg += obj.error;
+                    } else {
+                        msg += this.loadConfigErrorDefaultText;
+                    }
+                    this.on({
+                        ready: function() {
+                            this.displayXHRTrouble(msg, request.status);
+                        },
+                        scope: this
+                    });
+                    delete this.id;
+					window.location.hash = "";
+                    this.applyConfig(config);
+                },
+                scope: this
+            });
+        } else if (query && query.q) {
+            var queryConfig = Ext.util.JSON.decode(query.q);
+            Ext.apply(config, queryConfig);
+            this.applyConfig(config);
+        } else if (localStorage && localStorage.getItem('currentMapState')) {
+            var addConfig = Ext.util.JSON.decode(localStorage.getItem('currentMapState'));
+            this.applyConfig(Ext.applyIf(addConfig, config));
+		} else {
+			this.applyConfig(config);
+		}
+        
+    },
+ 	
+	/** private: method[saveMapStateOnExit]
+	 *	DocG - 2013/11/21
+	 */
+	saveMapStateOnExit: function() {
+		var configStr = Ext.util.JSON.encode(this.app.getState());
+		configStr = configStr.replace("/geoserver/www/wmsaatl/geoweb_brugis.xml", "/geoserver/gwc/service/wms");
+		if (localStorage) {
+			localStorage.setItem('currentMapState', configStr);
+		}
+	},
+	
 	 /** private: method[setCookieValue]
      *  Set the value for a cookie parameter
      */
@@ -504,6 +570,10 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
     },
     
     initPortal: function() {
+		/* DocG - 2013/11/21
+		*
+		*/
+		window.onbeforeunload = this.saveMapStateOnExit;
         var westPanel = new Ext.Panel({
 			id: "west",
 			region: "west",
@@ -681,7 +751,7 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
 					} catch(ex) {
 						console.log(ex);
 					}
-				} 
+				}
 			}
 		});
  		
@@ -792,6 +862,7 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
             ]
         }];
         GeoExplorer.superclass.initPortal.apply(this, arguments);  
+		
     },
 
     /**
