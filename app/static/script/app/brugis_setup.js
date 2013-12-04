@@ -103,7 +103,7 @@
 					id: "frBackground",
 					group:  "background",
 					fixed: true,
-					visibility: geoextLangFr
+					visibility: geoextLangEn
 				}]
 				:[];
 				
