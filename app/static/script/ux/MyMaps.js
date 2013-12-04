@@ -43,7 +43,7 @@ ux.plugins.MyMaps = Ext.extend(gxp.plugins.Tool, {
 	mapsTitleText: "Maps",
 	dateTitleText: "Dates",
 	
-    expanderTemplateText: "<p><b>Abstract:</b> {abstract}</p>",
+    expanderTemplateText: "<p><b>Abstract:</b> {description}</p>",
 	
 	importText: "Import",
 	exportText: "Export",
@@ -69,7 +69,7 @@ ux.plugins.MyMaps = Ext.extend(gxp.plugins.Tool, {
 	okText: "Ok",
 	
 	mapNameErrorText: "This map name is invalid.",
-	mapAbstractErrorText: "This map abstract is invalid.",
+	mapAbstractErrorText: "This map description is invalid.",
 	
 	sameMapNameTitle: "Warning",
 	sameMapNameMessage: "This name already exists. Do you want to overwrite this map?",
@@ -161,7 +161,7 @@ ux.plugins.MyMaps = Ext.extend(gxp.plugins.Tool, {
 				localStorage.setItem("myMaps","[]");
 			}
 			this.myMaps = new Ext.data.ArrayStore({
-				fields: ["Maps", "content", "abstract", "date"],
+				fields: ["Maps", "content", "description", "date"],
 				data: data
 			});
 		}
@@ -440,7 +440,7 @@ ux.plugins.MyMaps = Ext.extend(gxp.plugins.Tool, {
 					
 					// màj de this.myMaps
 					myMapsManager.myMaps = new Ext.data.ArrayStore({
-						fields: ["Maps", "content", "abstract", "date"],
+						fields: ["Maps", "content", "description", "date"],
 						data: myMapsData
 					});
 					
@@ -508,7 +508,7 @@ ux.plugins.MyMaps = Ext.extend(gxp.plugins.Tool, {
 			for (each=0;each<myMapsGridPanel.selModel.selections.items.length;each++) {
 				var selectedMap 	= myMapsGridPanel.selModel.selections.items[each];
 				var mapName 		= selectedMap.data.Maps;
-				var mapAbstract 	= selectedMap.data.abstract;
+				var mapAbstract 	= selectedMap.data.description;
 				var mapDate			= selectedMap.data.date;
 				var mapContent 		= selectedMap.data.content;
 			
