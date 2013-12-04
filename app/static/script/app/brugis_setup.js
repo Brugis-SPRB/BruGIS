@@ -72,6 +72,41 @@
 				:
 				"";
 				
+		var baseMap =
+			(geoextLangFr)?
+				[{
+					source: "GeoWebCacheLocal",
+					name:   "urbisFR",
+					title:  "Urbis",
+					id: "frBackground",
+					group:  "background",
+					fixed: true,
+					visibility: geoextLangFr
+				}]
+				:
+			(geoextLangNl)?
+				[{
+					source: "GeoWebCacheLocal",
+					name:   "urbisNL",
+					title:  "Urbis",
+					id: "nlBackground",
+					group:  "background",
+					fixed: true,
+					visibility: geoextLangNl
+				}]
+				:
+			(geoextLangEn)?
+				[{
+					source: "GeoWebCacheLocal",
+					name:   "urbisFR",
+					title:  "Urbis",
+					id: "frBackground",
+					group:  "background",
+					fixed: true,
+					visibility: geoextLangFr
+				}]
+				:[];
+				
         var app = new GeoExplorer.Brugis({
 			id : "brugisApp",
             authStatus: globalAuthStatus,
@@ -167,49 +202,6 @@
 				maxExtent:   [140000.0, 160000.0, 165088.0, 185088.0],
 				center: [149360, 170450],
 				zoom:2,
-				layers: [
-				/*{
-					source: "Cadastre WMS",
-					name:   "CP_Cadastral_Parcels",
-					title:  "CP_Cadastral_Parcels"
-				},*/
-				{
-					source: "GeoWebCacheLocal",
-					name:   "urbisFR",
-					title:  "Urbis Fr",
-					id: "frBackground",
-					group:  "background",
-					fixed: true,
-					visibility: geoextLangFr
-				}, {
-					source: "GeoWebCacheLocal",
-					name:   "urbisNL",
-					title:  "Urbis Nl",
-					id: "nlBackground",
-					group:  "background",
-					fixed: true,
-					visibility: geoextLangNl
-				}, {
-					source: "GeoWebCacheLocal",
-					name:   "urbis:ortho2004",
-					title:  "Orthophotoplans 2004",
-					visibility: false,
-					format: "image/jpeg",
-					transparent : "false"
-				}, {
-					source: "GeoWebCacheLocal",
-					name:   "urbisORTHO",
-					title:  "Orthophotoplans 2009",
-					visibility: false,
-					format: "image/jpeg",
-					transparent : "false"
-				}, {
-					source: "GeoWebCacheLocal",
-					name:   "ortho2012",
-					title:  "Orthophotoplans 2012",
-					visibility: false,
-					format: "image/png",
-					transparent : "true"
-				}]
+				layers: baseMap
 			}
         });
