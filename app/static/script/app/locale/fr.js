@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Copyright (c) 2009-2010 The Open Planning Project
  */
 
@@ -62,6 +62,37 @@ GeoExt.Lang.add("fr", {
 		loadingText: "Recherche en cours...",
         emptyText: "Rechercher",
 		language: 'en'
+	},
+	
+	"ux.plugins.MyMaps.prototype": {
+		myMapsTip: "Mes cartes",
+		myMapsText: "my maps text",
+		myMapsMenuText: "my maps menu text",
+		availableMyMapsText: "Mes cartes",
+		mapsTitleText: "Cartes",
+		dateTitleText: "Dates",
+		expanderTemplateText: "<p><b>Description:</b> {abstract}</p>",
+		importText: "Importer",
+		exportText: "Exporter",
+		saveMapText: "Sauver",
+		loadMapText: "Charger",
+		deleteMapText: "Supprimer",
+		doneText: "Terminé",
+		saveButtonTooltipText: "Sauver la carte courante",
+		deleteButtonTooltipText: "Supprimer la carte",
+		loadButtonTooltipText: "Charger la carte",
+		loadConfirmTitle: "Chargement de la carte",
+		loadConfirmMessage: "Charger cette carte?",
+		deleteConfirmTitle: "Suppression de carte(s)",
+		deleteConfirmMessage: "Supprimer la/les carte(s) sélectionnée(s)?",
+		namingText: "Nouvelles carte",
+		mapNameFieldText: "Nom",
+		mapAbstractFieldText: "Description",
+		okText: "Ok",
+		mapNameErrorText: "Cette carte est non valide.",
+		mapAbstractErrorText: "La description de cette carte est invalide.",
+		sameMapNameTitle: "Attention",
+		sameMapNameMessage: "Ce nom est déjà utilisé par une carte. Voulez-vous la remplacer?"
 	},
 	
 	"ux.plugins.Geolocator.prototype" : {

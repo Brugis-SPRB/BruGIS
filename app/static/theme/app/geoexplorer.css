@@ -49,6 +49,10 @@ body {
     background-image: url(img/silk/help.png);
 }
 
+.x-btn .icon-maps {
+    background-image: url(img/silk/map.png);
+}
+
 .x-btn .icon-addlayers {
     background-image: url(img/silk/add.png);
 }

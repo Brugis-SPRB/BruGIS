@@ -373,8 +373,6 @@ ux.plugins.AddLayers = Ext.extend(gxp.plugins.Tool, {
             data: data
         });
 
-
-
         var expander = this.createExpander();
         
         function addLayers() {
@@ -394,9 +392,7 @@ ux.plugins.AddLayers = Ext.extend(gxp.plugins.Tool, {
         }
 
         source = this.target.layerSources[data[idx][0]];
-		
-		
-		
+
         var capGridPanel = new Ext.grid.GridPanel({
             store: source.store,
             autoScroll: true,

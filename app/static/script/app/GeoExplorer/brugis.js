@@ -1,6 +1,6 @@
-
+ï»¿
 ///////////////////////////////////////////////////////////////////////////////
-// DocG - Nouveau contrôleur pour intercepter le click même sur une tablette //
+// DocG - Nouveau contrÃ´leur pour intercepter le click mÃªme sur une tablette //
 
 OpenLayers.Control.Click = OpenLayers.Class(OpenLayers.Control, { 
 	defaultHandlerOptions: { 
@@ -102,16 +102,24 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
                 ptype: "gxp_zoomtolayerextent",
                 actionTarget: {target: "layers.contextMenu", index: 0}
             }, {
+				ptype: "ux_mymaps",
+				id: "mymapsmanager",
+				actionTarget: {target: "paneltbar", index: 4}
+			}, {
+                ptype: "ux_print",
+                printService: config.printService,
+                actionTarget: {target: "paneltbar", index: 6}
+            }, {
                 ptype: "gxp_navigation", 
 				toggleGroup: this.toggleGroup,
-                actionTarget: {target: "paneltbar", hidden: false, index: 6},
+                actionTarget: {target: "paneltbar", hidden: false, index: 7},
 				autoActivate: false
             }, {
                 ptype: "ux_wmsgetfeatureinfo", 
 				toggleGroup: this.toggleGroup,
 				format: "grid",
 				unique: true,
-                actionTarget: {target: "paneltbar", index: 7}
+                actionTarget: {target: "paneltbar", index: 8}
             }, {
                 ptype: "gxp_featuremanager",
                 id: "featuremanager",
@@ -122,7 +130,7 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
                 featureManager: "featuremanager",
                 autoLoadFeature: true,
                 toggleGroup: this.toggleGroup,
-                actionTarget: {target: "paneltbar", index: 8}
+                actionTarget: {target: "paneltbar", index: 9}
             }, {
 				ptype: "ux_BrugisSearcher",
 				outputTarget: "paneltbar",
@@ -135,13 +143,13 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
                 ptype: "gxux_measure", toggleGroup: this.toggleGroup,
                 controlOptions: {immediate: true,
 								 outputTarget: "bbar_measure"},
-                actionTarget: {target: "paneltbar", index: 10}
-            }, {
-                ptype: "gxp_zoom",
                 actionTarget: {target: "paneltbar", index: 11}
             }, {
+                ptype: "gxp_zoom",
+                actionTarget: {target: "paneltbar", index: 12}
+            }, {
                 ptype: "gxp_navigationhistory",
-                actionTarget: {target: "paneltbar", index: 13}
+                actionTarget: {target: "paneltbar", index: 14}
             }, {
                 ptype: "gxp_zoomtoextent",
                 actionTarget: {target: "paneltbar", index: 15}
@@ -151,13 +159,7 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
 								 bind: false,
 								 watch: true,
 								 geolocationOptions: {enableHighAccuracy: true, maximumAge: 0, timeout: 7000}},
-                actionTarget: {target: "paneltbar", index: 16}
-            }, {
-                ptype: "ux_print",
-                //customParams: {},
-                //customParams: {outputFilename: 'GeoExplorer-print'},
-                printService: config.printService,
-                actionTarget: {target: "paneltbar", index: 5}
+                actionTarget: {target: "paneltbar", index: 17}
             }, {
 				ptype: "ux_wmstreelegend",
 				outputTarget: "treeTab",
@@ -215,7 +217,7 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
 	/** api: method[loadConfig]
 	 *	DocG - 2013/11/21
 	 */
-        loadConfig: function(config) {
+    loadConfig: function(config) {
         var mapUrl = window.location.hash.substr(1);
         var match = mapUrl.match(/^maps\/(\d+)$/);
 		var query = Ext.urlDecode(document.location.search.substr(1));
@@ -258,6 +260,10 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
             var queryConfig = Ext.util.JSON.decode(query.q);
             Ext.apply(config, queryConfig);
             this.applyConfig(config);
+		} else if (localStorage && localStorage.getItem('mapStateToLoad')) {
+			var addConfig = Ext.util.JSON.decode(localStorage.getItem('mapStateToLoad'));
+			localStorage.removeItem('mapStateToLoad');
+            this.applyConfig(Ext.applyIf(addConfig, config));
         } else if (localStorage && localStorage.getItem('currentMapState')) {
             var addConfig = Ext.util.JSON.decode(localStorage.getItem('currentMapState'));
             this.applyConfig(Ext.applyIf(addConfig, config));
@@ -272,6 +278,8 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
 	 */
 	saveMapStateOnExit: function() {
 		var configStr = Ext.util.JSON.encode(this.app.getState());
+		
+		//var configStr = Ext.util.JSON.encode(this.app.getState());
 		configStr = configStr.replace("/geoserver/www/wmsaatl/geoweb_brugis.xml", "/geoserver/gwc/service/wms");
 		if (localStorage) {
 			localStorage.setItem('currentMapState', configStr);
@@ -334,109 +342,6 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
             scope: this
         });
     },
-
-    /** private: method[authenticate]
-     * Show the login dialog for the user to login.
-     */
-	 /*
-    authenticate: function() {
-        var panel = new Ext.FormPanel({
-            url: "../login/",
-            frame: true,
-            labelWidth: 80,
-            defaultType: "textfield",
-            errorReader: {
-                read: function(response) {
-                    var success = false;
-                    var records = [];
-                    if (response.status === 200) {
-                        success = true;
-                    } else {
-                        records = [
-                            {data: {id: "username", msg: this.loginErrorText}},
-                            {data: {id: "password", msg: this.loginErrorText}}
-                        ];
-                    }
-                    return {
-                        success: success,
-                        records: records
-                    };
-                }
-            },
-            items: [
-			{
-                fieldLabel: this.userFieldText,
-                name: "username",
-                allowBlank: false,
-                listeners: {
-                    render: function() {
-                        this.focus(true, 100);
-                    }
-                }
-            }, {
-                fieldLabel: this.passwordFieldText,
-                name: "password",
-                inputType: "password",
-                allowBlank: false
-            }],
-            buttons: [{
-                text: this.loginText,
-                formBind: true,
-                handler: submitLogin,
-                scope: this
-            }],
-            keys: [{ 
-                key: [Ext.EventObject.ENTER], 
-                handler: submitLogin,
-                scope: this
-            }]
-        });
-
-        function submitLogin() {
-
-            panel.buttons[0].disable();
-            panel.getForm().submit({
-                success: function(form, action) {
-                    Ext.getCmp('paneltbar').items.each(function(tool) {
-                        if (tool.needsAuthorization === true) {
-                            tool.enable();
-                        }
-                    });
-                    var user = form.findField('username').getValue();
-                    this.setCookieValue(this.cookieParamName, user);
-                    this.setAuthorizedRoles(["ROLE_ADMINISTRATOR"]);
-                    this.showLogout(user);
-                    win.un("beforedestroy", this.cancelAuthentication, this);
-                    win.close();
-                },
-                failure: function(form, action) {
-                    this.authorizedRoles = [];
-                    panel.buttons[0].enable();
-                    form.markInvalid({
-                        "username": this.loginErrorText,
-                        "password": this.loginErrorText
-                    });
-                },
-                scope: this
-            });
-        }
-                
-        var win = new Ext.Window({
-            title: this.loginText,
-            layout: "fit",
-            width: 255,
-            height: 130,
-            plain: true,
-            border: false,
-            modal: true,
-            items: [panel],
-            listeners: {
-                beforedestroy: this.cancelAuthentication,
-                scope: this
-            }
-        });
-        win.show();
-    },*/
 
     /** private: method[authenticate]
      * Show the login dialog for the user to login.
@@ -658,98 +563,118 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
 				var params = Ext.urlDecode(location.search.substring(1));
 				
 				var currentLangage = GeoExt.Lang.locale;
-				
-				if(params.qry && params.val && ux.qry && ux.qry[currentLangage] && ux.qry[currentLangage][params.qry]) {
-				
-				var sourceName = ux.qry[currentLangage][params.qry]["source_name"];
-				var layerName = ux.qry[currentLangage][params.qry]["layer_name"];
-				var propertyName = ux.qry[currentLangage][params.qry]["property_name"];
-				var propertyValue = params.val;
-				
-				var theFeatureManager = this.tools.featuremanager;
-				var source = this.layerSources[sourceName];
-				
-				var store = source.store;
-				source.store.load({callback: (function() {
-					var myLayer = null;
+				/*** DocG - 2013/12/03
+				 *	url interface to zoom on a lambert coordinates
+				 *  url accepted is brugis/?lambx=XXXXXX.x&lamby=YYYYYY.y[&scale=0.ssssss]
+				 */
+				if(params.lambx && params.lamby) {
+					var lambert72CoordinatesX = parseFloat(params.lambx);
+					var lambert72CoordinatesY = parseFloat(params.lamby);
+					var bounds = {
+						bottom: 	lambert72CoordinatesY - 35,
+						top: 		lambert72CoordinatesY + 35,
+						left: 		lambert72CoordinatesX - 65,
+						right: 		lambert72CoordinatesX + 65};
+					var extend = [	bounds.left,
+									bounds.bottom,
+									bounds.right,
+									bounds.top];
+					this.mapPanel.map.zoomToExtent(extend);
+					if (params.scale) {
+						this.mapPanel.map.zoomToScale(params.scale, true);
+					}
+				} else if(params.qry && params.val && ux.qry && ux.qry[currentLangage] && ux.qry[currentLangage][params.qry]) {
+					var sourceName = ux.qry[currentLangage][params.qry]["source_name"];
+					var layerName = ux.qry[currentLangage][params.qry]["layer_name"];
+					var propertyName = ux.qry[currentLangage][params.qry]["property_name"];
+					var propertyValue = params.val;
 					
-					store.each(function(rec,b,c) {
-						if(rec.data.name == layerName) {
-							myLayer = rec;
-						}
-					},this);
+					var theFeatureManager = this.tools.featuremanager;
+					var source = this.layerSources[sourceName];
+					
+					var store = source.store;
+					source.store.load({callback: (function() {
+						var myLayer = null;
+						
+						store.each(function(rec,b,c) {
+							if(rec.data.name == layerName) {
+								myLayer = rec;
+							}
+						},this);
 
-					var record = source.createLayerRecord({
-							name : myLayer.data.name,
-							title: myLayer.data.title,
-							url: myLayer.data.url,
-							source: source.id,
-							queryable: true
-					});
-					
-					// DocG - 20131002 - If some dedicated map is given too, the propertyValue contains a / at its end... Maybe good to suppress it?
-					propertyValue = propertyValue.replace("/", "");
-					
-					if(record != null) {	
-						theFeatureManager.on("layerchange",  function(rec,schema){
-								//Creation du spatial Filter
-								var ogcFilter = new OpenLayers.Filter.Comparison({
-									type: OpenLayers.Filter.Comparison.EQUAL_TO,
-									property: propertyName,
-									value: propertyValue
-								});
-								
-								theFeatureManager.loadFeatures(ogcFilter, function(features){
-									//Features sélectionnée et chargée, on zoom sur le résultat
-									var bounds, geom;
-									//console.log(bounds);
-									for (var i=features.length-1; i>=0; --i) {
-										geom = features[i].geometry;
-										if (geom) {
-											extent = geom.getBounds();
-											if (bounds) {
-												bounds.extend(extent);
-												//console.log("bounds");
-											} else {
-												bounds = extent.clone();
-												//console.log("else");
-												//console.log(bounds);
+						var record = source.createLayerRecord({
+								name : myLayer.data.name,
+								title: myLayer.data.title,
+								url: myLayer.data.url,
+								source: source.id,
+								queryable: true
+						});
+						
+						// DocG - 20131002 - If some dedicated map is given too, the propertyValue contains a / at its end... Maybe good to suppress it?
+						propertyValue = propertyValue.replace("/", "");
+						
+						if(record != null) {	
+							theFeatureManager.on("layerchange",  function(rec,schema){
+									//Creation du spatial Filter
+									var ogcFilter = new OpenLayers.Filter.Comparison({
+										type: OpenLayers.Filter.Comparison.EQUAL_TO,
+										property: propertyName,
+										value: propertyValue
+									});
+									
+									theFeatureManager.loadFeatures(ogcFilter, function(features){
+										//Features sÃ©lectionnÃ©e et chargÃ©e, on zoom sur le rÃ©sultat
+										var bounds, geom;
+										//console.log(bounds);
+										for (var i=features.length-1; i>=0; --i) {
+											geom = features[i].geometry;
+											if (geom) {
+												extent = geom.getBounds();
+												if (bounds) {
+													bounds.extend(extent);
+													//console.log("bounds");
+												} else {
+													bounds = extent.clone();
+													//console.log("else");
+													//console.log(bounds);
+												}
 											}
 										}
-									}
-									if(bounds) {
-										// DOCG 2013/08/05 Afin de zoomer au 1/1.000 et pas au 1/50 si l'extent est nul
-										if (bounds.getHeight() == 0){
-											bounds.bottom 	= bounds.bottom - 60;
-											bounds.top 		= bounds.top + 60;
-											bounds.left 	= bounds.left - 70;
-											bounds.right	= bounds.right +70;
+										if(bounds) {
+											// DOCG 2013/08/05 Afin de zoomer au 1/1.000 et pas au 1/50 si l'extent est nul
+											if (bounds.getHeight() == 0){
+												bounds.bottom 	= bounds.bottom - 60;
+												bounds.top 		= bounds.top + 60;
+												bounds.left 	= bounds.left - 70;
+												bounds.right	= bounds.right +70;
+											}
+											this.mapPanel.map.zoomToExtent(bounds);
 										}
-										this.mapPanel.map.zoomToExtent(bounds);
-									}
-								},this);				
-							},this,{single: true});
-						if(theFeatureManager.setLayer(record)){
-							//console.log("LayerChanged");
+									},this);				
+								},this,{single: true});
+							if(theFeatureManager.setLayer(record)){
+								//console.log("LayerChanged");
+							} else {
+								//console.log("LayerNotChanged");
+							}
 						} else {
-							//console.log("LayerNotChanged");
+							//console.log("LayerNotFound");
 						}
-					} else {
-						//console.log("LayerNotFound");
-					}
-				}).createDelegate(this)});
+					}).createDelegate(this)});
 				}
 			}
 			
 			///////////////////////DOCG////////////////////////////////////////////
 			// On applique le resize au couches de fond, Alleluyah!!!!!!!!!!!!!!!!!
-			for (var layerConfig in app.initialConfig.map.layers) {
-				if (app.initialConfig.map.layers[layerConfig].source){
-					try {
-						app.getLayerRecordFromMap(app.initialConfig.map.layers[layerConfig]).getLayer().transitionEffect = 'resize';
-						app.getLayerRecordFromMap(app.initialConfig.map.layers[layerConfig]).getLayer().removeBackBufferDelay = 200;
-					} catch(ex) {
-						console.log(ex);
+			if (app.initialConfig.map) {
+				for (var layerConfig in app.initialConfig.map.layers) {
+					if (app.initialConfig.map.layers[layerConfig].source){
+						try {
+							app.getLayerRecordFromMap(app.initialConfig.map.layers[layerConfig]).getLayer().transitionEffect = 'resize';
+							app.getLayerRecordFromMap(app.initialConfig.map.layers[layerConfig]).getLayer().removeBackBufferDelay = 200;
+						} catch(ex) {
+							console.log(ex);
+						}
 					}
 				}
 			}
@@ -815,7 +740,7 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
         };
 	
 		///////////////////////DOCG////////////////////////////////////////////
-		// Qui l'eût cru! Il fallait encore un control.click...
+		// Qui l'eÃ»t cru! Il fallait encore un control.click...
 		var click = new OpenLayers.Control.Click({trigger: showPosition});
 		this.mapPanel.map.addControl(click);
 		click.activate();
@@ -900,6 +825,13 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
             handler: this.displayAppInfo,
             scope: this
         });
+		/* 
+        var mapsButton = new Ext.Button({
+            //text: this.appInfoText,
+            iconCls: "icon-maps",
+            handler: this.displayMyMappsInfo,
+            scope: this
+        }); */
 
         tools.unshift("-");
         tools.unshift(new Ext.Button({
@@ -922,6 +854,9 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
             scope: this,
             iconCls: "icon-save"
         }));
+        //tools.unshift("-");
+        //tools.unshift(mapsButton);
+		
         tools.unshift("-");
         tools.unshift(aboutButton);
         return tools;
@@ -1092,5 +1027,4 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
             items: [wizard]
        }).show();
     }
-
 });

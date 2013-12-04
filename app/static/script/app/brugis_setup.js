@@ -73,6 +73,7 @@
 				"";
 				
         var app = new GeoExplorer.Brugis({
+			id : "brugisApp",
             authStatus: globalAuthStatus,
             proxy: "../proxy/?url=",
             printService: "/geoserver/pdf/",
@@ -85,7 +86,7 @@
         	// layer sources
         	defaultSourceType: "gxp_wmssource",
 			
-			
+			/*
 			sources: {
 				'BruGIS WMS - Geoserver': {
 					url: "http://svappmavw019:9090/geoserver/ows",
@@ -108,9 +109,9 @@
 					ptype: "gxp_wmscsource"
 				}
 			},
+			*/
 			
 			
-			/*
 			sources: {
 				'BruGIS WMS - Geoserver': {
 					url: "/geoserver/ows",
@@ -133,7 +134,7 @@
 					ptype: "gxp_wmscsource"
 				}
 			},
-			*/
+			
 			
 		    map: {
 				id: "mymap", // id needed to reference map in portalConfig above
