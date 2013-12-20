@@ -107,6 +107,40 @@
 				}]
 				:[];
 				
+		// screen pixels per screen inch
+		var dpi = 90;
+		
+		// quite clear factor to have round scales
+		var buggerThemAllInHellFactor = 90.71410375/90.00;
+		
+		// 1/ screen inch per screen meter * screen pixels per screen inch = 1/ screen pixels per screen meter = screen meter / screen pixels
+		var scaleToResFactor = 2.54/(100 * dpi * buggerThemAllInHellFactor);
+				
+		var resolutions = [	scaleToResFactor * 175000,
+							scaleToResFactor * 150000,
+							scaleToResFactor * 100000,
+							scaleToResFactor * 75000,
+							scaleToResFactor * 50000,
+							scaleToResFactor * 25000,
+							scaleToResFactor * 20000,
+							scaleToResFactor * 12500,
+							scaleToResFactor * 10000,
+							scaleToResFactor * 7500,
+							scaleToResFactor * 5000,
+							scaleToResFactor * 2500,
+							scaleToResFactor * 2000,
+							scaleToResFactor * 1000,
+							scaleToResFactor * 500,
+							scaleToResFactor * 250,
+							scaleToResFactor * 200,
+							scaleToResFactor * 125//,
+							//scaleToResFactor * 100,
+							//scaleToResFactor * 50
+							];
+
+		console.log(resolutions);
+		
+			
         var app = new GeoExplorer.Brugis({
 			id : "brugisApp",
             authStatus: globalAuthStatus,
@@ -121,7 +155,7 @@
         	// layer sources
         	defaultSourceType: "gxp_wmssource",
 			
-			/*
+		
 			sources: {
 				'BruGIS WMS - Geoserver': {
 					url: "http://svappmavw019:9090/geoserver/ows",
@@ -144,9 +178,9 @@
 					ptype: "gxp_wmscsource"
 				}
 			},
-			*/
 			
 			
+			/*
 			sources: {
 				'BruGIS WMS - Geoserver': {
 					url: "/geoserver/ows",
@@ -169,37 +203,20 @@
 					ptype: "gxp_wmscsource"
 				}
 			},
-			
+			*/
 			
 		    map: {
 				id: "mymap", // id needed to reference map in portalConfig above
 				projection: 'EPSG:31370',
 				units: 'm',
-				resolutions: [	49.0,		// 1/175.000
-								42.0, 	// 1/150.000
-								28.0, 	// 1/100.000
-								21.0, 	// 1/75.000
-								14.0, 	// 1/50.000
-								7, 		// 1/25.000
-								5.6,	// 1/20.000
-								3.5, 	// 1/12.500
-								2.8, 	// 1/10.000
-								2.1, 	// 1/7.500
-								1.4, 	// 1/5.000
-								0.7, 	// 1/2.500
-								0.56,	// 1/2.000
-								0.28, 	// 1/1.000
-								0.14, 	// 1/500
-								0.07, 	// 1/250
-								0.056,	// 1/200
-								0.035, 	// 1/125
-								0.028, 	// 1/100
-								0.014  	// 1/50
-							  ],
-				maxResolution: 49,
+				resolutions: resolutions,
+				maxResolution: resolutions[0],
+				maxExtent: [17646.52218435664, 21958.60926379636, 297198.78807110013, 245254.64733992796],
+				restrictedExtent : [120000, 140000, 180000, 200000],
 				//maxExtent: [129800, 158000, 167800, 181100],
 				//maxExtent:   [120000, 140000, 180000, 200000],
-				maxExtent:   [140000.0, 160000.0, 165088.0, 185088.0],
+				//maxExtent in array is [left, bottom, right, top]
+				//maxExtent:   [140000.0, 160000.0, 165088.0, 185088.0],
 				center: [149360, 170450],
 				zoom:2,
 				layers: baseMap
