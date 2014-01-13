@@ -1,4 +1,4 @@
-﻿        // optionally set locale based on query string parameter
+        // optionally set locale based on query string parameter
 		
         if (GeoExt.Lang) {
             GeoExt.Lang.set(OpenLayers.Util.getParameters()["locale"] || GeoExt.Lang.locale);
