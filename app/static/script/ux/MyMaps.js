@@ -45,6 +45,7 @@ ux.plugins.MyMaps = Ext.extend(gxp.plugins.Tool, {
 	
     expanderTemplateText: "<p><b>Abstract:</b> {description}</p>",
 	
+	resetText: "reset",
 	importText: "Import",
 	exportText: "Export",
 	saveMapText: "Save",
@@ -52,6 +53,7 @@ ux.plugins.MyMaps = Ext.extend(gxp.plugins.Tool, {
 	deleteMapText: "Delete",
 	doneText: "Done",
 	
+	resetButtonTooltipText: "Reset the BruGIS map to its default state",
 	importButtonTooltipText: "Import maps from file",
 	exportButtonTooltipText: "Export selected maps to file",
 	saveButtonTooltipText: "Save current map state",
@@ -62,6 +64,8 @@ ux.plugins.MyMaps = Ext.extend(gxp.plugins.Tool, {
 	loadConfirmMessage: "Are you sure to load this map?",
 	deleteConfirmTitle: "Deleting map",
 	deleteConfirmMessage: "Are you sure you want to delete this/these map(s)?",
+	resetConfirmTitle: "Resetting map",
+	resetConfirmMessage: "Do you want to reset BruGIS to its default map state?",
 	
 	namingText: "New map",
 	mapNameFieldText: "Name",
@@ -244,7 +248,14 @@ ux.plugins.MyMaps = Ext.extend(gxp.plugins.Tool, {
 				tooltip: this.exportButtonTooltipText,
                 scope : this
             }),
- */            "->",
+ */         new Ext.Button({
+				id: "resetButton",
+                text: this.resetText,
+                handler: this.resetMapState,
+				tooltip: this.resetButtonTooltipText,
+                scope : this
+            }),
+			"->",
 			new Ext.Button({
 				id: "saveButton",
                 text: this.saveMapText,
@@ -583,6 +594,35 @@ ux.plugins.MyMaps = Ext.extend(gxp.plugins.Tool, {
             },
             scope: this
         });
+	},
+	
+	/** api: method[resetMapState]
+	 * reset the map at its defaults parameters
+	 */
+	resetMapState: function() {
+	
+        var callback = function() {
+			//var configStr = Ext.util.JSON.encode(mapContent);
+			//configStr = configStr.replace("/geoserver/www/wmsaatl/geoweb_brugis.xml", "/geoserver/gwc/service/wms");
+			if (localStorage) {
+				localStorage.setItem('reset', 'True');
+			}
+            window.location.reload();
+        };
+		
+        Ext.Msg.show({
+            title: this.resetConfirmTitle, 
+            msg: this.resetConfirmMessage, 
+            buttons: Ext.Msg.YESNOCANCEL,
+            icon: Ext.MessageBox.WARNING,
+            fn: function(btn) {
+                if (btn === 'yes') {
+                    callback.call(this);
+                } else if (btn === 'no') {
+                }
+            },
+            scope: this
+        });	 
 	},
 	
     /** api: config[createExpander]

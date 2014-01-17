@@ -275,17 +275,25 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
  	
 	/** private: method[saveMapStateOnExit]
 	 *	DocG - 2013/11/21
+	 *  DocG - 2014/01/17
+	 *	reset mode added.
 	 */
 	saveMapStateOnExit: function() {
 		var configStr = Ext.util.JSON.encode(this.app.getState());
-		
 		//var configStr = Ext.util.JSON.encode(this.app.getState());
 		configStr = configStr.replace("/geoserver/www/wmsaatl/geoweb_brugis.xml", "/geoserver/gwc/service/wms");
 		if (localStorage) {
 			if(localStorage.getItem("DEV") == 'Y') {
 				console.log("DEV mode");
 			} else {
-				localStorage.setItem('currentMapState', configStr);
+				if (localStorage.getItem("reset") && localStorage.getItem("reset") == 'True' && localStorage.getItem('currentMapState')) {
+					// removing any currentMapState
+					localStorage.removeItem('currentMapState');
+					localStorage.removeItem('reset');
+				} else {
+					// saving current map state
+					localStorage.setItem('currentMapState', configStr);
+				}
 			}
 		}
 	},

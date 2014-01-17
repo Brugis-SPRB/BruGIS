@@ -133,9 +133,9 @@
 							scaleToResFactor * 500,
 							scaleToResFactor * 250,
 							scaleToResFactor * 200,
-							scaleToResFactor * 125//,
-							//scaleToResFactor * 100,
-							//scaleToResFactor * 50
+							scaleToResFactor * 125,
+							scaleToResFactor * 100,
+							scaleToResFactor * 50
 							];
 
 		console.log(resolutions);
@@ -147,7 +147,7 @@
             proxy: "../proxy/?url=",
             printService: "/geoserver/pdf/",
             about: {
-                title: "MyBruGIS v 1.10",
+                title: "MyBruGIS v 1.1",
                 "abstract": abstractText,
 				"help": localeHelp,
 		        contact: contactText
@@ -155,7 +155,7 @@
         	// layer sources
         	defaultSourceType: "gxp_wmssource",
 			
-		
+			/*
 			sources: {
 				'BruGIS WMS - Geoserver': {
 					url: "http://svappmavw019:9090/geoserver/ows",
@@ -178,9 +178,9 @@
 					ptype: "gxp_wmscsource"
 				}
 			},
+			*/
 			
 			
-			/*
 			sources: {
 				'BruGIS WMS - Geoserver': {
 					url: "/geoserver/ows",
@@ -203,7 +203,7 @@
 					ptype: "gxp_wmscsource"
 				}
 			},
-			*/
+			
 			
 		    map: {
 				id: "mymap", // id needed to reference map in portalConfig above
@@ -212,12 +212,12 @@
 				resolutions: resolutions,
 				maxResolution: resolutions[0],
 				maxExtent: [17646.52218435664, 21958.60926379636, 297198.78807110013, 245254.64733992796],
-				restrictedExtent : [120000, 140000, 180000, 200000],
+				//restrictedExtent : [120000, 140000, 180000, 200000],
 				//maxExtent: [129800, 158000, 167800, 181100],
 				//maxExtent:   [120000, 140000, 180000, 200000],
 				//maxExtent in array is [left, bottom, right, top]
 				//maxExtent:   [140000.0, 160000.0, 165088.0, 185088.0],
-				center: [149360, 170450],
+				center: [149000, 168000],
 				zoom:2,
 				layers: baseMap
 			}
