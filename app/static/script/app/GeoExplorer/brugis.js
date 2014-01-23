@@ -118,7 +118,7 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
                 ptype: "ux_wmsgetfeatureinfo", 
 				toggleGroup: this.toggleGroup,
 				format: "grid",
-				unique: true,
+				//unique: true,
                 actionTarget: {target: "paneltbar", index: 8}
             }, {
                 ptype: "gxp_featuremanager",

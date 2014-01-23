@@ -158,7 +158,7 @@
 			/*
 			sources: {
 				'BruGIS WMS - Geoserver': {
-					url: "http://svappmavw019:9090/geoserver/ows",
+					url: "http://svappmavw019:8080/geoserver/ows",
 					version: "1.1.1",
 					ptype: "gxp_wmscsource"
 				},
@@ -173,7 +173,7 @@
 					ptype: "gxp_wmscsource"
 				},
             	'GeoWebCacheLocal': {
-					url: "http://svappmavw019:9090/geoserver/www/wmsaatl/geoweb_brugis.xml",
+					url: "http://svappmavw019:8080/geoserver/www/wmsaatl/geoweb_brugis.xml",
 					version: "1.1.1",
 					ptype: "gxp_wmscsource"
 				}
@@ -217,7 +217,7 @@
 				//maxExtent:   [120000, 140000, 180000, 200000],
 				//maxExtent in array is [left, bottom, right, top]
 				//maxExtent:   [140000.0, 160000.0, 165088.0, 185088.0],
-				center: [149000, 168000],
+				center: [149600, 170300],
 				zoom:2,
 				layers: baseMap
 			}

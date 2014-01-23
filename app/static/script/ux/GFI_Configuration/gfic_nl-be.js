@@ -1,9 +1,10 @@
 ﻿
 Ext.namespace("ux.gfi");
 
-ux.gfi['nl-be'] =  {
+ux.gfi.nl =  {
 		"BROH:Bestemmingen" : {
 			"actiontype" : "GRID",
+			"title"      : "[NAME_NL]",
 			"attributes" : [
 				{ "name" : "Bestemmingen" ,  "label" : "[NAME_NL]" , "type" : "string" },
 				{ "name" : "Link" 		 ,  "label" : "[URL_P_NL]", "type" : "link"   }
@@ -43,6 +44,7 @@ ux.gfi['nl-be'] =  {
 		},
 		"DMS_INV_ARBR:Arbres_Remarquables": {
 			"actiontype" : "GRID",
+			"title"		 : "[tax_nl]",
 			"attributes" : [
 				{ "name": "Omtrek"				, "label" : "[circonference] cm"	, "type" : "string"},
 				{ "name": "Naam"				, "label" : "[tax_nl]"				, "type" : "string"},
@@ -59,6 +61,7 @@ ux.gfi['nl-be'] =  {
 		},
 		"DMS_INV_ARBR:Arbres_remarquables_rarete": {
 			"actiontype" : "GRID",
+			"title"		 : "[tax_nl]",
 			"attributes" : [
 				{ "name": "Identificatie"			, "label" : "[id]"					, "type" : "string"},
 				{ "name": "Latijn taxon"			, "label" : "[tax_la]"				, "type" : "string"},
@@ -67,6 +70,7 @@ ux.gfi['nl-be'] =  {
 		},
 		"DMS_INV_ARBR:Arbres_remarquables_100_biggest": {
 			"actiontype" : "GRID",
+			"title"		 : "[tax_nl]",
 			"attributes" : [
 				{ "name": "Omtrek"					, "label" : "[circonference] cm"	, "type" : "string"},
 				{ "name": "Indeling van maten"		, "label" : "[ClassementTailles]"	, "type" : "string"}
@@ -113,5 +117,15 @@ ux.gfi['nl-be'] =  {
 				{ "name": "ORIG_OBS"			, "label" : "[ORIG_OBS]"	, "type" : "string"},
 				{ "name": "PARCELLE"			, "label" : "[PARCELLE]"	, "type" : "string"}
 			]
+		},
+		"BROH:Perceel_2013": {
+			"actiontype" : "GRID",
+			"title"      : "Perceel 2013: [CAPAKEY]",
+			"attributes" : []
+		},
+		"BROH:Gemeentegrenzen": {
+			"actiontype" : "GRID",
+			"title"      : "Commune: [MUDN]",
+			"attributes" : []
 		}
 };

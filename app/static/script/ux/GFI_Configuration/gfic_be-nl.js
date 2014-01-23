@@ -1,9 +1,10 @@
 ﻿
 Ext.namespace("ux.gfi");
 
-ux.gfi['be-nl'] =  {
+ux.gfi.nl =  {
 		"BROH:Bestemmingen" : {
 			"actiontype" : "GRID",
+			"title"      : "[NAME_NL]",
 			"attributes" : [
 				{ "name" : "Bestemmingen" ,  "label" : "[NAME_NL]" , "type" : "string" },
 				{ "name" : "Link" 		 ,  "label" : "[URL_P_NL]", "type" : "link"   }
@@ -43,6 +44,7 @@ ux.gfi['be-nl'] =  {
 		},
 		"DMS_INV_ARBR:Arbres_Remarquables": {
 			"actiontype" : "GRID",
+			"title"		 : "[tax_nl]",
 			"attributes" : [
 				{ "name": "Omtrek"				, "label" : "[circonference] cm"	, "type" : "string"},
 				{ "name": "Naam"				, "label" : "[tax_nl]"				, "type" : "string"},
@@ -59,6 +61,7 @@ ux.gfi['be-nl'] =  {
 		},
 		"DMS_INV_ARBR:Arbres_remarquables_rarete": {
 			"actiontype" : "GRID",
+			"title"		 : "[tax_nl]",
 			"attributes" : [
 				{ "name": "Identificatie"			, "label" : "[id]"					, "type" : "string"},
 				{ "name": "Latijn taxon"			, "label" : "[tax_la]"				, "type" : "string"},
@@ -67,6 +70,7 @@ ux.gfi['be-nl'] =  {
 		},
 		"DMS_INV_ARBR:Arbres_remarquables_100_biggest": {
 			"actiontype" : "GRID",
+			"title"		 : "[tax_nl]",
 			"attributes" : [
 				{ "name": "Omtrek"					, "label" : "[circonference] cm"	, "type" : "string"},
 				{ "name": "Indeling van maten"		, "label" : "[ClassementTailles]"	, "type" : "string"}
@@ -88,6 +92,22 @@ ux.gfi['be-nl'] =  {
 				{ "name": "NB"				, "label" : "[NB]"				, "type" : "string"}
 			]
 		},
+		"AATL:Patrimoine_New": {
+			"actiontype" : "GRID",
+			"attributes" : [
+				{ "name": "Benaming"				, "label" : "[BENAMING_PAT_VW_NL]"								, "type" : "string"},
+				{ "name": "Adres van het goed"			, "label" : "[STRAAT_NL] [NUMMER_VAN], [POSTCODE] [GEMEENTE_NL]", "type" : "string"},
+				{ "name": "Type van vrijwaring"		, "label" : "[TYPE_VRIJWARING_NL]"								, "type" : "string"},
+				{ "name": "Gevrijwaard als"			, "label" : "[BESCHERMD_ALS_NL]"								, "type" : "string"},
+				{ "name": "Datum van het eerste	besluit"		, "label" : "[DATUM_AG1]"										, "type" : "string"},
+				{ "name": "Datatum van het laatste besluit"		, "label" : "[DATUM_AG2]"										, "type" : "string"},
+				{ "name": "Het eerste besluit"					, "label" : "[DOCUM_AG1]"										, "type" : "link"},
+				{ "name": "Het laatste besluit"					, "label" : "[DOCUM_AG2]"										, "type" : "link"},
+				{ "name": "Foto"					, "label" : "[FOTO]"											, "type" : "picture"},
+				{ "name": "Vrijwaringszone"			, "label" : "['Ja','Nee'][[VRIJWARINGSZONE]]"					, "type" : "eval"},
+				{ "name": "Referentie DML"			, "label" : "[NUMMER_DOSSIER]/[CODE_DOSSIER]"					, "type" : "string"}
+			]
+		},
 		"TAX:Observations": {
 			"actiontype" : "GRID",
 			"attributes" : [
@@ -98,12 +118,14 @@ ux.gfi['be-nl'] =  {
 				{ "name": "PARCELLE"			, "label" : "[PARCELLE]"	, "type" : "string"}
 			]
 		},
-		"BUV:Voorkooprecht": {
+		"BROH:Perceel_2013": {
 			"actiontype" : "GRID",
-			"attributes" : [
-				{ "name": "Zone naam"			, "label" : "[NOM_NL]"	, "type" : "string"},
-				{ "name": "link"				, "label" : "[URL_NL]"				, "type" : "link"},
-				{ "name": "aktief/inaktief"		, "label" : "[ACTIF]"				, "type" : "string"}
-			]
+			"title"      : "Perceel 2013: [CAPAKEY]",
+			"attributes" : []
+		},
+		"BROH:Gemeentegrenzen": {
+			"actiontype" : "GRID",
+			"title"      : "Commune: [MUDN]",
+			"attributes" : []
 		}
 };
