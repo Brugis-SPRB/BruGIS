@@ -161,6 +161,12 @@ ux.plugins.WMSTreeLegend = Ext.extend(gxp.plugins.Tool, {
 								record.data.layer.transitionEffect = "resize";
 								record.data.layer.removeBackBufferDelay = 200;
 						
+						
+								//NDU 24/01/2013 Fix Geowecache HIT Alignement de grid 
+								record.data.layer.addOptions({
+									tileOrigin: new OpenLayers.LonLat(140000, 160000) 
+								});
+								
 								// NDU 19/07/2013 Hack forcant l'utilisation de l'url proposée dans le getcapabilities. voir bug #176
 								record.data.layer.url = layer.url;
 								
