@@ -23,8 +23,7 @@ Ext.namespace("ux.plugins");
 /** api: constructor
  *  .. class:: MyMaps(config)
  *
- *    Plugin for removing a selected layer from the map.
- *    TODO Make this plural - selected layers
+ *    Plugin for creating and managing localstorage maps
  */
 ux.plugins.MyMaps = Ext.extend(gxp.plugins.Tool, {
     
