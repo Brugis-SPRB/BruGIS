@@ -136,7 +136,7 @@ ux.plugins.WMSGetFeatureInfo = Ext.extend(gxp.plugins.Tool, {
                     eventListeners: {
                         getfeatureinfo: function(evt) {
                             var title = x.get("title") || x.get("name");
-							console.log(title);
+							//console.log(title);
 							var layer_name = x.get("name");
 							var currentLangage = GeoExt.Lang.locale;
 							if(layer_name) {
@@ -144,7 +144,7 @@ ux.plugins.WMSGetFeatureInfo = Ext.extend(gxp.plugins.Tool, {
 									var actiontype = ux.gfi[currentLangage][layer_name].actiontype;
 									switch(actiontype) {
 										case "GRID":
-											console.log("calling displaySmartPopup for ".concat(title));
+											//console.log("calling displaySmartPopup for ".concat(title));
 											this.displaySmartPopup(evt, title, ux.gfi[currentLangage][layer_name]);
 											break;
 										case "REDIRECT":
