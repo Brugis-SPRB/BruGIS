@@ -114,7 +114,7 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
                 actionTarget: {target: "paneltbar", index: 6}
             }, {
                 ptype: "gxp_navigation", 
-				toggleGroup: this.toggleGroup,
+				//toggleGroup: this.toggleGroup,
                 actionTarget: {target: "paneltbar", hidden: false, index: 7},
 				autoActivate: false
             }, {
@@ -565,7 +565,7 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
 		///////////////////////DOCG////////////////////////////////////////////
         this.on("ready", function() {
 		
-			if(this.layerSources["BruGIS WMS - Geoserver"].url != this.originalSourcesUrl) {
+			if(this.originalSourcesUrl != "" && this.layerSources["BruGIS WMS - Geoserver"].url != this.originalSourcesUrl) {
 				this.layerSources["BruGIS WMS - Geoserver"].url = this.originalSourcesUrl;
 				this.layerSources["BruGIS WMS - Geoserver"].createStore();
 			}

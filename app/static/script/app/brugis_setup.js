@@ -187,8 +187,8 @@
             },
         	// layer sources
         	defaultSourceType: "gxp_wmssource",
-			//sources: sourcesDev,
-			sources: sourcesPrd,
+			sources: sourcesDev,
+			//sources: sourcesPrd,
 			
 		    map: {
 				id: "mymap", // id needed to reference map in portalConfig above
