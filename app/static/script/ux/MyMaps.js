@@ -424,7 +424,7 @@ ux.plugins.MyMaps = Ext.extend(gxp.plugins.Tool, {
 					// sauvegarde du mapState courant
 					var configStr = Ext.util.JSON.encode(this.app.getState());
 					configStr = configStr.replace("/geoserver/www/wmsaatl/geoweb_brugis.xml", "/geoserver/gwc/service/wms");
-					
+					configStr = configStr.replace("/geoserver/www/wmsaatl/wmsc_brugis.xml", "/geoserver/ows");
 					//bkp de this.myMaps
 					var myMapsData = [];
 					var myMapsNames = [];
@@ -572,11 +572,12 @@ ux.plugins.MyMaps = Ext.extend(gxp.plugins.Tool, {
 		var mapContent 		= selectedMap.data.content;
 		
         var callback = function() {
-			var configStr = Ext.util.JSON.encode(mapContent);
-			configStr = configStr.replace("/geoserver/www/wmsaatl/geoweb_brugis.xml", "/geoserver/gwc/service/wms");
+			var configStr = mapContent;
 			if (localStorage) {
 				localStorage.setItem('mapStateToLoad', configStr);
+				//console.log("mapStateToLoad set");
 			}
+			//console.log("just before reload");
             window.location.reload();
         };
 		
@@ -601,8 +602,6 @@ ux.plugins.MyMaps = Ext.extend(gxp.plugins.Tool, {
 	resetMapState: function() {
 	
         var callback = function() {
-			//var configStr = Ext.util.JSON.encode(mapContent);
-			//configStr = configStr.replace("/geoserver/www/wmsaatl/geoweb_brugis.xml", "/geoserver/gwc/service/wms");
 			if (localStorage) {
 				localStorage.setItem('reset', 'True');
 			}

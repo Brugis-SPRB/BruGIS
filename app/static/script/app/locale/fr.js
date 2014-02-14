@@ -51,6 +51,9 @@ GeoExt.Lang.add("fr", {
 		treeTabTitleText: "Données",
 		legendTabTitleText: "Légende",
 		disclaimerText: "Carte indicative - Réalisée par BruGIS sur base de UrbIS2",
+		wpsserver :"http://svappmavw019:8080/geoserver/wps",
+		//wpsserver :"http://mybrugis.irisnetlab.be/geoserver/wps",
+		//wpsserver :"http://www.mybrugis.irisnet.be/geoserver/wps",
 		//wmsTreeLegendSourceText: "http://localhost:8080/geoserver/www/wmsaatl/wmsaatl_fr.xml"
 		wmsTreeLegendSourceText: "http://svappmavw019:8080/geoserver/www/wmsaatl/wmsaatl_fr.xml"
 		//wmsTreeLegendSourceText: "http://mybrugis.irisnetlab.be/geoserver/www/wmsaatl/wmsaatl_fr.xml"

@@ -49,6 +49,9 @@ GeoExt.Lang.add("nl", {
 		treeTabTitleText: "Gegevens",
 		legendTabTitleText: "Legende",
 		disclaimerText: "Indicative map - Realized by BruGIS team with Brussels UrbIS",
+		wpsserver :"http://svappmavw019:8080/geoserver/wps",
+		//wpsserver :"http://mybrugis.irisnetlab.be/geoserver/wps",
+		//wpsserver :"http://www.mybrugis.irisnet.be/geoserver/wps",
 		//wmsTreeLegendSourceText: "http://localhost:8080/geoserver/www/wmsaatl/wmsaatl_nl.xml"
 		wmsTreeLegendSourceText: "http://svappmavw019:8080/geoserver/www/wmsaatl/wmsaatl_nl.xml"
 		//wmsTreeLegendSourceText: "http://mybrugis.irisnetlab.be/geoserver/www/wmsaatl/wmsaatl_nl.xml"

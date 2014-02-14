@@ -58,8 +58,10 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
 	deutchText: "in het nederlands",
 	englishText: "in english",
 	disclaimerText:  "Indicative map - Realized by BruGIS team with Brussels UrbIS",
+	wpsserver :"http://svappmavw019:8080/geoserver/wps",
+	//wpsserver :"http://mybrugis.irisnetlab.be/geoserver/wps",
+	//wpsserver :"http://www.mybrugis.irisnet.be/geoserver/wps",
 	//wmsTreeLegendSourceText: "localhost:8080/geoserver/www/wmsaatl/wmsaatl.xml",
-	wpsserver :'http://svappmavw019:8080/geoserver/wps',
 	wmsTreeLegendSourceText: "svappmavw019:8080/geoserver/www/wmsaatl/wmsaatl.xml",
 	//wmsTreeLegendSourceText: "http://mybrugis.irisnetlab.be/geoserver/www/wmsaatl/wmsaatl.xml",
 	//wmsTreeLegendSourceText: "http://www.mybrugis.irisnet.be/geoserver/www/wmsaatl/wmsaatl.xml",
@@ -91,6 +93,7 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
                 ptype: "ux_addlayers",
                 actionTarget: "layers.tbar",
                 upload: true,
+				//search: {selectedSource: "BruGIS searchWMS - Geoserver"},
 				skipSourceIdList: ["GeoWebCacheLocal"]
             }, {
                 ptype: "gxp_removelayer",
@@ -154,7 +157,7 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
                 ptype: "gxp_zoomtoextent",
                 actionTarget: {target: "paneltbar", index: 15}
             }, {
-                ptype: "ux_geolocator", 
+                ptype: "ux_geolocator",
 				controlOptions: {id: "geolocatecontrol",
 								 bind: false,
 								 watch: true,
@@ -262,15 +265,29 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
             this.applyConfig(config);
 		} else if (localStorage && localStorage.getItem('mapStateToLoad')) {
 			var addConfig = Ext.util.JSON.decode(localStorage.getItem('mapStateToLoad'));
+			delete config.sources;
+			delete config.map;
+			//console.log(config);
+			//console.log(addConfig);
+			Ext.applyIf(config, addConfig);
+			this.applyConfig(config);
 			localStorage.removeItem('mapStateToLoad');
-            this.applyConfig(Ext.applyIf(addConfig, config));
         } else if (localStorage && localStorage.getItem('currentMapState')) {
+			console.log("Loading last state...");
             var addConfig = Ext.util.JSON.decode(localStorage.getItem('currentMapState'));
-            this.applyConfig(Ext.applyIf(addConfig, config));
+			//var originalSources = config.sources;
+			delete config.sources;
+			delete config.map;
+			console.log(config);
+			console.log(addConfig);
+			Ext.apply(config, addConfig);
+			this.applyConfig(config);
+			//this.sources = originalSources;
 		} else {
+			console.log("Nothing special, loading...");
+			console.log(config);
 			this.applyConfig(config);
 		}
-        
     },
  	
 	/** private: method[saveMapStateOnExit]
@@ -280,16 +297,19 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
 	 */
 	saveMapStateOnExit: function() {
 		var configStr = Ext.util.JSON.encode(this.app.getState());
-		//var configStr = Ext.util.JSON.encode(this.app.getState());
-		configStr = configStr.replace("/geoserver/www/wmsaatl/geoweb_brugis.xml", "/geoserver/gwc/service/wms");
+		//var configStr = Ext.util.JSON.encode(this.getState());
+		//configStr = configStr.replace("/geoserver/www/wmsaatl/geoweb_brugis.xml", "/geoserver/gwc/service/wms");
+		//configStr = configStr.replace("/geoserver/www/wmsaatl/wmsc_brugis.xml", "/geoserver/ows");
 		if (localStorage) {
 			if(localStorage.getItem("DEV") == 'Y') {
 				console.log("DEV mode");
 			} else {
-				if (localStorage.getItem("reset") && localStorage.getItem("reset") == 'True' && localStorage.getItem('currentMapState')) {
+				if (localStorage.getItem("reset") && localStorage.getItem("reset") == 'True') {
 					// removing any currentMapState
-					localStorage.removeItem('currentMapState');
 					localStorage.removeItem('reset');
+					if (localStorage.getItem('currentMapState')) {
+						localStorage.removeItem('currentMapState');
+					}
 				} else {
 					// saving current map state
 					localStorage.setItem('currentMapState', configStr);
@@ -298,7 +318,7 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
 		}
 	},
 	
-	 /** private: method[setCookieValue]
+	/** private: method[setCookieValue]
      *  Set the value for a cookie parameter
      */
     setCookieValue: function(param, value) {
@@ -328,7 +348,6 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
         return null;
     },
 
-
     /** private: method[logout]
      *  Log out the current user from the application.
      */
@@ -337,6 +356,10 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
             this.clearCookieValue("JSESSIONID");
             this.clearCookieValue(this.cookieParamName);
             this.setAuthorizedRoles([]);
+			// DocG - 2014/02/10 
+			if (localStorage) {
+				localStorage.setItem('reset', 'True');
+			}
             window.location.reload();
         };
         Ext.Msg.show({
@@ -546,8 +569,12 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
             items: this.createBottomTools()
         });
 		///////////////////////DOCG////////////////////////////////////////////
-		
         this.on("ready", function() {
+		
+			//console.log(this);
+			//this.sources["BruGIS WMS - Geoserver"].url = "http://svappmavw019:8080/geoserver/www/wmsaatl/wmsc_brugis.xml";
+			//this.initialConfig.sources = this.sources;
+			
             // enable only those items that were not specifically disabled
             var disabled = this.toolbar.items.filterBy(function(item) {
                 return item.initialConfig && item.initialConfig.disabled;
@@ -556,7 +583,6 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
             disabled.each(function(item) {
                 item.disable();
             });
-			
 			// DOCG // idem dessus, mais pour la bottomToolbar
             var bottomDisabled = this.bottomtoolbar.items.filterBy(function(item) {
                 return item.initialConfig && item.initialConfig.disabled;
@@ -691,7 +717,7 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
 				}
 			}
 		});
- 		
+		
 		///////////////////////DOCG////////////////////////////////////////////
 		// Show the x y coordinates of the event
 		var showCoordinates = function(e) {
@@ -798,8 +824,7 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
 				queryContainer
             ]
         }];
-        GeoExplorer.superclass.initPortal.apply(this, arguments);  
-		
+        GeoExplorer.superclass.initPortal.apply(this, arguments);
     },
 
     /**
@@ -837,13 +862,6 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
             handler: this.displayAppInfo,
             scope: this
         });
-		/* 
-        var mapsButton = new Ext.Button({
-            //text: this.appInfoText,
-            iconCls: "icon-maps",
-            handler: this.displayMyMappsInfo,
-            scope: this
-        }); */
 
         tools.unshift("-");
         tools.unshift(new Ext.Button({
@@ -866,8 +884,6 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
             scope: this,
             iconCls: "icon-save"
         }));
-        //tools.unshift("-");
-        //tools.unshift(mapsButton);
 		
         tools.unshift("-");
         tools.unshift(aboutButton);

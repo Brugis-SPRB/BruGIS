@@ -75,8 +75,8 @@
 		var baseMap =
 			(geoextLangFr)?
 				[{
-					source: "GeoWebCacheLocal",
-					name:   "urbisFR",
+					source: "BruGIS WMS - Geoserver",
+					name:   "URBIS:urbisFR",
 					title:  "Urbis",
 					id: "frBackground",
 					group:  "background",
@@ -86,8 +86,8 @@
 				:
 			(geoextLangNl)?
 				[{
-					source: "GeoWebCacheLocal",
-					name:   "urbisNL",
+					source: "BruGIS WMS - Geoserver",
+					name:   "URBIS:urbisNL",
 					title:  "Urbis",
 					id: "nlBackground",
 					group:  "background",
@@ -97,8 +97,8 @@
 				:
 			(geoextLangEn)?
 				[{
-					source: "GeoWebCacheLocal",
-					name:   "urbisFR",
+					source: "BruGIS WMS - Geoserver",
+					name:   "URBIS:urbisFR",
 					title:  "Urbis",
 					id: "frBackground",
 					group:  "background",
@@ -138,27 +138,9 @@
 							scaleToResFactor * 50
 							];
 
-		//console.log(resolutions);
-		
-			
-        var app = new GeoExplorer.Brugis({
-			id : "brugisApp",
-            authStatus: globalAuthStatus,
-            proxy: "../proxy/?url=",
-            printService: "/geoserver/pdf/",
-            about: {
-                title: "MyBruGIS v 1.1",
-                "abstract": abstractText,
-				"help": localeHelp,
-		        contact: contactText
-            },
-        	// layer sources
-        	defaultSourceType: "gxp_wmssource",
-			
-			/*
-			sources: {
+		var sourcesDev = {
 				'BruGIS WMS - Geoserver': {
-					url: "http://svappmavw019:8080/geoserver/ows",
+					url: "http://svappmavw019:8080/geoserver/www/wmsaatl/wmsc_brugis.xml",
 					version: "1.1.1",
 					ptype: "gxp_wmscsource"
 				},
@@ -177,13 +159,11 @@
 					version: "1.1.1",
 					ptype: "gxp_wmscsource"
 				}
-			},
-			*/
+			};
 			
-			
-			sources: {
+		var sourcesPrd = {
 				'BruGIS WMS - Geoserver': {
-					url: "/geoserver/ows",
+					url: "/geoserver/www/wmsaatl/wmsc_brugis.xml",
 					version: "1.1.1",
 					ptype: "gxp_wmscsource"
 				},
@@ -202,8 +182,23 @@
 					version: "1.1.1",
 					ptype: "gxp_wmscsource"
 				}
-			},
+			};
 			
+        var app = new GeoExplorer.Brugis({
+			//id : "brugisApp", //commented out for savemap compatibility
+            authStatus: globalAuthStatus,
+            proxy: "../proxy/?url=",
+            printService: "/geoserver/pdf/",
+            about: {
+                title: "MyBruGIS v 1.1 Haendel",
+                "abstract": abstractText,
+				"help": localeHelp,
+		        contact: contactText
+            },
+        	// layer sources
+        	defaultSourceType: "gxp_wmssource",
+			sources: sourcesDev,
+			//sources: sourcesPrd,
 			
 		    map: {
 				id: "mymap", // id needed to reference map in portalConfig above

@@ -115,17 +115,17 @@ ux.plugins.WMSTreeLegend = Ext.extend(gxp.plugins.Tool, {
             text: 'WMS',
             loader: new GeoExt.tree.WMSCapabilitiesLoader({
                 url: this.outputConfig.url,
-                layerOptions: { buffer: 0, 
-								singleTile: true, 
-								ratio: 1, 
+                layerOptions: { buffer: 0,
+								singleTile: true,
+								ratio: 1,
 								featureInfoFormat: "text/xml"},
                 layerParams: { 'TRANSPARENT': 'TRUE', 'INFO_FORMAT': "text/xml" },
                 // customize the createNode method to add a checkbox to nodes
                 createNode: function(attr) {
                     attr.checked = attr.leaf ? false : undefined;
 					// Ceci déplie le premier Node appelé "AATL" ou "BROH"
-					attr.expanded = ((attr.text == "Bruxelles Développement urbain") || 
-									 (attr.text == "Brussel Stedelijke Ontwikkeling") || 
+					attr.expanded = ((attr.text == "Bruxelles Développement urbain") ||
+									 (attr.text == "Brussel Stedelijke Ontwikkeling") ||
 									 (attr.text == "Fonds de plan") ||
 									 (attr.text == "Basiskaart"));
                     return GeoExt.tree.WMSCapabilitiesLoader.prototype.createNode.apply(this, [attr]);
@@ -147,6 +147,7 @@ ux.plugins.WMSTreeLegend = Ext.extend(gxp.plugins.Tool, {
                     if (checked === true) {
 
 						var source = this.target.layerSources[this.sourceName];
+						console.log(source);
 						var layer = node.attributes.layer; //type : Openlayer.WmsLayer
 						if(source.lazy) {
 							source.store.load({callback: (function() {
@@ -162,7 +163,7 @@ ux.plugins.WMSTreeLegend = Ext.extend(gxp.plugins.Tool, {
 								record.data.layer.removeBackBufferDelay = 200;
 						
 						
-								//NDU 24/01/2013 Fix Geowecache HIT Alignement de grid 
+								//NDU 24/01/2014 Fix Geowecache HIT Alignement de grid 
 								record.data.layer.addOptions({
 									tileOrigin: new OpenLayers.LonLat(140000, 160000) 
 								});
