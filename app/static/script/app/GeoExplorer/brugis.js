@@ -66,6 +66,8 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
 	//wmsTreeLegendSourceText: "http://mybrugis.irisnetlab.be/geoserver/www/wmsaatl/wmsaatl.xml",
 	//wmsTreeLegendSourceText: "http://www.mybrugis.irisnet.be/geoserver/www/wmsaatl/wmsaatl.xml",
     // End i18n.
+	
+	originalSourcesUrl : "",
 
     constructor: function(config) {
         // Starting with this.authorizedRoles being undefined, which means no
@@ -92,9 +94,7 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
             }, {
                 ptype: "ux_addlayers",
                 actionTarget: "layers.tbar",
-                upload: true,
-				//search: {selectedSource: "BruGIS searchWMS - Geoserver"},
-				skipSourceIdList: ["GeoWebCacheLocal"]
+                upload: true
             }, {
                 ptype: "gxp_removelayer",
                 actionTarget: ["layers.tbar", "layers.contextMenu"]
@@ -267,25 +267,19 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
 			var addConfig = Ext.util.JSON.decode(localStorage.getItem('mapStateToLoad'));
 			delete config.sources;
 			delete config.map;
-			//console.log(config);
-			//console.log(addConfig);
+			this.originalSourcesUrl = config.sources["BruGIS WMS - Geoserver"].url;
 			Ext.applyIf(config, addConfig);
 			this.applyConfig(config);
 			localStorage.removeItem('mapStateToLoad');
         } else if (localStorage && localStorage.getItem('currentMapState')) {
-			console.log("Loading last state...");
             var addConfig = Ext.util.JSON.decode(localStorage.getItem('currentMapState'));
-			//var originalSources = config.sources;
+			this.originalSourcesUrl= config.sources["BruGIS WMS - Geoserver"].url;
 			delete config.sources;
 			delete config.map;
-			console.log(config);
-			console.log(addConfig);
 			Ext.apply(config, addConfig);
 			this.applyConfig(config);
-			//this.sources = originalSources;
+
 		} else {
-			console.log("Nothing special, loading...");
-			console.log(config);
 			this.applyConfig(config);
 		}
     },
@@ -298,8 +292,8 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
 	saveMapStateOnExit: function() {
 		var configStr = Ext.util.JSON.encode(this.app.getState());
 		//var configStr = Ext.util.JSON.encode(this.getState());
-		//configStr = configStr.replace("/geoserver/www/wmsaatl/geoweb_brugis.xml", "/geoserver/gwc/service/wms");
-		//configStr = configStr.replace("/geoserver/www/wmsaatl/wmsc_brugis.xml", "/geoserver/ows");
+		configStr = configStr.replace("/geoserver/www/wmsaatl/geoweb_brugis.xml", "/geoserver/gwc/service/wms");
+		configStr = configStr.replace("/geoserver/www/wmsaatl/wmsc_brugis.xml", "/geoserver/ows");
 		if (localStorage) {
 			if(localStorage.getItem("DEV") == 'Y') {
 				console.log("DEV mode");
@@ -571,8 +565,12 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
 		///////////////////////DOCG////////////////////////////////////////////
         this.on("ready", function() {
 		
-			//console.log(this);
-			//this.sources["BruGIS WMS - Geoserver"].url = "http://svappmavw019:8080/geoserver/www/wmsaatl/wmsc_brugis.xml";
+			if(this.layerSources["BruGIS WMS - Geoserver"].url != this.originalSourcesUrl) {
+				this.layerSources["BruGIS WMS - Geoserver"].url = this.originalSourcesUrl;
+				this.layerSources["BruGIS WMS - Geoserver"].createStore();
+			}
+
+			
 			//this.initialConfig.sources = this.sources;
 			
             // enable only those items that were not specifically disabled

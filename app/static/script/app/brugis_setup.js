@@ -153,11 +153,6 @@
 					url: "http://geoserver.gis.irisnet.be/geoserver/ows",
 					version: "1.3.0",
 					ptype: "gxp_wmscsource"
-				},
-            	'GeoWebCacheLocal': {
-					url: "http://svappmavw019:8080/geoserver/www/wmsaatl/geoweb_brugis.xml",
-					version: "1.1.1",
-					ptype: "gxp_wmscsource"
 				}
 			};
 			
@@ -176,11 +171,6 @@
 					url: "http://geoserver.gis.irisnet.be/geoserver/ows",
 					version: "1.3.0",
 					ptype: "gxp_wmscsource"
-				},
-            	'GeoWebCacheLocal': {
-					url: "/geoserver/www/wmsaatl/geoweb_brugis.xml",
-					version: "1.1.1",
-					ptype: "gxp_wmscsource"
 				}
 			};
 			
@@ -197,8 +187,8 @@
             },
         	// layer sources
         	defaultSourceType: "gxp_wmssource",
-			sources: sourcesDev,
-			//sources: sourcesPrd,
+			//sources: sourcesDev,
+			sources: sourcesPrd,
 			
 		    map: {
 				id: "mymap", // id needed to reference map in portalConfig above
