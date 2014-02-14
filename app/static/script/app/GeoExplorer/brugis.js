@@ -265,9 +265,9 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
             this.applyConfig(config);
 		} else if (localStorage && localStorage.getItem('mapStateToLoad')) {
 			var addConfig = Ext.util.JSON.decode(localStorage.getItem('mapStateToLoad'));
+			this.originalSourcesUrl = config.sources["BruGIS WMS - Geoserver"].url;
 			delete config.sources;
 			delete config.map;
-			this.originalSourcesUrl = config.sources["BruGIS WMS - Geoserver"].url;
 			Ext.applyIf(config, addConfig);
 			this.applyConfig(config);
 			localStorage.removeItem('mapStateToLoad');
@@ -278,7 +278,6 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
 			delete config.map;
 			Ext.apply(config, addConfig);
 			this.applyConfig(config);
-
 		} else {
 			this.applyConfig(config);
 		}

@@ -147,7 +147,6 @@ ux.plugins.WMSTreeLegend = Ext.extend(gxp.plugins.Tool, {
                     if (checked === true) {
 
 						var source = this.target.layerSources[this.sourceName];
-						console.log(source);
 						var layer = node.attributes.layer; //type : Openlayer.WmsLayer
 						if(source.lazy) {
 							source.store.load({callback: (function() {

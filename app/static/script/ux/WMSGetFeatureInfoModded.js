@@ -136,7 +136,6 @@ ux.plugins.WMSGetFeatureInfo = Ext.extend(gxp.plugins.Tool, {
                     eventListeners: {
                         getfeatureinfo: function(evt) {
                             var title = x.get("title") || x.get("name");
-							//console.log(title);
 							var layer_name = x.get("name");
 							var currentLangage = GeoExt.Lang.locale;
 							if(layer_name) {
@@ -144,7 +143,6 @@ ux.plugins.WMSGetFeatureInfo = Ext.extend(gxp.plugins.Tool, {
 									var actiontype = ux.gfi[currentLangage][layer_name].actiontype;
 									switch(actiontype) {
 										case "GRID":
-											//console.log("calling displaySmartPopup for ".concat(title));
 											this.displaySmartPopup(evt, title, ux.gfi[currentLangage][layer_name]);
 											break;
 										case "REDIRECT":
@@ -200,12 +198,10 @@ ux.plugins.WMSGetFeatureInfo = Ext.extend(gxp.plugins.Tool, {
 			for (var each in this.popupCache) {
 				this.popupCache[each].close();
 			}
-		}
-	
+		}	
         var popup;
         var popupKey = evt.xy.x + "." + evt.xy.y;
 		var NumberOfObjects = evt.features.length;
-
         if (!(popupKey in this.popupCache)) {
             popup = this.addOutput({
                 xtype: "gx_popup",
@@ -222,7 +218,8 @@ ux.plugins.WMSGetFeatureInfo = Ext.extend(gxp.plugins.Tool, {
                     autoScroll: true,
                     autoHeight: true,
                     autoWidth: true,
-                    collapsible: true
+                    collapsible: true,
+					collapsed: true
                 },
                 listeners: {
                     close: (function(key) {
@@ -231,7 +228,8 @@ ux.plugins.WMSGetFeatureInfo = Ext.extend(gxp.plugins.Tool, {
                         };
                     })(popupKey),
                     scope: this
-                }
+                },
+				numberOfEntries: NumberOfObjects
             });
             this.popupCache[popupKey] = popup;
         } else {
@@ -331,11 +329,9 @@ ux.plugins.WMSGetFeatureInfo = Ext.extend(gxp.plugins.Tool, {
 				this.popupCache[each].close();
 			}
 		}
-		
         var popup;
         var popupKey = evt.xy.x + "." + evt.xy.y;
-		var NumberOfObjects = evt.features.length;
-		
+		var NumberOfObjects = evt.features.length;		
         if (!(popupKey in this.popupCache)) {
             popup = this.addOutput({
                 xtype: "gx_popup",
@@ -424,8 +420,6 @@ ux.plugins.WMSGetFeatureInfo = Ext.extend(gxp.plugins.Tool, {
 					
 					new_attributes[n_attribute.name] = labelTemplate;		
 				}
-				
-				//console.log(feature.geometry.getCentroid());
 				// Calcul incompatible avec IE... le .getArea n'est pas accepté
 				if (OpenLayers.Util.getBrowserName() != 'msie'){
 					if (feature.geometry.getArea() > 0.0) {
@@ -449,7 +443,6 @@ ux.plugins.WMSGetFeatureInfo = Ext.extend(gxp.plugins.Tool, {
 				 */
 				var customTitle = title;
 				if (layerConfiguration.title) {
-					//console.log("layerConfiguration.title");
 					customTitle = layerConfiguration.title;
 					for(var attribute in feature.attributes)
 					{
@@ -458,9 +451,7 @@ ux.plugins.WMSGetFeatureInfo = Ext.extend(gxp.plugins.Tool, {
 					}
 					feature.customTitle = customTitle.replace(/\[(.*?)\]/g, "");
 				}
-				
 				feature.attributes = new_attributes;
-				
 				var p = new Ext.grid.PropertyGrid({
 					listeners: {
 						'beforeedit': function (e) { 
