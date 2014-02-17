@@ -66,7 +66,7 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
 	//wmsTreeLegendSourceText: "http://mybrugis.irisnetlab.be/geoserver/www/wmsaatl/wmsaatl.xml",
 	//wmsTreeLegendSourceText: "http://www.mybrugis.irisnet.be/geoserver/www/wmsaatl/wmsaatl.xml",
     // End i18n.
-	
+	noTileslayersList: ["AATL_DMS_SITE_ARBR:Arbres_Remarquables"],
 	originalSourcesUrl : "",
 
     constructor: function(config) {
@@ -268,6 +268,7 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
 			this.originalSourcesUrl = config.sources["BruGIS WMS - Geoserver"].url;
 			delete config.sources;
 			delete config.map;
+			addConfig = this.avoidTiledCacheUsage(addConfig, this.noTileslayersList);
 			Ext.applyIf(config, addConfig);
 			this.applyConfig(config);
 			localStorage.removeItem('mapStateToLoad');
@@ -276,6 +277,7 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
 			this.originalSourcesUrl= config.sources["BruGIS WMS - Geoserver"].url;
 			delete config.sources;
 			delete config.map;
+			addConfig = this.avoidTiledCacheUsage(addConfig, this.noTileslayersList);
 			Ext.apply(config, addConfig);
 			this.applyConfig(config);
 		} else {
@@ -283,6 +285,24 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
 		}
     },
  	
+	/** private: method[avoidTiledCacheUsage]
+	 *	DocG - 2014/02/17
+	 *	
+	 *	
+	 */
+	avoidTiledCacheUsage: function(config, layersList) {
+		for (var i=layersList.length-1; i>=0; --i) {
+			for (var j=config.map.layers.length-1; j>=0; --j) {
+				if (config.map.layers[j].name == layersList[i]) {
+					config.map.layers[j].url = config.map.layers[j].url.replace("gwc/service/","");
+					config.map.layers[j].tiled = false;
+					config.map.layers[j].ratio = 3;
+				}
+			}
+		}
+		return config;
+	},
+	
 	/** private: method[saveMapStateOnExit]
 	 *	DocG - 2013/11/21
 	 *  DocG - 2014/01/17
@@ -563,14 +583,15 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
         });
 		///////////////////////DOCG////////////////////////////////////////////
         this.on("ready", function() {
-		
+			/* NDU - 2014/02/14
+			 *	Restauration des sources à leur définition originale afin de sauvegarder
+			 *	l'usage du xml et de sa rapidité, perdu en cas de rechargement de mybrugis
+			 *	d'une session précédente
+			 */
 			if(this.originalSourcesUrl != "" && this.layerSources["BruGIS WMS - Geoserver"].url != this.originalSourcesUrl) {
 				this.layerSources["BruGIS WMS - Geoserver"].url = this.originalSourcesUrl;
 				this.layerSources["BruGIS WMS - Geoserver"].createStore();
 			}
-
-			
-			//this.initialConfig.sources = this.sources;
 			
             // enable only those items that were not specifically disabled
             var disabled = this.toolbar.items.filterBy(function(item) {
