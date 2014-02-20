@@ -97,8 +97,6 @@ ux.plugins.BrugisSearcher = Ext.extend(gxp.plugins.Tool, {
 			}
 		});
 		
-		
-		
         var bounds = target.mapPanel.map.restrictedExtent;
         if (bounds && !combo.bounds) {
             target.on({
@@ -117,11 +115,8 @@ ux.plugins.BrugisSearcher = Ext.extend(gxp.plugins.Tool, {
         return ux.plugins.BrugisSearcher.superclass.init.apply(this, arguments);
     },
 	
-
-	
     /** api: method[addOutput]
      */
-
     addOutput: function(config) {
 		 this.btGroup = new Ext.ButtonGroup({
 			items : [this.combo,this.cadtext,this.typecombo]
@@ -177,14 +172,15 @@ ux.plugins.BrugisSearcher = Ext.extend(gxp.plugins.Tool, {
 	},
     /** private: method[onComboSelect]
      *  Listener for combo's select event.
+	 *	DocG - 2014/02/20 update for zoom level based on extent returned by the CIRB webservice
      */
     onComboSelect: function(combo, record) {
         if (this.updateField) {
             var map = this.target.mapPanel.map;
-			
-			var dest = new Proj4js.Proj('EPSG:31370');			
+			var dest    = new Proj4js.Proj('EPSG:31370');			
 			var myPoint = record.data.point;
-			var adnc    = record.data.adNc;
+			var adnc 	= record.data.adNc;
+			var extent 	= record.json.extent;
 			
 			if(map.getLayersByName('Search').length > 0){
 				var vectorLayer = map.getLayersByName('Search')[0];
@@ -202,8 +198,11 @@ ux.plugins.BrugisSearcher = Ext.extend(gxp.plugins.Tool, {
 					)
 				);
 				map.addLayer(vectorLayer);
-			}			
-			if (record.data.addressNumber === ""){
+			}
+			if (typeof extent=="object"){
+				map.zoomToExtent([extent.xmin, extent.ymin, extent.xmax, extent.ymax]);
+			}
+			else if (record.data.addressNumber === ""){
 				 var position = new OpenLayers.LonLat(
 						myPoint.x, myPoint.y
 				 );
