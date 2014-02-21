@@ -12,19 +12,15 @@ ux.gfi.fr = {
 		},
 		"AATL:Espaces_structurants" : {
 			"actiontype" : "GRID",
+			"title"		 : "[NAME_FR]",
 			"attributes" : [
 				 { "name" : "Affectation"	, "label" : "[NAME_FR]"		, "type" : "string" },
 				 { "name" : "Lien"			, "label" : "[URL_P_FR]"  	, "type" : "link" }
 			]
 		},
-		"AATL:Liseres_de_noyau_commercial" : {
-			"actiontype" : "GRID",
-			"attributes" : [
-				{ "name": "Affectation"		, "label" : "[AFFECTATION]" , "type" : "string" }
-			]
-		},
 		"AATL:Maille" : {
 			"actiontype" : "GRID",
+			"title"		 : "Maille: [GMLINK]",
 			"attributes" : [
 				{ "name": "Code"	, "label" : "[GMLINK]"			, "type" : "string" },
 				{ "name": "Lien"	, "label" : "[PATH_INTER]"		, "type" : "string" }
@@ -32,12 +28,14 @@ ux.gfi.fr = {
 		},
 		"AATL:Accessibilite" : {
 			"actiontype" : "GRID",
+			"title"		 : "Accessibilité: [ZONE]",
 			"attributes" : [
 				{ "name": "Type de zone"	, "label" : "[ZONE]"		, "type" : "string" }
 			]
 		},
 		"AATL:Enseignes" : {
 			"actiontype" : "GRID",
+			"title"		 : "Enseignes: [ZONE]",
 			"attributes" : [
 				{ "name": "Type de zone"	, "label" : "[ZONE]"		, "type" : "string" }
 			]
@@ -75,7 +73,7 @@ ux.gfi.fr = {
 		},
 		"AATL_DMS_SITE_ARBR:Arbres_remarquables_rarete": {
 			"actiontype" : "GRID",
-			"title"		 : "[tax_fr]",
+			"title"		 : "[tax_la]: [rarete]",
 			"attributes" : [
 				{ "name": "Identifiant"			, "label" : "[id]"					, "type" : "string"},
 				{ "name": "Taxon latin"			, "label" : "[tax_la]"				, "type" : "string"},
@@ -90,8 +88,44 @@ ux.gfi.fr = {
 				{ "name": "Classement des tailles"	, "label" : "[ClassementTailles]"	, "type" : "string"}
 			]
 		},
+		"AATL:Contrats_de_quartier": {
+			"actiontype" : "GRID",
+			"title"		 : "Contrat de quartier: [NOMCQ]",
+			"attributes" : [
+				{ "NAME": "Nom"									, "label" : "[NOMCQ]"					, "type": "string"},
+				{ "NAME": "Commune"								, "label" : "[COMMUNE]"					, "type": "string"},
+				{ "NAME": "Date d'arrêté du gouvernement"		, "label" : "[ARRET_GVT]"				, "type": "string"},
+				{ "NAME": "Date de notification à la commune"	, "label" : "[NOTIF_COMM]"				, "type": "string"},
+				{ "NAME": "Date de fin"							, "label" : "[DATE_FIN]"				, "type": "string"},
+				{ "NAME": "Actif"								, "label" : "['Oui','Non'][[STATUS]]"	, "type": "eval"},
+				{ "NAME": "Bureau d'étude"						, "label" : "[NOM_BE]"					, "type": "string"},
+				{ "NAME": "Bureau d'étude (responsable)"		, "label" : "[RESP_BE]"					, "type": "string"},
+				{ "NAME": "Série"								, "label" : "[SERIE]"					, "type": "string"},
+				{ "NAME": "Gestionnaire"						, "label" : "[GESTION]"					, "type": "string"},
+				{ "NAME": "Contact"								, "label" : "[TEL_BE]"					, "type": "string"},
+				{ "NAME": "Subside régional"					, "label" : "[SUBS_REG]"				, "type": "string"},
+				{ "NAME": "Référence comptable"					, "label" : "[REFERENCE]"				, "type": "string"},
+				{ "NAME": "ID"									, "label" : "[ID]"						, "type": "string"}
+			]
+		},
+		"AATL:Lotissements": {
+			"actiontype" : "GRID",
+			"title"		 : "[OBJET]",
+			"attributes" : [
+				{ "name": "Nom"						, "label" : "[OBJET]"			, "type": "string"},
+				{ "name": "Adresse"					, "label" : "[ADRESSE]"			, "type": "string"},
+				{ "name": "Demandeur"				, "label" : "[DEMANDEUR]"		, "type": "string"},
+				{ "name": "Date de notification"	, "label" : "[DATENOTIF]"		, "type": "string"},
+				{ "name": "Etat"					, "label" : "[PERMISOCTROYE]"	, "type": "string"},
+				{ "name": "Référence NOVA"			, "label" : "[REFNOVA]"			, "type": "string"},
+				{ "name": "Référence SITEX"			, "label" : "[REFSITEX]"		, "type": "string"},
+				{ "name": "Référence cadastrale"	, "label" : "[NUMCADAST]"		, "type": "string"},
+				{ "name": "ID"						, "label" : "[ID]"				, "type": "string"}
+			]
+		},
 		"AATL:Patrimoine": {
 			"actiontype" : "GRID",
+			"title"      : "[MS]: [DENOMINATION]",
 			"attributes" : [
 				{ "name": "Dénomination"	, "label" : "[DENOMINATION]"	, "type" : "string"},
 				{ "name": "Commune"			, "label" : "[COMMUNE]"			, "type" : "string"},
@@ -106,8 +140,33 @@ ux.gfi.fr = {
 				{ "name": "NB"				, "label" : "[NB]"				, "type" : "string"}
 			]
 		},
+		"AATL:Zones_de_protection": {
+			"actiontype" : "GRID",
+			"title"      : "[MS] en [CLSV]: [DENOMINATION]",
+			"attributes" : [
+				{ "name": "Dénomination"	, "label" : "[DENOMINATION]"	, "type" : "string"},
+				{ "name": "Commune"			, "label" : "[COMMUNE]"			, "type" : "string"},
+				{ "name": "Adresse"			, "label" : "[ADRESSE]"			, "type" : "string"},
+				{ "name": "N° de police"	, "label" : "[NRPOLICE]"		, "type" : "string"},
+				{ "name": "Mon./Site/Ens."	, "label" : "[MS]"				, "type" : "string"},
+				{ "name": "Class./Sauv."	, "label" : "[CLSV]"			, "type" : "string"},
+				{ "name": "Date AD"			, "label" : "[AD]"				, "type" : "string"},
+				{ "name": "N° de dossier"	, "label" : "[DMSFOLDERNR]"		, "type" : "string"},
+				{ "name": "Commentaire"		, "label" : "[COMMENTAIRE]"		, "type" : "string"},
+				{ "name": "EXTPROT"			, "label" : "[EXTPROT]"			, "type" : "string"},
+				{ "name": "NB"				, "label" : "[NB]"				, "type" : "string"}
+			]
+		},
+		"AATL:Zones_de_protection_UNESCO": {
+			"actiontype" : "GRID",
+			"title"      : "Zone de protection UNESCO: [NOM_FR]",
+			"attributes" : [
+				{ "name": "Dénomination"	, "label" : "[NOM_FR]"			, "type" : "string"}
+			]
+		},
 		"AATL:Patrimoine_New": {
 			"actiontype" : "GRID",
+			"title"      : "[BESCHERMD_ALS_FR]: [BENAMING_PAT_VW_FR]",
 			"attributes" : [
 				{ "name": "Dénomination"			, "label" : "[BENAMING_PAT_VW_FR]"								, "type" : "string"},
 				{ "name": "Addresse du bien"		, "label" : "[NUMMER_VAN], [STRAAT_FR], [POSTCODE] [GEMEENTE_FR]", "type" : "string"},
@@ -146,10 +205,29 @@ ux.gfi.fr = {
 		},
 		"AED:Zones_de_preemption": {
 			"actiontype" : "GRID",
+			"title"		 : "Zone de préemption: [NOM_FR]",
 			"attributes" : [
 				{ "name": "Nom de zone"			, "label" : "[NOM_FR]"	, "type" : "string"},
 				{ "name": "Lien"				, "label" : "[URL_FR]"				, "type" : "link"},
 				{ "name": "actif/inactif"		, "label" : "[ACTIF]"				, "type" : "string"}
+			]
+		},
+		"AATL:PPAS":{
+			"actiontype" : "GRID",
+			"title"		 : "Plan particulier d'affection du sol: [OBJET]",
+			"attributes" : [
+				{ "name": "Nom"							, "label" : "[OBJET]"			, "type" : "string"},
+				{ "name": "Référence NOVA"				, "label" : "[REFNOVA]"			, "type" : "string"},
+				{ "name": "Référence SPEC"				, "label" : "[REFSPEC]"			, "type" : "string"},
+				{ "name": "RIE"							, "label" : "[RIE]"				, "type" : "string"},
+				{ "name": "Type d'arrêté"				, "label" : "[TYPEARRETE]"		, "type" : "string"},
+				{ "name": "Date d'arrêté"				, "label" : "[DATEARRETE]"		, "type" : "string"},
+				{ "name": "Date d'arrêté EXP"			, "label" : "[DATARREXP]"		, "type" : "string"},
+				{ "name": "Date d'arrêté PROJPLAN"		, "label" : "[DATARRPROJPLAN]"	, "type" : "string"},
+				{ "name": "En zone d'intérêt régionale"	, "label" : "[ZIR]"				, "type" : "string"},
+				{ "name": "Décision"					, "label" : "[DECISION]"		, "type" : "string"},
+				{ "name": "DECPROJPLAN"					, "label" : "[DECPROJPLAN]"		, "type" : "string"},
+				{ "name": "ID"							, "label" : "[ID]"				, "type" : "string"}
 			]
 		},
 		"TAX:Observations": {
@@ -171,6 +249,47 @@ ux.gfi.fr = {
 			"actiontype" : "GRID",
 			"title"      : "Commune: [MUFN]",
 			"attributes" : []
+		},
+		"AATL:Galeries_commercantes": {
+			"actiontype" : "GRID",
+			"title"      : "Galeries commerçantes",
+			"attributes" : []
+		},
+		"AATL:Parking_de_transit": {
+			"actiontype" : "GRID",
+			"title"      : "Parking de transit",
+			"attributes" : []
+		},
+		"AATL:Points_de_variation_de_mixite": {
+			"actiontype" : "GRID",
+			"title"      : "Points de variation de mixité",
+			"attributes" : []
+		},
+		"AATL:Liseres_de_noyau_commercial": {
+			"actiontype" : "GRID",
+			"title"      : "Liserés de noyau commercial",
+			"attributes" : []
+		},
+		"AATL:Zichee": {
+			"actiontype" : "GRID",
+			"title"      : "Zone d'intérêt culturel, historique et d'embellisement",
+			"attributes" : []
+		},
+		"AATL:Biens_classes_ou_en_sauvegarde": {
+			"actiontype" : "GRID",
+			"title"      : "Biens: [DENOMINATION]",
+			"attributes" : [
+				{ "name": "Dénomination"			, "label" : "[DENOMINATION]"									, "type" : "string"},
+				{ "name": "Addresse du bien"		, "label" : "[NRPOLICE], [ADRESSE], [COMMUNE]"					, "type" : "string"},
+				{ "name": "Type de biens"			, "label" : "[MS]"												, "type" : "string"},
+				{ "name": "Type de classement"      , "label" : "[CLSV]"											, "type" : "string"},
+				{ "name": "Date d'arrêté"			, "label" : "[AD]"												, "type" : "string"},
+				{ "name": "Date OP"					, "label" : "[OP]"												, "type" : "string"},
+				{ "name": "Extension de protection"	, "label" : "[EXTPROT]"											, "type" : "link"},
+				{ "name": "Protection"				, "label" : "[PROTECTION]"										, "type" : "eval"},
+				{ "name": "Référence DMS"			, "label" : "[DMSFOLDERNR]"										, "type" : "string"},
+				{ "name": "Commentaire"				, "label" : "[COMMENTAIRE]"										, "type" : "string"}
+			]
 		}
 	};
 

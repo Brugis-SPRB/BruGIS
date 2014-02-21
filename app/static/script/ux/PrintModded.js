@@ -139,9 +139,11 @@ ux.plugins.Print = Ext.extend(gxp.plugins.Tool, {
 							if (layer instanceof OpenLayers.Layer.WMS) {
 								//console.log(layer);
 								layer.url = layer.url.replace("geoserver/gwc/service/wms","geoserver/ows");
-								if (layer.name.search("Urbis") === 0) {
+								// DocG - 2014/02/19 - obsolète depuis la publication casdacdée des FDPs UrbIS
+								/*if (layer.name.search("Urbis") === 0) {
 									layer.url = layer.url.replace(layer.url,"http://geoserver.gis.irisnet.be/geoserver/wms?SERVICE=WMS&");
 								};
+								*/
 								// Hardcode pour corriger la non impression des orthophotoplans 
 								if (layer.name.search("Orthophotoplans 2004") === 0) {
 									layer.url = layer.url.replace(layer.url,"http://geoserver.gis.irisnet.be/geoserver/wms?SERVICE=WMS&");
