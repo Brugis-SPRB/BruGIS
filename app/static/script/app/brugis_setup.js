@@ -9,7 +9,7 @@
         // optionally set locale based on query string parameter
         if (GeoExt.Lang) {
             GeoExt.Lang.set(OpenLayers.Util.getParameters()["locale"] || GeoExt.Lang.locale);
-       }
+        }
 		var geoextLangFr = ((GeoExt.Lang.locale == "fr")||(GeoExt.Lang.locale == "fr-be")||(GeoExt.Lang.locale == "fr-fr"))?true:false;
 		var geoextLangNl = ((GeoExt.Lang.locale == "nl")||(GeoExt.Lang.locale == "nl-be")||(GeoExt.Lang.locale == "nl-nl"))?true:false;
 		var geoextLangEn = ((GeoExt.Lang.locale == "en")||(GeoExt.Lang.locale == "en-gb")||(GeoExt.Lang.locale == "en-us")||(GeoExt.Lang.locale == "en-en"))?true:false;
@@ -17,7 +17,7 @@
 			geoextLangFr = true;
 		}
 		
-/*		
+/*
 ///////////////////////////////////////////////////////////////////////////////
 		if (OpenLayers.Util) {
 			//console.log(OpenLayers.Util.getBrowserName());
@@ -50,13 +50,13 @@
 
 		var abstractText = 
 			(geoextLangFr)?
-				"BruGIS, plateforme cartographique de Bruxelles D�veloppement urbain (SPRB)."
+				"BruGIS, Portail d'Information Géographique pour Bruxelles Développement urbain (SPRB)."
 				:
 			(geoextLangNl)?
-				"BruGIS, cartografische platform van Brussel Stedelijke Ontwikkeling (GOB)."
+				"BruGIS, Geografische Informatie Portaal voor Brussel Stedelijke Ontwikkeling (GOB)."
 				:
 			(geoextLangEn)?
-				"BruGIS, cartographic platform of Brussels Urban Development (BRPS)."
+				"BruGIS, Geographic Information Portal for Brussels Urban Development (BRPS)."
 				:
 				"";
 			
@@ -72,23 +72,75 @@
 				:
 				"";
 				
-        var app = new GeoExplorer.Brugis({
-            authStatus: globalAuthStatus,
-            proxy: "../proxy/?url=",
-            printService: "/geoserver/pdf/",
-            about: {
-                title: "MyBruGIS v 1.00",
-                "abstract": abstractText,
-				"help": localeHelp,
-		        contact: contactText
-            },
-        	// layer sources
-        	defaultSourceType: "gxp_wmssource",
-			
-			/*
-			sources: {
+		var baseMap =
+			(geoextLangFr)?
+				[{
+					source: "BruGIS WMS - Geoserver",
+					name:   "URBIS:urbisFR",
+					title:  "Urbis",
+					id: "frBackground",
+					group:  "background",
+					fixed: true,
+					visibility: geoextLangFr
+				}]
+				:
+			(geoextLangNl)?
+				[{
+					source: "BruGIS WMS - Geoserver",
+					name:   "URBIS:urbisNL",
+					title:  "Urbis",
+					id: "nlBackground",
+					group:  "background",
+					fixed: true,
+					visibility: geoextLangNl
+				}]
+				:
+			(geoextLangEn)?
+				[{
+					source: "BruGIS WMS - Geoserver",
+					name:   "URBIS:urbisFR",
+					title:  "Urbis",
+					id: "frBackground",
+					group:  "background",
+					fixed: true,
+					visibility: geoextLangEn
+				}]
+				:[];
+				
+		// screen pixels per screen inch
+		var dpi = 90;
+		
+		// quite clear factor to have round scales
+		var buggerThemAllInHellFactor = 90.71410375/90.00;
+		
+		// 1/ screen inch per screen meter * screen pixels per screen inch = 1/ screen pixels per screen meter = screen meter / screen pixels
+		var scaleToResFactor = 2.54/(100 * dpi * buggerThemAllInHellFactor);
+				
+		var resolutions = [	scaleToResFactor * 175000,
+							scaleToResFactor * 150000,
+							scaleToResFactor * 100000,
+							scaleToResFactor * 75000,
+							scaleToResFactor * 50000,
+							scaleToResFactor * 25000,
+							scaleToResFactor * 20000,
+							scaleToResFactor * 12500,
+							scaleToResFactor * 10000,
+							scaleToResFactor * 7500,
+							scaleToResFactor * 5000,
+							scaleToResFactor * 2500,
+							scaleToResFactor * 2000,
+							scaleToResFactor * 1000,
+							scaleToResFactor * 500,
+							scaleToResFactor * 250,
+							scaleToResFactor * 200,
+							scaleToResFactor * 125,
+							scaleToResFactor * 100,
+							scaleToResFactor * 50
+							];
+
+		var sourcesDev = {
 				'BruGIS WMS - Geoserver': {
-					url: "http://svappmavw019:8080/geoserver/ows",
+					url: "http://svappmavw019:8080/geoserver/www/wmsaatl/wmsc_brugis.xml",
 					version: "1.1.1",
 					ptype: "gxp_wmscsource"
 				},
@@ -99,20 +151,14 @@
 				},
 				'CIRB WMS - Geoserver': {
 					url: "http://geoserver.gis.irisnet.be/geoserver/ows",
-					version: "1.1.1",
-					ptype: "gxp_wmscsource"
-				},
-            	'GeoWebCacheLocal': {
-					url: "http://svappmavw019:8080/geoserver/www/wmsaatl/geoweb_brugis.xml",
-					version: "1.1.1",
+					version: "1.3.0",
 					ptype: "gxp_wmscsource"
 				}
-			}, 
-			*/
+			};
 			
-			sources: {
+		var sourcesPrd = {
 				'BruGIS WMS - Geoserver': {
-					url: "/geoserver/ows",
+					url: "/geoserver/www/wmsaatl/wmsc_brugis.xml",
 					version: "1.1.1",
 					ptype: "gxp_wmscsource"
 				},
@@ -123,90 +169,36 @@
 				},
 				'CIRB WMS - Geoserver': {
 					url: "http://geoserver.gis.irisnet.be/geoserver/ows",
-					version: "1.1.1",
-					ptype: "gxp_wmscsource"
-				},
-            	'GeoWebCacheLocal': {
-					url: "/geoserver/www/wmsaatl/geoweb_brugis.xml",
-					version: "1.1.1",
+					version: "1.3.0",
 					ptype: "gxp_wmscsource"
 				}
-			},
+			};
 			
+        var app = new GeoExplorer.Brugis({
+			//id : "brugisApp", //commented out for savemap compatibility
+            authStatus: globalAuthStatus,
+            proxy: "../proxy/?url=",
+            printService: "/geoserver/pdf/",
+            about: {
+                title: "MyBruGIS v 1.1 Haendel",
+                "abstract": abstractText,
+				"help": localeHelp,
+		        contact: contactText
+            },
+        	// layer sources
+        	defaultSourceType: "gxp_wmssource",
+			sources: sourcesDev,
+			//sources: sourcesPrd,
 			
 		    map: {
 				id: "mymap", // id needed to reference map in portalConfig above
 				projection: 'EPSG:31370',
 				units: 'm',
-				resolutions: [	49,		// 1/175.000
-								42, 	// 1/150.000
-								28, 	// 1/100.000
-								21, 	// 1/75.000
-								14, 	// 1/50.000
-								7, 		// 1/25.000
-								5.6,	// 1/20.000
-								3.5, 	// 1/12.500
-								2.8, 	// 1/10.000
-								2.1, 	// 1/7.500
-								1.4, 	// 1/5.000
-								0.7, 	// 1/2.500
-								0.56,	// 1/2.000
-								0.28, 	// 1/1.000
-								0.14, 	// 1/500
-								0.07, 	// 1/250
-								0.056,	// 1/200
-								0.035, 	// 1/125
-								0.028, 	// 1/100
-								0.014  	// 1/50
-							  ],
-				maxResolution: 49,
-				//maxExtent: [129800, 158000, 167800, 181100],
-				maxExtent:   [120000, 140000, 180000, 200000],
-				center: [149360, 170450],
+				resolutions: resolutions,
+				maxResolution: resolutions[0],
+				maxExtent: [17646.52218435664, 21958.60926379636, 297198.78807110013, 245254.64733992796],
+				center: [149600, 170300],
 				zoom:2,
-				layers: [
-				/*{
-					source: "Cadastre WMS",
-					name:   "CP_Cadastral_Parcels",
-					title:  "CP_Cadastral_Parcels"
-				},*/
-				{
-					source: "GeoWebCacheLocal",
-					name:   "urbisFR",
-					title:  "Urbis Fr",
-					id: "frBackground",
-					group:  "background",
-					fixed: true,
-					visibility: geoextLangFr
-				}, {
-					source: "GeoWebCacheLocal",
-					name:   "urbisNL",
-					title:  "Urbis Nl",
-					id: "nlBackground",
-					group:  "background",
-					fixed: true,
-					visibility: geoextLangNl
-				}, {
-					source: "GeoWebCacheLocal",
-					name:   "urbis:ortho2004",
-					title:  "Orthophotoplans 2004",
-					visibility: false,
-					format: "image/jpeg",
-					transparent : "false"
-				}, {
-					source: "GeoWebCacheLocal",
-					name:   "urbisORTHO",
-					title:  "Orthophotoplans 2009",
-					visibility: false,
-					format: "image/jpeg",
-					transparent : "false"
-				}, {
-					source: "GeoWebCacheLocal",
-					name:   "ortho2012",
-					title:  "Orthophotoplans 2012",
-					visibility: false,
-					format: "image/png",
-					transparent : "true"
-				}]
+				layers: baseMap
 			}
         });

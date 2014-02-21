@@ -297,9 +297,10 @@ ux.plugins.AddLayers = Ext.extend(gxp.plugins.Tool, {
     showCatalogueSearch: function() {
         var selectedSource = this.initialConfig.search.selectedSource;
         var sources = {};
+		//console.log(this.target.layerSources);
         for (var key in this.target.layerSources) {
             var source = this.target.layerSources[key];
-			//console.log(source);
+			//console.log(Object.getPrototypeOf(source));
             if (source instanceof gxp.plugins.CatalogueSource) {
             //if (true) {
                 var obj = {};
@@ -309,6 +310,7 @@ ux.plugins.AddLayers = Ext.extend(gxp.plugins.Tool, {
         }
 		//console.log(sources);
 		//console.log(selectedSource);
+		//sources = this.target.layerSources;
         var output = ux.plugins.AddLayers.superclass.addOutput.apply(this, [{
             sources: sources,
             selectedSource: selectedSource,
@@ -373,8 +375,6 @@ ux.plugins.AddLayers = Ext.extend(gxp.plugins.Tool, {
             data: data
         });
 
-
-
         var expander = this.createExpander();
         
         function addLayers() {
@@ -394,9 +394,7 @@ ux.plugins.AddLayers = Ext.extend(gxp.plugins.Tool, {
         }
 
         source = this.target.layerSources[data[idx][0]];
-		
-		
-		
+
         var capGridPanel = new Ext.grid.GridPanel({
             store: source.store,
             autoScroll: true,

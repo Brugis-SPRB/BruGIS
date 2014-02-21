@@ -1,6 +1,6 @@
-
+﻿
 ///////////////////////////////////////////////////////////////////////////////
-// DocG - Nouveau controleur pour intercepter le click m�me sur une tablette //
+// DocG - Nouveau contrôleur pour intercepter le click même sur une tablette //
 
 OpenLayers.Control.Click = OpenLayers.Class(OpenLayers.Control, { 
 	defaultHandlerOptions: { 
@@ -46,6 +46,8 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
     loginText: "Login",
     logoutText: "Logout, {user}",
     loginErrorText: "Invalid username or password.",
+    logoutConfirmTitle: "Warning",
+    logoutConfirmMessage: "Logging out will undo any unsaved changes, remove any layers you may have added, and reset the map composition. Do you want to save your composition first?",
     userFieldText: "User",
     passwordFieldText: "Password", 
     saveErrorText: "Trouble saving: ",
@@ -56,11 +58,16 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
 	deutchText: "in het nederlands",
 	englishText: "in english",
 	disclaimerText:  "Indicative map - Realized by BruGIS team with Brussels UrbIS",
-	wmsTreeLegendSourceText: "localhost:8080/geoserver/www/wmsaatl/wmsaatl.xml",
-	//wmsTreeLegendSourceText: "svappmavw019:8080/geoserver/www/wmsaatl/wmsaatl.xml",
+	wpsserver :"http://svappmavw019:8080/geoserver/wps",
+	//wpsserver :"http://mybrugis.irisnetlab.be/geoserver/wps",
+	//wpsserver :"http://www.mybrugis.irisnet.be/geoserver/wps",
+	//wmsTreeLegendSourceText: "localhost:8080/geoserver/www/wmsaatl/wmsaatl.xml",
+	wmsTreeLegendSourceText: "svappmavw019:8080/geoserver/www/wmsaatl/wmsaatl.xml",
 	//wmsTreeLegendSourceText: "http://mybrugis.irisnetlab.be/geoserver/www/wmsaatl/wmsaatl.xml",
 	//wmsTreeLegendSourceText: "http://www.mybrugis.irisnet.be/geoserver/www/wmsaatl/wmsaatl.xml",
     // End i18n.
+	noTileslayersList: ["AATL_DMS_SITE_ARBR:Arbres_Remarquables"],
+	originalSourcesUrl : "",
 
     constructor: function(config) {
         // Starting with this.authorizedRoles being undefined, which means no
@@ -87,8 +94,7 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
             }, {
                 ptype: "ux_addlayers",
                 actionTarget: "layers.tbar",
-                upload: true,
-				skipSourceIdList: ["GeoWebCacheLocal"]
+                upload: true
             }, {
                 ptype: "gxp_removelayer",
                 actionTarget: ["layers.tbar", "layers.contextMenu"]
@@ -99,15 +105,24 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
                 ptype: "gxp_zoomtolayerextent",
                 actionTarget: {target: "layers.contextMenu", index: 0}
             }, {
+				ptype: "ux_mymaps",
+				id: "mymapsmanager",
+				actionTarget: {target: "paneltbar", index: 4}
+			}, {
+                ptype: "ux_print",
+                printService: config.printService,
+                actionTarget: {target: "paneltbar", index: 6}
+            }, {
                 ptype: "gxp_navigation", 
-				toggleGroup: this.toggleGroup,
-                actionTarget: {target: "paneltbar", hidden: false, index: 6},
+				//toggleGroup: this.toggleGroup,
+                actionTarget: {target: "paneltbar", hidden: false, index: 7},
 				autoActivate: false
             }, {
                 ptype: "ux_wmsgetfeatureinfo", 
 				toggleGroup: this.toggleGroup,
 				format: "grid",
-                actionTarget: {target: "paneltbar", index: 7}
+				//unique: true,
+                actionTarget: {target: "paneltbar", index: 8}
             }, {
                 ptype: "gxp_featuremanager",
                 id: "featuremanager",
@@ -118,10 +133,11 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
                 featureManager: "featuremanager",
                 autoLoadFeature: true,
                 toggleGroup: this.toggleGroup,
-                actionTarget: {target: "paneltbar", index: 8}
+                actionTarget: {target: "paneltbar", index: 9}
             }, {
 				ptype: "ux_BrugisSearcher",
 				outputTarget: "paneltbar",
+				wpsserver : this.wpsserver,
 				outputConfig: {
 					map: null,
 					width: 300
@@ -130,29 +146,23 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
                 ptype: "gxux_measure", toggleGroup: this.toggleGroup,
                 controlOptions: {immediate: true,
 								 outputTarget: "bbar_measure"},
-                actionTarget: {target: "paneltbar", index: 10}
-            }, {
-                ptype: "gxp_zoom",
                 actionTarget: {target: "paneltbar", index: 11}
             }, {
+                ptype: "gxp_zoom",
+                actionTarget: {target: "paneltbar", index: 12}
+            }, {
                 ptype: "gxp_navigationhistory",
-                actionTarget: {target: "paneltbar", index: 13}
+                actionTarget: {target: "paneltbar", index: 14}
             }, {
                 ptype: "gxp_zoomtoextent",
                 actionTarget: {target: "paneltbar", index: 15}
             }, {
-                ptype: "ux_geolocator", 
+                ptype: "ux_geolocator",
 				controlOptions: {id: "geolocatecontrol",
 								 bind: false,
 								 watch: true,
 								 geolocationOptions: {enableHighAccuracy: true, maximumAge: 0, timeout: 7000}},
-                actionTarget: {target: "paneltbar", index: 16}
-            }, {
-                ptype: "ux_print",
-                //customParams: {},
-                //customParams: {outputFilename: 'GeoExplorer-print'},
-                printService: config.printService,
-                actionTarget: {target: "paneltbar", index: 5}
+                actionTarget: {target: "paneltbar", index: 17}
             }, {
 				ptype: "ux_wmstreelegend",
 				outputTarget: "treeTab",
@@ -162,13 +172,14 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
 					url : this.wmsTreeLegendSourceText
 				}
 			}, {
-				ptype: "gxp_featuregrid",
+				ptype: "ux_featuregrid",
 				featureManager: "featuremanager",
 				outputConfig: {
 					id: "featuregrid",
 					autoExpand: true,
 					autoCollapse: true,
 					showTotalResults: true,
+					zoomOnSelect: true,
 					alwaysDisplayOnMap: true,
 					selectOnMap: true
 				},
@@ -176,6 +187,7 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
 				autoExpand: true,
 				autoCollapse: true,
 				showTotalResults: true,
+				zoomOnSelect: true,
 				alwaysDisplayOnMap: true,
 				selectOnMap: true
 			}, {
@@ -205,7 +217,121 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
         GeoExplorer.Composer.superclass.destroy.apply(this, arguments);
     },
 
-	 /** private: method[setCookieValue]
+	/** api: method[loadConfig]
+	 *	DocG - 2013/11/21
+	 */
+    loadConfig: function(config) {
+        var mapUrl = window.location.hash.substr(1);
+        var match = mapUrl.match(/^maps\/(\d+)$/);
+		var query = Ext.urlDecode(document.location.search.substr(1));
+        if (match) {
+            this.id = Number(match[1]);
+            OpenLayers.Request.GET({
+                url: "../" + mapUrl,
+                success: function(request) {
+                    var addConfig = Ext.util.JSON.decode(request.responseText);
+                    // Don't use persisted tool configurations from old maps
+                    delete addConfig.tools;
+                    this.applyConfig(Ext.applyIf(addConfig, config));
+                },
+                failure: function(request) {
+                    var obj;
+                    try {
+                        obj = Ext.util.JSON.decode(request.responseText);
+                    } catch (err) {
+                        // pass
+                    }
+                    var msg = this.loadConfigErrorText;
+                    if (obj && obj.error) {
+                        msg += obj.error;
+                    } else {
+                        msg += this.loadConfigErrorDefaultText;
+                    }
+                    this.on({
+                        ready: function() {
+                            this.displayXHRTrouble(msg, request.status);
+                        },
+                        scope: this
+                    });
+                    delete this.id;
+					window.location.hash = "";
+                    this.applyConfig(config);
+                },
+                scope: this
+            });
+        } else if (query && query.q) {
+            var queryConfig = Ext.util.JSON.decode(query.q);
+            Ext.apply(config, queryConfig);
+            this.applyConfig(config);
+		} else if (localStorage && localStorage.getItem('mapStateToLoad')) {
+			var addConfig = Ext.util.JSON.decode(localStorage.getItem('mapStateToLoad'));
+			this.originalSourcesUrl = config.sources["BruGIS WMS - Geoserver"].url;
+			delete config.sources;
+			delete config.map;
+			addConfig = this.avoidTiledCacheUsage(addConfig, this.noTileslayersList);
+			Ext.applyIf(config, addConfig);
+			this.applyConfig(config);
+			localStorage.removeItem('mapStateToLoad');
+        } else if (localStorage && localStorage.getItem('currentMapState')) {
+            var addConfig = Ext.util.JSON.decode(localStorage.getItem('currentMapState'));
+			this.originalSourcesUrl= config.sources["BruGIS WMS - Geoserver"].url;
+			delete config.sources;
+			delete config.map;
+			addConfig = this.avoidTiledCacheUsage(addConfig, this.noTileslayersList);
+			Ext.apply(config, addConfig);
+			this.applyConfig(config);
+		} else {
+			this.applyConfig(config);
+		}
+    },
+ 	
+	/** private: method[avoidTiledCacheUsage]
+	 *	DocG - 2014/02/17
+	 *	
+	 *	
+	 */
+	avoidTiledCacheUsage: function(config, layersList) {
+		for (var i=layersList.length-1; i>=0; --i) {
+			for (var j=config.map.layers.length-1; j>=0; --j) {
+				if (config.map.layers[j].name == layersList[i]) {
+					config.map.layers[j].url = config.map.layers[j].url.replace("gwc/service/","");
+					config.map.layers[j].tiled = false;
+					config.map.layers[j].ratio = 3;
+				}
+			}
+		}
+		return config;
+	},
+	
+	/** private: method[saveMapStateOnExit]
+	 *	DocG - 2013/11/21
+	 *  DocG - 2014/01/17
+	 *	reset mode added.
+	 */
+	saveMapStateOnExit: function() {
+		var configStr = Ext.util.JSON.encode(this.app.getState());
+		//var configStr = Ext.util.JSON.encode(this.getState());
+		configStr = configStr.replace("/geoserver/www/wmsaatl/geoweb_brugis.xml", "/geoserver/gwc/service/wms");
+		configStr = configStr.replace("/geoserver/www/wmsaatl/wmsc_brugis.xml", "/geoserver/ows");
+		if (localStorage) {
+			if(localStorage.getItem("DEV") == 'Y') {
+				console.log("DEV mode");
+			} else {
+				if (localStorage.getItem("reset") && localStorage.getItem("reset") == 'True') {
+					// removing any currentMapState
+					localStorage.removeItem('reset');
+					if (localStorage.getItem('currentMapState')) {
+						localStorage.removeItem('currentMapState');
+					}
+				} else {
+					// saving current map state
+					localStorage.setItem('currentMapState', configStr);
+				}
+			}
+		}
+	},
+	
+	/** private: method[setCookieValue]
      *  Set the value for a cookie parameter
      */
     setCookieValue: function(param, value) {
@@ -218,7 +344,6 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
     clearCookieValue: function(param) {
         document.cookie = param + "=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/";
     },
-
 
     /** private: method[getCookieValue]
      *  Get the value of a certain cookie parameter. Returns null if not found.
@@ -240,19 +365,32 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
      *  Log out the current user from the application.
      */
     logout: function() {
-        this.clearCookieValue("JSESSIONID");
-        this.clearCookieValue(this.cookieParamName);
-        this.setAuthorizedRoles([]);
-        Ext.getCmp('paneltbar').items.each(function(tool) {
-            if (tool.needsAuthorization === true) {
-                tool.disable();
-            }
+        var callback = function() {
+            this.clearCookieValue("JSESSIONID");
+            this.clearCookieValue(this.cookieParamName);
+            this.setAuthorizedRoles([]);
+			// DocG - 2014/02/10 
+			if (localStorage) {
+				localStorage.setItem('reset', 'True');
+			}
+            window.location.reload();
+        };
+        Ext.Msg.show({
+            title: this.logoutConfirmTitle, 
+            msg: this.logoutConfirmMessage, 
+            buttons: Ext.Msg.YESNOCANCEL,
+            icon: Ext.MessageBox.WARNING,
+            fn: function(btn) {
+                if (btn === 'yes') {
+                    this.save(callback, this);
+                } else if (btn === 'no') {
+                    callback.call(this);
+                }
+            },
+            scope: this
         });
-        this.showLogin();
-		window.location.reload();
     },
 
- 
     /** private: method[authenticate]
      * Show the login dialog for the user to login.
      */
@@ -260,7 +398,7 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
         var panel = new Ext.FormPanel({
             url: "../login/",
             frame: true,
-            labelWidth: 80,
+            labelWidth: 60,
             defaultType: "textfield",
             errorReader: {
                 read: function(response) {
@@ -280,10 +418,10 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
                     };
                 }
             },
-            items: [
-			{
+            items: [{
                 fieldLabel: this.userFieldText,
                 name: "username",
+                width: 137,
                 allowBlank: false,
                 listeners: {
                     render: function() {
@@ -293,6 +431,7 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
             }, {
                 fieldLabel: this.passwordFieldText,
                 name: "password",
+                width: 137,
                 inputType: "password",
                 allowBlank: false
             }],
@@ -310,7 +449,6 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
         });
 
         function submitLogin() {
-
             panel.buttons[0].disable();
             panel.getForm().submit({
                 success: function(form, action) {
@@ -341,7 +479,7 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
         var win = new Ext.Window({
             title: this.loginText,
             layout: "fit",
-            width: 255,
+            width: 235,
             height: 130,
             plain: true,
             border: false,
@@ -385,6 +523,10 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
     },
     
     initPortal: function() {
+		/* DocG - 2013/11/21
+		*
+		*/
+		window.onbeforeunload = this.saveMapStateOnExit;
         var westPanel = new Ext.Panel({
 			id: "west",
 			region: "west",
@@ -440,8 +582,17 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
             items: this.createBottomTools()
         });
 		///////////////////////DOCG////////////////////////////////////////////
-		
         this.on("ready", function() {
+			/* NDU - 2014/02/14
+			 *	Restauration des sources à leur définition originale afin de sauvegarder
+			 *	l'usage du xml et de sa rapidité, perdu en cas de rechargement de mybrugis
+			 *	d'une session précédente
+			 */
+			if(this.originalSourcesUrl != "" && this.layerSources["BruGIS WMS - Geoserver"].url != this.originalSourcesUrl) {
+				this.layerSources["BruGIS WMS - Geoserver"].url = this.originalSourcesUrl;
+				this.layerSources["BruGIS WMS - Geoserver"].createStore();
+			}
+			
             // enable only those items that were not specifically disabled
             var disabled = this.toolbar.items.filterBy(function(item) {
                 return item.initialConfig && item.initialConfig.disabled;
@@ -450,7 +601,6 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
             disabled.each(function(item) {
                 item.disable();
             });
-			
 			// DOCG // idem dessus, mais pour la bottomToolbar
             var bottomDisabled = this.bottomtoolbar.items.filterBy(function(item) {
                 return item.initialConfig && item.initialConfig.disabled;
@@ -469,103 +619,123 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
 				var params = Ext.urlDecode(location.search.substring(1));
 				
 				var currentLangage = GeoExt.Lang.locale;
-				
-				if(params.qry && params.val && ux.qry && ux.qry[currentLangage] && ux.qry[currentLangage][params.qry]) {
-				
-				var sourceName = ux.qry[currentLangage][params.qry]["source_name"];
-				var layerName = ux.qry[currentLangage][params.qry]["layer_name"];
-				var propertyName = ux.qry[currentLangage][params.qry]["property_name"];
-				var propertyValue = params.val;
-				
-				var theFeatureManager = this.tools.featuremanager;
-				var source = this.layerSources[sourceName];
-				
-				var store = source.store;
-				source.store.load({callback: (function() {
-					var myLayer = null;
+				/*** DocG - 2013/12/03
+				 *	url interface to zoom on a lambert coordinates
+				 *  url accepted is brugis/?lambx=XXXXXX.x&lamby=YYYYYY.y[&scale=0.ssssss]
+				 */
+				if(params.lambx && params.lamby) {
+					var lambert72CoordinatesX = parseFloat(params.lambx);
+					var lambert72CoordinatesY = parseFloat(params.lamby);
+					var bounds = {
+						bottom: 	lambert72CoordinatesY - 35,
+						top: 		lambert72CoordinatesY + 35,
+						left: 		lambert72CoordinatesX - 65,
+						right: 		lambert72CoordinatesX + 65};
+					var extend = [	bounds.left,
+									bounds.bottom,
+									bounds.right,
+									bounds.top];
+					this.mapPanel.map.zoomToExtent(extend);
+					if (params.scale) {
+						this.mapPanel.map.zoomToScale(params.scale, true);
+					}
+				} else if(params.qry && params.val && ux.qry && ux.qry[currentLangage] && ux.qry[currentLangage][params.qry]) {
+					var sourceName = ux.qry[currentLangage][params.qry]["source_name"];
+					var layerName = ux.qry[currentLangage][params.qry]["layer_name"];
+					var propertyName = ux.qry[currentLangage][params.qry]["property_name"];
+					var propertyValue = params.val;
 					
-					store.each(function(rec,b,c) {
-						if(rec.data.name == layerName) {
-							myLayer = rec;
-						}
-					},this);
+					var theFeatureManager = this.tools.featuremanager;
+					var source = this.layerSources[sourceName];
+					
+					var store = source.store;
+					source.store.load({callback: (function() {
+						var myLayer = null;
+						
+						store.each(function(rec,b,c) {
+							if(rec.data.name == layerName) {
+								myLayer = rec;
+							}
+						},this);
 
-					var record = source.createLayerRecord({
-							name : myLayer.data.name,
-							title: myLayer.data.title,
-							url: myLayer.data.url,
-							source: source.id,
-							queryable: true
-					});
-					
-					// DocG - 20131002 - If some dedicated map is given too, the propertyValue contains a / at its end... Maybe good to suppress it?
-					propertyValue = propertyValue.replace("/", "");
-					
-					if(record != null) {	
-						theFeatureManager.on("layerchange",  function(rec,schema){
-								//Creation du spatial Filter
-								var ogcFilter = new OpenLayers.Filter.Comparison({
-									type: OpenLayers.Filter.Comparison.EQUAL_TO,
-									property: propertyName,
-									value: propertyValue
-								});
-								
-								theFeatureManager.loadFeatures(ogcFilter, function(features){
-									//Features s�lectionn�e et charg�e, on zoom sur le r�sultat
-									var bounds, geom;
-									//console.log(bounds);
-									for (var i=features.length-1; i>=0; --i) {
-										geom = features[i].geometry;
-										if (geom) {
-											extent = geom.getBounds();
-											if (bounds) {
-												bounds.extend(extent);
-												//console.log("bounds");
-											} else {
-												bounds = extent.clone();
-												//console.log("else");
-												//console.log(bounds);
+						var record = source.createLayerRecord({
+								name : myLayer.data.name,
+								title: myLayer.data.title,
+								url: myLayer.data.url,
+								source: source.id,
+								queryable: true
+						});
+						
+						// DocG - 20131002 - If some dedicated map is given too, the propertyValue contains a / at its end... Maybe good to suppress it?
+						propertyValue = propertyValue.replace("/", "");
+						
+						if(record != null) {	
+							theFeatureManager.on("layerchange",  function(rec,schema){
+									//Creation du spatial Filter
+									var ogcFilter = new OpenLayers.Filter.Comparison({
+										type: OpenLayers.Filter.Comparison.EQUAL_TO,
+										property: propertyName,
+										value: propertyValue
+									});
+									
+									theFeatureManager.loadFeatures(ogcFilter, function(features){
+										//Features sélectionnée et chargée, on zoom sur le résultat
+										var bounds, geom;
+										//console.log(bounds);
+										for (var i=features.length-1; i>=0; --i) {
+											geom = features[i].geometry;
+											if (geom) {
+												extent = geom.getBounds();
+												if (bounds) {
+													bounds.extend(extent);
+													//console.log("bounds");
+												} else {
+													bounds = extent.clone();
+													//console.log("else");
+													//console.log(bounds);
+												}
 											}
 										}
-									}
-									if(bounds) {
-										// DOCG 2013/08/05 Afin de zoomer au 1/1.000 et pas au 1/50 si l'extent est nul
-										if (bounds.getHeight() == 0){
-											bounds.bottom 	= bounds.bottom - 60;
-											bounds.top 		= bounds.top + 60;
-											bounds.left 	= bounds.left - 70;
-											bounds.right	= bounds.right +70;
+										if(bounds) {
+											// DOCG 2013/08/05 Afin de zoomer au 1/1.000 et pas au 1/50 si l'extent est nul
+											if (bounds.getHeight() == 0){
+												bounds.bottom 	= bounds.bottom - 60;
+												bounds.top 		= bounds.top + 60;
+												bounds.left 	= bounds.left - 70;
+												bounds.right	= bounds.right +70;
+											}
+											this.mapPanel.map.zoomToExtent(bounds);
 										}
-										this.mapPanel.map.zoomToExtent(bounds);
-									}
-								},this);				
-							},this,{single: true});
-						if(theFeatureManager.setLayer(record)){
-							//console.log("LayerChanged");
+									},this);				
+								},this,{single: true});
+							if(theFeatureManager.setLayer(record)){
+								//console.log("LayerChanged");
+							} else {
+								//console.log("LayerNotChanged");
+							}
 						} else {
-							//console.log("LayerNotChanged");
+							//console.log("LayerNotFound");
 						}
-					} else {
-						//console.log("LayerNotFound");
-					}
-				}).createDelegate(this)});
+					}).createDelegate(this)});
 				}
 			}
 			
 			///////////////////////DOCG////////////////////////////////////////////
 			// On applique le resize au couches de fond, Alleluyah!!!!!!!!!!!!!!!!!
-			for (var layerConfig in app.initialConfig.map.layers) {
-				if (app.initialConfig.map.layers[layerConfig].source){
-					try {
-						app.getLayerRecordFromMap(app.initialConfig.map.layers[layerConfig]).getLayer().transitionEffect = 'resize';
-						app.getLayerRecordFromMap(app.initialConfig.map.layers[layerConfig]).getLayer().removeBackBufferDelay = 200;
-					} catch(ex) {
-						console.log(ex);
+			if (app.initialConfig.map) {
+				for (var layerConfig in app.initialConfig.map.layers) {
+					if (app.initialConfig.map.layers[layerConfig].source){
+						try {
+							app.getLayerRecordFromMap(app.initialConfig.map.layers[layerConfig]).getLayer().transitionEffect = 'resize';
+							app.getLayerRecordFromMap(app.initialConfig.map.layers[layerConfig]).getLayer().removeBackBufferDelay = 200;
+						} catch(ex) {
+							console.log(ex);
+						}
 					}
-				} 
+				}
 			}
 		});
- 		
+		
 		///////////////////////DOCG////////////////////////////////////////////
 		// Show the x y coordinates of the event
 		var showCoordinates = function(e) {
@@ -626,70 +796,12 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
         };
 	
 		///////////////////////DOCG////////////////////////////////////////////
-		// Qui l'e�t cru! Il fallait encore un control.click...
+		// Qui l'eût cru! Il fallait encore un control.click...
 		var click = new OpenLayers.Control.Click({trigger: showPosition});
 		this.mapPanel.map.addControl(click);
 		click.activate();
 		///////////////////////DOCG////////////////////////////////////////////
 		
-        var googleEarthPanel = new gxp.GoogleEarthPanel({
-            mapPanel: this.mapPanel,
-            listeners: {
-                beforeadd: function(record) {
-                    return record.get("group") !== "background";
-                }
-            }
-        });
-        
-        // TODO: continue making this Google Earth Panel more independent
-        // Currently, it's too tightly tied into the viewer.
-        // In the meantime, we keep track of all items that the were already
-        // disabled when the panel is shown.
-        var preGoogleDisabled = [];
-
-        googleEarthPanel.on("show", function() {
-            preGoogleDisabled.length = 0;
-            this.toolbar.items.each(function(item) {
-                if (item.disabled) {
-                    preGoogleDisabled.push(item);
-                }
-            });
-            this.toolbar.disable();
-            // loop over all the tools and remove their output
-            for (var key in this.tools) {
-                var tool = this.tools[key];
-                if (tool.outputTarget === "map") {
-                    tool.removeOutput();
-                }
-            }
-            var layersContainer = Ext.getCmp("tree");
-            var layersToolbar = layersContainer && layersContainer.getTopToolbar();
-            if (layersToolbar) {
-                layersToolbar.items.each(function(item) {
-                    if (item.disabled) {
-                        preGoogleDisabled.push(item);
-                    }
-                });
-                layersToolbar.disable();
-            }
-        }, this);
-
-        googleEarthPanel.on("hide", function() {
-            // re-enable all tools
-            this.toolbar.enable();
-            
-            var layersContainer = Ext.getCmp("tree");
-            var layersToolbar = layersContainer && layersContainer.getTopToolbar();
-            if (layersToolbar) {
-                layersToolbar.enable();
-            }
-            // now go back and disable all things that were disabled previously
-            for (var i=0, ii=preGoogleDisabled.length; i<ii; ++i) {
-                preGoogleDisabled[i].disable();
-            }
-
-        }, this);
-	
         this.mapPanelContainer = new Ext.Panel({
             layout: "card",
             region: "center",
@@ -698,8 +810,7 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
             },
 			tbar: this.toolbar,
             items: [
-                this.mapPanel,
-                googleEarthPanel
+                this.mapPanel
             ],
 			bbar: this.bottomtoolbar,
             activeItem: 0
@@ -731,7 +842,7 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
 				queryContainer
             ]
         }];
-        GeoExplorer.superclass.initPortal.apply(this, arguments);  
+        GeoExplorer.superclass.initPortal.apply(this, arguments);
     },
 
     /**
@@ -791,6 +902,7 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
             scope: this,
             iconCls: "icon-save"
         }));
+		
         tools.unshift("-");
         tools.unshift(aboutButton);
         return tools;
@@ -898,20 +1010,7 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
     /** private: method[showEmbedWindow]
      */
     showEmbedWindow: function() {
-       var validAPIKey = false;
-       for (var key in this.tools) {
-           var tool = this.tools[key];
-           if (tool instanceof gxp.plugins.GoogleEarth) {
-               validAPIKey = (tool.hasValidAPIKey() !== undefined);
-           }
-       }
-       for (var i=0, len=this.viewerTools.length; i<len; ++i) {
-           if (this.viewerTools[i].ptype === gxp.plugins.GoogleEarth.prototype.ptype) {
-               this.viewerTools[i].disabled = !validAPIKey;
-               this.viewerTools[i].checked = validAPIKey;
-           }
-       } 
-       var toolsArea = new Ext.tree.TreePanel({title: this.toolsTitle, 
+        var toolsArea = new Ext.tree.TreePanel({title: this.toolsTitle, 
            autoScroll: true,
            root: {
                nodeType: 'async', 
@@ -974,5 +1073,4 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
             items: [wizard]
        }).show();
     }
-
 });

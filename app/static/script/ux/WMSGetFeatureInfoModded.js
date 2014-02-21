@@ -61,6 +61,13 @@ ux.plugins.WMSGetFeatureInfo = Ext.extend(gxp.plugins.Tool, {
      *  Default is "html".
      */
     format: "html",
+	
+	/** api: config[unique]
+	 * ``Boolean`` true or false. If set to True, only one popup window
+	 * is allowed at a time.
+	 * DocG - 05/11/2013
+	 */
+	 unique: false,
     
     /** api: method[addActions]
      */
@@ -184,14 +191,21 @@ ux.plugins.WMSGetFeatureInfo = Ext.extend(gxp.plugins.Tool, {
      * :arg text: ``String`` Body text.
      */
     displayPopup: function(evt, title, text) {
-	
+		/** DocG
+		 *	Gestion des popup uniques ou non
+		 */
+		if (this.unique) {
+			for (var each in this.popupCache) {
+				this.popupCache[each].close();
+			}
+		}	
         var popup;
         var popupKey = evt.xy.x + "." + evt.xy.y;
-
+		var NumberOfObjects = evt.features.length;
         if (!(popupKey in this.popupCache)) {
             popup = this.addOutput({
                 xtype: "gx_popup",
-                title: this.popupTitle,
+                title: this.popupTitle.concat(" (".concat(NumberOfObjects.toString().concat(")"))),
                 layout: "accordion",
                 fill: false,
                 autoScroll: true,
@@ -204,7 +218,8 @@ ux.plugins.WMSGetFeatureInfo = Ext.extend(gxp.plugins.Tool, {
                     autoScroll: true,
                     autoHeight: true,
                     autoWidth: true,
-                    collapsible: true
+                    collapsible: true,
+					collapsed: true
                 },
                 listeners: {
                     close: (function(key) {
@@ -213,11 +228,16 @@ ux.plugins.WMSGetFeatureInfo = Ext.extend(gxp.plugins.Tool, {
                         };
                     })(popupKey),
                     scope: this
-                }
+                },
+				numberOfEntries: NumberOfObjects
             });
             this.popupCache[popupKey] = popup;
         } else {
             popup = this.popupCache[popupKey];
+			if (NumberOfObjects) {
+				popup.numberOfEntries += NumberOfObjects;
+				popup.setTitle(this.popupTitle.concat(" (".concat(popup.numberOfEntries.toString().concat(")"))));
+			}
         }
 
         var features = evt.features, config = [];
@@ -252,7 +272,7 @@ ux.plugins.WMSGetFeatureInfo = Ext.extend(gxp.plugins.Tool, {
 							feature.attributes[attribute].indexOf(".gif") >=0){
 							var attrib = feature.attributes[attribute];
 							customRenderers[attribute] = function(attrib){
-								return '<A href="' + attrib + '" target="_blank"><img height=100 width=100 src="' + attrib + '"/></A>';
+								return '<A href="' + attrib + '" target="_blank"><img height=100 src="' + attrib + '"/></A>';
 							};
 						}
 						else  
@@ -269,10 +289,16 @@ ux.plugins.WMSGetFeatureInfo = Ext.extend(gxp.plugins.Tool, {
                     listeners: {
                         'beforeedit': function (e) { 
                             return false; 
-                        } 
+                        },
+						'celldblclick': function (e, rowIndex, columnIndex) {
+							var name  = e.store.data.items[rowIndex].data.name;
+							var value = e.store.data.items[rowIndex].data.value;
+							window.prompt (name + ': ', value);
+						} 
                     },
                     title: feature.fid ? feature.fid : title,
                     source: feature.attributes,
+					dateFormat: "d/m/Y",
 					customRenderers : customRenderers
                 }, this.itemConfig));
 				
@@ -295,13 +321,21 @@ ux.plugins.WMSGetFeatureInfo = Ext.extend(gxp.plugins.Tool, {
      * :arg text: ``String`` Body text.
      */
     displaySmartPopup: function(evt, title, layerConfiguration, text) {
+		/** DocG
+		 *	Gestion des popup uniques ou non
+		 */
+		if (this.unique) {
+			for (var each in this.popupCache) {
+				this.popupCache[each].close();
+			}
+		}
         var popup;
         var popupKey = evt.xy.x + "." + evt.xy.y;
-
+		var NumberOfObjects = evt.features.length;		
         if (!(popupKey in this.popupCache)) {
             popup = this.addOutput({
                 xtype: "gx_popup",
-                title: this.popupTitle,
+                title: this.popupTitle.concat(" (".concat(NumberOfObjects.toString().concat(")"))),
                 layout: "accordion",
                 fill: false,
                 autoScroll: true,
@@ -323,11 +357,16 @@ ux.plugins.WMSGetFeatureInfo = Ext.extend(gxp.plugins.Tool, {
                         };
                     })(popupKey),
                     scope: this
-                }
+                },
+				numberOfEntries: NumberOfObjects
             });
             this.popupCache[popupKey] = popup;
         } else {
             popup = this.popupCache[popupKey];
+			if (NumberOfObjects) {
+				popup.numberOfEntries += NumberOfObjects;
+				popup.setTitle(this.popupTitle.concat(" (".concat(popup.numberOfEntries.toString().concat(")"))));
+			}
         }
 		
         var features = evt.features, config = [];
@@ -381,7 +420,6 @@ ux.plugins.WMSGetFeatureInfo = Ext.extend(gxp.plugins.Tool, {
 					
 					new_attributes[n_attribute.name] = labelTemplate;		
 				}
-				//console.log(feature.geometry.getCentroid());
 				// Calcul incompatible avec IE... le .getArea n'est pas accepté
 				if (OpenLayers.Util.getBrowserName() != 'msie'){
 					if (feature.geometry.getArea() > 0.0) {
@@ -399,32 +437,50 @@ ux.plugins.WMSGetFeatureInfo = Ext.extend(gxp.plugins.Tool, {
 						}
 					}
 				}
-				feature.attributes = new_attributes;
 
-				
+				/* DOCG - 2014/01/22
+				 *Décoration du titre de l'accordion
+				 */
+				var customTitle = title;
+				if (layerConfiguration.title) {
+					customTitle = layerConfiguration.title;
+					for(var attribute in feature.attributes)
+					{
+						var pattern = "\["+attribute+"\]";
+						customTitle = customTitle.replace(pattern,feature.attributes[attribute]);
+					}
+					feature.customTitle = customTitle.replace(/\[(.*?)\]/g, "");
+				}
+				feature.attributes = new_attributes;
 				var p = new Ext.grid.PropertyGrid({
 					listeners: {
 						'beforeedit': function (e) { 
 							return false; 
-						} 
+						},
+						'celldblclick': function (e, rowIndex, columnIndex) {
+							var name  = e.store.data.items[rowIndex].data.name;
+							var value = e.store.data.items[rowIndex].data.value;
+							window.prompt(name + ': ', value);
+						}
 					},
-					title: feature.fid ? feature.fid.replace('.',' ') : title,
+					title: feature.customTitle ? feature.customTitle : feature.fid? feature.fid.replace('.',' ') : title,
+					dateFormat: "d/m/Y",
 					customRenderers : customRenderers
 				});
 
 				delete p.getStore().sortInfo; // Remove default sorting
 				p.getColumnModel().getColumnById('name').sortable = false; // set sorting of first column to false
 				p.setSource(feature.attributes); // Now load data
-				
-				config.push(Ext.apply(p, this.itemConfig));		
+				config.push(Ext.apply(p, this.itemConfig));
 			}
         } else if (text) {
             config.push(Ext.apply({
                 title: title,
                 html: text
             }, this.itemConfig));
-        }		
-        popup.add(config);
+        }
+		
+		popup.add(config);
         popup.doLayout();
     },
 	
@@ -442,7 +498,7 @@ ux.plugins.WMSGetFeatureInfo = Ext.extend(gxp.plugins.Tool, {
 					templateUrl = templateUrl.replace(pattern,feature.attributes[attribute]);	
 				}
 				window.open(templateUrl,  '_blank');
-				break; // on effectue que la première redirection
+				break; // on n'effectue que la première redirection
 			}
 		}
 	}

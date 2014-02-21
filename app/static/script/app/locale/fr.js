@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Copyright (c) 2009-2010 The Open Planning Project
  */
 
@@ -51,8 +51,11 @@ GeoExt.Lang.add("fr", {
 		treeTabTitleText: "Données",
 		legendTabTitleText: "Légende",
 		disclaimerText: "Carte indicative - Réalisée par BruGIS sur base de UrbIS2",
-		wmsTreeLegendSourceText: "http://localhost:8080/geoserver/www/wmsaatl/wmsaatl_fr.xml"
-		//wmsTreeLegendSourceText: "http://svappmavw019:8080/geoserver/www/wmsaatl/wmsaatl_fr.xml"
+		wpsserver :"http://svappmavw019:8080/geoserver/wps",
+		//wpsserver :"http://mybrugis.irisnetlab.be/geoserver/wps",
+		//wpsserver :"http://www.mybrugis.irisnet.be/geoserver/wps",
+		//wmsTreeLegendSourceText: "http://localhost:8080/geoserver/www/wmsaatl/wmsaatl_fr.xml"
+		wmsTreeLegendSourceText: "http://svappmavw019:8080/geoserver/www/wmsaatl/wmsaatl_fr.xml"
 		//wmsTreeLegendSourceText: "http://mybrugis.irisnetlab.be/geoserver/www/wmsaatl/wmsaatl_fr.xml"
 		//wmsTreeLegendSourceText: "http://www.mybrugis.irisnet.be/geoserver/www/wmsaatl/wmsaatl_fr.xml"
 		
@@ -62,6 +65,41 @@ GeoExt.Lang.add("fr", {
 		loadingText: "Recherche en cours...",
         emptyText: "Rechercher",
 		language: 'en'
+	},
+	
+	"ux.plugins.MyMaps.prototype": {
+		myMapsTip: "Mes cartes",
+		myMapsText: "my maps text",
+		myMapsMenuText: "my maps menu text",
+		availableMyMapsText: "Mes cartes",
+		mapsTitleText: "Cartes",
+		dateTitleText: "Dates",
+		expanderTemplateText: "<p><b>Description:</b> {abstract}</p>",
+		resetText: "Réinitialiser",
+		importText: "Importer",
+		exportText: "Exporter",
+		saveMapText: "Sauver",
+		loadMapText: "Charger",
+		deleteMapText: "Supprimer",
+		doneText: "Terminé",
+		resetButtonTooltipText: "Réinitialiser la carte de BruGIS",
+		saveButtonTooltipText: "Sauver la carte courante",
+		deleteButtonTooltipText: "Supprimer la carte",
+		loadButtonTooltipText: "Charger la carte",
+		loadConfirmTitle: "Chargement de la carte",
+		loadConfirmMessage: "Charger cette carte?",
+		deleteConfirmTitle: "Suppression de carte(s)",
+		deleteConfirmMessage: "Supprimer la/les carte(s) sélectionnée(s)?",
+		resetConfirmTitle: "Réinitialiser la carte de BruGIS",
+		resetConfirmMessage: "Voulez-vous restaurer la carte de BruGIS à son état initial?",
+		namingText: "Nouvelles carte",
+		mapNameFieldText: "Nom",
+		mapAbstractFieldText: "Description",
+		okText: "Ok",
+		mapNameErrorText: "Cette carte est non valide.",
+		mapAbstractErrorText: "La description de cette carte est invalide.",
+		sameMapNameTitle: "Attention",
+		sameMapNameMessage: "Ce nom est déjà utilisé par une carte. Voulez-vous la remplacer?"
 	},
 	
 	"ux.plugins.Geolocator.prototype" : {

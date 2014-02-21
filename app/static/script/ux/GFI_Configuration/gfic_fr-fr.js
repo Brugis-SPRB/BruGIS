@@ -1,9 +1,10 @@
 ﻿
 Ext.namespace("ux.gfi");
 
-ux.gfi['fr-fr'] = {
+ux.gfi.fr = {
 		"AATL:Affectations" : {
 			"actiontype" : "GRID",
+			"title"		 : "Affectation: [NAME_FR]",
 			"attributes" : [
 				{ "name" : "Affectation" ,  "label" : "[NAME_FR]" , "type" : "string" },
 				{ "name" : "Lien" 		 ,  "label" : "[URL_P_FR]", "type" : "link"   }
@@ -43,6 +44,7 @@ ux.gfi['fr-fr'] = {
 		},
 		"AATL_DMS_SITE_ARBR:Arbres_Remarquables": {
 			"actiontype" : "GRID",
+			"title"		 : "[tax_fr]",
 			"attributes" : [
 				{ "name": "Circonférence"		, "label" : "[circonference] cm"	, "type" : "string"},
 				{ "name": "Nom"					, "label" : "[tax_fr]"				, "type" : "string"},
@@ -73,6 +75,7 @@ ux.gfi['fr-fr'] = {
 		},
 		"AATL_DMS_SITE_ARBR:Arbres_remarquables_rarete": {
 			"actiontype" : "GRID",
+			"title"		 : "[tax_fr]",
 			"attributes" : [
 				{ "name": "Identifiant"			, "label" : "[id]"					, "type" : "string"},
 				{ "name": "Taxon latin"			, "label" : "[tax_la]"				, "type" : "string"},
@@ -81,6 +84,7 @@ ux.gfi['fr-fr'] = {
 		},
 		"AATL_DMS_SITE_ARBR:Arbres_remarquables_100_biggest": {
 			"actiontype" : "GRID",
+			"title"		 : "[tax_fr]",
 			"attributes" : [
 				{ "name": "Circonférence"			, "label" : "[circonference] cm"	, "type" : "string"},
 				{ "name": "Classement des tailles"	, "label" : "[ClassementTailles]"	, "type" : "string"}
@@ -157,6 +161,16 @@ ux.gfi['fr-fr'] = {
 				{ "name": "ORIG_OBS"			, "label" : "[ORIG_OBS]"	, "type" : "string"},
 				{ "name": "PARCELLE"			, "label" : "[PARCELLE]"	, "type" : "string"}
 			]
+		},
+		"AATL:Parcelle_2013": {
+			"actiontype" : "GRID",
+			"title"      : "Parcelle 2013: [CAPAKEY]",
+			"attributes" : []
+		},
+		"AATL:Limites_communales": {
+			"actiontype" : "GRID",
+			"title"      : "Commune: [MUFN]",
+			"attributes" : []
 		}
 	};
 

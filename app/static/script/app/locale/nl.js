@@ -49,6 +49,9 @@ GeoExt.Lang.add("nl", {
 		treeTabTitleText: "Gegevens",
 		legendTabTitleText: "Legende",
 		disclaimerText: "Indicative map - Realized by BruGIS team with Brussels UrbIS",
+		wpsserver :"http://svappmavw019:8080/geoserver/wps",
+		//wpsserver :"http://mybrugis.irisnetlab.be/geoserver/wps",
+		//wpsserver :"http://www.mybrugis.irisnet.be/geoserver/wps",
 		//wmsTreeLegendSourceText: "http://localhost:8080/geoserver/www/wmsaatl/wmsaatl_nl.xml"
 		wmsTreeLegendSourceText: "http://svappmavw019:8080/geoserver/www/wmsaatl/wmsaatl_nl.xml"
 		//wmsTreeLegendSourceText: "http://mybrugis.irisnetlab.be/geoserver/www/wmsaatl/wmsaatl_nl.xml"
@@ -59,6 +62,42 @@ GeoExt.Lang.add("nl", {
         emptyText: "Zoeken",
 		language: 'en'
 	},
+	
+	"ux.plugins.MyMaps.prototype": {
+		myMapsTip: "Mijn kaarten",
+		myMapsText: "Mijn kaarten tekst",
+		myMapsMenuText: "Mijn kaarten menu tekst",
+		availableMyMapsText: "Mijn kaarten",
+		mapsTitleText: "Kaarten",
+		dateTitleText: "Daten",
+		expanderTemplateText: "<p><b>Beschrijving:</b> {abstract}</p>",
+		resetText: "Opnieuw instellen",
+		importText: "Importeren",
+		exportText: "Exporteren",
+		saveMapText: "Opslaan",
+		loadMapText: "Opladen",
+		deleteMapText: "Verwijderen",
+		doneText: "Voltooid",
+		resetButtonTooltipText: "BruGIS kaart opnieuw instellen",
+		saveButtonTooltipText: "huidige kaart opslaan",
+		deleteButtonTooltipText: "Kaart wissen",
+		loadButtonTooltipText: "Kaart laden",
+		loadConfirmTitle: "Opladen kaart",
+		loadConfirmMessage: "Ben je zeker die kaart te willen opladen?",
+		deleteConfirmTitle: "Kaart(en) wissen",
+		deleteConfirmMessage: "Wens je de gekozen kaart(en) te wissen?",
+		resetConfirmTitle: "BruGIS kaart opnieuw instellen",
+		resetConfirmMessage: "Wens je de standaardwaarden van BruGIS opnieuw in te stellen?",
+		namingText: "Nieuw kaart",
+		mapNameFieldText: "Naam",
+		mapAbstractFieldText: "Beschrijving",
+		okText: "Ok",
+		mapNameErrorText: "Deze kaart is niet geldig.",
+		mapAbstractErrorText: "De beschrijving van deze kaart is ongeldig.",
+		sameMapNameTitle: "Opgelet",
+		sameMapNameMessage: "Deze naam is al gebruikt voor een andere kaart. Wens je deze te vervangen?"
+	},
+	
 	"ux.plugins.Geolocator.prototype" : {
 	menuText: "U bent hier",
 	tooltip: "U bent hier"

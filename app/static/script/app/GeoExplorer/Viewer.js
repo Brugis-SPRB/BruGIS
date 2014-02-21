@@ -70,8 +70,9 @@ GeoExplorer.Viewer = Ext.extend(GeoExplorer, {
 		
 			this.toolbar.enable();
 		
-			// DocG - 02/10/2013 - Addition for embeding + ux.qry behaviour
-			
+			/*** DocG - 2013/10/03
+			 * Addition for embeding + ux.qry behaviour
+			 */
 			OpenLayers.Projection.defaults["EPSG:31370"] = {
 				units:"m", maxExtent:[0,0,300000,300000]
 			};
@@ -82,14 +83,32 @@ GeoExplorer.Viewer = Ext.extend(GeoExplorer, {
 				
 				var currentLangage = GeoExt.Lang.locale;
 				
-				if(params.qry && params.val && ux.qry && ux.qry[currentLangage] && ux.qry[currentLangage][params.qry]) {
+				/*** DocG - 2013/12/03
+				 *	url interface to zoom on a lambert coordinates
+				 *  url accepted is brugis/?lambx=XXXXXX.x&lamby=YYYYYY.y[&scale=0.ssssss]
+				 */
+				if(params.lambx && params.lamby) {
+					var lambert72CoordinatesX = parseFloat(params.lambx);
+					var lambert72CoordinatesY = parseFloat(params.lamby);
+					var bounds = {
+						bottom: 	lambert72CoordinatesY - 35,
+						top: 		lambert72CoordinatesY + 35,
+						left: 		lambert72CoordinatesX - 65,
+						right: 		lambert72CoordinatesX + 65};
+					var extend = [	bounds.left,
+									bounds.bottom,
+									bounds.right,
+									bounds.top];
+					this.mapPanel.map.zoomToExtent(extend);
+					if (params.scale) {
+						this.mapPanel.map.zoomToScale(params.scale, true);
+					}
+				} else if(params.qry && params.val && ux.qry && ux.qry[currentLangage] && ux.qry[currentLangage][params.qry]) {
 				
 				var sourceName = ux.qry[currentLangage][params.qry]["source_name"];
 				var layerName = ux.qry[currentLangage][params.qry]["layer_name"];
 				var propertyName = ux.qry[currentLangage][params.qry]["property_name"];
 				var propertyValue = params.val;
-				
-				//console.log(sourceName, layerName, propertyName, propertyValue);
 				
 				var theFeatureManager = this.tools.featuremanager;
 				var source = this.layerSources[sourceName];
