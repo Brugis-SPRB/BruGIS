@@ -26,7 +26,6 @@ Ext.namespace("ux.plugins");
  *    Plugin for getting preconfigured list with tree of wms layer
  */
 ux.plugins.WMSTreeLegend = Ext.extend(gxp.plugins.Tool, {
-    
     /** api: ptype = ux_wmstreelegend */
     ptype: "ux_wmstreelegend",
     
