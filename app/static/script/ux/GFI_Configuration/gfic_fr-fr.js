@@ -88,6 +88,26 @@ ux.gfi.fr = {
 				{ "name": "Classement des tailles"	, "label" : "[ClassementTailles]"	, "type" : "string"}
 			]
 		},
+		"AATL:Contrats_de_quartier": {
+			"actiontype" : "GRID",
+			"title"		 : "Contrat de quartier: [NOMCQ]",
+			"attributes" : [
+				{ "name": "Nom"									, "label" : "[NOMCQ]"					, "type": "string"},
+				{ "name": "Commune"								, "label" : "[COMMUNE]"					, "type": "string"},
+				{ "name": "Date d'arrêté du gouvernement"		, "label" : "[ARRET_GVT]"				, "type": "string"},
+				{ "name": "Date de notification à la commune"	, "label" : "[NOTIF_COMM]"				, "type": "string"},
+				{ "name": "Date de fin"							, "label" : "[DATE_FIN]"				, "type": "string"},
+				{ "name": "Actif"								, "label" : "['Non','Oui'][[STATUT]]"	, "type": "eval"},
+				{ "name": "Bureau d'étude"						, "label" : "[NOM_BE]"					, "type": "string"},
+				{ "name": "Bureau d'étude (responsable)"		, "label" : "[RESP_BE]"					, "type": "string"},
+				{ "name": "Série"								, "label" : "[SERIE]"					, "type": "string"},
+				{ "name": "Gestionnaire"						, "label" : "[GESTION]"					, "type": "string"},
+				{ "name": "Contact"								, "label" : "[TEL_BE]"					, "type": "string"},
+				{ "name": "Subside régional"					, "label" : "[SUBS_REG]"				, "type": "string"},
+				{ "name": "Référence comptable"					, "label" : "[REFERENCE]"				, "type": "string"},
+				{ "name": "ID"									, "label" : "[ID]"						, "type": "string"}
+			]
+		},
 		"AATL:Lotissements": {
 			"actiontype" : "GRID",
 			"title"		 : "[OBJET]",
@@ -266,7 +286,7 @@ ux.gfi.fr = {
 				{ "name": "Date d'arrêté"			, "label" : "[AD]"												, "type" : "string"},
 				{ "name": "Date OP"					, "label" : "[OP]"												, "type" : "string"},
 				{ "name": "Extension de protection"	, "label" : "[EXTPROT]"											, "type" : "link"},
-				{ "name": "Protection"				, "label" : "[PROTECTION]"										, "type" : "eval"},
+				{ "name": "Protection"				, "label" : "[PROTECTION]"										, "type" : "string"},
 				{ "name": "Référence DMS"			, "label" : "[DMSFOLDERNR]"										, "type" : "string"},
 				{ "name": "Commentaire"				, "label" : "[COMMENTAIRE]"										, "type" : "string"}
 			]

@@ -58,6 +58,10 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
 	deutchText: "in het nederlands",
 	englishText: "in english",
 	disclaimerText:  "Indicative map - Realized by BruGIS team with Brussels UrbIS",
+	newBrugisTitle: "New BruGIS version",
+	newBrugisMessagePart1: "The new BruGIS version is ",
+	newBrugisMessagePart2: ".\n your current version is ",
+	newBrugisMessagePart3: ".\n You have nothing to do, the default map shall be restored.",
 	wpsserver :"http://svappmavw019:8080/geoserver/wps",
 	//wpsserver :"http://mybrugis.irisnetlab.be/geoserver/wps",
 	//wpsserver :"http://www.mybrugis.irisnet.be/geoserver/wps",
@@ -231,6 +235,8 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
                 success: function(request) {
                     var addConfig = Ext.util.JSON.decode(request.responseText);
                     // Don't use persisted tool configurations from old maps
+					// Aurions-nous le même souçaï ici?
+					this.originalSourcesUrl = config.sources["BruGIS WMS - Geoserver"].url;
                     delete addConfig.tools;
                     this.applyConfig(Ext.applyIf(addConfig, config));
                 },
@@ -273,13 +279,30 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
 			this.applyConfig(config);
 			localStorage.removeItem('mapStateToLoad');
         } else if (localStorage && localStorage.getItem('currentMapState')) {
+			/** DocG - 13/03/2014
+			 *  Non chargement du currentMapState en cas de nouvelle version
+			 */
             var addConfig = Ext.util.JSON.decode(localStorage.getItem('currentMapState'));
-			this.originalSourcesUrl= config.sources["BruGIS WMS - Geoserver"].url;
-			delete config.sources;
-			delete config.map;
-			addConfig = this.avoidTiledCacheUsage(addConfig, this.noTileslayersList);
-			Ext.apply(config, addConfig);
-			this.applyConfig(config);
+			var titleFromConfig 	= config.about.title;
+			var titleFromAddConfig 	= addConfig.about.title;
+			if (titleFromConfig == titleFromAddConfig) {
+				this.originalSourcesUrl= config.sources["BruGIS WMS - Geoserver"].url;
+				delete config.sources;
+				delete config.map;
+				addConfig = this.avoidTiledCacheUsage(addConfig, this.noTileslayersList);
+				Ext.apply(config, addConfig);
+				this.applyConfig(config);
+			} else {
+				Ext.Msg.show({
+					title: this.newBrugisTitle, 
+					msg: this.newBrugisMessagePart1 + titleFromConfig + this.newBrugisMessagePart2 + titleFromAddConfig + this.newBrugisMessagePart3, 
+					buttons: Ext.Msg.OK,
+					icon: Ext.MessageBox.INFO,
+					scope: this
+				});
+				//console.log("New BruGIS version, refreshing currentMapState");
+				this.applyConfig(config);
+			}
 		} else {
 			this.applyConfig(config);
 		}

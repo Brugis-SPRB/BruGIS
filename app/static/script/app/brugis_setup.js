@@ -144,15 +144,20 @@
 					version: "1.1.1",
 					ptype: "gxp_wmscsource"
 				},
-				'IBGE WMS - Mapserver': {
+				'IBGE/BIM WMS - Mapserver': {
 					url: "http://wms.ibgebim.be/cgi-bin/ibgewms.exe",
 					ptype: "gxp_wmscsource",
 					version: "1.1.1"
 				},
-				'CIRB WMS - Geoserver': {
+				'CIRB/CIBG WMS - Geoserver': {
 					url: "http://geoserver.gis.irisnet.be/geoserver/ows",
 					version: "1.3.0",
 					ptype: "gxp_wmscsource"
+				},
+				'STIB/MIVB WMS - Geoserver': {
+					url: "http://gis.irisnet.be/geoserver/stib_mivb/wms?",
+					version: "1.3.0",
+					ptype: "gxp_wmssource"
 				}
 			};
 			
@@ -162,15 +167,20 @@
 					version: "1.1.1",
 					ptype: "gxp_wmscsource"
 				},
-				'IBGE WMS - Mapserver': {
+				'IBGE/BIM WMS - Mapserver': {
 					url: "http://wms.ibgebim.be/cgi-bin/ibgewms.exe",
 					version: "1.1.1",
 					ptype: "gxp_wmscsource"
 				},
-				'CIRB WMS - Geoserver': {
+				'CIRB/CIBG WMS - Geoserver': {
 					url: "http://geoserver.gis.irisnet.be/geoserver/ows",
 					version: "1.3.0",
 					ptype: "gxp_wmscsource"
+				},
+				'STIB/MIVB WMS - Geoserver': {
+					url: "http://gis.irisnet.be/geoserver/stib_mivb/wms?",
+					version: "1.3.0",
+					ptype: "gxp_wmssource"
 				}
 			};
 			
@@ -179,7 +189,7 @@
             proxy: "../proxy/?url=",
             printService: "/geoserver/pdf/",
             about: {
-                title: "MyBruGIS v 1.1 Haendel",
+                title: "MyBruGIS v 1.1b Webern",
                 "abstract": abstractText,
 				"help": localeHelp,
 		        contact: contactText

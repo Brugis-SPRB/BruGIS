@@ -387,7 +387,6 @@ ux.plugins.WMSGetFeatureInfo = Ext.extend(gxp.plugins.Tool, {
 						var pattern = "\["+attribute+"\]";
 						labelTemplate = labelTemplate.replace(pattern,feature.attributes[attribute]);
 					}
-					
 					var type = n_attribute.type;
 					switch(type) {
 							case "eval":
@@ -418,7 +417,8 @@ ux.plugins.WMSGetFeatureInfo = Ext.extend(gxp.plugins.Tool, {
 					}
 					labelTemplate = labelTemplate.replace(/\[(.*?)\]/g, "");
 					
-					new_attributes[n_attribute.name] = labelTemplate;		
+					new_attributes[n_attribute.name] = labelTemplate;
+					
 				}
 				// Calcul incompatible avec IE... le .getArea n'est pas accepté
 				if (OpenLayers.Util.getBrowserName() != 'msie'){
