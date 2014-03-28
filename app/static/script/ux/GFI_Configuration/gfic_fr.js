@@ -243,7 +243,74 @@ ux.gfi.fr = {
 		"AATL:Parcelle_2013": {
 			"actiontype" : "GRID",
 			"title"      : "Parcelle 2013: [CAPAKEY]",
-			"attributes" : []
+			"attributes" : [
+				{ "name": "APNC_MAPC"			, "label" : "[APNC_MAPC]"	, "type" : "string"},
+				{ "name": "APNC_CADC"			, "label" : "[APNC_CADC]"	, "type" : "string"},
+				{ "name": "CAPAKEY"				, "label" : "[CAPAKEY]"		, "type" : "string"},
+				{ "name": "SHNC_FILE"			, "label" : "[SHNC_FILE]"	, "type" : "string"},
+				{ "name": "SHEET"				, "label" : "[SHEET]"		, "type" : "string"},
+				{ "name": "CDNC"				, "label" : "[CDNC]"		, "type" : "string"},
+				{ "name": "CD5C"				, "label" : "[CD5C]"		, "type" : "string"},
+				{ "name": "CSNC"				, "label" : "[CSNC]"		, "type" : "string"},
+				{ "name": "MUNC"				, "label" : "[MUNC]"		, "type" : "string"},
+				{ "name": "SHNC"				, "label" : "[SHNC]"		, "type" : "string"},
+				{ "name": "APNC_CAD"			, "label" : "[APNC_CAD]"	, "type" : "string"},
+				{ "name": "APNC_MAP"			, "label" : "[APNC_MAP]"	, "type" : "string"},
+				{ "name": "RAD_NUM"				, "label" : "[RAD_NUM]"		, "type" : "string"},
+				{ "name": "EXP_ALPHA"			, "label" : "[EXP_ALPHA]"	, "type" : "string"},
+				{ "name": "EXP_NUM"				, "label" : "[EXP_NUM]"		, "type" : "string"},
+				{ "name": "CAPATY"				, "label" : "[CAPATY]"		, "type" : "string"},
+				{ "name": "ID"					, "label" : "[ID]"			, "type" : "string"},
+				{ "name": "SHAPE_AREA_IN_DB"	, "label" : "[SHAPE_AREA]"	, "type" : "string"}
+			]
+		},
+		"AATL:Parcelle_2012": {
+			"actiontype" : "GRID",
+			"title"      : "Parcelle 2012: [CAPAKEY]",
+			"attributes" : [
+				{ "name": "APNC_MAPC"			, "label" : "[APNC_MAPC]"	, "type" : "string"},
+				{ "name": "APNC_CADC"			, "label" : "[APNC_CADC]"	, "type" : "string"},
+				{ "name": "CAPAKEY"				, "label" : "[CAPAKEY]"		, "type" : "string"},
+				{ "name": "SHNC_FILE"			, "label" : "[SHNC_FILE]"	, "type" : "string"},
+				{ "name": "SHEET"				, "label" : "[SHEET]"		, "type" : "string"},
+				{ "name": "CDNC"				, "label" : "[CDNC]"		, "type" : "string"},
+				{ "name": "CD5C"				, "label" : "[CD5C]"		, "type" : "string"},
+				{ "name": "CSNC"				, "label" : "[CSNC]"		, "type" : "string"},
+				{ "name": "MUNC"				, "label" : "[MUNC]"		, "type" : "string"},
+				{ "name": "SHNC"				, "label" : "[SHNC]"		, "type" : "string"},
+				{ "name": "APNC_CAD"			, "label" : "[APNC_CAD]"	, "type" : "string"},
+				{ "name": "APNC_MAP"			, "label" : "[APNC_MAP]"	, "type" : "string"},
+				{ "name": "RAD_NUM"				, "label" : "[RAD_NUM]"		, "type" : "string"},
+				{ "name": "EXP_ALPHA"			, "label" : "[EXP_ALPHA]"	, "type" : "string"},
+				{ "name": "EXP_NUM"				, "label" : "[EXP_NUM]"		, "type" : "string"},
+				{ "name": "CAPATY"				, "label" : "[CAPATY]"		, "type" : "string"},
+				{ "name": "ID"					, "label" : "[ID]"			, "type" : "string"},
+				{ "name": "SHAPE_AREA_IN_DB"	, "label" : "[SHAPE_AREA]"	, "type" : "string"}
+			]
+		},
+		"AATL:Parcelle_2011": {
+			"actiontype" : "GRID",
+			"title"      : "Parcelle 2011: [CAPAKEY]",
+			"attributes" : [
+				{ "name": "APNC_MAPC"			, "label" : "[APNC_MAPC]"	, "type" : "string"},
+				{ "name": "APNC_CADC"			, "label" : "[APNC_CADC]"	, "type" : "string"},
+				{ "name": "CAPAKEY"				, "label" : "[CAPAKEY]"		, "type" : "string"},
+				{ "name": "SHNC_FILE"			, "label" : "[SHNC_FILE]"	, "type" : "string"},
+				{ "name": "SHEET"				, "label" : "[SHEET]"		, "type" : "string"},
+				{ "name": "CDNC"				, "label" : "[CDNC]"		, "type" : "string"},
+				{ "name": "CD5C"				, "label" : "[CD5C]"		, "type" : "string"},
+				{ "name": "CSNC"				, "label" : "[CSNC]"		, "type" : "string"},
+				{ "name": "MUNC"				, "label" : "[MUNC]"		, "type" : "string"},
+				{ "name": "SHNC"				, "label" : "[SHNC]"		, "type" : "string"},
+				{ "name": "APNC_CAD"			, "label" : "[APNC_CAD]"	, "type" : "string"},
+				{ "name": "APNC_MAP"			, "label" : "[APNC_MAP]"	, "type" : "string"},
+				{ "name": "RAD_NUM"				, "label" : "[RAD_NUM]"		, "type" : "string"},
+				{ "name": "EXP_ALPHA"			, "label" : "[EXP_ALPHA]"	, "type" : "string"},
+				{ "name": "EXP_NUM"				, "label" : "[EXP_NUM]"		, "type" : "string"},
+				{ "name": "CAPATY"				, "label" : "[CAPATY]"		, "type" : "string"},
+				{ "name": "ID"					, "label" : "[ID]"			, "type" : "string"},
+				{ "name": "SHAPE_AREA_IN_DB"	, "label" : "[SHAPE_AREA]"	, "type" : "string"}
+			]
 		},
 		"AATL:Limites_communales": {
 			"actiontype" : "GRID",

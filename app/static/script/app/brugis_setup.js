@@ -189,7 +189,7 @@
             proxy: "../proxy/?url=",
             printService: "/geoserver/pdf/",
             about: {
-                title: "MyBruGIS v 1.1b Webern",
+                title: "MyBruGIS v 1.1b Dvorak",
                 "abstract": abstractText,
 				"help": localeHelp,
 		        contact: contactText
