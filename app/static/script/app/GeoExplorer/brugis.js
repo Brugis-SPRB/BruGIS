@@ -74,7 +74,8 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
 	originalSourcesUrl : "",
 
     constructor: function(config) {
-        // Starting with this.authorizedRoles being undefined, which means no
+
+		// Starting with this.authorizedRoles being undefined, which means no
         // authentication service is available
         if (config.authStatus === 401) {
             // user has not authenticated or is not authorized
@@ -757,6 +758,15 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
 					}
 				}
 			}
+			
+			/** DocG - 2014/04/01
+			 * OpacitySlider is back!
+			 */
+			this.on("layerselectionchange", function(record) {
+					var opacitySlider = Ext.getCmp("gx_opacityslider");
+					opacitySlider.setLayer(record.data.layer);
+					opacitySlider.setVisible(!(!record));
+				}, this);
 		});
 		
 		///////////////////////DOCG////////////////////////////////////////////
@@ -865,6 +875,7 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
 				queryContainer
             ]
         }];
+		
         GeoExplorer.superclass.initPortal.apply(this, arguments);
     },
 

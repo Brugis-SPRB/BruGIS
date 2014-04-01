@@ -114,7 +114,25 @@ var GeoExplorer = Ext.extend(gxp.Viewer, {
                 plugins: new GeoExt.ZoomSliderTip({
                     template: this.zoomSliderText
                 })
-            }
+            }, {
+				xtype: "gx_opacityslider",
+				id: 'gx_opacityslider',
+				layer: null,
+				aggressive: true,
+				vertical: false,
+				//hidden: true,
+				//height: 100,
+				width: 220,
+				x: 63,
+				y: 23,
+				anchor: true,
+				inverse: true,
+				changeVisibility: true,
+				plugins: new GeoExt.LayerOpacitySliderTip({
+					template: "<div>{opacity}% transparent</div>"
+				}),
+				hidden: true
+			}
         ];
 
         // both the Composer and the Viewer need to know about the viewerTools

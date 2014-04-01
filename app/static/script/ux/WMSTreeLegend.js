@@ -139,7 +139,7 @@ ux.plugins.WMSTreeLegend = Ext.extend(gxp.plugins.Tool, {
 			root: root,
 			border : false,
             listeners: {
-                // Add layers to the map when ckecked, remove when unchecked.
+                // Add layers to the map when checked, remove when unchecked.
                 // Note that this does not take care of maintaining the layer
                 // order on the map.
                 'checkchange': function(node, checked) {
