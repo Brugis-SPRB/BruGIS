@@ -62,13 +62,13 @@
 			
 		var contactText = 
 			(geoextLangFr)?
-				"e-mail: <a href='mailto:brugis@mrbc.irisnet.be'>brugis@mrbc.irisnet.be</a>."
+				"e-mail: <a href='mailto:brugis@sprb.irisnet.be'>brugis@sprb.irisnet.be</a>."
 				:
 			(geoextLangNl)?
-				"e-mail: <a href='mailto:brugis@mrbc.irisnet.be'>brugis@mrbc.irisnet.be</a>."
+				"e-mail: <a href='mailto:brugis@sprb.irisnet.be'>brugis@sprb.irisnet.be</a>."
 				:
 			(geoextLangEn)?
-				"e-mail: <a href='mailto:brugis@mrbc.irisnet.be'>brugis@mrbc.irisnet.be</a>."
+				"e-mail: <a href='mailto:brugis@sprb.irisnet.be'>brugis@sprb.irisnet.be</a>."
 				:
 				"";
 				
