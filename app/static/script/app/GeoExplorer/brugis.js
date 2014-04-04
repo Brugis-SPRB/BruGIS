@@ -762,15 +762,17 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
 			/** DocG - 2014/04/01
 			 * OpacitySlider is back!
 			 */
+		
 			this.on("layerselectionchange", function(record) {
 					var opacitySlider = Ext.getCmp("gx_opacityslider");
-					if (!(!record)){
-						opacitySlider.setLayer(record.data.layer);
+					if (!(!this.selectedLayer)){
+						opacitySlider.setLayer(this.selectedLayer);
 					} else {
 						opacitySlider.setLayer(null);
 					}
-					opacitySlider.setVisible(!(!record));
+					opacitySlider.setVisible(!(!this.selectedLayer));
 				}, this);
+				
 		});
 		
 		///////////////////////DOCG////////////////////////////////////////////
