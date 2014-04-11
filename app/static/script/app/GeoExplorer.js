@@ -120,8 +120,6 @@ var GeoExplorer = Ext.extend(gxp.Viewer, {
 				layer: null,
 				aggressive: true,
 				vertical: false,
-				//hidden: true,
-				//height: 100,
 				width: 220,
 				x: 63,
 				y: 23,

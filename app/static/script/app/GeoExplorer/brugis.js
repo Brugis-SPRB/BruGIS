@@ -170,6 +170,7 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
                 actionTarget: {target: "paneltbar", index: 17}
             }, {
 				ptype: "ux_wmstreelegend",
+				id: "wmsTreeLegendManager",
 				outputTarget: "treeTab",
 				sourceName : "BruGIS WMS - Geoserver",
 				outputConfig: {
@@ -745,7 +746,10 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
 			}
 			
 			///////////////////////DOCG////////////////////////////////////////////
-			// On applique le resize au couches de fond, Alleluyah!!!!!!!!!!!!!!!!!
+			// On applique le resize aux couches de la carte
+			/**
+			 *	On tente de checker les couches ajoutées à la carte
+			 */
 			if (app.initialConfig.map) {
 				for (var layerConfig in app.initialConfig.map.layers) {
 					if (app.initialConfig.map.layers[layerConfig].source){
@@ -756,13 +760,16 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
 							console.log(ex);
 						}
 					}
+					/*if (app.initialConfig.map.layers[layerConfig].source){
+						console.log(app.initialConfig.map.layers[layerConfig]);
+						console.log(this.tools.wmsTreeLegendManager);
+					}*/
 				}
 			}
 			
 			/** DocG - 2014/04/01
-			 * OpacitySlider is back!
-			 */
-		
+			 *  OpacitySlider is back!
+			 */	
 			this.on("layerselectionchange", function(record) {
 					var opacitySlider = Ext.getCmp("gx_opacityslider");
 					if (!(!this.selectedLayer)){
@@ -772,7 +779,8 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
 					}
 					opacitySlider.setVisible(!(!this.selectedLayer));
 				}, this);
-				
+			
+			//console.log(this.mapPanel.layers);
 		});
 		
 		///////////////////////DOCG////////////////////////////////////////////

@@ -46,8 +46,8 @@ GeoExt.Lang.add("en", {
         loginErrorText: "Login or password error",
         userFieldText: "Login",
         passwordFieldText: "Password",
-		dataTabTitleText: "Map compositing",
-		treeTabTitleText: "AATL Data",
+		dataTabTitleText: "Legend",
+		treeTabTitleText: "Data",
 		legendTabTitleText: "Legend",
 		disclaimerText: "Indicative map - Realized by BruGIS team with Brussels UrbIS",
 		wmsTreeLegendSourceText: "http://localhost:8080/geoserver/www/wmsaatl/wmsaatl_fr.xml"

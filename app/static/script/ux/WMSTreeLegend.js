@@ -89,9 +89,24 @@ ux.plugins.WMSTreeLegend = Ext.extend(gxp.plugins.Tool, {
 			}
 		};
 		
+	
+		var addLayer = function(obj,record,index) {		
+			if(this.cheking == false){
+				this.reloading = true;
+				for(i=0, l=record.length; i<l; i++) {
+					if (!(!(record[i].json))) {
+						var myLayerName = record[i].json.name;
+						this.checkAndExpandNodeFromLayerName(myLayerName,record[i]);
+					}
+				}
+				this.reloading = false;
+			}			
+		};
+		
 		this.target.mapPanel.layers.on({
-            "remove": unselectLayer
-        });
+			"add": { fn : addLayer , scope: this},
+			"remove" : {fn : unselectLayer, scope: this}
+		});
 		
         return ux.plugins.WMSTreeLegend.superclass.addActions.apply(this, [actions]);
     },
@@ -104,7 +119,29 @@ ux.plugins.WMSTreeLegend = Ext.extend(gxp.plugins.Tool, {
     getLegendPanel: function() {
         return this.output[0];
     },
-
+	
+	checkAndExpandNodeFromLayerName: function(myLayerName,layerRecord) {
+		var node = Ext.getCmp("wmsTree").root.findChildBy(function(curnode) {
+			if(curnode.attributes.layer && curnode.leaf) {
+				var nodeLayerName = curnode.attributes.layer.metadata.name;
+				if(nodeLayerName == myLayerName) {
+					return true;
+				}
+			}
+			return false;
+		} , Ext.getCmp("wmsTree").root, true);
+							
+		if (node && layerRecord) {
+			var treepanel = Ext.getCmp("wmsTree");
+			treepanel.expandPath(node.getPath());
+			node.getUI().toggleCheck(true);
+			//remember the node id for unchecking the node
+			layerRecord["NodeId"] = node.id;	
+			// remember the record in the node for removing
+			node.attributes["record"] = layerRecord; 
+		}		
+	},
+	
     /** private: method[addOutput]
      *  :arg config: ``Object``
      */
@@ -142,13 +179,65 @@ ux.plugins.WMSTreeLegend = Ext.extend(gxp.plugins.Tool, {
                 // Add layers to the map when checked, remove when unchecked.
                 // Note that this does not take care of maintaining the layer
                 // order on the map.
+				'load' : {
+					fn : function() {
+						this.reloading = true;
+						this.target.mapPanel.layers.data.items.forEach(function(l){
+							if(l.json) {
+								var myLayerName = l.json.name;
+								var layerid = l.id;
+								var layerRecord = this.target.mapPanel.layers.getById(layerid);
+								this.checkAndExpandNodeFromLayerName(myLayerName,layerRecord);
+							}
+						},this);	
+						this.reloading = false;
+					}
+					,scope : this
+				},
                 'checkchange': function(node, checked) {
-                    if (checked === true) {
+					this.cheking = true;
+					if(this.reloading == false) {
+						if (checked === true) {
 
-						var source = this.target.layerSources[this.sourceName];
-						var layer = node.attributes.layer; //type : Openlayer.WmsLayer
-						if(source.lazy) {
-							source.store.load({callback: (function() {
+							var source = this.target.layerSources[this.sourceName];
+							var layer = node.attributes.layer; //type : Openlayer.WmsLayer
+							if(source.lazy) {
+								source.store.load({callback: (function() {
+									var record = source.createLayerRecord({ // createLayerRecord GVDS 18/12/2012
+										name : layer.params.LAYERS,
+										title: layer.metadata.title, // GVDS 15/10/2012
+										url: layer.url,
+										source: source.id,
+										queryable: true
+									});
+									// DOCG 17/06/2013 On applique le resize au couches de fond, Alleluyah 3!!!!!!!!!!!!!!!
+									record.data.layer.transitionEffect = "resize";
+									record.data.layer.removeBackBufferDelay = 200;
+							
+							
+									//NDU 24/01/2014 Fix Geowecache HIT Alignement de grid 
+									record.data.layer.addOptions({
+										tileOrigin: new OpenLayers.LonLat(140000, 160000) 
+									});
+									
+									// NDU 19/07/2013 Hack forcant l'utilisation de l'url proposée dans le getcapabilities. voir bug #176
+									record.data.layer.url = layer.url;
+									
+									// DOCG 19/07/2013 Hack pour afficher les symboles des arbres sans les tronquer en bord de tuile. voir bug #179
+									if (record.data.name === "AATL_DMS_SITE_ARBR:Arbres_Remarquables"){
+										record.data.layer.url = record.data.layer.url.replace("gwc/service/","");
+										record.data.layer.singleTile = true;
+										record.data.layer.ratio = 3;
+									}
+
+									//remember the node id for unchecking the node
+									record["NodeId"] = node.id;	
+									// remember the record in the node for removing
+									node.attributes["record"] = record; 
+									
+									this.target.mapPanel.layers.add(record);
+								}).createDelegate(this)});
+							} else {
 								var record = source.createLayerRecord({ // createLayerRecord GVDS 18/12/2012
 									name : layer.params.LAYERS,
 									title: layer.metadata.title, // GVDS 15/10/2012
@@ -159,14 +248,8 @@ ux.plugins.WMSTreeLegend = Ext.extend(gxp.plugins.Tool, {
 								// DOCG 17/06/2013 On applique le resize au couches de fond, Alleluyah 3!!!!!!!!!!!!!!!
 								record.data.layer.transitionEffect = "resize";
 								record.data.layer.removeBackBufferDelay = 200;
-						
-						
-								//NDU 24/01/2014 Fix Geowecache HIT Alignement de grid 
-								record.data.layer.addOptions({
-									tileOrigin: new OpenLayers.LonLat(140000, 160000) 
-								});
 								
-								// NDU 19/07/2013 Hack forcant l'utilisation de l'url proposée dans le getcapabilities. voir bug #176
+								// NDU 19/07/2013 Hack forcant l'utilisation de l'url du proposée dans le getcapabilities. voir bug #176
 								record.data.layer.url = layer.url;
 								
 								// DOCG 19/07/2013 Hack pour afficher les symboles des arbres sans les tronquer en bord de tuile. voir bug #179
@@ -175,46 +258,19 @@ ux.plugins.WMSTreeLegend = Ext.extend(gxp.plugins.Tool, {
 									record.data.layer.singleTile = true;
 									record.data.layer.ratio = 3;
 								}
-
-								//remember the node id for unchecking the node
+						
+								// remember the node id for unchecking the node
 								record["NodeId"] = node.id;	
 								// remember the record in the node for removing
 								node.attributes["record"] = record; 
 								
 								this.target.mapPanel.layers.add(record);
-							}).createDelegate(this)});
+							}						
 						} else {
-							var record = source.createLayerRecord({ // createLayerRecord GVDS 18/12/2012
-								name : layer.params.LAYERS,
-								title: layer.metadata.title, // GVDS 15/10/2012
-								url: layer.url,
-								source: source.id,
-								queryable: true
-							});
-							// DOCG 17/06/2013 On applique le resize au couches de fond, Alleluyah 3!!!!!!!!!!!!!!!
-							record.data.layer.transitionEffect = "resize";
-							record.data.layer.removeBackBufferDelay = 200;
-							
-							// NDU 19/07/2013 Hack forcant l'utilisation de l'url du proposée dans le getcapabilities. voir bug #176
-							record.data.layer.url = layer.url;
-							
-							// DOCG 19/07/2013 Hack pour afficher les symboles des arbres sans les tronquer en bord de tuile. voir bug #179
-							if (record.data.name === "AATL_DMS_SITE_ARBR:Arbres_Remarquables"){
-								record.data.layer.url = record.data.layer.url.replace("gwc/service/","");
-								record.data.layer.singleTile = true;
-								record.data.layer.ratio = 3;
-							}
-					
-							// remember the node id for unchecking the node
-							record["NodeId"] = node.id;	
-							// remember the record in the node for removing
-							node.attributes["record"] = record; 
-							
-							this.target.mapPanel.layers.add(record);
-						}						
-                    } else {
-						this.target.mapPanel.layers.remove(node.attributes.record);
-                    }
+							this.target.mapPanel.layers.remove(node.attributes.record);
+						}
+					}
+					this.cheking = false;
                 },scope: this
             }
         }, config));
