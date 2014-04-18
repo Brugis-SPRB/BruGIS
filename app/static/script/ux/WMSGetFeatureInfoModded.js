@@ -224,6 +224,7 @@ ux.plugins.WMSGetFeatureInfo = Ext.extend(gxp.plugins.Tool, {
 		if(resLayers.length == 0 ) {
 			vectorLayer = new OpenLayers.Layer.Vector("wmsgfihigh");
 			vectorLayer.styleMap = styleMap;
+			vectorLayer.displayInLayerSwitcher = false;
 			this.target.mapPanel.map.addLayer(vectorLayer);
 		} else {
 			vectorLayer = resLayers[0];
