@@ -182,11 +182,72 @@ ux.plugins.WMSGetFeatureInfo = Ext.extend(gxp.plugins.Tool, {
         
         return actions;
     },
-	
+
+	/*
+	*	Display the feture geometry on map
+	*    there will be only one (geometry)
+	*   ALL YOUR BASE ARE BELONG O US
+	*/
+	highlightFeature : function(feature) {
+		var styleMap = new OpenLayers.StyleMap({
+            "default": new OpenLayers.Style(null, {
+                rules: [new OpenLayers.Rule({
+                    symbolizer: {
+                        "Point": {
+                            pointRadius: 5,
+                            graphicName: "cross",
+                            //fillColor: "white",
+                            //fillOpacity: 1,
+                            strokeWidth: 1,
+                            strokeOpacity: 1,
+                            strokeColor: "#FF0000"
+                        },
+                        "Line": {
+                            strokeWidth: 1.5,
+                            strokeOpacity: 1,
+                            strokeColor: "#FF0000",
+                            strokeDashstyle: "dash"
+                        },
+                        "Polygon": {
+                            strokeWidth: 1,
+                            strokeOpacity: 1,
+                            strokeColor: "#FF0000",
+                            fillColor: "white",
+                            fillOpacity: 0.3
+                        }
+                    }
+                })]
+            })
+        });
+		var resLayers = this.target.mapPanel.map.getLayersByName("wmsgfihigh");
+		var vectorLayer;
+		if(resLayers.length == 0 ) {
+			vectorLayer = new OpenLayers.Layer.Vector("wmsgfihigh");
+			vectorLayer.styleMap = styleMap;
+			this.target.mapPanel.map.addLayer(vectorLayer);
+		} else {
+			vectorLayer = resLayers[0];
+		}
+		vectorLayer.removeAllFeatures();
+		vectorLayer.addFeatures([feature]);
+	},
+	cleanHighlighting : function() 
+	{
+		var resLayers = this.target.mapPanel.map.getLayersByName("wmsgfihigh");
+		if(resLayers.length != 0 ) {
+			resLayers[0].removeAllFeatures();
+		} 
+	},
+	removeHighlightLayer : function() {
+		var resLayers = this.target.mapPanel.map.getLayersByName("wmsgfihigh");
+		if(resLayers.length != 0 ) {
+			this.target.mapPanel.map.removeLayer(resLayers[0]);
+		} 
+	},
     /** private: method[displayPopup]
      * :arg evt: the event object from a 
      *     :class:`OpenLayers.Control.GetFeatureInfo` control
-     * :arg title: a String to use for the title of the results section 
+     * :arg title: a String to use for the title of the results striggered before a layer has been added.  The event object will include a layerection 
      *     reporting the info to the user
      * :arg text: ``String`` Body text.
      */
@@ -224,6 +285,7 @@ ux.plugins.WMSGetFeatureInfo = Ext.extend(gxp.plugins.Tool, {
                 listeners: {
                     close: (function(key) {
                         return function(panel){
+							this.removeHighlightLayer();
                             delete this.popupCache[key];
                         };
                     })(popupKey),
@@ -253,8 +315,7 @@ ux.plugins.WMSGetFeatureInfo = Ext.extend(gxp.plugins.Tool, {
 				var currentLangage = GeoExt.Lang.locale;
 				var layerConfiguration = ux.gfi[currentLangage][layer_name];
 				if (layer_name && ux.gfi[currentLangage] && ux.gfi[currentLangage][layer_name]) {
-					
-					
+
 					for(var cpt=0; cpt<layerConfiguration.attributes.length; cpt++)
 					{
 						var n_attribute = layerConfiguration.attributes[cpt];
@@ -301,6 +362,8 @@ ux.plugins.WMSGetFeatureInfo = Ext.extend(gxp.plugins.Tool, {
 				} else {
 					new_attributes = feature.attributes;
 				}
+				//Store the geometry for highlighting
+				new_attributes["geom"] = feature.geometry;
 				
 				// Calcul incompatible avec IE... le .getArea n'est pas accepté
 				if (OpenLayers.Util.getBrowserName() != 'msie'){
@@ -342,7 +405,20 @@ ux.plugins.WMSGetFeatureInfo = Ext.extend(gxp.plugins.Tool, {
 							var name  = e.store.data.items[rowIndex].data.name;
 							var value = e.store.data.items[rowIndex].data.value;
 							window.prompt (name + ': ', value);
-						} 
+						},
+						'expand' : {
+							fn: function(p) {
+								var myFeature = new OpenLayers.Feature.Vector(p.source.geom);
+								this.highlightFeature(myFeature);
+							},
+							scope : this
+						},
+						'collapse' : {
+							fn : function(p) {
+								this.cleanHighlighting();
+							},
+							scope : this
+						}
                     },
                     title: feature.customTitle ? feature.customTitle : feature.fid? feature.fid.replace('.',' ') : title,
                     source: new_attributes,
@@ -401,6 +477,7 @@ ux.plugins.WMSGetFeatureInfo = Ext.extend(gxp.plugins.Tool, {
                 listeners: {
                     close: (function(key) {
                         return function(panel){
+							this.removeHighlightLayer();
                             delete this.popupCache[key];
                         };
                     })(popupKey),
@@ -420,12 +497,12 @@ ux.plugins.WMSGetFeatureInfo = Ext.extend(gxp.plugins.Tool, {
         var features = evt.features, config = [];
 		
         if (!text && features.length > 0) {
-			var new_attributes = {};
-			customRenderers = {};	
+
 		
 			for (var i=0; i<features.length; ++i) {
 				var feature = features[i];
-				
+				var new_attributes = {};
+				customRenderers = {};	
 				for(var cpt=0; cpt<layerConfiguration.attributes.length; cpt++)
 				{
 					var n_attribute = layerConfiguration.attributes[cpt];
@@ -499,7 +576,9 @@ ux.plugins.WMSGetFeatureInfo = Ext.extend(gxp.plugins.Tool, {
 					}
 					feature.customTitle = customTitle.replace(/\[(.*?)\]/g, "");
 				}
-				feature.attributes = new_attributes;
+
+				new_attributes["geom"] = feature.geometry;
+				
 				var p = new Ext.grid.PropertyGrid({
 					listeners: {
 						'beforeedit': function (e) { 
@@ -509,16 +588,33 @@ ux.plugins.WMSGetFeatureInfo = Ext.extend(gxp.plugins.Tool, {
 							var name  = e.store.data.items[rowIndex].data.name;
 							var value = e.store.data.items[rowIndex].data.value;
 							window.prompt(name + ': ', value);
+						},
+						'expand' : {
+							fn: function(p) {
+								var myFeature = new OpenLayers.Feature.Vector(p.source.geom);
+								this.highlightFeature(myFeature);
+							},
+							scope : this
+						},
+						'collapse' : {
+							fn : function(p) {
+								this.cleanHighlighting();
+							},
+							scope : this
+						},
+						'hide' : function() {
+							console.log("HIIIDE");
+						},
+						'show' : function() {
+							console.log("SHOW");
 						}
 					},
 					title: feature.customTitle ? feature.customTitle : feature.fid? feature.fid.replace('.',' ') : title,
 					dateFormat: "d/m/Y",
-					customRenderers : customRenderers
+					customRenderers : customRenderers,
+					source : new_attributes
 				});
 
-				delete p.getStore().sortInfo; // Remove default sorting
-				p.getColumnModel().getColumnById('name').sortable = false; // set sorting of first column to false
-				p.setSource(feature.attributes); // Now load data
 				config.push(Ext.apply(p, this.itemConfig));
 			}
         } else if (text) {
