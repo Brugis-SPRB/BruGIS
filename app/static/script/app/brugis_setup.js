@@ -189,7 +189,7 @@
             proxy: "../proxy/?url=",
             printService: "/geoserver/pdf/",
             about: {
-                title: "MyBruGIS v 1.1 Dowland",
+                title: "MyBruGIS v 1.1 Sainte-Colombe",
                 "abstract": abstractText,
 				"help": localeHelp,
 		        contact: contactText

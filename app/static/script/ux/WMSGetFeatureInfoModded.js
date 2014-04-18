@@ -243,9 +243,65 @@ ux.plugins.WMSGetFeatureInfo = Ext.extend(gxp.plugins.Tool, {
         var features = evt.features, config = [];
         if (!text && features) {
             var feature;
+		
             for (var i=0,ii=features.length; i<ii; ++i) {
                 feature = features[i];
-				//console.log(feature.geometry.getCentroid());
+				var new_attributes = {};
+				var customRenderers = {};					
+				//Récupèrele nom de la feature
+				var layer_name = feature.gml.featureNSPrefix + ":" + feature.gml.featureType;
+				var currentLangage = GeoExt.Lang.locale;
+				var layerConfiguration = ux.gfi[currentLangage][layer_name];
+				if (layer_name && ux.gfi[currentLangage] && ux.gfi[currentLangage][layer_name]) {
+					
+					
+					for(var cpt=0; cpt<layerConfiguration.attributes.length; cpt++)
+					{
+						var n_attribute = layerConfiguration.attributes[cpt];
+						var labelTemplate = n_attribute.label;
+						
+						for(var attribute in feature.attributes)
+						{
+							var pattern = "\["+attribute+"\]";
+							labelTemplate = labelTemplate.replace(pattern,feature.attributes[attribute]);
+						}
+						var type = n_attribute.type;
+						switch(type) {
+								case "eval":
+									labelTemplate = eval(labelTemplate);
+									break;
+								case "string":
+									//do nothing
+									break;
+								case "link":
+									customRenderers[n_attribute.name] = function(attrib){
+										return '<a href="' + attrib + '" target= "_blank">' + attrib + '</a>';
+									}
+									break;
+								case "file":
+									customRenderers[n_attribute.name] = function(attrib){
+										attrib = attrib.replace("\\\\", "/");
+										attrib = attrib.replace(/^\/\//g,'');
+										attrib = attrib.replace(/^\/ /g,'');
+										attrib = "file://///" + attrib;
+										return '<a href="' + attrib + '" target= "_blank">' + attrib + '</a>';
+									}
+									break;
+								case "picture":
+									customRenderers[n_attribute.name] = function(attrib){
+										return '<A href="' + attrib + '" target="_blank"><img height=100 src="' + attrib + '"/></A>';
+									};
+									break;
+						}
+						labelTemplate = labelTemplate.replace(/\[(.*?)\]/g, "");
+						
+						new_attributes[n_attribute.name] = labelTemplate;
+						
+					}				
+				} else {
+					new_attributes = feature.attributes;
+				}
+				
 				// Calcul incompatible avec IE... le .getArea n'est pas accepté
 				if (OpenLayers.Util.getBrowserName() != 'msie'){
 					if (feature.geometry.getArea() > 0.0) {
@@ -263,27 +319,19 @@ ux.plugins.WMSGetFeatureInfo = Ext.extend(gxp.plugins.Tool, {
 						}
 					}
 				}
-				customRenderers = {};				
-				for (var attribute in feature.attributes) {
-					//Pour les images on pourrait imaginer le brol ci-après mais attention à la taille de l'image ....:
-					if (feature.attributes[attribute]){
-						if (feature.attributes[attribute].indexOf(".png") >=0 || 
-							feature.attributes[attribute].indexOf(".jpeg") >=0 || 
-							feature.attributes[attribute].indexOf(".gif") >=0){
-							var attrib = feature.attributes[attribute];
-							customRenderers[attribute] = function(attrib){
-								return '<A href="' + attrib + '" target="_blank"><img height=100 src="' + attrib + '"/></A>';
-							};
-						}
-						else  
-						if (feature.attributes[attribute].indexOf("http://") >=0 || feature.attributes[attribute].indexOf("https://") >=0){
-							var attrib = feature.attributes[attribute];
-							customRenderers[attribute] = function(attrib){
-								return '<a href="' + attrib + '" target= "_blank">' + attrib + '</a>';
-							};
-						}
+				
+
+				var customTitle = title;
+				if (layerConfiguration && layerConfiguration.title) {
+					customTitle = layerConfiguration.title;
+					for(var attribute in feature.attributes)
+					{
+						var pattern = "\["+attribute+"\]";
+						customTitle = customTitle.replace(pattern,feature.attributes[attribute]);
 					}
+					feature.customTitle = customTitle.replace(/\[(.*?)\]/g, "");
 				}
+				
                 config.push(Ext.apply({
                     xtype: "propertygrid",
                     listeners: {
@@ -296,8 +344,8 @@ ux.plugins.WMSGetFeatureInfo = Ext.extend(gxp.plugins.Tool, {
 							window.prompt (name + ': ', value);
 						} 
                     },
-                    title: feature.fid ? feature.fid : title,
-                    source: feature.attributes,
+                    title: feature.customTitle ? feature.customTitle : feature.fid? feature.fid.replace('.',' ') : title,
+                    source: new_attributes,
 					dateFormat: "d/m/Y",
 					customRenderers : customRenderers
                 }, this.itemConfig));
