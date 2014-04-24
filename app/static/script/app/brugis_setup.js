@@ -189,7 +189,7 @@
             proxy: "../proxy/?url=",
             printService: "/geoserver/pdf/",
             about: {
-                title: "MyBruGIS v 1.1 Sainte-Colombe",
+                title: "MyBruGIS v 1.1 Haendel",
                 "abstract": abstractText,
 				"help": localeHelp,
 		        contact: contactText
