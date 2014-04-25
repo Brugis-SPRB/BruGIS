@@ -126,6 +126,11 @@ function proxyPass(config) {
     }
     exchange.wait();
     var headers = new Headers(objects.clone(exchange.headers));
+	
+	headers.set("Cache-Control","no-cache, no-store, must-revalidate");
+	headers.set("Pragma","no-cache");
+	headers.set("Expires","0");
+	
     if (!config.allowAuth) {
         // strip out authorization and cookie headers
         headers.unset("WWW-Authenticate");

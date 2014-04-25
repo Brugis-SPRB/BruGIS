@@ -232,8 +232,7 @@ ux.plugins.WMSGetFeatureInfo = Ext.extend(gxp.plugins.Tool, {
 		vectorLayer.removeAllFeatures();
 		vectorLayer.addFeatures([feature]);
 	},
-	cleanHighlighting : function() 
-	{
+	cleanHighlighting : function() {
 		var resLayers = this.target.mapPanel.map.getLayersByName("wmsgfihigh");
 		if(resLayers.length != 0 ) {
 			resLayers[0].removeAllFeatures();
@@ -473,7 +472,8 @@ ux.plugins.WMSGetFeatureInfo = Ext.extend(gxp.plugins.Tool, {
                     autoScroll: true,
                     autoHeight: true,
                     autoWidth: true,
-                    collapsible: true
+                    collapsible: true,
+					collapsed: true
                 },
                 listeners: {
                     close: (function(key) {

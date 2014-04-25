@@ -137,7 +137,7 @@
 							scaleToResFactor * 100,
 							scaleToResFactor * 50
 							];
-
+							
 		var sourcesDev = {
 				'BruGIS WMS - Geoserver': {
 					url: "http://svappmavw019:8080/geoserver/www/wmsaatl/wmsc_brugis.xml",
@@ -189,7 +189,7 @@
             proxy: "../proxy/?url=",
             printService: "/geoserver/pdf/",
             about: {
-                title: "MyBruGIS v 1.1 Haendel",
+                title: "MyBruGIS v 1.1 Buxtehude",
                 "abstract": abstractText,
 				"help": localeHelp,
 		        contact: contactText
