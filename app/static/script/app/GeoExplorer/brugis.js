@@ -770,7 +770,7 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
 			/** DocG - 2014/04/01
 			 *  OpacitySlider is back!
 			 */
-			
+
 			this.on("layerselectionchange", function(record) {
 					var opacitySlider = Ext.getCmp("gx_opacityslider");
 					if (!(!this.selectedLayer)){
