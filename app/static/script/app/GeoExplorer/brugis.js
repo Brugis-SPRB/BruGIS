@@ -743,6 +743,9 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
 						}
 					}).createDelegate(this)});
 				}
+				if (params.json) {
+					console.log("Djééézonne");
+				}
 			}
 			
 			///////////////////////DOCG////////////////////////////////////////////
@@ -894,6 +897,51 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
         GeoExplorer.superclass.initPortal.apply(this, arguments);
     },
 
+	//DocG/////////////////////////////////////////////////////////////////////////
+    /**
+     * api: method[addLocaleTools]
+     * Add locale buttons in the received tools.
+     */
+	addLocaleTools: function(tools) {
+		var frButton = new Ext.Button({
+			text: 'fr',
+			tooltip: this.frenchText,
+			handler: function() {
+				localStorage.setItem('BruGISLanguage', "fr");
+				window.location.reload(); 
+			},
+			scope: this
+		});
+		var nlButton = new Ext.Button({
+			text: 'nl',
+			tooltip: this.deutchText,
+			handler: function() {
+				localStorage.setItem('BruGISLanguage', "nl");
+				window.location.reload(); 
+			},
+			scope: this
+		});
+		var enButton = new Ext.Button({
+			text: 'en',
+			tooltip: this.englishText,
+			handler: function() {
+				localStorage.setItem('BruGISLanguage', "en");
+				window.location.reload();  
+			},
+			scope: this
+		});
+		if (localStorage) {
+			tools.push("-");
+			tools.push(frButton);
+			tools.push("-");
+			tools.push(nlButton);
+			tools.push("-");
+			tools.push(enButton);
+		}
+        return tools;
+	},
+	//DocG/////////////////////////////////////////////////////////////////////////
+	
     /**
      * api: method[createTools]
      * Create the toolbar configuration for the main view.
@@ -991,6 +1039,9 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
 					    xtype: "tbtext"
 						}
 				]);
+				
+		tools = this.addLocaleTools(tools);		
+		
         return tools;
     },
 	///////////////////////////////////////////////////////////////////////////

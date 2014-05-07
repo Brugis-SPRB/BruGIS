@@ -1,17 +1,21 @@
         // optionally set locale based on query string parameter
+		if (localStorage && localStorage.getItem('BruGISLanguage')) {
+			GeoExt.Lang.locale = localStorage.getItem('BruGISLanguage');
+		}
 		
-        if (GeoExt.Lang) {
+		if (GeoExt.Lang) {
             GeoExt.Lang.set(OpenLayers.Util.getParameters()["locale"] || GeoExt.Lang.locale);
 		}
         Ext.BLANK_IMAGE_URL = "../theme/app/img/blank.gif";
         OpenLayers.ImgPath = "../theme/app/img/";
 		OpenLayers.IMAGE_RELOAD_ATTEMPTS = 3;
         // optionally set locale based on query string parameter
+		
         if (GeoExt.Lang) {
             GeoExt.Lang.set(OpenLayers.Util.getParameters()["locale"] || GeoExt.Lang.locale);
         }
-		var geoextLangFr = ((GeoExt.Lang.locale == "fr")||(GeoExt.Lang.locale == "fr-be")||(GeoExt.Lang.locale == "fr-fr"))?true:false;
-		var geoextLangNl = ((GeoExt.Lang.locale == "nl")||(GeoExt.Lang.locale == "nl-be")||(GeoExt.Lang.locale == "nl-nl"))?true:false;
+		var geoextLangFr = ((GeoExt.Lang.locale == "fr")||(GeoExt.Lang.locale == "fr-be")||(GeoExt.Lang.locale == "fr-BE")||(GeoExt.Lang.locale == "fr-fr"))?true:false;
+		var geoextLangNl = ((GeoExt.Lang.locale == "nl")||(GeoExt.Lang.locale == "nl-be")||(GeoExt.Lang.locale == "nl-BE")||(GeoExt.Lang.locale == "nl-nl"))?true:false;
 		var geoextLangEn = ((GeoExt.Lang.locale == "en")||(GeoExt.Lang.locale == "en-gb")||(GeoExt.Lang.locale == "en-us")||(GeoExt.Lang.locale == "en-US")||(GeoExt.Lang.locale == "en-en"))?true:false;
 		if (!(geoextLangFr) == true && !(geoextLangNl) == true && !(geoextLangEn) == true){
 			geoextLangFr = true;
@@ -189,7 +193,7 @@
             proxy: "../proxy/?url=",
             printService: "/geoserver/pdf/",
             about: {
-                title: "MyBruGIS v 1.1 Buxtehude",
+                title: "MyBruGIS v 1.1 Zamponi",
                 "abstract": abstractText,
 				"help": localeHelp,
 		        contact: contactText
