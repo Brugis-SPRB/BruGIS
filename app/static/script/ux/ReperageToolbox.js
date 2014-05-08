@@ -30,12 +30,10 @@ ux.plugins.ReperageToolbox = Ext.extend(gxp.plugins.Tool, {
 	
     // Begin i18n.
 	showReperageGrid: "ShowReperageGrid",
-    clearReperageLayerBtnToolTip: "Cleanup",
     drawReperageAreaToolTip: "DrawArea",
     showReperageFormBtnToolTip: "showReperageForm",
     modifyReperageAreaToolTip: "ModifyArea",
     copyParcelFeatBtnToolTip : "CopyParcel",
-//    copyBuildingFeatBtnToolTip: "CopyBuilding",
     deleteOneFeatureBtnToolTip: "DeleteOneFeature",
 	reperageButtonTip: "ReperageToolBox",
     // End i18n.
@@ -152,7 +150,7 @@ console.log("ReperageToolbox.showReperageButton end");
 
     	//Copy 1 parcel
     	//Warning : the getfeatureInfo need a proxy defined in order to work
-    	var parcelLayer = new OpenLayers.Layer.WMS("parcels",
+    	var parcelLayer = new OpenLayers.Layer.WMS("ParcelleReperage",
             "http://www.mybrugis.irisnet.be/geoserver/wms", 
             {'layers': 'AATL:Parcelle_2013', transparent: true, format: 'image/png'},
             {isBaseLayer: false}
@@ -185,60 +183,7 @@ console.log("ReperageToolbox.showReperageButton end");
 		    }
     	});
 
-//On ne fais plus de reperage sur batiment mais que sur parcelle
-//    	//Copy 1 Building
-//    	var buildingsLayer = new OpenLayers.Layer.WMS("buildings",
-//            "http://www.mybrugis.irisnet.be/geoserver/wms", 
-//            {'layers': 'AATL:Batiment_2013', transparent: true, format: 'image/png'},
-//            {isBaseLayer: false}
-//        );
-//
-//        var copyBuildingControl = new OpenLayers.Control.WMSGetFeatureInfo({
-//            url: 'http://www.mybrugis.irisnet.be/geoserver/wms', 
-//            title: 'Identify features by clicking',
-//            layers: [buildingsLayer],
-//            queryVisible: true,
-//            infoFormat: "application/vnd.ogc.gml"
-//        });
-//
-//        copyBuildingControl.events.register("getfeatureinfo", this, this.addFeatureToReperageLayer);
-//
-//    	var copyBuildingFeatBtn = new Ext.Button({
-//            enableToggle: true,
-//            allowDepress: true,
-//            tooltip: this.copyBuildingFeatBtnToolTip,
-//            iconCls: "ux-icon-copybuilding",
-//            toggleGroup: toggleGroup,
-//            scope: this,
-//		    toggleHandler: function(btn,state){
-//		        if (state) {
-//		            this.copyBuildingControl.activate();
-//		        } else {
-//		            this.copyBuildingControl.deactivate();
-//		        }
-//		    }
-//    	});
-		
-		
-//		/////////////////Raph old reperage//////////DEB//////////
-//		var oldrepLayer = new OpenLayers.Layer.WMS("reperagelite",
-//            "/geoserver/wms", 
-//            {'layers': 'AATL:reperagelite', transparent: true, format: 'image/png'},
-//            {isBaseLayer: false}
-//        );
-//		/////////////////Raph old reperage//////////FIN//////////
-
     	
-    	//Clear Layer
-    	var clearReperageLayerBtn = new Ext.Button({
-            tooltip: this.clearReperageLayerBtnToolTip,
-            iconCls: "ux-icon-deletereperage",
-            disabled: false,
-            handler: function() {
-            	this.clearReperageLayer();
-            },
-            scope: this
-    	});
 
     	//Reperage Form
     	var showReperageFormBtn = new Ext.Button({
@@ -364,7 +309,6 @@ console.log("ReperageToolbox.showReperageButton end");
 		this.modifyReperageAreaButton = modifyReperageAreaButton;
 		this.deleteOneFeatureControl = deleteOneFeatureControl;
 		this.deleteOneFeatureBtn = deleteOneFeatureBtn;
-        this.clearReperageLayerBtn = clearReperageLayerBtn;
         this.showReperageFormBtn = showReperageFormBtn;
         this.showReperageFormDlg = showReperageFormDlg;
         this.reperageFormPanel = reperageFormPanel;
@@ -375,10 +319,6 @@ console.log("ReperageToolbox.showReperageButton end");
         this.copyParcelFeatBtn = copyParcelFeatBtn;
         this.copyParcelControl = copyParcelControl;
         this.parcelLayer = parcelLayer;
-//		this.oldrepLayer = oldrepLayer;
-//        this.copyBuildingFeatBtn = copyBuildingFeatBtn;
-//        this.buildingsLayer = buildingsLayer;
-//        this.copyBuildingControl = copyBuildingControl;
 		
 		this.showReperageButton = showReperageButton;
 console.log("ReperageToolbox.init end");
@@ -410,11 +350,9 @@ console.log("ReperageToolbox.addActions");
 				'-',
 				this.drawReperageAreaButton,
 				this.copyParcelFeatBtn,
-				//this.copyBuildingFeatBtn,
 				'-',
 				this.modifyReperageAreaButton,
 				this.deleteOneFeatureBtn,
-				this.clearReperageLayerBtn,
 				'-',
 				this.showReperageFormBtn
 			]
@@ -502,6 +440,14 @@ console.log("ReperageToolbox.addOutput");
 		
 		return ux.plugins.ReperageToolbox.superclass.addOutput.call(this, [this.button]);
 	}, */
+	
+	//Ajoute le(s) layer(s) au panel
+	raiseLayers: function() {
+    	var map = this.target.mapPanel.map;
+
+    	map.setLayerIndex(this.parcelLayer, 98);
+    	map.setLayerIndex(this.reperageLayer, 99);
+    },
 	
 	//suprime les polygones du reperage
 	clearReperageLayer: function() {
