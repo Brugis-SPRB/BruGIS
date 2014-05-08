@@ -213,7 +213,7 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
 				//ptype: "ux_myreperage",
 				ptype: "ux_ReperageToolbox",
 				id: "myReperageManager",
-				actionTarget: {target: "paneltbar", index: 19}
+				actionTarget: {target: "paneltbar", index: 15}
 			}
         ];
         delete config.apiKeys;

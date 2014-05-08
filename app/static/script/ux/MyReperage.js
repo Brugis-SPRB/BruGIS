@@ -60,11 +60,11 @@ ux.plugins.MyReperage = Ext.extend(gxp.plugins.Tool, {
 	/** private: method[constructor]
 	 */
 	constructor: function(config) {
-console.log("MyReperage.constructor");
+		console.log("MyReperage.constructor");
 		this.checkLocalStorage();
 		this.initMyReperage();
 		this.initMyReperageGrid();
-		this.addActions();
+		//this.addActions();
 		ux.plugins.MyReperage.superclass.constructor.apply(this, arguments);
 	},
 	

@@ -85,7 +85,7 @@ console.log("ReperageToolbox.init");
     	this.reperageLayer = new OpenLayers.Layer.Vector(this.reperageLayerName,{
     		rendererOptions: { zIndexing: true }
     	});
-		
+		//this.reperageLayer.displayInLayerSwitcher = false;
 		//TODO: Show reperage (prendre le MyReperage.js ???)
 console.log("ReperageToolbox.showReperageButton");
 		var showReperageButton = new ux.plugins.MyReperage();
