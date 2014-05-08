@@ -208,6 +208,11 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
 				needsAuthorization: true,
 				actionTarget: ["layers.tbar", "layers.contextMenu"],
 				appendActions: false
+			}, { // TODO: A remplacé par un ext.menu.Menu (ReperageToolBox ??)
+				//ptype: "ux_myreperage",
+				ptype: "ux_ReperageToolbox",
+				id: "myReperageManager",
+				actionTarget: {target: "paneltbar", index: 19}
 			}
         ];
         delete config.apiKeys;

@@ -22,3 +22,6 @@
 [submodule "externals/ringojs-fork"]
 	path = externals/ringojs-fork
 	url = https://github.com/tschaub/ringojs.git
+[submodule "app\\static\\externals\\jsts"]
+	path = app\\static\\externals\\jsts
+	url = https://github.com/Geode/jsts.git

@@ -1,0 +1,28 @@
+.x-btn .ux-icon-drawreperage { 
+    background-image: url(pencil_add.png);
+}
+
+.x-btn .ux-icon-deletereperage { 
+    background-image: url(stop.png);
+}
+
+.x-btn .ux-icon-removeonefeature { 
+    background-image: url(delete.png);
+}
+
+.x-btn .ux-icon-sendreperage { 
+    background-image: url(find.png);
+}
+
+.x-btn .ux-icon-editreperage { 
+    background-image: url(shape_square_orange.png);
+}
+
+.x-btn .ux-icon-copyparcel { 
+    background-image: url(cursor.png);
+}
+
+.x-btn .ux-icon-copybuilding { 
+    background-image: url(cursor.png);
+}
+
