@@ -11,6 +11,7 @@ GeoExt.Lang.add("fr", {
         xhrTroubleText: "Trouble de la communication: état",
         layersText: "Couches",
         titleText: "Titre",
+		zoomLevelText: "Niveau de zoom",
         bookmarkText: "Mettre en favori URL",
         permakinkText: "Permalien",
         appInfoText: "GeoExplorer",
@@ -62,7 +63,6 @@ GeoExt.Lang.add("fr", {
 		wmsTreeLegendSourceText: "http://svappmavw019:8080/geoserver/www/wmsaatl/wmsaatl_fr.xml"
 		//wmsTreeLegendSourceText: "http://mybrugis.irisnetlab.be/geoserver/www/wmsaatl/wmsaatl_fr.xml"
 		//wmsTreeLegendSourceText: "http://www.mybrugis.irisnet.be/geoserver/www/wmsaatl/wmsaatl_fr.xml"
-		
 	},
 	
 	"ux.form.CirbGeocoderComboBox.prototype" : {
@@ -218,14 +218,6 @@ GeoExt.Lang.add("fr", {
         tooltip: "Légende"
     },
 
-    "gxp.plugins.Measure.prototype": {
-        lengthMenuText: "Longueur",
-        areaMenuText: "Surface",
-        lengthTooltip: "Mesure de longueur",
-        areaTooltip: "Mesure de surface",
-        measureTooltip: "Mesure"
-    },
-
     "gxp.plugins.Navigation.prototype": {
         menuText: "Panner la carte",
         tooltip: "Panner la carte"
@@ -271,6 +263,14 @@ GeoExt.Lang.add("fr", {
         previewText: "Aperçu avant impression",
         notAllNotPrintableText: "Non, toutes les couches peuvent être imprimées",
         nonePrintableText: "Aucune de vos couches ne peut être imprimée"
+    },
+
+    "gxp.plugins.Measure.prototype": {
+        lengthMenuText: "Longueur",
+        areaMenuText: "Surface",
+        lengthTooltip: "Mesure de longueur",
+        areaTooltip: "Mesure de surface",
+        measureTooltip: "Mesure"
     },
 
     "gxp.plugins.MapQuestSource.prototype": {
@@ -391,6 +391,8 @@ GeoExt.Lang.add("fr", {
     "gxp.RulePanel.prototype": {
         scaleSliderTemplate: "{scaleType} échelle 1:{scale}",
         labelFeaturesText: "Label Caractéristiques",
+        labelsText: "Labels",
+        basicText: "Basique",
         advancedText: "Avancé",
         limitByScaleText: "Limiter par l'échelle",
         limitByConditionText: "Limiter par condition",
@@ -400,7 +402,8 @@ GeoExt.Lang.add("fr", {
     
     "gxp.ScaleLimitPanel.prototype": {
         scaleSliderTemplate: "{scaleType} échelle 1:{scale}",
-        maxScaleLimitText: "Échelle maximale"
+        minScaleLimitText: "Echelle minimale",
+        maxScaleLimitText: "Echelle maximale"
     },
     
     "gxp.TextSymbolizer.prototype": {
@@ -420,6 +423,7 @@ GeoExt.Lang.add("fr", {
         transparentText: "Transparent",
         cacheText: "Cache",
         cacheFieldText: "Utiliser la version mise en cache",
+		stylesText: "Styles",
         infoFormatText: "Info format",
         infoFormatEmptyText: "Choisissez un format"
     },
@@ -463,5 +467,4 @@ GeoExt.Lang.add("fr", {
     "gxp.ScaleOverlay.prototype": { 
         zoomLevelText: "Niveau de zoom"
     }
-	
 });

@@ -21,6 +21,7 @@ GeoExt.Lang.add("en", {
         contactText: "Contact",
         aboutThisMapText: "About this Map"
     },
+	
     "GeoExplorer.Composer.prototype": {
         exportMapText: "Publish Map",
         saveMapText: "Save Map",
@@ -34,6 +35,7 @@ GeoExt.Lang.add("en", {
         userFieldText: "User",
         passwordFieldText: "Password"
     },
+	
 	"GeoExplorer.Brugis.prototype" : {
         exportMapText: "Export map",
         saveMapText: "Save map",
@@ -50,11 +52,60 @@ GeoExt.Lang.add("en", {
 		treeTabTitleText: "Data",
 		legendTabTitleText: "Legend",
 		disclaimerText: "Indicative map - Realized by BruGIS team with Brussels UrbIS",
-		wmsTreeLegendSourceText: "http://localhost:8080/geoserver/www/wmsaatl/wmsaatl_fr.xml"
-		//wmsTreeLegendSourceText: "http://svappmavw019:8080/geoserver/www/wmsaatl/wmsaatl_fr.xml"
-		//wmsTreeLegendSourceText: "http://mybrugis.irisnetlab.be/geoserver/www/wmsaatl/wmsaatl_fr.xml"
-		//wmsTreeLegendSourceText: "http://www.mybrugis.irisnet.be/geoserver/www/wmsaatl/wmsaatl_fr.xml"
+		newBrugisTitle: "New version of BruGIS",
+		newBrugisMessagePart1: "BruGIS version is now",
+		newBrugisMessagePart2: ".\n your BruGIS version is ",
+		newBrugisMessagePart3: ".\n You have nothing to do; you map is reinitialized",
+		wpsserver :"http://svappmavw019:8080/geoserver/wps",
+		//wpsserver :"http://mybrugis.irisnetlab.be/geoserver/wps",
+		//wpsserver :"http://www.mybrugis.irisnet.be/geoserver/wps",
+		//wmsTreeLegendSourceText: "http://localhost:8080/geoserver/www/wmsaatl/wmsaatl_en.xml"
+		wmsTreeLegendSourceText: "http://svappmavw019:8080/geoserver/www/wmsaatl/wmsaatl_en.xml"
+		//wmsTreeLegendSourceText: "http://mybrugis.irisnetlab.be/geoserver/www/wmsaatl/wmsaatl_en.xml"
+		//wmsTreeLegendSourceText: "http://www.mybrugis.irisnet.be/geoserver/www/wmsaatl/wmsaatl_en.xml"
 	},
+	
+	"ux.form.CirbGeocoderComboBox.prototype" : {
+		loadingText: "Searching...",
+        emptyText: "Search",
+		language: 'en'
+	},
+		
+	"ux.plugins.MyMaps.prototype": {
+		myMapsTip: "My maps",
+		myMapsText: "my maps text",
+		myMapsMenuText: "my maps menu text",
+		availableMyMapsText: "My maps",
+		mapsTitleText: "Maps",
+		dateTitleText: "Dates",
+		expanderTemplateText: "<p><b>Description:</b> {abstract}</p>",
+		resetText: "Reset",
+		importText: "Import",
+		exportText: "Export",
+		saveMapText: "Save",
+		loadMapText: "Load",
+		deleteMapText: "Delete",
+		doneText: "Done",
+		resetButtonTooltipText: "Reset BruGIS map",
+		saveButtonTooltipText: "Save current map",
+		deleteButtonTooltipText: "Delete map",
+		loadButtonTooltipText: "Load map",
+		loadConfirmTitle: "Load map",
+		loadConfirmMessage: "Load map?",
+		deleteConfirmTitle: "Delete map(s)",
+		deleteConfirmMessage: "Delete selected map(s)?",
+		resetConfirmTitle: "Reset BruGIS map",
+		resetConfirmMessage: "Do you want to reset the BruGIS map?",
+		namingText: "New map",
+		mapNameFieldText: "Name",
+		mapAbstractFieldText: "Description",
+		okText: "Ok",
+		mapNameErrorText: "Thei map is not valid.",
+		mapAbstractErrorText: "This map description is not valid.",
+		sameMapNameTitle: "Warning",
+		sameMapNameMessage: "This mapname is already used. Do you want to replace the existing map definition by the new one?"
+	},
+	
 	"gxp.menu.LayerMenu.prototype": {
         layerText: "Layer"
     },
@@ -147,6 +198,20 @@ GeoExt.Lang.add("en", {
         worldPrintTitle: "World Print"
     },
 
+    "gxp.plugins.OSMSource.prototype": {
+        title: "OpenStreetMap Layers",
+        mapnikAttribution: "Data CC-By-SA by <a href='http://openstreetmap.org/'>OpenStreetMap</a>",
+        osmarenderAttribution: "Data CC-By-SA by <a href='http://openstreetmap.org/'>OpenStreetMap</a>"
+    },
+
+    "gxp.plugins.Print.prototype": {
+        menuText: "Print Map",
+        tooltip: "Print Map",
+        previewText: "Print Preview",
+        notAllNotPrintableText: "Not All Layers Can Be Printed",
+        nonePrintableText: "None of your current map layers can be printed"
+    },
+
     "gxp.plugins.Measure.prototype": {
         lengthMenuText: "Length",
         areaMenuText: "Area",
@@ -165,20 +230,6 @@ GeoExt.Lang.add("en", {
         nextMenuText: "Zoom To Next Extent",
         previousTooltip: "Zoom To Previous Extent",
         nextTooltip: "Zoom To Next Extent"
-    },
-
-    "gxp.plugins.OSMSource.prototype": {
-        title: "OpenStreetMap Layers",
-        mapnikAttribution: "Data CC-By-SA by <a href='http://openstreetmap.org/'>OpenStreetMap</a>",
-        osmarenderAttribution: "Data CC-By-SA by <a href='http://openstreetmap.org/'>OpenStreetMap</a>"
-    },
-
-    "gxp.plugins.Print.prototype": {
-        menuText: "Print Map",
-        tooltip: "Print Map",
-        previewText: "Print Preview",
-        notAllNotPrintableText: "Not All Layers Can Be Printed",
-        nonePrintableText: "None of your current map layers can be printed"
     },
 
     "gxp.plugins.MapQuestSource.prototype": {

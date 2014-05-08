@@ -1,7 +1,7 @@
 ﻿
 Ext.namespace("ux.gfi");
 
-ux.gfi.fr = {
+ux.gfi["fr-be"] = {
 		"AATL:Affectations" : {
 			"actiontype" : "GRID",
 			"title"		 : "Affectation: [NAME_FR]",

@@ -1,7 +1,7 @@
 ﻿
 Ext.namespace("ux.gfi");
 
-ux.gfi.nl =  {
+ux.gfi["nl-be"] =  {
 		"BROH:Bestemmingen" : {
 			"actiontype" : "GRID",
 			"title"      : "[NAME_NL]",
