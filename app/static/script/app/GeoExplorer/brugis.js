@@ -152,22 +152,23 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
                 controlOptions: {immediate: true,
 								 outputTarget: "bbar_measure"},
                 actionTarget: {target: "paneltbar", index: 11}
-            }, {
+            }, /*{
                 ptype: "gxp_zoom",
+				//showZoomBoxAction: true,
                 actionTarget: {target: "paneltbar", index: 12}
-            }, {
+             }, */{
                 ptype: "gxp_navigationhistory",
-                actionTarget: {target: "paneltbar", index: 14}
-            }, {
+                actionTarget: {target: "paneltbar", index: 12}
+            }, /*{
                 ptype: "gxp_zoomtoextent",
                 actionTarget: {target: "paneltbar", index: 15}
-            }, {
+            }, */{
                 ptype: "ux_geolocator",
 				controlOptions: {id: "geolocatecontrol",
 								 bind: false,
 								 watch: true,
 								 geolocationOptions: {enableHighAccuracy: true, maximumAge: 0, timeout: 7000}},
-                actionTarget: {target: "paneltbar", index: 17}
+                actionTarget: {target: "paneltbar", index: 14}
             }, {
 				ptype: "ux_wmstreelegend",
 				id: "wmsTreeLegendManager",
@@ -561,6 +562,7 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
 			maxWidth: 400,
 			minWidth: 200,
 			width: 288,
+			split: true,
 			layout: {
 				type: 'vbox',
 				align : 'stretch',
@@ -571,12 +573,13 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
 				id: "htmlLogo",
 				xtype: "container",
 				html: '<img src=../theme/app/img/brugisBrussels_small.png />',
+				flex: 0,
 				height: 100
 			}, 
 			{
 				id: "west2",
 				xtype: "tabpanel",
-				activeTab: 0,
+				activeTab: 1,
 				flex:1,
 				deferredRender:false,
 				items : [{
@@ -590,7 +593,8 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
 					xtype: "container",
 					autoScroll: true
 				}]
-			}]
+			}]/*,
+			tbar: this.addLocaleTools([])*/
         });
 
         this.toolbar = new Ext.Toolbar({
@@ -745,7 +749,11 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
 				}
 				if (params.json) {
 					console.log("Djééézonne");
-				}
+					console.log(params.json);
+					// stub du json
+					var jsonContent = "http://www.mybrugis.irisnet.be/geoserver/AATL/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=AATL:Affectations&maxFeatures=50&outputFormat=application%2Fjson";
+						
+					}
 			}
 			
 			///////////////////////DOCG////////////////////////////////////////////
@@ -931,6 +939,7 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
 			scope: this
 		});
 		if (localStorage) {
+			
 			tools.push("-");
 			tools.push(frButton);
 			tools.push("-");
