@@ -19,22 +19,22 @@ Ext.namespace("ux.plugins");
 /** api: constructor
  *  .. class:: ReperageToolbox(config)
  *
- *    Plugin for add reperage toolbox to the viewer.  The underlying
- *    tools (if any) can be configured inside this plugin
- *    ``outputConfig`` property. 
+ *	Plugin for add reperage toolbox to the viewer.  The underlying
+ *	tools (if any) can be configured inside this plugin
+ *	``outputConfig`` property. 
  */
 ux.plugins.ReperageToolbox = Ext.extend(gxp.plugins.Tool, {
-    
-    /** api: ptype = ux_ReperageToolbox */
-    ptype: "ux_ReperageToolbox",
 	
-    // Begin i18n.
+	/** api: ptype = ux_ReperageToolbox */
+	ptype: "ux_ReperageToolbox",
+	
+	// Begin i18n.
 	showReperageGrid: "ShowReperageGrid",
-    drawReperageAreaToolTip: "DrawArea",
-    showReperageFormBtnToolTip: "showReperageForm",
-    modifyReperageAreaToolTip: "ModifyArea",
-    copyParcelFeatBtnToolTip : "CopyParcel",
-    deleteOneFeatureBtnToolTip: "DeleteOneFeature",
+	drawReperageAreaToolTip: "DrawArea",
+	showReperageFormBtnToolTip: "showReperageForm",
+	modifyReperageAreaToolTip: "ModifyArea",
+	copyParcelFeatBtnToolTip : "CopyParcel",
+	deleteOneFeatureBtnToolTip: "DeleteOneFeature",
 	reperageButtonTip: "ReperageToolBox",
 	
 	showReperageFormDlgTitle: "Reperage",
@@ -59,7 +59,7 @@ ux.plugins.ReperageToolbox = Ext.extend(gxp.plugins.Tool, {
 
 	myReperageGridPanel_bbar_displayMsg: "Reperages {0} - {1} of {2}",
 	myReperageGridPanel_bbar_emptyMsg: "No reperage",
-    // End i18n.
+	// End i18n.
 	
 	//UUID
 	username: 'noname',
@@ -67,11 +67,11 @@ ux.plugins.ReperageToolbox = Ext.extend(gxp.plugins.Tool, {
 	nbresultbypage: 25,
 	
 	/** api: config[reperageDrawingLayerName]
-     *  ``String``
-     *  If value is specified, specify the working layer for the ReperageToolbox
-     *  Default is "reperagework".
-     */
-    reperageLayerName: "reperagework",
+	 *  ``String``
+	 *  If value is specified, specify the working layer for the ReperageToolbox
+	 *  Default is "reperagework".
+	 */
+	reperageLayerName: "reperagework",
 	
 	
 	/** api: config[LocalStorageState]
@@ -87,10 +87,10 @@ ux.plugins.ReperageToolbox = Ext.extend(gxp.plugins.Tool, {
 	myReperage: false,
 	
 	/** api: config[reperageUserName]
-     *  ``String``
-     *  Saving value of user UUID
-     */
-    reperageUserName: "",
+	 *  ``String``
+	 *  Saving value of user UUID
+	 */
+	reperageUserName: "",
 	
 	/** private: method[constructor]
 	 */
@@ -101,12 +101,12 @@ console.log("ReperageToolbox.constructor");
 	},
 	
 	/** private: method[destroy]
-     */
-    destroy: function() {
+	 */
+	destroy: function() {
 console.log("ReperageToolbox.destroy");
-        this.button = null;
-        gxp.plugins.MyReperage.superclass.destroy.apply(this, arguments);
-    },
+		this.button = null;
+		gxp.plugins.MyReperage.superclass.destroy.apply(this, arguments);
+	},
 	
 	init: function(target) {
 console.log("ReperageToolbox.init");
@@ -114,63 +114,63 @@ console.log("ReperageToolbox.init");
 		
 		
 		//création du vecteur qui contiendra les polygone dessiner
-    	this.reperageLayer = new OpenLayers.Layer.Vector(this.reperageLayerName,{
-    		rendererOptions: { zIndexing: true }
-    	});
+		this.reperageLayer = new OpenLayers.Layer.Vector(this.reperageLayerName,{
+			rendererOptions: { zIndexing: true }
+		});
 		this.reperageLayer.displayInLayerSwitcher = false;
 		
 		//TODO: Show reperage (prendre le MyReperage.js ???)
 console.log("ReperageToolbox.showReperageButton");
 		var showReperageButton = new Ext.Button({
-            tooltip: this.myReperageTip,
-            iconCls: "star",
-            scope: this,
+			tooltip: this.myReperageTip,
+			iconCls: "star",
+			scope: this,
 			handler: function() {
 				this.showMyReperageGrid();
-		    }
+			}
 		});
 console.log("ReperageToolbox.showReperageButton end");
 		
-        var toggleGroup = this.toggleGroup || Ext.id();
+		var toggleGroup = this.toggleGroup || Ext.id();
 		
-    	//DrawPolygon
-    	var drawReperageFeatureControl = new OpenLayers.Control.DrawFeature(this.reperageLayer, OpenLayers.Handler.Polygon);
+		//DrawPolygon
+		var drawReperageFeatureControl = new OpenLayers.Control.DrawFeature(this.reperageLayer, OpenLayers.Handler.Polygon);
 		var drawReperageAreaButton = new Ext.Button({
-            enableToggle: true,
-            allowDepress: true,
-            tooltip: this.drawReperageAreaToolTip,
-            iconCls: "ux-icon-drawreperage",
-            toggleGroup: toggleGroup,
-            scope: this,
-		    toggleHandler: function(btn,state){
-		        if (state) {
+			enableToggle: true,
+			allowDepress: true,
+			tooltip: this.drawReperageAreaToolTip,
+			iconCls: "ux-icon-drawreperage",
+			toggleGroup: toggleGroup,
+			scope: this,
+			toggleHandler: function(btn,state){
+				if (state) {
 					this.parcelLayer.setVisibility(true);
-		            this.drawReperageFeatureControl.activate();
-		        } else {
+					this.drawReperageFeatureControl.activate();
+				} else {
 					this.parcelLayer.setVisibility(false);
-		            this.drawReperageFeatureControl.deactivate();
-		        }
-		    }
+					this.drawReperageFeatureControl.deactivate();
+				}
+			}
 		});
 		
 		//Edit Feature
 		var modifyReperageFeatureControl = new OpenLayers.Control.ModifyFeature(this.reperageLayer);
 		var modifyReperageAreaButton = new Ext.Button({
-            enableToggle: true,
-            allowDepress: true,
-            tooltip: this.modifyReperageAreaToolTip,
-            iconCls: "ux-icon-editreperage",
-            toggleGroup: toggleGroup,
-            scope: this,
-		    toggleHandler: function(btn,state){
-		        if (state) {
+			enableToggle: true,
+			allowDepress: true,
+			tooltip: this.modifyReperageAreaToolTip,
+			iconCls: "ux-icon-editreperage",
+			toggleGroup: toggleGroup,
+			scope: this,
+			toggleHandler: function(btn,state){
+				if (state) {
 					this.parcelLayer.setVisibility(true);
-		            this.modifyReperageFeatureControl.activate();
-		        } else {
+					this.modifyReperageFeatureControl.activate();
+				} else {
 					this.parcelLayer.setVisibility(false);
-		            this.modifyReperageFeatureControl.deactivate();
-		        }
-		    }
+					this.modifyReperageFeatureControl.deactivate();
+				}
+			}
 		});		
 		
 		//DeleteSelectedFeature
@@ -178,183 +178,185 @@ console.log("ReperageToolbox.showReperageButton end");
 		deleteOneFeatureControl.events.register("featurehighlighted", this, this.removeFeatureToReperageLayer);
 
 		var deleteOneFeatureBtn = new Ext.Button({
-            enableToggle: true,
-            allowDepress: true,
-            tooltip: this.deleteOneFeatureBtnToolTip,
-            iconCls: "ux-icon-removeonefeature",
-            toggleGroup: toggleGroup,
-            scope: this,
-		    toggleHandler: function(btn,state){
-		        if (state) {
+			enableToggle: true,
+			allowDepress: true,
+			tooltip: this.deleteOneFeatureBtnToolTip,
+			iconCls: "ux-icon-removeonefeature",
+			toggleGroup: toggleGroup,
+			scope: this,
+			toggleHandler: function(btn,state){
+				if (state) {
 					
 					this.parcelLayer.setVisibility(true);
-		            this.deleteOneFeatureControl.activate();
-		        } else {
+					this.deleteOneFeatureControl.activate();
+				} else {
 					this.parcelLayer.setVisibility(false);
-		            this.deleteOneFeatureControl.deactivate();
-		        }
-		    }
+					this.deleteOneFeatureControl.deactivate();
+				}
+			}
 		});			
 		//TODO
 
-    	//Copy 1 parcel
-    	//Warning : the getfeatureInfo need a proxy defined in order to work
-    	var parcelLayer = new OpenLayers.Layer.WMS("ParcelleReperage",
-            "http://www.mybrugis.irisnet.be/geoserver/wms", 
-            {'layers': 'AATL:Parcelle_2013', transparent: true, format: 'image/png'},
-            {isBaseLayer: false}
-        );
+		//Copy 1 parcel
+		//Warning : the getfeatureInfo need a proxy defined in order to work
+		var parcelLayer = new OpenLayers.Layer.WMS("ParcelleReperage",
+			"http://www.mybrugis.irisnet.be/geoserver/wms", 
+			{'layers': 'AATL:Parcelle_2013', transparent: true, format: 'image/png'},
+			{isBaseLayer: false}
+		);
 		parcelLayer.displayInLayerSwitcher = false;
 		parcelLayer.setVisibility(false);
 		
-    	var copyParcelControl = new OpenLayers.Control.WMSGetFeatureInfo({
-            url: 'http://www.mybrugis.irisnet.be/geoserver/wms', 
-            title: 'Identify features by clicking',
-            layers: [parcelLayer],
-            queryVisible: true,
-            infoFormat: "application/vnd.ogc.gml"
-        });
+		var copyParcelControl = new OpenLayers.Control.WMSGetFeatureInfo({
+			url: 'http://www.mybrugis.irisnet.be/geoserver/wms', 
+			title: 'Identify features by clicking',
+			layers: [parcelLayer],
+			queryVisible: true,
+			infoFormat: "application/vnd.ogc.gml"
+		});
 
-        copyParcelControl.events.register("getfeatureinfo", this, this.addFeatureToReperageLayer);
+		copyParcelControl.events.register("getfeatureinfo", this, this.addFeatureToReperageLayer);
 
-    	var copyParcelFeatBtn = new Ext.Button({
-            enableToggle: true,
-            allowDepress: true,
-            tooltip: this.copyParcelFeatBtnToolTip,
-            iconCls: "ux-icon-copyparcel",
-            toggleGroup: toggleGroup,
-            scope: this,
-		    toggleHandler: function(btn,state){
+		var copyParcelFeatBtn = new Ext.Button({
+			enableToggle: true,
+			allowDepress: true,
+			tooltip: this.copyParcelFeatBtnToolTip,
+			iconCls: "ux-icon-copyparcel",
+			toggleGroup: toggleGroup,
+			scope: this,
+			toggleHandler: function(btn,state){
 console.log("drawReperageAreaButton.toggleHandler()");
-		        if (state) {
+				if (state) {
 					this.parcelLayer.setVisibility(true);
-		            this.copyParcelControl.activate();
-		        } else {
+					this.copyParcelControl.activate();
+				} else {
 					this.parcelLayer.setVisibility(false);
-		            this.copyParcelControl.deactivate();
-		        }
-		    }
-    	});
+					this.copyParcelControl.deactivate();
+				}
+			}
+		});
 		
-    	
 		
-    	//Reperage Form
-    	var showReperageFormBtn = new Ext.Button({
-    		tooltip: this.showReperageFormBtnToolTip,
-    		iconCls: "ux-icon-sendreperage",
-    		disabled: false,
-            handler: function() {
+		
+		//Reperage Form
+		var showReperageFormBtn = new Ext.Button({
+			tooltip: this.showReperageFormBtnToolTip,
+			iconCls: "ux-icon-sendreperage",
+			disabled: false,
+			handler: function() {
 				this.showReperageForm();
-            },
-    		scope: this
-    	});
+			},
+			scope: this
+		});
 
-        var dataRepType = new Ext.data.JsonStore({
-            url: '/WebReperage/resources/ReperagesType',
-            autoLoad: true,
-            idProperty: 'id',
-            fields: ['id',  'title']
-        });
+		var dataRepType = new Ext.data.JsonStore({
+			url: '/WebReperage/resources/ReperagesType',
+			autoLoad: true,
+			idProperty: 'id',
+			fields: ['id',  'title']
+		});
 			
-        var reperageTypeCombo = new Ext.form.ComboBox({
-            fieldLabel: this.reperageTypeCombofieldLabel,
-            hiddenName:'reptype',
-            store: dataRepType,
-            valueField:'id',
-            displayField:'title',
-            typeAhead: true,
-            mode: 'local',
-            triggerAction: 'all',
-            emptyText: this.reperageTypeComboemptyText,
-            selectOnFocus:true,
-            allowBlank: false,
-            width:200,
-            editable: false,
-            forceSelection: true
-        });
+		var reperageTypeCombo = new Ext.form.ComboBox({
+			fieldLabel: this.reperageTypeCombofieldLabel,
+			hiddenName:'reptype',
+			store: dataRepType,
+			valueField:'id',
+			displayField:'title',
+			typeAhead: true,
+			mode: 'local',
+			triggerAction: 'all',
+			emptyText: this.reperageTypeComboemptyText,
+			selectOnFocus:true,
+			allowBlank: false,
+			width:200,
+			editable: false,
+			forceSelection: true
+		});
 		
 		var reperageRefDossText = new Ext.form.TextField({
 			id: 'valuereperageRefDossText',
-        	fieldLabel: this.reperageRefDossTextfieldLabel,
-        	name: 'refdossier',
-        	allowBlank: false,
-        	width: 200
-        });
+			fieldLabel: this.reperageRefDossTextfieldLabel,
+			name: 'refdossier',
+			allowBlank: false,
+			width: 200
+		});
 
-        var reperageAdrText = new Ext.form.TextField({
+		var reperageAdrText = new Ext.form.TextField({
 			id: 'valuereperageAdrText',
-        	fieldLabel: this.reperageAdrTextfieldLabel,
-        	name: 'adr',
-        	allowBlank: false,
-        	width: 200
-        });
+			fieldLabel: this.reperageAdrTextfieldLabel,
+			name: 'adr',
+			allowBlank: false,
+			width: 200
+		});
 
-        var reperageGeomHidden = new Ext.form.Hidden({
-        	name: 'geom'
-        });
+		var reperageGeomHidden = new Ext.form.Hidden({
+			name: 'geom'
+		});
 		
 		var reperageUserHidden = new Ext.form.Hidden({
 			name: 'user'
 		});
 
-    	var reperageFormPanel = new Ext.FormPanel({
-    		labelWidth: 100,
-    		frame:true,
-    		url: '/WebReperage/res/reperage',
-    		defaults: {width: 200},
-    		items: [reperageRefDossText,
+		var reperageFormPanel = new Ext.FormPanel({
+			labelWidth: 100,
+			frame:true,
+			url: '/WebReperage/res/reperage',
+			defaults: {width: 200},
+			items: [reperageRefDossText,
 				reperageGeomHidden,
 				reperageAdrText,
 				reperageTypeCombo,
 				reperageUserHidden],
-    		buttons : [{ 
-    			text: 'OK',
-    			minWidth: '75',
-    			scope: this,
-    			handler: function() {
-    				this.reperageFormPanel.getForm().submit({
-					    success: function(form, action) {
-					       Ext.Msg.alert('Success', action.result.msg);
-						   Ext.getCmp('valuereperageRefDossText').reset();
-						   Ext.getCmp('valuereperageAdrText').reset();
-						   this.clearReperageLayer();
-					    },
-					    failure: function(form, action) {
-					        switch (action.failureType) {
-					            case Ext.form.Action.CLIENT_INVALID:
-					                Ext.Msg.alert('Failure', 'Form fields may not be submitted with invalid values');
-					                break;
-					            case Ext.form.Action.CONNECT_FAILURE:
-					                Ext.Msg.alert('Failure', 'Ajax communication failed');
-					                break;
-					            case Ext.form.Action.SERVER_INVALID:
-					               Ext.Msg.alert('Failure', action.result.msg);
-					       }
-					    },
+			buttons : [{ 
+				text: 'OK',
+				minWidth: '75',
+				scope: this,
+				handler: function() {
+					this.reperageFormPanel.getForm().submit({
+						success: function(form, action) {
+							Ext.Msg.alert('Success', action.result.msg);
+							if(action.result.usr !== undefined || action.result.usr != '')
+								localStorage.setItem("repuser","noname");
+							Ext.getCmp('valuereperageRefDossText').reset();
+							Ext.getCmp('valuereperageAdrText').reset();
+							this.clearReperageLayer();
+						},
+						failure: function(form, action) {
+							switch (action.failureType) {
+								case Ext.form.Action.CLIENT_INVALID:
+									Ext.Msg.alert('Failure', 'Form fields may not be submitted with invalid values');
+									break;
+								case Ext.form.Action.CONNECT_FAILURE:
+									Ext.Msg.alert('Failure', 'Ajax communication failed');
+									break;
+								case Ext.form.Action.SERVER_INVALID:
+								   Ext.Msg.alert('Failure', action.result.msg);
+						   }
+						},
 						scope: this
-    				});
-    				this.showReperageFormDlg.hide();
-    			}
-    		},{
-    			text: 'Cancel',
-    			minWidth: '75',
-    			scope: this,
-    			handler: function() {
-    				this.showReperageFormDlg.hide();
-    			}
-    		}]
-    	});
+					});
+					this.showReperageFormDlg.hide();
+				}
+			},{
+				text: 'Cancel',
+				minWidth: '75',
+				scope: this,
+				handler: function() {
+					this.showReperageFormDlg.hide();
+				}
+			}]
+		});
 
-    	var showReperageFormDlg = new Ext.Window({
-           height: 200,
-           width: 400,
-           closable: true,
-           closeAction : 'hide', 
-           modal: true,
-           title: this.showReperageFormDlgTitle,
-           layout: 'fit',
-           items: [reperageFormPanel]
-        });
+		var showReperageFormDlg = new Ext.Window({
+		   height: 200,
+		   width: 400,
+		   closable: true,
+		   closeAction : 'hide', 
+		   modal: true,
+		   title: this.showReperageFormDlgTitle,
+		   layout: 'fit',
+		   items: [reperageFormPanel]
+		});
 
 		this.drawReperageFeatureControl = drawReperageFeatureControl;
 		this.drawReperageAreaButton = drawReperageAreaButton;
@@ -362,21 +364,21 @@ console.log("drawReperageAreaButton.toggleHandler()");
 		this.modifyReperageAreaButton = modifyReperageAreaButton;
 		this.deleteOneFeatureControl = deleteOneFeatureControl;
 		this.deleteOneFeatureBtn = deleteOneFeatureBtn;
-        this.showReperageFormBtn = showReperageFormBtn;
-        this.showReperageFormDlg = showReperageFormDlg;
-        this.reperageFormPanel = reperageFormPanel;
+		this.showReperageFormBtn = showReperageFormBtn;
+		this.showReperageFormDlg = showReperageFormDlg;
+		this.reperageFormPanel = reperageFormPanel;
 		this.reperageRefDossText = reperageRefDossText;
-        this.reperageAdrText = reperageAdrText;
-        this.reperageGeomHidden = reperageGeomHidden;
+		this.reperageAdrText = reperageAdrText;
+		this.reperageGeomHidden = reperageGeomHidden;
 		this.reperageUserHidden = reperageUserHidden;
-        this.copyParcelFeatBtn = copyParcelFeatBtn;
-        this.copyParcelControl = copyParcelControl;
-        this.parcelLayer = parcelLayer;
+		this.copyParcelFeatBtn = copyParcelFeatBtn;
+		this.copyParcelControl = copyParcelControl;
+		this.parcelLayer = parcelLayer;
 		
 		this.showReperageButton = showReperageButton;
 console.log("ReperageToolbox.init end");
-        return ux.plugins.ReperageToolbox.superclass.init.apply(this, arguments);
-    },
+		return ux.plugins.ReperageToolbox.superclass.init.apply(this, arguments);
+	},
 	
 	
 	
@@ -392,8 +394,8 @@ console.log("ReperageToolbox.init end");
 	
 	//Crée le bouton pour la page principale
 	/** api: method[addActions]
-     */
-    addActions: function() {
+	 */
+	addActions: function() {
 console.log("ReperageToolbox.addActions");
 
 		var menuReperageTool = new Ext.menu.Menu({
@@ -412,40 +414,40 @@ console.log("ReperageToolbox.addActions");
 			]
 		});
 
-        this.button = new Ext.Button({
-            iconCls: "star",
-            tooltip: this.reperageButtonTip,
-            scope: this,
-            menu: menuReperageTool
-        });
+		this.button = new Ext.Button({
+			iconCls: "star",
+			tooltip: this.reperageButtonTip,
+			scope: this,
+			menu: menuReperageTool
+		});
 		
 		var map = this.target.mapPanel.map;
 		
 		//The reperage layers
 		if(map.getLayersByName(this.reperageLayerName).length > 0){
-    		console.error("reperage working layer : " + this.reperageLayerName + " Found ! Plugin is initialized multiple times");
-    	} else {
-    		map.addLayer(this.reperageLayer);
-    		map.addLayer(this.parcelLayer);
-    	}
+			console.error("reperage working layer : " + this.reperageLayerName + " Found ! Plugin is initialized multiple times");
+		} else {
+			map.addLayer(this.reperageLayer);
+			map.addLayer(this.parcelLayer);
+		}
 		
 		//Adding OL Controls
-    	map.addControl(this.drawReperageFeatureControl);
-    	map.addControl(this.modifyReperageFeatureControl);
-    	map.addControl(this.copyParcelControl);
-    	map.addControl(this.deleteOneFeatureControl);
+		map.addControl(this.drawReperageFeatureControl);
+		map.addControl(this.modifyReperageFeatureControl);
+		map.addControl(this.copyParcelControl);
+		map.addControl(this.deleteOneFeatureControl);
 		
-        var actions = ux.plugins.ReperageToolbox.superclass.addActions.apply(this, [this.button]);
-        
-        this.target.on("ready", function() {
+		var actions = ux.plugins.ReperageToolbox.superclass.addActions.apply(this, [this.button]);
+		
+		this.target.on("ready", function() {
 			if (this.checkLocalStorage()) {
 				actions[0].enable();
 			} else {
 				actions[0].disable();
 			}
-        }, this);
-        return actions;
-    },
+		}, this);
+		return actions;
+	},
 	
 	
 	//////////////////////////////////////Raphael créeation reperagegrid + init /// Debut
@@ -455,12 +457,12 @@ console.log("ReperageToolbox.addActions");
 console.log("MyReperage.initMyReperage");
 		if (this.validLocalStorage) {
 			var data = [];
-			if (localStorage.getItem("repuser") !== null && localStorage.getItem("repuser") != 'noname') {
+			if (localStorage.getItem("repuser") !== null && localStorage.getItem("repuser") != 'noname' && localStorage.getItem("repuser") != '') {
 				//TODO: load reperage.
 				username = localStorage.getItem("repuser");
 			} else {
 				localStorage.setItem("repuser","noname");
-				username = 'admin';
+				username = 'noname';
 			}
 			this.myReperage = new Ext.data.Store({
 				reader: new Ext.data.JsonReader({
@@ -486,7 +488,6 @@ console.log("MyReperage.initMyReperage");
 				storeId: 'ReperageStoreId',
 				// reader configs
 				remoteSort: true
-
 			});
 			this.myReperage.setDefaultSort('startdate', 'desc');
 			this.myReperage.setBaseParam('users', username);
@@ -495,18 +496,18 @@ console.log("MyReperage.initMyReperage");
 	},
 	
 	/** api: method[showMyReperageGrid]
-     * Shows the window with a MyReperage grid.
-     */
-    showMyReperageGrid: function() {
+	 * Shows the window with a MyReperage grid.
+	 */
+	showMyReperageGrid: function() {
 console.log("MyReperage.showMyReperageGrid");
 		this.initMyReperage();
-        if(!this.myReperageGrid) {
-            this.initMyReperageGrid();
-        } else if (!(this.myReperageGrid instanceof Ext.Window)) {
-            this.addOutput(this.myReperageGrid);
-        }
-        this.myReperageGrid.show();
-    },
+		if(!this.myReperageGrid) {
+			this.initMyReperageGrid();
+		} else if (!(this.myReperageGrid instanceof Ext.Window)) {
+			this.addOutput(this.myReperageGrid);
+		}
+		this.myReperageGrid.show();
+	},
 	
 	/**
 	 * private: method[initMyReperageGrid]
@@ -682,90 +683,90 @@ console.log("MyReperage.initMyReperageGrid");
 	//Ajoute le(s) layer(s) au panel
 	raiseLayers: function() {
 console.log("ReperageToolbox.raiseLayers");
-    	var map = this.target.mapPanel.map;
+		var map = this.target.mapPanel.map;
 
-    	map.setLayerIndex(this.parcelLayer, 98);
-    	map.setLayerIndex(this.reperageLayer, 99);
-    },
+		map.setLayerIndex(this.parcelLayer, 98);
+		map.setLayerIndex(this.reperageLayer, 99);
+	},
 	
 	//suprime les polygones du reperage
 	clearReperageLayer: function() {
 console.log("ReperageToolbox.clearReperageLayer");
 		this.reperageLayer.removeAllFeatures();	
-    },
+	},
 	
 	//affiche le formulaire d'envois de reperage
 	showReperageForm: function() {
 console.log("ReperageToolbox.showReperageForm");
-    	this.showReperageFormDlg.show();
+		this.showReperageFormDlg.show();
 		
-    	//Get the adress if any
-    	for(var tool in this.target.tools) {
-    		if(this.target.tools[tool].ptype == 'ux_BrugisSearcher') {
-    			var adrValue = this.target.tools[tool].lastvalue;
-    			if(adrValue){
-    				this.reperageAdrText.setValue(adrValue);
-    			}
+		//Get the adress if any
+		for(var tool in this.target.tools) {
+			if(this.target.tools[tool].ptype == 'ux_BrugisSearcher') {
+				var adrValue = this.target.tools[tool].lastvalue;
+				if(adrValue){
+					this.reperageAdrText.setValue(adrValue);
+				}
 				this.target.tools[tool].lastvalue = null;
-    			break;
-    		}
-    	}
+				break;
+			}
+		}
 		
-    	//Get the geometry
-    	this.reperageGeomHidden.setValue(this.serializeReperageArea());
+		//Get the geometry
+		this.reperageGeomHidden.setValue(this.serializeReperageArea());
 		//Get the user
 		this.reperageUserHidden.setValue(this.reperageUserName);
-    },
+	},
 	
 	serializeReperageArea: function() {
 console.log("ReperageToolbox.serializeReperageArea");
-    	var resultGeom = null;
-    	var wtkResult = null;
+		var resultGeom = null;
+		var wtkResult = null;
 		
-    	var olParser = new jsts.io.OpenLayersParser();
-    	var jstsWKTWriter = new jsts.io.WKTWriter();
+		var olParser = new jsts.io.OpenLayersParser();
+		var jstsWKTWriter = new jsts.io.WKTWriter();
 		
-    	for(var cpt = 0; cpt < this.reperageLayer.features.length; cpt ++) 
-    	{
-    		var olGeom = this.reperageLayer.features[cpt].geometry;
-    		var jstsGeom = olParser.read(olGeom);
-    		if(resultGeom) {
-    			resultGeom = resultGeom.union(jstsGeom);
-    		} else {
-    			resultGeom = jstsGeom;
-    		}
-    	}
-    	
-    	this.clearReperageLayer();
+		for(var cpt = 0; cpt < this.reperageLayer.features.length; cpt ++) 
+		{
+			var olGeom = this.reperageLayer.features[cpt].geometry;
+			var jstsGeom = olParser.read(olGeom);
+			if(resultGeom) {
+				resultGeom = resultGeom.union(jstsGeom);
+			} else {
+				resultGeom = jstsGeom;
+			}
+		}
 		
-    	if(resultGeom) {
+		this.clearReperageLayer();
+		
+		if(resultGeom) {
 			var myRes = olParser.write(resultGeom);
 			var unionOutput = new OpenLayers.Feature.Vector(myRes, null, { fillColor: 'green', fillOpacity: 1});
 			this.reperageLayer.addFeatures([unionOutput]);
 			
 			wtkResult = jstsWKTWriter.write(resultGeom);
-    	}
-    	
-    	return wtkResult;
-    },
+		}
+		
+		return wtkResult;
+	},
 	
 	addFeatureToReperageLayer: function(evt) {
 console.log("ReperageToolbox.addFeatureToReperageLayer");
-    	if (evt.features && evt.features.length) {
-    		this.reperageLayer.addFeatures(evt.features);
-    	} else {
-    		//console.log("Not A feature !");
-    	}
-    },
+		if (evt.features && evt.features.length) {
+			this.reperageLayer.addFeatures(evt.features);
+		} else {
+			//console.log("Not A feature !");
+		}
+	},
 	
-    removeFeatureToReperageLayer: function(evt){
+	removeFeatureToReperageLayer: function(evt){
 console.log("ReperageToolbox.removeFeatureToReperageLayer");
-    	if (evt.feature) {
-    		this.reperageLayer.removeFeatures([evt.feature]);
-    	} else {
-    		//console.log("Not A feature !");
-    	}
-    }
+		if (evt.feature) {
+			this.reperageLayer.removeFeatures([evt.feature]);
+		} else {
+			//console.log("Not A feature !");
+		}
+	}
 });
 
 Ext.preg('ux_ReperageToolbox', ux.plugins.ReperageToolbox);
