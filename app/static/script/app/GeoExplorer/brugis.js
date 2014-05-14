@@ -627,6 +627,9 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
 				this.layerSources["BruGIS WMS - Geoserver"].createStore();
 			}
 			
+			//Raph ajout des layers de reperage dans la liste
+			this.tools.toolboxReperage.raiseLayers();
+			
             // enable only those items that were not specifically disabled
             var disabled = this.toolbar.items.filterBy(function(item) {
                 return item.initialConfig && item.initialConfig.disabled;
