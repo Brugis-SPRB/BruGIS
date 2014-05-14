@@ -399,7 +399,6 @@ console.log("ReperageToolbox.addActions");
 		var menuReperageTool = new Ext.menu.Menu({
 			id: 'reperageMenu',
 			showSeparator: false,
-			cls: "padding1",
 			items: [
 				this.showReperageButton,
 				'-',

@@ -26,6 +26,12 @@
     background-image: url(cursor.png);
 }
 
-.padding1 {
+#reperageMenu > ul > li {
 	padding: 1px;
+}
+
+#reperageMenu > ul > li > img{
+	position: absolute;
+	height: 0px;
+	width: 0px;
 }
