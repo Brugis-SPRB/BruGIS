@@ -71,6 +71,10 @@ GeoExt.Lang.add("fr", {
 		language: 'en'
 	},
 	
+	"ux.plugins.BrugisSearcher.prototype" : {
+		searchLayerName: "resultats de la recherche"
+	},
+	
 	"ux.plugins.MyMaps.prototype": {
 		myMapsTip: "Mes cartes",
 		myMapsText: "my maps text",

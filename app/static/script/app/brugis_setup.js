@@ -162,7 +162,12 @@
 					url: "http://gis.irisnet.be/geoserver/stib_mivb/wms?",
 					version: "1.3.0",
 					ptype: "gxp_wmssource"
-				}
+				}/*,
+				"CIRB/CIBG WMS for SPRB - Geoserver": {
+					url: "http://svappmavw019:8080/geoserver/www/wmsaatl/wms_1_3_0_capabilities_sprb_fre.xml",
+					version: "1.1.1",
+					ptype: "gxp_wmscsource"
+				}*/
 			};
 			
 		var sourcesPrd = {

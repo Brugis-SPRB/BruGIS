@@ -31,6 +31,7 @@ ux.plugins.BrugisSearcher = Ext.extend(gxp.plugins.Tool, {
 	wpsserver : '/geoserver/wps',
 	zoom : 9,
 	zoomToPolNum: 12,
+	searchLayerName: "search",
 
     /** api: config[updateField]
      *  ``String``
@@ -150,14 +151,14 @@ ux.plugins.BrugisSearcher = Ext.extend(gxp.plugins.Tool, {
 			var map = this.target.mapPanel.map;
 			myPoint =  result[0].geometry;
 
-			if(map.getLayersByName('Search').length > 0){
-				var vectorLayer = map.getLayersByName('Search')[0];
+			if(map.getLayersByName(this.searchLayerName).length > 0){
+				var vectorLayer = map.getLayersByName(this.searchLayerName)[0];
 				vectorLayer.addFeatures(new OpenLayers.Feature.Vector(
 					new OpenLayers.Geometry.Point(myPoint.x, myPoint.y)
 				));
 			}
 			else{
-				var vectorLayer = new OpenLayers.Layer.Vector("Search");
+				var vectorLayer = new OpenLayers.Layer.Vector(this.searchLayerName);
 				vectorLayer.addFeatures(new OpenLayers.Feature.Vector(
 					new OpenLayers.Geometry.Point(myPoint.x, myPoint.y)
 				));
@@ -182,8 +183,8 @@ ux.plugins.BrugisSearcher = Ext.extend(gxp.plugins.Tool, {
 			var adnc 	= record.data.adNc;
 			var extent 	= record.json.extent;
 			
-			if(map.getLayersByName('Search').length > 0){
-				var vectorLayer = map.getLayersByName('Search')[0];
+			if(map.getLayersByName(this.searchLayerName).length > 0){
+				var vectorLayer = map.getLayersByName(this.searchLayerName)[0];
 				vectorLayer.addFeatures(
 					new OpenLayers.Feature.Vector(
 						new OpenLayers.Geometry.Point(myPoint.x, myPoint.y)
@@ -191,7 +192,15 @@ ux.plugins.BrugisSearcher = Ext.extend(gxp.plugins.Tool, {
 				);
 			}
 			else{
-				var vectorLayer = new OpenLayers.Layer.Vector("Search");
+				var myStyle = new OpenLayers.Symbolizer.Point({
+							graphicName: 'cross',
+							strokeColor: '#000000',
+							strokeWidth: 0.8,
+							fillOpacity: 0,
+							pointRadius: 7
+						});
+				var myStyleMap = new OpenLayers.StyleMap(myStyle, {extendDefault: true});
+				var vectorLayer = new OpenLayers.Layer.Vector(this.searchLayerName, {style: myStyle, styleMap: myStyleMap});
 				vectorLayer.addFeatures(
 					new OpenLayers.Feature.Vector(
 						new OpenLayers.Geometry.Point(myPoint.x, myPoint.y)
