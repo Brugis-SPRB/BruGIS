@@ -86,12 +86,6 @@ ux.plugins.ReperageToolbox = Ext.extend(gxp.plugins.Tool, {
 	 */
 	myReperage: false,
 	
-	/** api: config[reperageUserName]
-	 *  ``String``
-	 *  Saving value of user UUID
-	 */
-	reperageUserName: "",
-	
 	/** private: method[constructor]
 	 */
 	constructor: function(config) {
@@ -112,6 +106,8 @@ console.log("ReperageToolbox.destroy");
 console.log("ReperageToolbox.init");
 		this.id = "toolboxReperage";
 		
+		if (this.validLocalStorage)
+			this.username = localStorage.getItem("repuser");
 		
 		//création du vecteur qui contiendra les polygone dessiner
 		this.reperageLayer = new OpenLayers.Layer.Vector(this.reperageLayerName,{
@@ -119,8 +115,6 @@ console.log("ReperageToolbox.init");
 		});
 		this.reperageLayer.displayInLayerSwitcher = false;
 		
-		//TODO: Show reperage (prendre le MyReperage.js ???)
-console.log("ReperageToolbox.showReperageButton");
 		var showReperageButton = new Ext.Button({
 			tooltip: this.myReperageTip,
 			iconCls: "star",
@@ -129,7 +123,6 @@ console.log("ReperageToolbox.showReperageButton");
 				this.showMyReperageGrid();
 			}
 		});
-console.log("ReperageToolbox.showReperageButton end");
 		
 		var toggleGroup = this.toggleGroup || Ext.id();
 		
@@ -315,8 +308,15 @@ console.log("drawReperageAreaButton.toggleHandler()");
 					this.reperageFormPanel.getForm().submit({
 						success: function(form, action) {
 							Ext.Msg.alert('Success', action.result.msg);
-							if(action.result.usr !== undefined || action.result.usr != '')
-								localStorage.setItem("repuser","noname");
+console.log("success");
+							if(action.result.usr !== undefined && action.result.usr != ''){
+console.log("ok usr = " + action.result.usr);
+								localStorage.setItem("repuser",action.result.usr);
+console.log("aaa   "  +this.username);
+								this.username = action.result.usr;
+console.log("bbb   "  +this.username);
+							} else 
+console.log("no usr");
 							Ext.getCmp('valuereperageRefDossText').reset();
 							Ext.getCmp('valuereperageAdrText').reset();
 							this.clearReperageLayer();
@@ -456,13 +456,11 @@ console.log("ReperageToolbox.addActions");
 	initMyReperage: function() {
 console.log("MyReperage.initMyReperage");
 		if (this.validLocalStorage) {
-			var data = [];
 			if (localStorage.getItem("repuser") !== null && localStorage.getItem("repuser") != 'noname' && localStorage.getItem("repuser") != '') {
-				//TODO: load reperage.
-				username = localStorage.getItem("repuser");
+				this.username = localStorage.getItem("repuser");
 			} else {
 				localStorage.setItem("repuser","noname");
-				username = 'noname';
+				this.username = 'noname';
 			}
 			this.myReperage = new Ext.data.Store({
 				reader: new Ext.data.JsonReader({
@@ -490,8 +488,9 @@ console.log("MyReperage.initMyReperage");
 				remoteSort: true
 			});
 			this.myReperage.setDefaultSort('startdate', 'desc');
-			this.myReperage.setBaseParam('users', username);
+			this.myReperage.setBaseParam('users', this.username);
 			this.myReperage.load({params:{start:0, limit:this.nbresultbypage}});
+console.log("MyReperage.initMyReperage - this.myReperage.load() ??");
 		}
 	},
 	
@@ -500,9 +499,9 @@ console.log("MyReperage.initMyReperage");
 	 */
 	showMyReperageGrid: function() {
 console.log("MyReperage.showMyReperageGrid");
-		this.initMyReperage();
-		if(!this.myReperageGrid) {
-			this.initMyReperageGrid();
+		this.initMyReperage(); //initialise le DataStore et recupere les data mais ne met pas a jour le grid
+		if(!this.myReperageGrid) { //si la grid n'exite pas on la crée
+			this.initMyReperageGrid(); // atention la BBAR de la grid garde l'ancien Store ???
 		} else if (!(this.myReperageGrid instanceof Ext.Window)) {
 			this.addOutput(this.myReperageGrid);
 		}
@@ -715,7 +714,7 @@ console.log("ReperageToolbox.showReperageForm");
 		//Get the geometry
 		this.reperageGeomHidden.setValue(this.serializeReperageArea());
 		//Get the user
-		this.reperageUserHidden.setValue(this.reperageUserName);
+		this.reperageUserHidden.setValue(this.username);
 	},
 	
 	serializeReperageArea: function() {
