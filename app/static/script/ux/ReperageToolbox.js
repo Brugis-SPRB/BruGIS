@@ -82,9 +82,14 @@ ux.plugins.ReperageToolbox = Ext.extend(gxp.plugins.Tool, {
 	
 	/** api: config[myReperage]
 	 *  ``Ext.data.Store``
-	 *  Text for the grid expander (i18n).
 	 */
 	myReperage: false,
+	
+	
+	/** api: config[myReperage]
+	 *  ``Ext.grid.GridPanel``
+	 */
+	myReperageGridPanel: false,
 	
 	/** private: method[constructor]
 	 */
@@ -501,10 +506,12 @@ console.log("MyReperage.initMyReperage - this.myReperage.load() ??");
 console.log("MyReperage.showMyReperageGrid");
 		this.initMyReperage(); //initialise le DataStore et recupere les data mais ne met pas a jour le grid
 		if(!this.myReperageGrid) { //si la grid n'exite pas on la crée
-			this.initMyReperageGrid(); // atention la BBAR de la grid garde l'ancien Store ???
+			this.initMyReperageGrid(); // atention la BBAR de la grid garde le premier username !!!
 		} else if (!(this.myReperageGrid instanceof Ext.Window)) {
 			this.addOutput(this.myReperageGrid);
 		}
+console.log("Reload");
+		this.myReperage.reload();
 		this.myReperageGrid.show();
 	},
 	
@@ -514,7 +521,13 @@ console.log("MyReperage.showMyReperageGrid");
 	 */
 	initMyReperageGrid: function() {
 console.log("MyReperage.initMyReperageGrid");
-		var myReperageGridPanel = new Ext.grid.GridPanel({
+
+		var lang = ((GeoExt.Lang.locale == "fr")||(GeoExt.Lang.locale == "fr-be")||(GeoExt.Lang.locale == "fr-BE")||(GeoExt.Lang.locale == "fr-fr"))?"FR":"FR";
+		lang = ((GeoExt.Lang.locale == "nl")||(GeoExt.Lang.locale == "nl-be")||(GeoExt.Lang.locale == "nl-BE")||(GeoExt.Lang.locale == "nl-nl"))?"NL":lang;
+		//lang = ((GeoExt.Lang.locale == "en")||(GeoExt.Lang.locale == "en-gb")||(GeoExt.Lang.locale == "en-us")||(GeoExt.Lang.locale == "en-US")||(GeoExt.Lang.locale == "en-en"))?"EN":lang;
+
+		
+		this.myReperageGridPanel = new Ext.grid.GridPanel({
 			id: "myReperageGridPanel",
 			store: this.myReperage,
 			autoScroll: true,
@@ -593,8 +606,9 @@ console.log("MyReperage.initMyReperageGrid");
 							var rec = grid.getStore().getAt(rowIndex);
 							if(rec.get('state') == "DONE"){
 								//TODO: Utilise des url corecte
-								//window.open("/WebReperage/detail?id="+rec.get('id'),'Docx');
-								window.open("http://www.google.be",'google');
+								var u = localStorage.getItem("repuser");
+								window.open("/WebReperage/res/reperage/"+rec.get('id')+".doc?lang="+lang+"&users="+u);
+								//window.open("http://perdu.com/",'perdu');
 							}
 						},
 						getClass: function(v, meta, rec) {  // Or return a class from a function
@@ -620,7 +634,7 @@ console.log("MyReperage.initMyReperageGrid");
 							if(rec.get('state') == "DONE"){
 								//TODO: Utilise des url corecte
 								//window.open("/WebReperage/detail?id="+rec.get('id'),'PDF');
-								window.open("http://www.google.be",'google');
+								window.open("http://perdu.com/",'perdu');
 							}
 						},
 						getClass: function(v, meta, rec) {  // Or return a class from a function
@@ -649,7 +663,7 @@ console.log("MyReperage.initMyReperageGrid");
 			region: "center",
 			layout: "fit",
 			//height: 'auto',
-			items: [myReperageGridPanel]
+			items: [this.myReperageGridPanel]
 		};
 		
 		var Cls = this.outputTarget ? Ext.Panel : Ext.Window;
@@ -666,7 +680,7 @@ console.log("MyReperage.initMyReperageGrid");
 			modal: true,
 			listeners: { 
 				hide: function(win) {
-					myReperageGridPanel.getSelectionModel().clearSelections();
+					this.myReperageGridPanel.getSelectionModel().clearSelections();
 				},
 				scope: this
 			}
@@ -675,6 +689,15 @@ console.log("MyReperage.initMyReperageGrid");
 		if (Cls === Ext.Panel) {
 			this.addOutput(this.myReperageGrid);
 		}
+		
+		var task = {
+			run: function(){
+console.log("AutoReload");
+				//this.myReperage.reload();
+			},
+			interval: 10000 //10 second
+		}
+		Ext.TaskMgr.start(task);
 	},
 	//////////////////////////////////////Raphael créeation reperagegrid + init /// Fin
 	
