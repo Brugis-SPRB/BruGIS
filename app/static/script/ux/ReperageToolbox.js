@@ -94,7 +94,6 @@ ux.plugins.ReperageToolbox = Ext.extend(gxp.plugins.Tool, {
 	/** private: method[constructor]
 	 */
 	constructor: function(config) {
-console.log("ReperageToolbox.constructor");
 		this.checkLocalStorage();
 		ux.plugins.MyReperage.superclass.constructor.apply(this, arguments);
 	},
@@ -102,13 +101,11 @@ console.log("ReperageToolbox.constructor");
 	/** private: method[destroy]
 	 */
 	destroy: function() {
-console.log("ReperageToolbox.destroy");
 		this.button = null;
 		gxp.plugins.MyReperage.superclass.destroy.apply(this, arguments);
 	},
 	
 	init: function(target) {
-console.log("ReperageToolbox.init");
 		this.id = "toolboxReperage";
 		
 		if (this.validLocalStorage)
@@ -223,7 +220,6 @@ console.log("ReperageToolbox.init");
 			toggleGroup: toggleGroup,
 			scope: this,
 			toggleHandler: function(btn,state){
-console.log("drawReperageAreaButton.toggleHandler()");
 				if (state) {
 					this.parcelLayer.setVisibility(true);
 					this.copyParcelControl.activate();
@@ -313,15 +309,10 @@ console.log("drawReperageAreaButton.toggleHandler()");
 					this.reperageFormPanel.getForm().submit({
 						success: function(form, action) {
 							Ext.Msg.alert('Success', action.result.msg);
-console.log("success");
 							if(action.result.usr !== undefined && action.result.usr != ''){
-console.log("ok usr = " + action.result.usr);
 								localStorage.setItem("repuser",action.result.usr);
-console.log("aaa   "  +this.username);
 								this.username = action.result.usr;
-console.log("bbb   "  +this.username);
-							} else 
-console.log("no usr");
+							}
 							Ext.getCmp('valuereperageRefDossText').reset();
 							Ext.getCmp('valuereperageAdrText').reset();
 							this.clearReperageLayer();
@@ -381,7 +372,6 @@ console.log("no usr");
 		this.parcelLayer = parcelLayer;
 		
 		this.showReperageButton = showReperageButton;
-console.log("ReperageToolbox.init end");
 		return ux.plugins.ReperageToolbox.superclass.init.apply(this, arguments);
 	},
 	
@@ -401,7 +391,6 @@ console.log("ReperageToolbox.init end");
 	/** api: method[addActions]
 	 */
 	addActions: function() {
-console.log("ReperageToolbox.addActions");
 
 		var menuReperageTool = new Ext.menu.Menu({
 			id: 'reperageMenu',
@@ -459,7 +448,6 @@ console.log("ReperageToolbox.addActions");
 	/** api: method[initMyReperage]
 	 */
 	initMyReperage: function() {
-console.log("MyReperage.initMyReperage");
 		if (this.validLocalStorage) {
 			if (localStorage.getItem("repuser") !== null && localStorage.getItem("repuser") != 'noname' && localStorage.getItem("repuser") != '') {
 				this.username = localStorage.getItem("repuser");
@@ -495,7 +483,6 @@ console.log("MyReperage.initMyReperage");
 			this.myReperage.setDefaultSort('startdate', 'desc');
 			this.myReperage.setBaseParam('users', this.username);
 			this.myReperage.load({params:{start:0, limit:this.nbresultbypage}});
-console.log("MyReperage.initMyReperage - this.myReperage.load() ??");
 		}
 	},
 	
@@ -503,16 +490,14 @@ console.log("MyReperage.initMyReperage - this.myReperage.load() ??");
 	 * Shows the window with a MyReperage grid.
 	 */
 	showMyReperageGrid: function() {
-console.log("MyReperage.showMyReperageGrid");
 		this.initMyReperage(); //initialise le DataStore et recupere les data mais ne met pas a jour le grid
 		if(!this.myReperageGrid) { //si la grid n'exite pas on la crée
 			this.initMyReperageGrid(); // atention la BBAR de la grid garde le premier username !!!
 		} else if (!(this.myReperageGrid instanceof Ext.Window)) {
 			this.addOutput(this.myReperageGrid);
 		}
-console.log("Reload");
-		this.myReperage.reload();
 		this.myReperageGrid.show();
+		this.myReperageGridPanel.getStore().reload();
 	},
 	
 	/**
@@ -520,7 +505,6 @@ console.log("Reload");
 	 * Constructs a window with a MyReperage grid.
 	 */
 	initMyReperageGrid: function() {
-console.log("MyReperage.initMyReperageGrid");
 
 		var lang = ((GeoExt.Lang.locale == "fr")||(GeoExt.Lang.locale == "fr-be")||(GeoExt.Lang.locale == "fr-BE")||(GeoExt.Lang.locale == "fr-fr"))?"FR":"FR";
 		lang = ((GeoExt.Lang.locale == "nl")||(GeoExt.Lang.locale == "nl-be")||(GeoExt.Lang.locale == "nl-BE")||(GeoExt.Lang.locale == "nl-nl"))?"NL":lang;
@@ -689,10 +673,10 @@ console.log("MyReperage.initMyReperageGrid");
 		
 		var task = {
 			run: function(){
-console.log("AutoReload");
-				//this.myReperage.reload();
+				this.myReperageGridPanel.getStore().reload();
 			},
-			interval: 10000 //10 second
+			interval: 10000, //10 second
+			scope: this
 		}
 		Ext.TaskMgr.start(task);
 	},
@@ -701,7 +685,6 @@ console.log("AutoReload");
 	
 	//Ajoute le(s) layer(s) au panel
 	raiseLayers: function() {
-console.log("ReperageToolbox.raiseLayers");
 		var map = this.target.mapPanel.map;
 
 		map.setLayerIndex(this.parcelLayer, 98);
@@ -710,13 +693,11 @@ console.log("ReperageToolbox.raiseLayers");
 	
 	//suprime les polygones du reperage
 	clearReperageLayer: function() {
-console.log("ReperageToolbox.clearReperageLayer");
 		this.reperageLayer.removeAllFeatures();	
 	},
 	
 	//affiche le formulaire d'envois de reperage
 	showReperageForm: function() {
-console.log("ReperageToolbox.showReperageForm");
 		this.showReperageFormDlg.show();
 		
 		//Get the adress if any
@@ -738,7 +719,6 @@ console.log("ReperageToolbox.showReperageForm");
 	},
 	
 	serializeReperageArea: function() {
-console.log("ReperageToolbox.serializeReperageArea");
 		var resultGeom = null;
 		var wtkResult = null;
 		
@@ -770,7 +750,6 @@ console.log("ReperageToolbox.serializeReperageArea");
 	},
 	
 	addFeatureToReperageLayer: function(evt) {
-console.log("ReperageToolbox.addFeatureToReperageLayer");
 		if (evt.features && evt.features.length) {
 			this.reperageLayer.addFeatures(evt.features);
 		} else {
@@ -779,7 +758,6 @@ console.log("ReperageToolbox.addFeatureToReperageLayer");
 	},
 	
 	removeFeatureToReperageLayer: function(evt){
-console.log("ReperageToolbox.removeFeatureToReperageLayer");
 		if (evt.feature) {
 			this.reperageLayer.removeFeatures([evt.feature]);
 		} else {
