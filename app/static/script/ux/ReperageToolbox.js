@@ -64,7 +64,7 @@ ux.plugins.ReperageToolbox = Ext.extend(gxp.plugins.Tool, {
 	//UUID
 	username: 'noname',
 	
-	nbresultbypage: 25,
+	nbresultbypage: 15,
 	
 	/** api: config[reperageDrawingLayerName]
 	 *  ``String``
@@ -605,10 +605,8 @@ console.log("MyReperage.initMyReperageGrid");
 						handler: function(grid, rowIndex, colIndex) {
 							var rec = grid.getStore().getAt(rowIndex);
 							if(rec.get('state') == "DONE"){
-								//TODO: Utilise des url corecte
 								var u = localStorage.getItem("repuser");
 								window.open("/WebReperage/res/reperage/"+rec.get('id')+".doc?lang="+lang+"&users="+u);
-								//window.open("http://perdu.com/",'perdu');
 							}
 						},
 						getClass: function(v, meta, rec) {  // Or return a class from a function
@@ -632,9 +630,8 @@ console.log("MyReperage.initMyReperageGrid");
 						handler: function(grid, rowIndex, colIndex) {
 							var rec = grid.getStore().getAt(rowIndex);
 							if(rec.get('state') == "DONE"){
-								//TODO: Utilise des url corecte
-								//window.open("/WebReperage/detail?id="+rec.get('id'),'PDF');
-								window.open("http://perdu.com/",'perdu');
+								var u = localStorage.getItem("repuser");
+								window.open("/WebReperage/res/reperage/"+rec.get('id')+".pdf?lang="+lang+"&users="+u);
 							}
 						},
 						getClass: function(v, meta, rec) {  // Or return a class from a function
