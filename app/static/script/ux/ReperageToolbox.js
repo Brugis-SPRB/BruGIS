@@ -490,9 +490,9 @@ ux.plugins.ReperageToolbox = Ext.extend(gxp.plugins.Tool, {
 	 * Shows the window with a MyReperage grid.
 	 */
 	showMyReperageGrid: function() {
-		this.initMyReperage(); //initialise le DataStore et recupere les data mais ne met pas a jour le grid
-		if(!this.myReperageGrid) { //si la grid n'exite pas on la crée
-			this.initMyReperageGrid(); // atention la BBAR de la grid garde le premier username !!!
+		this.initMyReperage();
+		if(!this.myReperageGrid) {
+			this.initMyReperageGrid();
 		} else if (!(this.myReperageGrid instanceof Ext.Window)) {
 			this.addOutput(this.myReperageGrid);
 		}
