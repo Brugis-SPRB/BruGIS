@@ -196,8 +196,6 @@ ux.plugins.WMSGetFeatureInfo = Ext.extend(gxp.plugins.Tool, {
                         "Point": {
                             pointRadius: 5,
                             graphicName: "cross",
-                            //fillColor: "white",
-                            //fillOpacity: 1,
                             strokeWidth: 1,
                             strokeOpacity: 1,
                             strokeColor: "#FF0000"
@@ -232,12 +230,14 @@ ux.plugins.WMSGetFeatureInfo = Ext.extend(gxp.plugins.Tool, {
 		vectorLayer.removeAllFeatures();
 		vectorLayer.addFeatures([feature]);
 	},
+	
 	cleanHighlighting : function() {
 		var resLayers = this.target.mapPanel.map.getLayersByName("wmsgfihigh");
 		if(resLayers.length != 0 ) {
 			resLayers[0].removeAllFeatures();
 		} 
 	},
+	
 	removeHighlightLayer : function() {
 		var resLayers = this.target.mapPanel.map.getLayersByName("wmsgfihigh");
 		if(resLayers.length != 0 ) {
@@ -305,7 +305,6 @@ ux.plugins.WMSGetFeatureInfo = Ext.extend(gxp.plugins.Tool, {
         var features = evt.features, config = [];
         if (!text && features) {
             var feature;
-		
             for (var i=0,ii=features.length; i<ii; ++i) {
                 feature = features[i];
 				var new_attributes = {};

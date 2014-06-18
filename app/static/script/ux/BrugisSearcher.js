@@ -32,6 +32,7 @@ ux.plugins.BrugisSearcher = Ext.extend(gxp.plugins.Tool, {
 	zoom : 9,
 	zoomToPolNum: 12,
 	searchLayerName: "search",
+	cadSearchTipText: "enter here the CAPAKEY searched",
 
     /** api: config[updateField]
      *  ``String``
@@ -79,7 +80,7 @@ ux.plugins.BrugisSearcher = Ext.extend(gxp.plugins.Tool, {
 		var cadTextField = new Ext.form.TextField({
 			hidden : true,
 			width: 300,
-			emptyText: 'CAPAKEY : 21562A0329/00X010',
+			emptyText: this.cadSearchTipText,
 			listeners: {
 				scope:this,
 				'render': function(c) {
@@ -177,11 +178,20 @@ ux.plugins.BrugisSearcher = Ext.extend(gxp.plugins.Tool, {
      */
     onComboSelect: function(combo, record) {
         if (this.updateField) {
-            var map = this.target.mapPanel.map;
+            var map 	= this.target.mapPanel.map;
 			var dest    = new Proj4js.Proj('EPSG:31370');			
 			var myPoint = record.data.point;
 			var adnc 	= record.data.adNc;
 			var extent 	= record.json.extent;
+			var date	= new Date();
+			
+			// support pour paramètre de nombre de recherche (une seule ou plusieurs)
+			var uniqueSearch = 
+			(localStorage.getItem("searchN") && localStorage.getItem("searchN") == '1')?true:
+			(localStorage.getItem("searchN") && localStorage.getItem("searchN") == '0')?false:false;
+			if (uniqueSearch && map.getLayersByName(this.searchLayerName).length > 0){
+				map.removeLayer(map.getLayersByName(this.searchLayerName)[0]);
+			}			
 			
 			if(map.getLayersByName(this.searchLayerName).length > 0){
 				var vectorLayer = map.getLayersByName(this.searchLayerName)[0];

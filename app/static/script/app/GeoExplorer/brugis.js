@@ -152,17 +152,10 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
                 controlOptions: {immediate: true,
 								 outputTarget: "bbar_measure"},
                 actionTarget: {target: "paneltbar", index: 11}
-            }, /*{
-                ptype: "gxp_zoom",
-				//showZoomBoxAction: true,
-                actionTarget: {target: "paneltbar", index: 12}
-             }, */{
+            }, {
                 ptype: "gxp_navigationhistory",
                 actionTarget: {target: "paneltbar", index: 12}
-            }, /*{
-                ptype: "gxp_zoomtoextent",
-                actionTarget: {target: "paneltbar", index: 15}
-            }, */{
+            }, {
                 ptype: "ux_geolocator",
 				controlOptions: {id: "geolocatecontrol",
 								 bind: false,
@@ -170,6 +163,10 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
 								 geolocationOptions: {enableHighAccuracy: true, maximumAge: 0, timeout: 7000}},
                 actionTarget: {target: "paneltbar", index: 14}
             }, {
+				ptype: "ux_preferences",
+				id: "preferencesmanager",
+				actionTarget: {target: "paneltbar", index: 19}
+			}, {
 				ptype: "ux_wmstreelegend",
 				id: "wmsTreeLegendManager",
 				outputTarget: "treeTab",
@@ -212,9 +209,7 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
 			}
         ];
         delete config.apiKeys;
-        
         GeoExplorer.Composer.superclass.constructor.apply(this, arguments);
-		
     },
 
     /** api: method[destroy]
@@ -238,7 +233,6 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
                 success: function(request) {
                     var addConfig = Ext.util.JSON.decode(request.responseText);
                     // Don't use persisted tool configurations from old maps
-					// Aurions-nous le même souçaï ici?
 					this.originalSourcesUrl = config.sources["BruGIS WMS - Geoserver"].url;
                     delete addConfig.tools;
                     this.applyConfig(Ext.applyIf(addConfig, config));
@@ -332,16 +326,19 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
 	/** private: method[saveMapStateOnExit]
 	 *	DocG - 2013/11/21
 	 *  DocG - 2014/01/17
+	 *  DocG - 2014/06/17 - preferences for session remanence added
 	 *	reset mode added.
 	 */
 	saveMapStateOnExit: function() {
 		var configStr = Ext.util.JSON.encode(this.app.getState());
-		//var configStr = Ext.util.JSON.encode(this.getState());
 		configStr = configStr.replace("/geoserver/www/wmsaatl/geoweb_brugis.xml", "/geoserver/gwc/service/wms");
 		configStr = configStr.replace("/geoserver/www/wmsaatl/wmsc_brugis.xml", "/geoserver/ows");
 		if (localStorage) {
-			if(localStorage.getItem("DEV") == 'Y') {
-				console.log("DEV mode");
+			if(localStorage.getItem("session") && localStorage.getItem("session") == '1') {
+				// removing any currentMapState
+				if (localStorage.getItem('currentMapState')) {
+						localStorage.removeItem('currentMapState');
+					}
 			} else {
 				if (localStorage.getItem("reset") && localStorage.getItem("reset") == 'True') {
 					// removing any currentMapState
@@ -550,9 +547,15 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
     
     initPortal: function() {
 		/* DocG - 2013/11/21
+		* DocG - 2014/06/17 - param from localStorage for active panel by default
 		*
 		*/
 		window.onbeforeunload = this.saveMapStateOnExit;
+		var westPanelActiveTab = 
+			(localStorage.getItem("defPanl") && localStorage.getItem("defPanl") == '0')?
+				1:
+			(localStorage.getItem("defPanl") && localStorage.getItem("defPanl") == '1')?
+				0:1;
         var westPanel = new Ext.Panel({
 			id: "west",
 			region: "west",
@@ -579,7 +582,7 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
 			{
 				id: "west2",
 				xtype: "tabpanel",
-				activeTab: 1,
+				activeTab: westPanelActiveTab,
 				flex:1,
 				deferredRender:false,
 				items : [{

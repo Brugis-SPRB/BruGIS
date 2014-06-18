@@ -120,7 +120,8 @@ ux.gfi.fr = {
 				{ "name": "Référence NOVA"			, "label" : "[REFNOVA]"			, "type": "string"},
 				{ "name": "Référence SITEX"			, "label" : "[REFSITEX]"		, "type": "string"},
 				{ "name": "Référence cadastrale"	, "label" : "[NUMCADAST]"		, "type": "string"},
-				{ "name": "ID"						, "label" : "[ID]"				, "type": "string"}
+				{ "name": "ID"						, "label" : "[ID]"				, "type": "string"},
+				{ "name": "Etat final"				, "label" : "[ETATFINAL]"		, "type": "string"}
 			]
 		},
 		"AATL:Patrimoine": {

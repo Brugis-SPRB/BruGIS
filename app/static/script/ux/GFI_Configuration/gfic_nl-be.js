@@ -1,7 +1,7 @@
 ﻿
 Ext.namespace("ux.gfi");
 
-ux.gfi["nl-be"] =  {
+ux.gfi.nl =  {
 		"BROH:Bestemmingen" : {
 			"actiontype" : "GRID",
 			"title"      : "[NAME_NL]",
@@ -55,13 +55,12 @@ ux.gfi["nl-be"] =  {
 				{ "name": "Hoogte"				, "label" : "[hauteur] m"			, "type" : "string"},
 				{ "name": "Diameter van de top"	, "label" : "[diametre_cime] m"		, "type" : "string"},
 				{ "name": "Soort plaats"		, "label" : "[emplacement]"			, "type" : "string"},
-				//{ "name": "statusId"			, "label" : "[status]"				, "type" : "string"},
 				{ "name": "Statuut"				, "label" : "[Legendenl]"			, "type" : "string"}
 			]
 		},
 		"DMS_INV_ARBR:Arbres_remarquables_rarete": {
 			"actiontype" : "GRID",
-			"title"		 : "[tax_nl]",
+			"title"		 : "[tax_nl]: [rarete]",
 			"attributes" : [
 				{ "name": "Identificatie"			, "label" : "[id]"					, "type" : "string"},
 				{ "name": "Latijn taxon"			, "label" : "[tax_la]"				, "type" : "string"},
@@ -76,8 +75,45 @@ ux.gfi["nl-be"] =  {
 				{ "name": "Indeling van maten"		, "label" : "[ClassementTailles]"	, "type" : "string"}
 			]
 		},
+		"BROH:Wijkcontract": {
+			"actiontype" : "GRID",
+			"title"		 : "Wijkcontract: [WIJKNAAM]",
+			"attributes" : [
+				{ "name": "Naam"								, "label" : "[WIJKNAAM]"					, "type": "string"},
+				{ "name": "Gemeente"							, "label" : "[GEMEENTE]"					, "type": "string"},
+				{ "name": "Date d'arrêté du gouvernement"		, "label" : "[ARRET_GVT]"				, "type": "string"},
+				{ "name": "Date de notification à la commune"	, "label" : "[NOTIF_COMM]"				, "type": "string"},
+				{ "name": "End datum"							, "label" : "[END_DATUM]"				, "type": "string"},
+				{ "name": "Actief"								, "label" : "['Nee','Ja'][[STATUT]]"	, "type": "eval"},
+				{ "name": "Bureau d'étude"						, "label" : "[NOM_BE]"					, "type": "string"},
+				{ "name": "Bureau d'étude (responsable)"		, "label" : "[RESP_BE]"					, "type": "string"},
+				{ "name": "Reeks"								, "label" : "[REEKS]"					, "type": "string"},
+				{ "name": "Gestionnaire"						, "label" : "[GESTION]"					, "type": "string"},
+				{ "name": "Contact"								, "label" : "[TEL_BE]"					, "type": "string"},
+				{ "name": "Subside régional"					, "label" : "[SUBS_REG]"				, "type": "string"},
+				{ "name": "Référence comptable"					, "label" : "[REFERENCE]"				, "type": "string"},
+				{ "name": "ID"									, "label" : "[ID]"						, "type": "string"}
+			]
+		},
+		"BROH:Verkavelingen": {
+			"actiontype" : "GRID",
+			"title"		 : "[OBJET]",
+			"attributes" : [
+				{ "name": "Naam"					, "label" : "[OBJET]"			, "type": "string"},
+				{ "name": "Adres"					, "label" : "[ADRES]"			, "type": "string"},
+				{ "name": "Aanvrager"				, "label" : "[AANVRAGER]"		, "type": "string"},
+				{ "name": "Datum betek"				, "label" : "[DATUMBETEK]"		, "type": "string"},
+				{ "name": "Staat"					, "label" : "[VERGAFGELEVERD]"	, "type": "string"},
+				{ "name": "NOVA referencie"			, "label" : "[REFNOVA]"			, "type": "string"},
+				{ "name": "SITEX referencie"		, "label" : "[REFSITEX]"		, "type": "string"},
+				{ "name": "Kadaster nummer"			, "label" : "[KADNUMMER]"		, "type": "string"},
+				{ "name": "ID"						, "label" : "[ID]"				, "type": "string"},
+				{ "name": "Eindtoestand"			, "label" : "[EINDTOESTAND]"	, "type": "string"}
+			]
+		},
 		"BROH:Patrimonium": {
 			"actiontype" : "GRID",
+			"title"      : "[ML]: [BESCHRIJVING]",
 			"attributes" : [
 				{ "name": "Beschrijving"	, "label" : "[BESCHRIJVING]"	, "type" : "string"},
 				{ "name": "Gemeente"		, "label" : "[GEMEENTE]"		, "type" : "string"},
@@ -86,8 +122,25 @@ ux.gfi["nl-be"] =  {
 				{ "name": "Mon./Land./Geh."	, "label" : "[ML]"				, "type" : "string"},
 				{ "name": "Besch./Bewaar."	, "label" : "[CLBL]"			, "type" : "string"},
 				{ "name": "Datum DB"		, "label" : "[AD]"				, "type" : "string"},
-				{ "name": "Dossier N°"		, "label" : "[DMSFOLDERNR]"		, "type" : "string"},
-				{ "name": "Commentaar"		, "label" : "[COMMENTAIRE]"		, "type" : "string"},
+				{ "name": "Folder nummer"	, "label" : "[DMSFOLDERNR]"		, "type" : "string"},
+				{ "name": "Commentaar"		, "label" : "[COMMENTAAR]"		, "type" : "string"},
+				{ "name": "EXTPROT"			, "label" : "[EXTPROT]"			, "type" : "string"},
+				{ "name": "NB"				, "label" : "[NB]"				, "type" : "string"}
+			]
+		},
+		"BROH:Vrijwaringzone": {
+			"actiontype" : "GRID",
+			"title"      : "[ML] in [CLBL]: [Beschrijving]",
+			"attributes" : [
+				{ "name": "Beschrijving"	, "label" : "[Beschrijving]"	, "type" : "string"},
+				{ "name": "Gemeente"		, "label" : "[GEMEENTE]"		, "type" : "string"},
+				{ "name": "Adres"			, "label" : "[ADRES]"			, "type" : "string"},
+				{ "name": "Policie nummer"	, "label" : "[NRPOLICE]"		, "type" : "string"},
+				{ "name": "Mon./Site/Ens."	, "label" : "[ML]"				, "type" : "string"},
+				{ "name": "Class./Sauv."	, "label" : "[CLBL]"			, "type" : "string"},
+				{ "name": "AD datum"		, "label" : "[AD]"				, "type" : "string"},
+				{ "name": "Folder nummer"	, "label" : "[DMSFOLDERNR]"		, "type" : "string"},
+				{ "name": "Commentaar"		, "label" : "[COMMENTAAR]"		, "type" : "string"},
 				{ "name": "EXTPROT"			, "label" : "[EXTPROT]"			, "type" : "string"},
 				{ "name": "NB"				, "label" : "[NB]"				, "type" : "string"}
 			]
@@ -121,7 +174,74 @@ ux.gfi["nl-be"] =  {
 		"BROH:Perceel_2013": {
 			"actiontype" : "GRID",
 			"title"      : "Perceel 2013: [CAPAKEY]",
-			"attributes" : []
+			"attributes" : [
+				{ "name": "APNC_MAPC"			, "label" : "[APNC_MAPC]"	, "type" : "string"},
+				{ "name": "APNC_CADC"			, "label" : "[APNC_CADC]"	, "type" : "string"},
+				{ "name": "CAPAKEY"				, "label" : "[CAPAKEY]"		, "type" : "string"},
+				{ "name": "SHNC_FILE"			, "label" : "[SHNC_FILE]"	, "type" : "string"},
+				{ "name": "SHEET"				, "label" : "[SHEET]"		, "type" : "string"},
+				{ "name": "CDNC"				, "label" : "[CDNC]"		, "type" : "string"},
+				{ "name": "CD5C"				, "label" : "[CD5C]"		, "type" : "string"},
+				{ "name": "CSNC"				, "label" : "[CSNC]"		, "type" : "string"},
+				{ "name": "MUNC"				, "label" : "[MUNC]"		, "type" : "string"},
+				{ "name": "SHNC"				, "label" : "[SHNC]"		, "type" : "string"},
+				{ "name": "APNC_CAD"			, "label" : "[APNC_CAD]"	, "type" : "string"},
+				{ "name": "APNC_MAP"			, "label" : "[APNC_MAP]"	, "type" : "string"},
+				{ "name": "RAD_NUM"				, "label" : "[RAD_NUM]"		, "type" : "string"},
+				{ "name": "EXP_ALPHA"			, "label" : "[EXP_ALPHA]"	, "type" : "string"},
+				{ "name": "EXP_NUM"				, "label" : "[EXP_NUM]"		, "type" : "string"},
+				{ "name": "CAPATY"				, "label" : "[CAPATY]"		, "type" : "string"},
+				{ "name": "ID"					, "label" : "[ID]"			, "type" : "string"},
+				{ "name": "SHAPE_AREA_IN_DB"	, "label" : "[SHAPE_AREA]"	, "type" : "string"}
+			]
+		},
+		"BROH:Perceel_2012": {
+			"actiontype" : "GRID",
+			"title"      : "Perceel 2012: [CAPAKEY]",
+			"attributes" : [
+				{ "name": "APNC_MAPC"			, "label" : "[APNC_MAPC]"	, "type" : "string"},
+				{ "name": "APNC_CADC"			, "label" : "[APNC_CADC]"	, "type" : "string"},
+				{ "name": "CAPAKEY"				, "label" : "[CAPAKEY]"		, "type" : "string"},
+				{ "name": "SHNC_FILE"			, "label" : "[SHNC_FILE]"	, "type" : "string"},
+				{ "name": "SHEET"				, "label" : "[SHEET]"		, "type" : "string"},
+				{ "name": "CDNC"				, "label" : "[CDNC]"		, "type" : "string"},
+				{ "name": "CD5C"				, "label" : "[CD5C]"		, "type" : "string"},
+				{ "name": "CSNC"				, "label" : "[CSNC]"		, "type" : "string"},
+				{ "name": "MUNC"				, "label" : "[MUNC]"		, "type" : "string"},
+				{ "name": "SHNC"				, "label" : "[SHNC]"		, "type" : "string"},
+				{ "name": "APNC_CAD"			, "label" : "[APNC_CAD]"	, "type" : "string"},
+				{ "name": "APNC_MAP"			, "label" : "[APNC_MAP]"	, "type" : "string"},
+				{ "name": "RAD_NUM"				, "label" : "[RAD_NUM]"		, "type" : "string"},
+				{ "name": "EXP_ALPHA"			, "label" : "[EXP_ALPHA]"	, "type" : "string"},
+				{ "name": "EXP_NUM"				, "label" : "[EXP_NUM]"		, "type" : "string"},
+				{ "name": "CAPATY"				, "label" : "[CAPATY]"		, "type" : "string"},
+				{ "name": "ID"					, "label" : "[ID]"			, "type" : "string"},
+				{ "name": "SHAPE_AREA_IN_DB"	, "label" : "[SHAPE_AREA]"	, "type" : "string"}
+			]
+		},
+		"BROH:Perceel_2011": {
+			"actiontype" : "GRID",
+			"title"      : "Perceel 2011: [CAPAKEY]",
+			"attributes" : [
+				{ "name": "APNC_MAPC"			, "label" : "[APNC_MAPC]"	, "type" : "string"},
+				{ "name": "APNC_CADC"			, "label" : "[APNC_CADC]"	, "type" : "string"},
+				{ "name": "CAPAKEY"				, "label" : "[CAPAKEY]"		, "type" : "string"},
+				{ "name": "SHNC_FILE"			, "label" : "[SHNC_FILE]"	, "type" : "string"},
+				{ "name": "SHEET"				, "label" : "[SHEET]"		, "type" : "string"},
+				{ "name": "CDNC"				, "label" : "[CDNC]"		, "type" : "string"},
+				{ "name": "CD5C"				, "label" : "[CD5C]"		, "type" : "string"},
+				{ "name": "CSNC"				, "label" : "[CSNC]"		, "type" : "string"},
+				{ "name": "MUNC"				, "label" : "[MUNC]"		, "type" : "string"},
+				{ "name": "SHNC"				, "label" : "[SHNC]"		, "type" : "string"},
+				{ "name": "APNC_CAD"			, "label" : "[APNC_CAD]"	, "type" : "string"},
+				{ "name": "APNC_MAP"			, "label" : "[APNC_MAP]"	, "type" : "string"},
+				{ "name": "RAD_NUM"				, "label" : "[RAD_NUM]"		, "type" : "string"},
+				{ "name": "EXP_ALPHA"			, "label" : "[EXP_ALPHA]"	, "type" : "string"},
+				{ "name": "EXP_NUM"				, "label" : "[EXP_NUM]"		, "type" : "string"},
+				{ "name": "CAPATY"				, "label" : "[CAPATY]"		, "type" : "string"},
+				{ "name": "ID"					, "label" : "[ID]"			, "type" : "string"},
+				{ "name": "SHAPE_AREA_IN_DB"	, "label" : "[SHAPE_AREA]"	, "type" : "string"}
+			]
 		},
 		"BROH:Gemeentegrenzen": {
 			"actiontype" : "GRID",

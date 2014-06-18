@@ -1,7 +1,7 @@
 ﻿
 Ext.namespace("ux.gfi");
 
-ux.gfi["fr-be"] = {
+ux.gfi.fr = {
 		"AATL:Affectations" : {
 			"actiontype" : "GRID",
 			"title"		 : "Affectation: [NAME_FR]",
@@ -120,7 +120,8 @@ ux.gfi["fr-be"] = {
 				{ "name": "Référence NOVA"			, "label" : "[REFNOVA]"			, "type": "string"},
 				{ "name": "Référence SITEX"			, "label" : "[REFSITEX]"		, "type": "string"},
 				{ "name": "Référence cadastrale"	, "label" : "[NUMCADAST]"		, "type": "string"},
-				{ "name": "ID"						, "label" : "[ID]"				, "type": "string"}
+				{ "name": "ID"						, "label" : "[ID]"				, "type": "string"},
+				{ "name": "Etat final"				, "label" : "[ETATFINAL]"		, "type": "string"}
 			]
 		},
 		"AATL:Patrimoine": {

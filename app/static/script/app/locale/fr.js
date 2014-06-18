@@ -72,7 +72,25 @@ GeoExt.Lang.add("fr", {
 	},
 	
 	"ux.plugins.BrugisSearcher.prototype" : {
-		searchLayerName: "resultats de la recherche"
+		searchLayerName: "resultats de la recherche",
+		cadSearchTipText: "entrez ici le code CAPAKEY recherché"
+	},
+	
+	"ux.plugins.Preferences.prototype" : {
+	    preferencesTip: "Préférences",
+		preferencesText: "Préférences",
+		preferencesMenuText: "Préférences menu text",
+		availablePreferencesText: "Préférences",
+		ParametersText: "Préférences BruGIS",
+		sessionText: "Retenir la session",
+		keepSessionText: "Oui",
+		forgetSessionText: "Non",
+		dataLegendText: "Onglet par défaut",
+		dataPanelText: "Données",
+		legendPanelText: "Légende",
+		searchResultText: "Résultat de recherche",
+		multipleSearchText: "Multiple",
+		uniqueSearchText: "Unique"
 	},
 	
 	"ux.plugins.MyMaps.prototype": {

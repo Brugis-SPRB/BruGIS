@@ -91,6 +91,7 @@ ux.plugins.CirbGeocoder = Ext.extend(gxp.plugins.Tool, {
 			
 			//var p = new Proj4js.Point(myPoint.x, myPoint.y);
 			//Proj4js.transform(source, dest, p);
+
 			if(map.getLayersByName('Search').length > 0){
 				var vectorLayer = map.getLayersByName('Search')[0];
 				vectorLayer.addFeatures(
@@ -98,6 +99,7 @@ ux.plugins.CirbGeocoder = Ext.extend(gxp.plugins.Tool, {
 					new OpenLayers.Geometry.Point(myPoint.x, myPoint.y)
 					)
 				);
+				console.log("searchpoint added");
 			}
 			else{
 				var vectorLayer = new OpenLayers.Layer.Vector("Search");

@@ -97,6 +97,9 @@ body {
    background-image: url(img/silk/layers.png);
 }
 
+.x-btn .icon-preferences {
+   background-image: url(img/silk/cog.png);
+}
 .x-btn .icon-zoom-in { 
     background-image: url(img/silk/magnifier_zoom_in.png);
 }

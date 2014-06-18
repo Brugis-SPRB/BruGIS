@@ -68,7 +68,25 @@ GeoExt.Lang.add("nl", {
 	},
 	
 	"ux.plugins.BrugisSearcher.prototype" : {
-		searchLayerName: "resultaten van de opzoeking"
+		searchLayerName: "resultaten van de opzoeking",
+		cadSearchTipText: "vul hier de CAPAKEY"
+	},
+	
+	"ux.plugins.Preferences.prototype" : {
+		preferencesTip: "Opties",
+		preferencesText: "Opties tekst",
+		preferencesMenuText: "Opties menu text",
+		availablePreferencesText: "Opties",
+		ParametersText: "Opties BruGIS",
+		sessionText: "Sessie behouden",
+		keepSessionText: "Ja",
+		forgetSessionText: "Nee",
+		dataLegendText: "Tabblad",
+		dataPanelText: "Gegevens",
+		legendPanelText: "Legende",
+		searchResultText: "Opzoeking resultaat",
+		multipleSearchText: "Meervoudig",
+		uniqueSearchText: "Enkelvoudig"
 	},
 	
 	"ux.plugins.MyMaps.prototype": {

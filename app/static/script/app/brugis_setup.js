@@ -42,13 +42,13 @@
 */	
 		var localeHelp = 
 			(geoextLangFr)?
-				"<a href='http://urbanisme.irisnet.be/cartographie/brugis/brugis-r-fait-peau-neuve/mode-demploi-brugis'target= '_blank'>Click here</a>"
+				"<a href='http://www.developpement-urbain.irisnet.be/cartographie/brugis/mode-demploi'target= '_blank'>Click here</a>"
 				:
 			(geoextLangNl)?
-				"<a href='http://stedenbouw.irisnet.be/cartografie/brugis/gebruiksaanwijzing-brugis?set_language=nl'target= '_blank'>Click here</a>"
+				"<a href='http://stedelijke-ontwikkeling.irisnet.be/nl/cartografie/brugis-r/gebruiksaanwijzing-brugis?set_language=nl'target= '_blank'>Click here</a>"
 				:
 			(geoextLangEn)?
-				"<a href='http://urbanisme.irisnet.be/cartographie/brugis/brugis-r-fait-peau-neuve/mode-demploi-brugis'target= '_blank'>Click here</a>"
+				"<a href='http://www.developpement-urbain.irisnet.be/cartographie/brugis/mode-demploi'target= '_blank'>Click here</a>"
 				:
 				"";
 
@@ -162,12 +162,7 @@
 					url: "http://gis.irisnet.be/geoserver/stib_mivb/wms?",
 					version: "1.3.0",
 					ptype: "gxp_wmssource"
-				}/*,
-				"CIRB/CIBG WMS for SPRB - Geoserver": {
-					url: "http://svappmavw019:8080/geoserver/www/wmsaatl/wms_1_3_0_capabilities_sprb_fre.xml",
-					version: "1.1.1",
-					ptype: "gxp_wmscsource"
-				}*/
+				}
 			};
 			
 		var sourcesPrd = {
@@ -198,7 +193,7 @@
             proxy: "../proxy/?url=",
             printService: "/geoserver/pdf/",
             about: {
-                title: "MyBruGIS v 1.1 Zamponi",
+                title: "MyBruGIS v 1.1 Clementi",
                 "abstract": abstractText,
 				"help": localeHelp,
 		        contact: contactText

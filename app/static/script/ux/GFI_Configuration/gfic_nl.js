@@ -95,6 +95,22 @@ ux.gfi.nl =  {
 				{ "name": "ID"									, "label" : "[ID]"						, "type": "string"}
 			]
 		},
+		"BROH:Verkavelingen": {
+			"actiontype" : "GRID",
+			"title"		 : "[OBJET]",
+			"attributes" : [
+				{ "name": "Naam"					, "label" : "[OBJET]"			, "type": "string"},
+				{ "name": "Adres"					, "label" : "[ADRES]"			, "type": "string"},
+				{ "name": "Aanvrager"				, "label" : "[AANVRAGER]"		, "type": "string"},
+				{ "name": "Datum betek"				, "label" : "[DATUMBETEK]"		, "type": "string"},
+				{ "name": "Staat"					, "label" : "[VERGAFGELEVERD]"	, "type": "string"},
+				{ "name": "NOVA referencie"			, "label" : "[REFNOVA]"			, "type": "string"},
+				{ "name": "SITEX referencie"		, "label" : "[REFSITEX]"		, "type": "string"},
+				{ "name": "Kadaster nummer"			, "label" : "[KADNUMMER]"		, "type": "string"},
+				{ "name": "ID"						, "label" : "[ID]"				, "type": "string"},
+				{ "name": "Eindtoestand"			, "label" : "[EINDTOESTAND]"	, "type": "string"}
+			]
+		},
 		"BROH:Patrimonium": {
 			"actiontype" : "GRID",
 			"title"      : "[ML]: [BESCHRIJVING]",
