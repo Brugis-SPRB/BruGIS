@@ -16,7 +16,7 @@
     <property name="cargo.password" value=""/>
     <property name="cargo.context" value="${ant.project.name}"/>
 
-    <condition property="git" value="git.cmd" else="git">
+    <condition property="git" value="git" else="git">
         <os family="windows"/>
     </condition>
 

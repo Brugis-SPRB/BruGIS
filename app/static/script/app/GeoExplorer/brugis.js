@@ -206,6 +206,11 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
 				needsAuthorization: true,
 				actionTarget: ["layers.tbar", "layers.contextMenu"],
 				appendActions: false
+			}, { // TODO: A remplacé par un ext.menu.Menu (ReperageToolBox ??)
+				//ptype: "ux_myreperage",
+				ptype: "ux_ReperageToolbox",
+				id: "myReperageManager",
+				actionTarget: {target: "paneltbar", index: 15}
 			}
         ];
         delete config.apiKeys;
@@ -624,6 +629,9 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
 				this.layerSources["BruGIS WMS - Geoserver"].url = this.originalSourcesUrl;
 				this.layerSources["BruGIS WMS - Geoserver"].createStore();
 			}
+			
+			//Raph ajout des layers de reperage dans la liste
+			this.tools.toolboxReperage.raiseLayers();
 			
             // enable only those items that were not specifically disabled
             var disabled = this.toolbar.items.filterBy(function(item) {

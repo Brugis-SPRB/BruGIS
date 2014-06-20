@@ -132,6 +132,10 @@ body {
     background-image: url(img/geosilk/google_earth.png);
 }
 
+.x-btn .star {
+	background-image: url(img/silk/star.png);
+}
+
 /* Pan- and Zoom- Panel Styles*/
 
 .olControlPanPanel div {
