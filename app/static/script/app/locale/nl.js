@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Copyright (c) 2009-2010 The Open Planning Project
  */
 
@@ -52,7 +52,7 @@ GeoExt.Lang.add("nl", {
 		newBrugisTitle: "Nieuwe versie van BruGIS",
 		newBrugisMessagePart1: "De nieuwe versie van BruGIS is ",
 		newBrugisMessagePart2: ".\n Uw versie is ",
-		newBrugisMessagePart3: ".\n De kaart word opnieuw ge�nitializeerd.",
+		newBrugisMessagePart3: ".\n De kaart word opnieuw geïnitializeerd.",
 		wpsserver :"http://svappmavw019:8080/geoserver/wps",
 		//wpsserver :"http://mybrugis.irisnetlab.be/geoserver/wps",
 		//wpsserver :"http://www.mybrugis.irisnet.be/geoserver/wps",
@@ -87,6 +87,34 @@ GeoExt.Lang.add("nl", {
 		searchResultText: "Opzoeking resultaat",
 		multipleSearchText: "Meervoudig",
 		uniqueSearchText: "Enkelvoudig"
+	},
+	
+	"ux.plugins.ReperageToolbox.prototype" : {
+		showReperageGrid: "ShowReperageGrid",
+		drawReperageAreaToolTip: "oppervlak teken",
+		showReperageFormBtnToolTip: "Stedenanalysis vorm",
+		modifyReperageAreaToolTip: "oppervlak veranderen",
+		copyParcelFeatBtnToolTip : "kopie van een perceel oppervlak",
+		deleteOneFeatureBtnToolTip: "oppervlak verwijderen",
+		reperageButtonTip: "Stedenanalysis",
+		showReperageFormDlgTitle: "Stedenanalysis",
+		reperageTypeCombofieldLabel: "Stedenanalysis tijp",
+		reperageTypeComboemptyText: "Stedenanalysis tijp kies",
+		reperageRefDossTextfieldLabel: "Référence du dossier",
+		reperageAdrTextfieldLabel: "Adres",
+		myReperageTip: "Mijn stedenanalysis",
+		myReperageText: "Stedenanalysis",
+		myReperageMenuText: "Mijn stedenanalysis",
+		availableMyReperageText: "Mijn stedenanalysis",
+		myReperageGridPanel_docref_header: "Dossier",
+		myReperageGridPanel_adress_header: "Adres",
+		myReperageGridPanel_state_header: "Statut",
+		myReperageGridPanel_startdate_header: "Créé le :",
+		myReperageGridPanel_enddate_header: "Disponible jusqu'au :",
+		myReperageGridPanel_docx_tooltip: "Télécharger un Docx",
+		myReperageGridPanel_pdf_tooltip: "Télécharger un PDF",
+		myReperageGridPanel_bbar_displayMsg: "Stedenanalysis {0} - {1} of {2}",
+		myReperageGridPanel_bbar_emptyMsg: "Aucune urbanalyse"
 	},
 	
 	"ux.plugins.MyMaps.prototype": {

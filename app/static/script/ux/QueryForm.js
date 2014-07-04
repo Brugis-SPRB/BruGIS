@@ -131,7 +131,9 @@ ux.plugins.QueryForm = Ext.extend(gxp.plugins.Tool, {
                 menuText: this.queryMenuText,
                 iconCls: "gxp-icon-find",
                 tooltip: this.queryActionTip,
-                disabled: true
+                disabled: true,
+				//hidden: config.hidden,
+				id: "qrButton"
             }]
         });
         ux.plugins.QueryForm.superclass.constructor.apply(this, arguments);
@@ -150,6 +152,21 @@ ux.plugins.QueryForm = Ext.extend(gxp.plugins.Tool, {
 					} 
                 }
             }, this);
+			this.target.on("preferencesChange", function() {
+				for (var i=this.actions.length-1; i>=0; --i) {
+					var showButton = 
+						(localStorage.getItem("shwQrTl") && localStorage.getItem("shwQrTl") == '0')?
+						false:
+						(localStorage.getItem("shwQrTl") && localStorage.getItem("shwQrTl") == '1')?
+						true:
+						false;
+					if (showButton == true) {
+						this.actions[i].show();
+					} else {
+						this.actions[i].hide();
+					}
+                }
+			}, this);
         }
     },
 

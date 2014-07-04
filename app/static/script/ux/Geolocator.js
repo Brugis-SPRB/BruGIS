@@ -129,6 +129,7 @@ ux.plugins.Geolocator = Ext.extend(gxp.plugins.Tool, {
             enableToggle: true,
             pressed: false,
             allowDepress: true,
+			hidden: this.hidden,
             control: this.geolocateControl,
             map: this.target.mapPanel.map
 		})];
@@ -138,10 +139,29 @@ ux.plugins.Geolocator = Ext.extend(gxp.plugins.Tool, {
 		
 		actions[0].control.events.register("activate", this, this.onGeolocateCtrlActivate);
 		actions[0].control.events.register("deactivate", this, this.onGeolocateCtrlDeactivate);
+		
+		this.actions = actions;
+		
+		this.target.on("preferencesChange", function() {
+			for (var i=this.actions.length-1; i>=0; --i) {
+				var showButton = 
+					(localStorage.getItem("shwGlTl") && localStorage.getItem("shwGlTl") == '0')?
+					false:
+					(localStorage.getItem("shwGlTl") && localStorage.getItem("shwGlTl") == '1')?
+					true:
+					true;
+					
+				if (showButton == true) {
+					this.actions[i].show();
+				} else {
+					this.actions[i].hide();
+				}
+			}
+		}, this);
+
 	
         return ux.plugins.Geolocator.superclass.addActions.apply(this, [actions]);
     }
-	
 });
 
 Ext.preg('ux_geolocator', ux.plugins.Geolocator);

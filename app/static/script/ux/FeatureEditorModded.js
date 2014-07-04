@@ -669,6 +669,26 @@ gxp.plugins.FeatureEditor = Ext.extend(gxp.plugins.ClickableFeatures, {
             snappingAgent.registerEditor(this);
         }
 
+		this.actions = actions;
+		
+		this.target.on("preferencesChange", function() {
+			for (var i=this.actions.length-1; i>=0; --i) {
+				var showButton = 
+					(localStorage.getItem("shwDeTl") && localStorage.getItem("shwDeTl") == '0')?
+					false:
+					(localStorage.getItem("shwDeTl") && localStorage.getItem("shwDeTl") == '1')?
+					true:
+					false;
+					
+				if (showButton == true) {
+					this.actions[i].show();
+				} else {
+					this.actions[i].hide();
+				}
+			}
+		}, this);
+
+		
         return actions;
     },
 

@@ -93,6 +93,34 @@ GeoExt.Lang.add("fr", {
 		uniqueSearchText: "Unique"
 	},
 	
+	"ux.plugins.ReperageToolbox.prototype" : {
+		showReperageGrid: "ShowReperageGrid",
+		drawReperageAreaToolTip: "Dessiner une surface",
+		showReperageFormBtnToolTip: "Formulaire d'urbanalyse",
+		modifyReperageAreaToolTip: "Modifier le tracé",
+		copyParcelFeatBtnToolTip : "Copier un tracé de parcelle",
+		deleteOneFeatureBtnToolTip: "Effacer le tracé",
+		reperageButtonTip: "Outils d'urbanalyse",
+		showReperageFormDlgTitle: "Urbanalyse",
+		reperageTypeCombofieldLabel: "Type d'urbanalyse",
+		reperageTypeComboemptyText: "Choisir un type d'urbanalyse",
+		reperageRefDossTextfieldLabel: "Référence du dossier",
+		reperageAdrTextfieldLabel: "Addresse",
+		myReperageTip: "Mes urbanalyses",
+		myReperageText: "Urbanalyse",
+		myReperageMenuText: "Mes urbanalyses",
+		availableMyReperageText: "Mes urbanalyses",
+		myReperageGridPanel_docref_header: "Dossier",
+		myReperageGridPanel_adress_header: "Addresse",
+		myReperageGridPanel_state_header: "Statut",
+		myReperageGridPanel_startdate_header: "Créé le :",
+		myReperageGridPanel_enddate_header: "Disponible jusqu'au :",
+		myReperageGridPanel_docx_tooltip: "Télécharger un Docx",
+		myReperageGridPanel_pdf_tooltip: "Télécharger un PDF",
+		myReperageGridPanel_bbar_displayMsg: "Urbanalyse {0} - {1} of {2}",
+		myReperageGridPanel_bbar_emptyMsg: "Aucune urbanalyse"
+	},
+	
 	"ux.plugins.MyMaps.prototype": {
 		myMapsTip: "Mes cartes",
 		myMapsText: "my maps text",

@@ -95,7 +95,12 @@ ux.plugins.ReperageToolbox = Ext.extend(gxp.plugins.Tool, {
 	 */
 	constructor: function(config) {
 		this.checkLocalStorage();
-		ux.plugins.MyReperage.superclass.constructor.apply(this, arguments);
+		
+		console.log(this);
+		//this.hidden = true;
+		//this.config.hidden = true;
+		//ux.plugins.MyReperage.superclass.constructor.apply(this, arguments);
+		ux.plugins.ReperageToolbox.superclass.constructor.apply(this, arguments);
 	},
 	
 	/** private: method[destroy]
@@ -375,8 +380,7 @@ ux.plugins.ReperageToolbox = Ext.extend(gxp.plugins.Tool, {
 		return ux.plugins.ReperageToolbox.superclass.init.apply(this, arguments);
 	},
 	
-	
-	
+
 	/** api: method[checkLocalStorage]
 	 */
 	checkLocalStorage: function() {
@@ -384,7 +388,7 @@ ux.plugins.ReperageToolbox = Ext.extend(gxp.plugins.Tool, {
 		if (this.validLocalStorage) {} else {
 			this.deactivate();
 		}
-		return this.validLocalStorage
+		return this.validLocalStorage;
 	},
 	
 	//Crée le bouton pour la page principale
@@ -396,19 +400,20 @@ ux.plugins.ReperageToolbox = Ext.extend(gxp.plugins.Tool, {
 			id: 'reperageMenu',
 			showSeparator: false,
 			items: [
-				this.showReperageButton,
-				'-',
 				this.drawReperageAreaButton,
 				this.copyParcelFeatBtn,
 				'-',
 				this.modifyReperageAreaButton,
 				this.deleteOneFeatureBtn,
 				'-',
-				this.showReperageFormBtn
+				this.showReperageFormBtn,
+				'-',
+				this.showReperageButton
 			]
 		});
 
 		this.button = new Ext.Button({
+			//hidden: this.hidden,
 			iconCls: "star",
 			tooltip: this.reperageButtonTip,
 			scope: this,
@@ -417,9 +422,9 @@ ux.plugins.ReperageToolbox = Ext.extend(gxp.plugins.Tool, {
 		
 		var map = this.target.mapPanel.map;
 		
-		//The reperage layers
+		//The Urbanalysis layers
 		if(map.getLayersByName(this.reperageLayerName).length > 0){
-			console.error("reperage working layer : " + this.reperageLayerName + " Found ! Plugin is initialized multiple times");
+			console.error("urbanalysis working layer : " + this.reperageLayerName + " found ! Plugin is initialized multiple times");
 		} else {
 			map.addLayer(this.reperageLayer);
 			map.addLayer(this.parcelLayer);
@@ -440,9 +445,27 @@ ux.plugins.ReperageToolbox = Ext.extend(gxp.plugins.Tool, {
 				actions[0].disable();
 			}
 		}, this);
+		
+		this.actions = actions;
+		this.target.on("preferencesChange", function() {
+			for (var i=this.actions.length-1; i>=0; --i) {
+				var showButton = 
+					(localStorage.getItem("shwUaTb") && localStorage.getItem("shwUaTb") == '0')?
+					false:
+					(localStorage.getItem("shwUaTb") && localStorage.getItem("shwUaTb") == '1')?
+					true:
+					false;
+					
+				if (showButton == true) {
+					this.actions[i].show();
+				} else {
+					this.actions[i].hide();
+				}
+			}
+		}, this);
+		
 		return actions;
 	},
-	
 	
 	//////////////////////////////////////Raphael créeation reperagegrid + init /// Debut
 	/** api: method[initMyReperage]
@@ -691,12 +714,12 @@ ux.plugins.ReperageToolbox = Ext.extend(gxp.plugins.Tool, {
 		map.setLayerIndex(this.reperageLayer, 99);
 	},
 	
-	//suprime les polygones du reperage
+	//supprime les polygones de l'urbanalyse
 	clearReperageLayer: function() {
 		this.reperageLayer.removeAllFeatures();	
 	},
 	
-	//affiche le formulaire d'envois de reperage
+	//affiche le formulaire d'envoi de l'urbanalyse
 	showReperageForm: function() {
 		this.showReperageFormDlg.show();
 		

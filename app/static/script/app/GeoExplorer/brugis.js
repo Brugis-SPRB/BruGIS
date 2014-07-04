@@ -75,6 +75,10 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
 
     constructor: function(config) {
 
+		// add any custom application events
+        this.addEvents(
+			"preferencesChange"
+		);
 		// Starting with this.authorizedRoles being undefined, which means no
         // authentication service is available
         if (config.authStatus === 401) {
@@ -206,12 +210,11 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
 				needsAuthorization: true,
 				actionTarget: ["layers.tbar", "layers.contextMenu"],
 				appendActions: false
-			}, { // TODO: A remplacé par un ext.menu.Menu (ReperageToolBox ??)
-				//ptype: "ux_myreperage",
+			}/* , {
 				ptype: "ux_ReperageToolbox",
 				id: "myReperageManager",
 				actionTarget: {target: "paneltbar", index: 15}
-			}
+			} */
         ];
         delete config.apiKeys;
         GeoExplorer.Composer.superclass.constructor.apply(this, arguments);
@@ -631,8 +634,9 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
 			}
 			
 			//Raph ajout des layers de reperage dans la liste
-			this.tools.toolboxReperage.raiseLayers();
-			
+			if (this.tools.toolboxReperage) {
+				this.tools.toolboxReperage.raiseLayers();
+			}
             // enable only those items that were not specifically disabled
             var disabled = this.toolbar.items.filterBy(function(item) {
                 return item.initialConfig && item.initialConfig.disabled;
@@ -803,7 +807,6 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
 					opacitySlider.setVisible(!(!this.selectedLayer));
 				}, this);
 			
-			//console.log(this.mapPanel.layers);
 		});
 		
 		///////////////////////DOCG////////////////////////////////////////////
@@ -914,6 +917,9 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
         }];
 		
         GeoExplorer.superclass.initPortal.apply(this, arguments);
+		
+		// DocG - 20140701 - update UI based on prefs conf
+		this.fireEvent("preferencesChange");
     },
 
 	//DocG/////////////////////////////////////////////////////////////////////////
@@ -997,9 +1003,8 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
             handler: this.displayAppInfo,
             scope: this
         });
-
-        tools.unshift("-");
-        tools.unshift(new Ext.Button({
+		
+		var exportMapButton = new Ext.Button({
             tooltip: this.exportMapText,
             needsAuthorization: true,
             disabled: !this.isAuthorized(),
@@ -1008,8 +1013,9 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
             },
             scope: this,
             iconCls: 'icon-export'
-        }));
-        tools.unshift(new Ext.Button({
+        });
+				
+		var saveMapButton = new Ext.Button({
             tooltip: this.saveMapText,
             needsAuthorization: true,
             disabled: !this.isAuthorized(),
@@ -1018,7 +1024,27 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
             },
             scope: this,
             iconCls: "icon-save"
-        }));
+        });
+		
+		this.addListener("preferencesChange", function() {
+			var showButton = 
+				(localStorage.getItem("shwDmTl") && localStorage.getItem("shwDmTl") == '0')?
+				false:
+				(localStorage.getItem("shwDmTl") && localStorage.getItem("shwDmTl") == '1')?
+				true:
+				false;
+			if (showButton == true) {
+				saveMapButton.show();
+				exportMapButton.show();
+			} else {
+				saveMapButton.hide();
+				exportMapButton.hide();
+			}
+		}, this);
+		
+        tools.unshift("-");
+        tools.unshift(exportMapButton);
+        tools.unshift(saveMapButton);
 		
         tools.unshift("-");
         tools.unshift(aboutButton);

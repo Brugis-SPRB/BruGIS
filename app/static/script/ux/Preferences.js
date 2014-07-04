@@ -34,20 +34,30 @@ ux.plugins.Preferences = Ext.extend(gxp.plugins.Tool, {
      *  ``String``
      *  Text for (i18n).
      */
-    preferencesTip: "Preferences",
-    preferencesText: "Preferences text",
-    preferencesMenuText: "Preferences menu text",
-	availablePreferencesText: "Preferences",
-	ParametersText: "BruGIS interface parameters",
-	sessionText: "session BruGIS",
-	keepSessionText: "Keep",
-	forgetSessionText: "Forget",
-	dataLegendText: "Default panel",
-	dataPanelText: "Data",
-	legendPanelText: "Legend",
-	searchResultText: "Search result",
-	multipleSearchText: "Multiple",
-	uniqueSearchText: "Unique",
+    preferencesTip: 			"Preferences",
+    preferencesText: 			"Preferences text",
+    preferencesMenuText: 		"Preferences menu text",
+	availablePreferencesText: 	"Preferences",
+	ParametersText: 			"BruGIS interface parameters",
+	
+	sessionText: 				"session BruGIS",
+	keepSessionText: 			"Keep",
+	forgetSessionText: 			"Forget",
+	
+	dataLegendText: 			"Default panel",
+	dataPanelText: 				"Data",
+	legendPanelText: 			"Legend",
+	
+	searchResultText: 			"Search result",
+	multipleSearchText: 		"Multiple",
+	uniqueSearchText: 			"Unique",
+	
+	toolsVisibilityOptionLabelText:			"Tools visibility options",
+	showQueryToolLabelText: 				"Show Query tool",
+	showGeolocatorToolLabelText: 			"Show geolocator tool",
+	showUrbanalysisToolLabelText: 			"Show Urbanalysis toolbox",
+	showDataEditorToolslabelText: 			"Show Edition tools",
+	showDedicatedMapAdvancedToolsLabelText:	"Show advanced creation map tools",
 	
     /** api: config[validLocalStorage]
      *  ``Boolean``
@@ -67,31 +77,66 @@ ux.plugins.Preferences = Ext.extend(gxp.plugins.Tool, {
      */
 	defaultPreferences: {	"session":0,
 							"defPanl":0,
-							"searchN":0},
+							"searchN":0,
+							"shwQrTl":0,
+							"shwGlTl":1,
+							"shwUaTb":0,
+							"shwDeTl":0,
+							"shwDmTl":0},
 							
-    /** api: config[preferencesStore]
+    /** api: config[sessionChoices]
      *  ``Ext.data.ArrayStore``
      *  
      */
 	sessionChoices: [],
 
-    /** api: config[preferencesStore]
+    /** api: config[panelChoices]
      *  ``Ext.data.ArrayStore``
      *  
      */
 	panelChoices: [],
 
-    /** api: config[preferencesStore]
+    /** api: config[searchChoices]
      *  ``Ext.data.ArrayStore``
      *  
      */
 	searchChoices: [],
 	
+    /** api: config[showQueryToolChoices]
+     *  ``Ext.data.ArrayStore``
+     *  
+     */
+	showQueryToolChoices: [],
+	
+    /** api: config[showGeolocatorToolChoices]
+     *  ``Ext.data.ArrayStore``
+     *  
+     */
+	showGeolocatorToolChoices: [],
+	
+    /** api: config[showUrbanalysisToolboxChoices]
+     *  ``Ext.data.ArrayStore``
+     *  
+     */
+	showUrbanalysisToolboxChoices: [],
+	
+    /** api: config[showDataEditoToolsChoices]
+     *  ``Ext.data.ArrayStore``
+     *  
+     */
+	showDataEditoToolsChoices: [],
+	
+    /** api: config[showDedicatedMapToolsChoices]
+     *  ``Ext.data.ArrayStore``
+     *  
+     */
+	showDedicatedMapToolsChoices: [],
+	
     /** api: config[preferencesKeys]
      *  ``Array``
      *  ! ne pas changer l'ordre !
      */
-	preferencesKeys: ["session", "defPanl", "searchN"],
+	preferencesKeys: ["session", "defPanl", "searchN", "shwQrTl", "shwGlTl", "shwUaTb", "shwDeTl", "shwDmTl"],
 	
     /** api: config[choicesPrefsKeysDic]
      *  ``Dictionnary``
@@ -136,38 +181,51 @@ ux.plugins.Preferences = Ext.extend(gxp.plugins.Tool, {
 		if (this.validLocalStorage) {
 			var data = [];
 			// ! ne pas changer l'ordre dans les array !
-			this.sessionChoices = [this.keepSessionText, this.forgetSessionText];
-			this.panelChoices   = [this.legendPanelText, this.dataPanelText];
-			this.searchChoices  = [this.multipleSearchText, this.uniqueSearchText];
+			this.sessionChoices 				= [this.keepSessionText, this.forgetSessionText];
+			this.panelChoices   				= [this.legendPanelText, this.dataPanelText];
+			this.searchChoices  				= [this.multipleSearchText, this.uniqueSearchText];
+			this.showQueryToolChoices 			= [false, true];
+			this.showGeolocatorToolChoices 		= [false, true];
+			this.showUrbanalysisToolboxChoices 	= [false, true];
+			this.showDataEditoToolsChoices 		= [false, true];
+			this.showDedicatedMapToolsChoices 	= [false, true];
+			
 			this.choicesPrefsKeysDic = {
 				"session" : this.sessionChoices, 
 				"defPanl" : this.panelChoices, 
-				"searchN" : this.searchChoices};
+				"searchN" : this.searchChoices,
+				"shwQrTl" : this.showQueryToolChoices,
+				"shwGlTl" : this.showGeolocatorToolChoices,
+				"shwUaTb" : this.showUrbanalysisToolboxChoices,
+				"shwDeTl" : this.showDataEditoToolsChoices,
+				"shwDmTl" : this.showDedicatedMapToolsChoices};
+			
 			// les prefs sont déjà en localstorage
 			if (localStorage.getItem("preferences") !== null) {
+				var preferencesKeysTemp = this.preferencesKeys;
 				for (key in this.preferencesKeys) {
 					var preferenceKey = this.preferencesKeys[key], 
-						preferenceContent = ''
+						preferenceContent = '';
 					if (localStorage.getItem(preferenceKey) !== null) {
+						//La prefs existe en localstorage
 						preferenceContent = localStorage.getItem(preferenceKey);
-						data.push([preferenceKey, preferenceContent]);
 					} else {
-						this.preferencesKeys = this.preferencesKeys.remove(preferenceKey);
+						// ou pas, on l'initialise, on l'ajoute
+						preferenceContent = this.defaultPreferences[this.preferencesKeys[key]];
+						localStorage.setItem(this.preferencesKeys[key], this.defaultPreferences[this.preferencesKeys[key]]);
 						localStorage.setItem("preferences", "['" + this.preferencesKeys.toString().replace(/\,/g,"','") + "']");
 					}
+					data.push([preferenceKey, preferenceContent]);
 				}
-			// les prefs ne sont pas encore en localstorage
+			// Aucune prefs ne se trouve encore en localstorage
 			} else {
-				//localStorage.setItem("preferences","[]");
 				localStorage.setItem("preferences", "['" + this.preferencesKeys.toString().replace(/\,/g,"','") + "']");
 				// ici créer les var de prefs en localstorage
 				// ici compléter le data
-				data = [[this.preferencesKeys[0], this.defaultPreferences[this.preferencesKeys[0]]],
-						[this.preferencesKeys[1], this.defaultPreferences[this.preferencesKeys[1]]],
-						[this.preferencesKeys[2], this.defaultPreferences[this.preferencesKeys[2]]]];
-				localStorage.setItem(this.preferencesKeys[0], this.defaultPreferences[this.preferencesKeys[0]]);
-				localStorage.setItem(this.preferencesKeys[1], this.defaultPreferences[this.preferencesKeys[1]]);
-				localStorage.setItem(this.preferencesKeys[2], this.defaultPreferences[this.preferencesKeys[2]]);
+				for (key in this.preferencesKeys) {
+					localStorage.setItem(this.preferencesKeys[key], this.defaultPreferences[this.preferencesKeys[key]]);
+					data.append([this.preferencesKeys[key], this.defaultPreferences[this.preferencesKeys[key]]]);
+				}
 			}
 			// génération du store une fois data complété avec 
 			//		soit les defaults
@@ -212,7 +270,7 @@ ux.plugins.Preferences = Ext.extend(gxp.plugins.Tool, {
             //store: this.preferencesStore,
 			bodyStyle: {"padding": "10px"},
             defaults: {
-                labelWidth: 90
+                labelWidth: 150
             },
 			items:[{
 				xtype: "fieldset",
@@ -272,6 +330,70 @@ ux.plugins.Preferences = Ext.extend(gxp.plugins.Tool, {
                             scope: this
                         }}]
 					}]
+				}, {
+				xtype: "fieldset",
+                title: this.toolsVisibilityOptionLabelText,
+                items: [{
+                    xtype: "compositefield",
+                    fieldLabel: this.showQueryToolLabelText,
+                    anchor: "99%",
+                    items: [{
+						id: "shwQrTl",
+                        xtype: "checkbox",
+                        checked: this.showQueryToolChoices[this.preferencesStore.reader.arrayData[3][1]],
+                        listeners: {
+							check: this.updateChoice,
+                            scope: this
+						}}]
+					}, {
+                    xtype: "compositefield",
+                    fieldLabel: this.showGeolocatorToolLabelText,
+					anchor: "99%",
+                    items: [{
+						id: "shwGlTl",
+                        xtype: "checkbox",
+                        checked: this.showGeolocatorToolChoices[this.preferencesStore.reader.arrayData[4][1]],
+                        listeners: {
+                            check: this.updateChoice,
+                            scope: this
+						}}]
+					}, {
+                    xtype: "compositefield",
+                    fieldLabel: this.showUrbanalysisToolLabelText,
+					anchor: "99%",
+                    items: [{
+						id: "shwUaTb",
+                        xtype: "checkbox",
+                        checked: this.showUrbanalysisToolboxChoices[this.preferencesStore.reader.arrayData[5][1]],
+                        listeners: {
+                            check: this.updateChoice,
+                            scope: this
+						}}]
+					}, {
+                    xtype: "compositefield",
+                    fieldLabel: this.showDataEditorToolslabelText,
+					anchor: "99%",
+                    items: [{
+						id: "shwDeTl",
+                        xtype: "checkbox",
+                        checked: this.showDataEditoToolsChoices[this.preferencesStore.reader.arrayData[6][1]],
+                        listeners: {
+                            check: this.updateChoice,
+                            scope: this
+						}}]
+					}, {
+                    xtype: "compositefield",
+                    fieldLabel: this.showDedicatedMapAdvancedToolsLabelText,
+					anchor: "99%",
+                    items: [{
+                        id: "shwDmTl",
+                        xtype: "checkbox",
+                        checked: this.showDedicatedMapToolsChoices[this.preferencesStore.reader.arrayData[7][1]],
+                        listeners: {
+                            check: this.updateChoice,
+                            scope: this
+						}}]
+					}]
 				}]
 		});
 		
@@ -290,8 +412,8 @@ ux.plugins.Preferences = Ext.extend(gxp.plugins.Tool, {
             closeAction: "hide",
             items: items,
             layout: "border",
-            height: 250,
-            width: 450,
+            height: 350,
+            width: 500,
 			modal: true,
             //listeners: {},
             scope: this
@@ -302,11 +424,20 @@ ux.plugins.Preferences = Ext.extend(gxp.plugins.Tool, {
 	},
 		
     /** api: method[updateChoice]
-     * a dummy function.
+     * a very intelligent and advanced function.
      */
     updateChoice: function(args) {
-		this.preferencesStore.data.items[this.preferencesStore.find("preferenceName",args.id)].data.preferencesContent = this.choicesPrefsKeysDic[args.id].indexOf(args.value);
-		localStorage.setItem(args.id, this.choicesPrefsKeysDic[args.id].indexOf(args.value));
+		//console.log(args);
+		if (args.xtype == "combo"){
+			//console.log("combo");
+			this.preferencesStore.data.items[this.preferencesStore.find("preferenceName",args.id)].data.preferencesContent = this.choicesPrefsKeysDic[args.id].indexOf(args.value);
+			localStorage.setItem(args.id, this.choicesPrefsKeysDic[args.id].indexOf(args.value));
+		} else if (args.xtype == "checkbox") {
+			//console.log("checkbox");
+			this.preferencesStore.data.items[this.preferencesStore.find("preferenceName",args.id)].data.preferencesContent = this.choicesPrefsKeysDic[args.id].indexOf(args.checked);
+			localStorage.setItem(args.id, this.choicesPrefsKeysDic[args.id].indexOf(args.checked));
+		}
+		this.target.fireEvent("preferencesChange");
     }
 });
 
