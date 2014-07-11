@@ -609,7 +609,7 @@ ux.plugins.ReperageToolbox = Ext.extend(gxp.plugins.Tool, {
 							var rec = grid.getStore().getAt(rowIndex);
 							if(rec.get('state') == "DONE"){
 								var u = localStorage.getItem("repuser");
-								window.open("/WebReperage/res/reperage/"+rec.get('id')+".docx?lang="+lang+"&users="+u);
+								window.open("/WebReperage/res/reperage/"+rec.get('id')+".docx?lang="+lang+"&user="+u);
 							}
 						},
 						getClass: function(v, meta, rec) {  // Or return a class from a function
@@ -634,7 +634,7 @@ ux.plugins.ReperageToolbox = Ext.extend(gxp.plugins.Tool, {
 							var rec = grid.getStore().getAt(rowIndex);
 							if(rec.get('state') == "DONE"){
 								var u = localStorage.getItem("repuser");
-								window.open("/WebReperage/res/reperage/"+rec.get('id')+".pdf?lang="+lang+"&users="+u);
+								window.open("/WebReperage/res/reperage/"+rec.get('id')+".pdf?lang="+lang+"&user="+u);
 							}
 						},
 						getClass: function(v, meta, rec) {  // Or return a class from a function
