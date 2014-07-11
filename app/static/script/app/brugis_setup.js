@@ -193,7 +193,7 @@
             proxy: "../proxy/?url=",
             printService: "/geoserver/pdf/",
             about: {
-                title: "MyBruGIS v 1.1 Clementi",
+                title: "MyBruGIS v 1.1 Johann Joseph Fux",
                 "abstract": abstractText,
 				"help": localeHelp,
 		        contact: contactText

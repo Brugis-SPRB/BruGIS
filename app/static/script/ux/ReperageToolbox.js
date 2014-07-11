@@ -96,10 +96,6 @@ ux.plugins.ReperageToolbox = Ext.extend(gxp.plugins.Tool, {
 	constructor: function(config) {
 		this.checkLocalStorage();
 		
-		console.log(this);
-		//this.hidden = true;
-		//this.config.hidden = true;
-		//ux.plugins.MyReperage.superclass.constructor.apply(this, arguments);
 		ux.plugins.ReperageToolbox.superclass.constructor.apply(this, arguments);
 	},
 	
@@ -504,7 +500,7 @@ ux.plugins.ReperageToolbox = Ext.extend(gxp.plugins.Tool, {
 				remoteSort: true
 			});
 			this.myReperage.setDefaultSort('startdate', 'desc');
-			this.myReperage.setBaseParam('users', this.username);
+			this.myReperage.setBaseParam('user', this.username);
 			this.myReperage.load({params:{start:0, limit:this.nbresultbypage}});
 		}
 	},
@@ -613,7 +609,7 @@ ux.plugins.ReperageToolbox = Ext.extend(gxp.plugins.Tool, {
 							var rec = grid.getStore().getAt(rowIndex);
 							if(rec.get('state') == "DONE"){
 								var u = localStorage.getItem("repuser");
-								window.open("/WebReperage/res/reperage/"+rec.get('id')+".doc?lang="+lang+"&users="+u);
+								window.open("/WebReperage/res/reperage/"+rec.get('id')+".docx?lang="+lang+"&users="+u);
 							}
 						},
 						getClass: function(v, meta, rec) {  // Or return a class from a function
@@ -704,7 +700,6 @@ ux.plugins.ReperageToolbox = Ext.extend(gxp.plugins.Tool, {
 		Ext.TaskMgr.start(task);
 	},
 	//////////////////////////////////////Raphael créeation reperagegrid + init /// Fin
-	
 	
 	//Ajoute le(s) layer(s) au panel
 	raiseLayers: function() {
