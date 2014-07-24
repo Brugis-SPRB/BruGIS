@@ -313,6 +313,9 @@ ux.plugins.ReperageToolbox = Ext.extend(gxp.plugins.Tool, {
 							if(action.result.user !== undefined && action.result.user != ''){
 								localStorage.setItem("repuser",action.result.user);
 								this.username = action.result.user;
+								if(this.myReperage) {
+									this.myReperage.setBaseParam('user', this.username);
+								}
 							}
 							Ext.getCmp('valuereperageRefDossText').reset();
 							Ext.getCmp('valuereperageAdrText').reset();
