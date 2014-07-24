@@ -310,9 +310,9 @@ ux.plugins.ReperageToolbox = Ext.extend(gxp.plugins.Tool, {
 					this.reperageFormPanel.getForm().submit({
 						success: function(form, action) {
 							Ext.Msg.alert('Success', action.result.msg);
-							if(action.result.usr !== undefined && action.result.usr != ''){
-								localStorage.setItem("repuser",action.result.usr);
-								this.username = action.result.usr;
+							if(action.result.user !== undefined && action.result.user != ''){
+								localStorage.setItem("repuser",action.result.user);
+								this.username = action.result.user;
 							}
 							Ext.getCmp('valuereperageRefDossText').reset();
 							Ext.getCmp('valuereperageAdrText').reset();

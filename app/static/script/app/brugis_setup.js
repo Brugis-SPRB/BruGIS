@@ -142,14 +142,82 @@
 							scaleToResFactor * 50
 							];
 							
-		var sourcesDev = {
+		var sourcesDev = 
+			(geoextLangFr)?
+			{
+				'BruGIS WMS - Geoserver': {
+					url: "http://svappmavw019:8080/geoserver/www/wmsaatl/wmsc_brugis.xml",
+					version: "1.1.1",
+					ptype: "gxp_wmscsource"
+				},
+				'IBGE WMS - Mapserver': {
+					url: "http://wms.ibgebim.be/ibgewms?Service=WmS&Request=GetCapabilities",
+					ptype: "gxp_wmscsource",
+					version: "1.1.1"
+				},
+				'CIRB WMS - Geoserver': {
+					url: "http://geoserver.gis.irisnet.be/geoserver/ows",
+					version: "1.3.0",
+					ptype: "gxp_wmscsource"
+				},
+				'STIB WMS - Geoserver': {
+					url: "http://gis.irisnet.be/geoserver/stib_mivb/wms?",
+					version: "1.3.0",
+					ptype: "gxp_wmssource"
+				},
+				'Bruxelles Mobilité WMS - Geoserver': {
+					url: "http://data-mobility.irisnet.be/inspire/capabilities/fr/wms",
+					version: "1.1.1",
+					ptype: "gxp_wmssource"
+				},
+				'IBSA WMS - Geoserver': {
+					url: "http://gis.irisnet.be/geoserver/ibsa_bisa/wms?",
+					version: "1.3.0",
+					ptype: "gxp_wmssource"
+				}
+			}:
+			(geoextLangNl)?
+			{
+				'BruGIS WMS - Geoserver': {
+					url: "http://svappmavw019:8080/geoserver/www/wmsaatl/wmsc_brugis.xml",
+					version: "1.1.1",
+					ptype: "gxp_wmscsource"
+				},
+				'BIM WMS - Mapserver': {
+					url: "http://wms.ibgebim.be/bimwms?Service=WmS&Request=GetCapabilities",
+					ptype: "gxp_wmscsource",
+					version: "1.1.1"
+				},
+				'CIBG WMS - Geoserver': {
+					url: "http://geoserver.gis.irisnet.be/geoserver/ows",
+					version: "1.3.0",
+					ptype: "gxp_wmscsource"
+				},
+				'MIVB WMS - Geoserver': {
+					url: "http://gis.irisnet.be/geoserver/stib_mivb/wms?",
+					version: "1.3.0",
+					ptype: "gxp_wmssource"
+				},
+				'Brussels Mobiliteit WMS - Geoserver': {
+					url: "http://data-mobility.irisnet.be/inspire/capabilities/fr/wms",
+					version: "1.1.1",
+					ptype: "gxp_wmssource"
+				},
+				'BISA WMS - Geoserver': {
+					url: "http://gis.irisnet.be/geoserver/ibsa_bisa/wms?",
+					version: "1.3.0",
+					ptype: "gxp_wmssource"
+				}
+			}:
+			(geoextLangEn)?
+			{
 				'BruGIS WMS - Geoserver': {
 					url: "http://svappmavw019:8080/geoserver/www/wmsaatl/wmsc_brugis.xml",
 					version: "1.1.1",
 					ptype: "gxp_wmscsource"
 				},
 				'IBGE/BIM WMS - Mapserver': {
-					url: "http://wms.ibgebim.be/cgi-bin/ibgewms.exe",
+					url: "http://wms.ibgebim.be/ibgewms?Service=WmS&Request=GetCapabilities",
 					ptype: "gxp_wmscsource",
 					version: "1.1.1"
 				},
@@ -162,17 +230,95 @@
 					url: "http://gis.irisnet.be/geoserver/stib_mivb/wms?",
 					version: "1.3.0",
 					ptype: "gxp_wmssource"
+				},
+				'Bruxelles Mobilité WMS - Geoserver': {
+					url: "http://data-mobility.irisnet.be/inspire/capabilities/fr/wms",
+					version: "1.1.1",
+					ptype: "gxp_wmssource"
+				},
+				'IBSA WMS - Geoserver': {
+					url: "http://gis.irisnet.be/geoserver/ibsa_bisa/wms?",
+					version: "1.3.0",
+					ptype: "gxp_wmssource"
 				}
-			};
+			}:{};
 			
-		var sourcesPrd = {
+		var sourcesPrd = 
+			(geoextLangFr)?
+			{
+				'BruGIS WMS - Geoserver': {
+					url: "/geoserver/www/wmsaatl/wmsc_brugis.xml",
+					version: "1.1.1",
+					ptype: "gxp_wmscsource"
+				},
+				'IBGE WMS - Mapserver': {
+					url: "http://wms.ibgebim.be/ibgewms?Service=WmS&Request=GetCapabilities",
+					version: "1.1.1",
+					ptype: "gxp_wmscsource"
+				},
+				'CIRB WMS - Geoserver': {
+					url: "http://geoserver.gis.irisnet.be/geoserver/ows",
+					version: "1.3.0",
+					ptype: "gxp_wmscsource"
+				},
+				'STIB WMS - Geoserver': {
+					url: "http://gis.irisnet.be/geoserver/stib_mivb/wms?",
+					version: "1.3.0",
+					ptype: "gxp_wmssource"
+				},
+				'Bruxelles Mobilité WMS - Geoserver': {
+					url: "http://data-mobility.irisnet.be/inspire/capabilities/fr/wms",
+					version: "1.1.1",
+					ptype: "gxp_wmssource"
+				},
+				'IBSA WMS - Geoserver': {
+					url: "http://gis.irisnet.be/geoserver/ibsa_bisa/wms?",
+					version: "1.3.0",
+					ptype: "gxp_wmssource"
+				}
+			}:
+			(geoextLangNl)?
+			{
+				'BruGIS WMS - Geoserver': {
+					url: "/geoserver/www/wmsaatl/wmsc_brugis.xml",
+					version: "1.1.1",
+					ptype: "gxp_wmscsource"
+				},
+				'BIM WMS - Mapserver': {
+					url: "http://wms.ibgebim.be/bimwms?Service=WmS&Request=GetCapabilities",
+					version: "1.1.1",
+					ptype: "gxp_wmscsource"
+				},
+				'CIBG WMS - Geoserver': {
+					url: "http://geoserver.gis.irisnet.be/geoserver/ows",
+					version: "1.3.0",
+					ptype: "gxp_wmscsource"
+				},
+				'MIVB WMS - Geoserver': {
+					url: "http://gis.irisnet.be/geoserver/stib_mivb/wms?",
+					version: "1.3.0",
+					ptype: "gxp_wmssource"
+				},
+				'Brussel Mobiliteit WMS - Geoserver': {
+					url: "http://data-mobility.irisnet.be/inspire/capabilities/fr/wms",
+					version: "1.1.1",
+					ptype: "gxp_wmssource"
+				},
+				'BISA WMS - Geoserver': {
+					url: "http://gis.irisnet.be/geoserver/ibsa_bisa/wms?",
+					version: "1.3.0",
+					ptype: "gxp_wmssource"
+				}
+			}:
+			(geoextLangEn)?
+			{
 				'BruGIS WMS - Geoserver': {
 					url: "/geoserver/www/wmsaatl/wmsc_brugis.xml",
 					version: "1.1.1",
 					ptype: "gxp_wmscsource"
 				},
 				'IBGE/BIM WMS - Mapserver': {
-					url: "http://wms.ibgebim.be/cgi-bin/ibgewms.exe",
+					url: "http://wms.ibgebim.be/ibgewms?Service=WmS&Request=GetCapabilities",
 					version: "1.1.1",
 					ptype: "gxp_wmscsource"
 				},
@@ -185,8 +331,18 @@
 					url: "http://gis.irisnet.be/geoserver/stib_mivb/wms?",
 					version: "1.3.0",
 					ptype: "gxp_wmssource"
+				},
+				'Bruxelles Mobilité WMS - Geoserver': {
+					url: "http://data-mobility.irisnet.be/inspire/capabilities/fr/wms",
+					version: "1.1.1",
+					ptype: "gxp_wmssource"
+				},
+				'IBSA WMS - Geoserver': {
+					url: "http://gis.irisnet.be/geoserver/ibsa_bisa/wms?",
+					version: "1.3.0",
+					ptype: "gxp_wmssource"
 				}
-			};
+			}:{};
 			
         var app = new GeoExplorer.Brugis({
             authStatus: globalAuthStatus,
@@ -200,8 +356,8 @@
             },
         	// layer sources
         	defaultSourceType: "gxp_wmssource",
-			sources: sourcesDev,
-			//sources: sourcesPrd,
+			//sources: sourcesDev,
+			sources: sourcesPrd,
 			
 		    map: {
 				id: "mymap", // id needed to reference map in portalConfig above
