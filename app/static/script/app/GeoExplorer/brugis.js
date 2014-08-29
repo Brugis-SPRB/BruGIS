@@ -141,7 +141,7 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
             }, {
                 ptype: "gxp_featureeditor",
                 featureManager: "featuremanager",
-                autoLoadFeature: true,
+                autoLoadFeature: false,
 				snappingAgent: "snapping-agent",
                 toggleGroup: this.toggleGroup,
                 actionTarget: {target: "paneltbar", index: 9}
@@ -152,8 +152,11 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
 				targets: [{
 					source: 'BruGIS WMS - Geoserver',
 					name: "AATL:Parcelle_2013",
+					minResolution: 1.4000028082733496,		// 1/5.000
+					maxResolution: 0.014000028082733494,	// 1/50
 					restrictedLayers: [
-						{ source: 'BruGIS WMS - Geoserver' , name: "AATL_DMS_PROT:Prises_actes" }
+						{ source: 'BruGIS WMS - Geoserver' , name: "AATL_DMS_PROT:Prises_actes" },
+						{ source: 'BruGIS WMS - Geoserver' , name: "POCDEV:POC_POLYGONES" }
 					]
 				}]
 			}, {

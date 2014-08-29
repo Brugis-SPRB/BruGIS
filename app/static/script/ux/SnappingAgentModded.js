@@ -51,10 +51,24 @@ ux.plugins.SnappingAgent = Ext.extend(gxp.plugins.Tool, {
     /** private: method[init]
      */
     init: function(target) {
-        gxp.plugins.SnappingAgent.superclass.init.apply(this, arguments);
+		gxp.plugins.SnappingAgent.superclass.init.apply(this, arguments);
         this.snappingTargets = [];
         this.controls = {};
         this.setSnappingTargets(this.targets);
+		//this.target.on("authorizationchange", this.onAuthorizationChange, this);
+    },
+
+    /** private: method[onAuthorizationChange]
+     */
+    onAuthorizationChange: function(e) {
+		if(this.target.authorizedRoles && this.target.authorizedRoles[0] == "ROLE_ADMINISTRATOR") {
+			console.log("ROLE_ADMINISTRATOR");
+			this.activate();
+		}
+		else {
+			console.log("ANONYMOUS");
+			this.deactivate();
+		}
     },
     
     /** private: method[setSnappingTargets]
@@ -167,14 +181,19 @@ ux.plugins.SnappingAgent = Ext.extend(gxp.plugins.Tool, {
         var min = snapTarget.minResolution || Number.NEGATIVE_INFINITY;
         var max = snapTarget.maxResolution || Number.POSITIVE_INFINITY;
         var resolution = this.target.mapPanel.map.getResolution();
+		console.log(resolution);
         if (min <= resolution && resolution < max) {
-            //TODO unhack this - uses a non-API method (update) and sets a
-            // read-only property (visibility) to make the non-API method work
-            // in this context.
-            var visibility = snapTarget.layer.visibility;
-            snapTarget.layer.visibility = true;
-            snapTarget.layer.strategies[0].update(options);
-            snapTarget.layer.visibility = visibility;
+			if(this.target.authorizedRoles && this.target.authorizedRoles[0] == "ROLE_ADMINISTRATOR") {
+				console.log("updateSnappingAgent");
+				//TODO unhack this - uses a non-API method (update) and sets a
+				// read-only property (visibility) to make the non-API method work
+				// in this context.
+				var visibility = snapTarget.layer.visibility;
+				snapTarget.layer.visibility = true;
+				snapTarget.layer.strategies[0].update(options);
+				snapTarget.layer.visibility = visibility;
+			}
+            
         }
     },
     
@@ -189,6 +208,7 @@ ux.plugins.SnappingAgent = Ext.extend(gxp.plugins.Tool, {
         var control = new OpenLayers.Control.Snapping(
             Ext.applyIf({layer: layer}, options || {})
         );
+		control.deactivate();
         return control;
     },
     
