@@ -148,7 +148,6 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
             }, {
 				ptype: "ux_snappingagent",
 				id: "snapping-agent",
-				//controlOptions: {autoActivate: false},
 				autoActivate: false,
 				targets: [{
 					source: 'BruGIS WMS - Geoserver',

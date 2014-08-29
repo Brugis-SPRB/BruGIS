@@ -30,35 +30,36 @@ ux.plugins.ReperageToolbox = Ext.extend(gxp.plugins.Tool, {
 	
 	// Begin i18n.
 	showReperageGrid: "ShowReperageGrid",
-	drawReperageAreaToolTip: "DrawArea",
-	showReperageFormBtnToolTip: "showReperageForm",
-	modifyReperageAreaToolTip: "ModifyArea",
-	copyParcelFeatBtnToolTip : "CopyParcel",
-	deleteOneFeatureBtnToolTip: "DeleteOneFeature",
-	reperageButtonTip: "ReperageToolBox",
 	
-	showReperageFormDlgTitle: "Reperage",
-	reperageTypeCombofieldLabel: 'Reperage type',
-	reperageTypeComboemptyText: 'Choose a reperage type',
+	drawReperageAreaToolTip: "Draw polygon",
+	showReperageFormBtnToolTip: "show Urbanalysis form",
+	modifyReperageAreaToolTip: "Modify polygon",
+	copyParcelFeatBtnToolTip : "Copy polygon from parcel",
+	deleteOneFeatureBtnToolTip: "Delete polygon",
+	reperageButtonTip: "Urbanalysis toolbox",
+	
+	showReperageFormDlgTitle: "Urbanalysis",
+	reperageTypeCombofieldLabel: 'Urbanalysis type',
+	reperageTypeComboemptyText: 'Choose urbanalysis type',
 	reperageRefDossTextfieldLabel: 'File reference',
-	reperageAdrTextfieldLabel: "Addresse",
+	reperageAdrTextfieldLabel: "Address",
 	
-	myReperageTip: "My reperage",
-	myReperageText: "my reperage text",
-	myReperageMenuText: "my reperage menu text",
-	availableMyReperageText: "My reperage",
+	myReperageTip: "My Urbanalysis",
+	myReperageText: "my Urbanalysis text",
+	myReperageMenuText: "my Urbanalysis menu text",
+	availableMyReperageText: "My Urbanalysis",
 	
-	myReperageGridPanel_docref_header: "Dossier",
-	myReperageGridPanel_adress_header: "Addresse",
+	myReperageGridPanel_docref_header: "File",
+	myReperageGridPanel_adress_header: "Address",
 	myReperageGridPanel_state_header: "Status",
-	myReperageGridPanel_startdate_header: "Reperage creates on :",
-	myReperageGridPanel_enddate_header: "Reperage will delete on :",
+	myReperageGridPanel_startdate_header: "Creation date:",
+	myReperageGridPanel_enddate_header: "Expiration date:",
 	
 	myReperageGridPanel_docx_tooltip: "Docx Download",
 	myReperageGridPanel_pdf_tooltip: "PDF Download",
 
-	myReperageGridPanel_bbar_displayMsg: "Reperages {0} - {1} of {2}",
-	myReperageGridPanel_bbar_emptyMsg: "No reperage",
+	myReperageGridPanel_bbar_displayMsg: "Urbanalysis {0} - {1} of {2}",
+	myReperageGridPanel_bbar_emptyMsg: "No Urbanalysis",
 	// End i18n.
 	
 	//UUID
