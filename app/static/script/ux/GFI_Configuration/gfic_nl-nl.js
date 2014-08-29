@@ -111,6 +111,24 @@ ux.gfi.nl =  {
 				{ "name": "Eindtoestand"			, "label" : "[EINDTOESTAND]"	, "type": "string"}
 			]
 		},
+		"BROH:BBP":{
+			"actiontype" : "GRID",
+			"title"		 : "BBP: [OBJET]",
+			"attributes" : [
+				{ "name": "Naam"						, "label" : "[OBJET]"			, "type" : "string"},
+				{ "name": "NOVA referentie"				, "label" : "[REFNOVA]"			, "type" : "string"},
+				{ "name": "SPEC referentie"				, "label" : "[REFSPEC]"			, "type" : "string"},
+				{ "name": "MER"							, "label" : "[MER]"				, "type" : "string"},
+				{ "name": "Besluit type"				, "label" : "[BESLUITTYPE]"		, "type" : "string"},
+				{ "name": "Datum van besluit"			, "label" : "[DATBESLUIT]"		, "type" : "string"},
+				{ "name": "DATBESONTWEIG"				, "label" : "[DATBESONTWEIG]"	, "type" : "string"},
+				{ "name": "DATBESONTWPLAN"				, "label" : "[DATBESONTWPLAN]"	, "type" : "string"},
+				{ "name": "In ZGB"						, "label" : "[ZGB]"				, "type" : "string"},
+				{ "name": "Beslissing"					, "label" : "[BESLISSING]"		, "type" : "string"},
+				{ "name": "BESLONTWPLAN"				, "label" : "[BESLONTWPLAN]"	, "type" : "string"},
+				{ "name": "ID"							, "label" : "[ID]"				, "type" : "string"}
+			]
+		},
 		"BROH:Patrimonium": {
 			"actiontype" : "GRID",
 			"title"      : "[ML]: [BESCHRIJVING]",

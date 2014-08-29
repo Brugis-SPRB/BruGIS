@@ -127,9 +127,10 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
                 actionTarget: {target: "paneltbar", hidden: false, index: 7},
 				autoActivate: false
             }, {
-                ptype: "ux_wmsgetfeatureinfo", 
+                ptype: "ux_wmsgetfeatureinfo",
 				toggleGroup: this.toggleGroup,
 				format: "grid",
+				onRightClick: true,
 				//unique: true,
                 actionTarget: {target: "paneltbar", index: 8}
             }, {
@@ -141,9 +142,22 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
                 ptype: "gxp_featureeditor",
                 featureManager: "featuremanager",
                 autoLoadFeature: true,
+				snappingAgent: "snapping-agent",
                 toggleGroup: this.toggleGroup,
                 actionTarget: {target: "paneltbar", index: 9}
             }, {
+				ptype: "ux_snappingagent",
+				id: "snapping-agent",
+				//controlOptions: {autoActivate: false},
+				autoActivate: false,
+				targets: [{
+					source: 'BruGIS WMS - Geoserver',
+					name: "AATL:Parcelle_2013",
+					restrictedLayers: [
+						{ source: 'BruGIS WMS - Geoserver' , name: "AATL_DMS_PROT:Prises_actes" }
+					]
+				}]
+			}, {
 				ptype: "ux_BrugisSearcher",
 				outputTarget: "paneltbar",
 				wpsserver : this.wpsserver,
@@ -873,6 +887,7 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
 		var click = new OpenLayers.Control.Click({trigger: showPosition});
 		this.mapPanel.map.addControl(click);
 		click.activate();
+		
 		///////////////////////DOCG////////////////////////////////////////////
 		
         this.mapPanelContainer = new Ext.Panel({

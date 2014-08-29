@@ -110,13 +110,13 @@ ux.gfi.fr = {
 		},
 		"AATL:Lotissements": {
 			"actiontype" : "GRID",
-			"title"		 : "[OBJET]",
+			"title"		 : "[REFSITEX]",
 			"attributes" : [
 				{ "name": "Nom"						, "label" : "[OBJET]"			, "type": "string"},
 				{ "name": "Adresse"					, "label" : "[ADRESSE]"			, "type": "string"},
 				{ "name": "Demandeur"				, "label" : "[DEMANDEUR]"		, "type": "string"},
 				{ "name": "Date de notification"	, "label" : "[DATENOTIF]"		, "type": "string"},
-				{ "name": "Etat"					, "label" : "[PERMISOCTROYE]"	, "type": "string"},
+				{ "name": "Permis"					, "label" : "[PERMISOCTROYE]"	, "type": "string"},
 				{ "name": "Référence NOVA"			, "label" : "[REFNOVA]"			, "type": "string"},
 				{ "name": "Référence SITEX"			, "label" : "[REFSITEX]"		, "type": "string"},
 				{ "name": "Référence cadastrale"	, "label" : "[NUMCADAST]"		, "type": "string"},

@@ -58,6 +58,7 @@ ux.plugins.Preferences = Ext.extend(gxp.plugins.Tool, {
 	showUrbanalysisToolLabelText: 			"Show Urbanalysis toolbox",
 	showDataEditorToolslabelText: 			"Show Edition tools",
 	showDedicatedMapAdvancedToolsLabelText:	"Show advanced creation map tools",
+	showPopupInfoOnRightClickLabelText:		"Show information popup on right clic",
 	
     /** api: config[validLocalStorage]
      *  ``Boolean``
@@ -82,7 +83,8 @@ ux.plugins.Preferences = Ext.extend(gxp.plugins.Tool, {
 							"shwGlTl":1,
 							"shwUaTb":0,
 							"shwDeTl":0,
-							"shwDmTl":0},
+							"shwDmTl":0,
+							"shwPiRc":0},
 							
     /** api: config[sessionChoices]
      *  ``Ext.data.ArrayStore``
@@ -136,7 +138,7 @@ ux.plugins.Preferences = Ext.extend(gxp.plugins.Tool, {
      *  ``Array``
      *  ! ne pas changer l'ordre !
      */
-	preferencesKeys: ["session", "defPanl", "searchN", "shwQrTl", "shwGlTl", "shwUaTb", "shwDeTl", "shwDmTl"],
+	preferencesKeys: ["session", "defPanl", "searchN", "shwQrTl", "shwGlTl", "shwUaTb", "shwDeTl", "shwDmTl", "shwPiRc"],
 	
     /** api: config[choicesPrefsKeysDic]
      *  ``Dictionnary``
@@ -189,6 +191,7 @@ ux.plugins.Preferences = Ext.extend(gxp.plugins.Tool, {
 			this.showUrbanalysisToolboxChoices 	= [false, true];
 			this.showDataEditoToolsChoices 		= [false, true];
 			this.showDedicatedMapToolsChoices 	= [false, true];
+			this.showPopupInfoOnRightClick		= [false, true];
 			
 			this.choicesPrefsKeysDic = {
 				"session" : this.sessionChoices, 
@@ -198,8 +201,9 @@ ux.plugins.Preferences = Ext.extend(gxp.plugins.Tool, {
 				"shwGlTl" : this.showGeolocatorToolChoices,
 				"shwUaTb" : this.showUrbanalysisToolboxChoices,
 				"shwDeTl" : this.showDataEditoToolsChoices,
-				"shwDmTl" : this.showDedicatedMapToolsChoices};
-			
+				"shwDmTl" : this.showDedicatedMapToolsChoices,
+				"shwPiRc" : this.showPopupInfoOnRightClick};
+				
 			// les prefs sont déjà en localstorage
 			if (localStorage.getItem("preferences") !== null) {
 				var preferencesKeysTemp = this.preferencesKeys;
@@ -270,7 +274,7 @@ ux.plugins.Preferences = Ext.extend(gxp.plugins.Tool, {
             //store: this.preferencesStore,
 			bodyStyle: {"padding": "10px"},
             defaults: {
-                labelWidth: 150
+                labelWidth: 250
             },
 			items:[{
 				xtype: "fieldset",
@@ -389,6 +393,18 @@ ux.plugins.Preferences = Ext.extend(gxp.plugins.Tool, {
                         id: "shwDmTl",
                         xtype: "checkbox",
                         checked: this.showDedicatedMapToolsChoices[this.preferencesStore.reader.arrayData[7][1]],
+                        listeners: {
+                            check: this.updateChoice,
+                            scope: this
+						}}]
+					}, {
+                    xtype: "compositefield",
+                    fieldLabel: this.showPopupInfoOnRightClickLabelText,
+					anchor: "99%",
+                    items: [{
+                        id: "shwPiRc",
+                        xtype: "checkbox",
+                        checked: this.showPopupInfoOnRightClick[this.preferencesStore.reader.arrayData[8][1]],
                         listeners: {
                             check: this.updateChoice,
                             scope: this

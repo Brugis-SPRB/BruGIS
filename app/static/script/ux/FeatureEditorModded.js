@@ -688,7 +688,6 @@ gxp.plugins.FeatureEditor = Ext.extend(gxp.plugins.ClickableFeatures, {
 			}
 		}, this);
 
-		
         return actions;
     },
 

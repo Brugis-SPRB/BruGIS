@@ -606,7 +606,7 @@ ux.plugins.ReperageToolbox = Ext.extend(gxp.plugins.Tool, {
 				width: 35,
 				items: [
 					{
-						icon   : '/WebReperage/inc/down2.gif',	 // Use a URL in the icon config
+						icon   : '../theme/app/img/down2.gif',	 // Use a URL in the icon config
 						tooltip: this.myReperageGridPanel_docx_tooltip,
 						handler: function(grid, rowIndex, colIndex) {
 							var rec = grid.getStore().getAt(rowIndex);
@@ -631,7 +631,7 @@ ux.plugins.ReperageToolbox = Ext.extend(gxp.plugins.Tool, {
 				width: 35,
 				items: [
 					{
-						icon   : '/WebReperage/inc/down2.gif',	 // Use a URL in the icon config
+						icon   : '../theme/app/img/down2.gif',	 // Use a URL in the icon config
 						tooltip: this.myReperageGridPanel_pdf_tooltip,
 						handler: function(grid, rowIndex, colIndex) {
 							var rec = grid.getStore().getAt(rowIndex);

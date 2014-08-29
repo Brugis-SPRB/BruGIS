@@ -185,6 +185,9 @@ ux.plugins.BrugisSearcher = Ext.extend(gxp.plugins.Tool, {
 			var extent 	= record.json.extent;
 			var date	= new Date();
 			
+			//console.log(record);
+			//console.log(extent);
+			
 			// support pour paramètre de nombre de recherche (une seule ou plusieurs)
 			var uniqueSearch = 
 			(localStorage.getItem("searchN") && localStorage.getItem("searchN") == '1')?true:
@@ -218,7 +221,7 @@ ux.plugins.BrugisSearcher = Ext.extend(gxp.plugins.Tool, {
 				);
 				map.addLayer(vectorLayer);
 			}
-			if (typeof extent=="object"){
+/* 			if (typeof extent=="object"){
 				map.zoomToExtent([extent.xmin, extent.ymin, extent.xmax, extent.ymax]);
 			}
 			else if (record.data.addressNumber === ""){
@@ -226,6 +229,24 @@ ux.plugins.BrugisSearcher = Ext.extend(gxp.plugins.Tool, {
 						myPoint.x, myPoint.y
 				 );
 				map.setCenter(position, this.zoom);
+			}
+			else{
+				 var position = new OpenLayers.LonLat(
+						myPoint.x, myPoint.y
+				 );
+				map.setCenter(position, this.zoomToPolNum);
+			}
+ */
+			if (record.data.addressNumber === "") {
+				if (typeof extent=="object") {
+					map.zoomToExtent([extent.xmin, extent.ymin, extent.xmax, extent.ymax]);
+				}
+				else {
+					var position = new OpenLayers.LonLat(
+							myPoint.x, myPoint.y
+					 );
+					map.setCenter(position, this.zoom);
+				}
 			}
 			else{
 				 var position = new OpenLayers.LonLat(

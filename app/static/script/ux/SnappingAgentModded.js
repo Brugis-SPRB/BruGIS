@@ -20,17 +20,17 @@
 /** api: (extends)
  *  plugins/Tool.js
  */
-Ext.namespace("gxp.plugins");
+Ext.namespace("ux.plugins");
 
 /** api: constructor
  *  .. class:: SnappingAgent(config)
  *
  *    Plugin for managing snapping while editing.
  */   
-gxp.plugins.SnappingAgent = Ext.extend(gxp.plugins.Tool, {
+ux.plugins.SnappingAgent = Ext.extend(gxp.plugins.Tool, {
     
     /** api: ptype = gxp_snappingagent */
-    ptype: "gxp_snappingagent_mod",    
+    ptype: "ux_snappingagent",    
     
     /** api: config[controlOptions]
      *  ``Object`` Options for the ``OpenLayers.Control.Snapping`` used with
@@ -303,4 +303,4 @@ gxp.plugins.SnappingAgent = Ext.extend(gxp.plugins.Tool, {
 
 });
 
-Ext.preg(gxp.plugins.SnappingAgent.prototype.ptype, gxp.plugins.SnappingAgent);
+Ext.preg("ux_snappingagent", ux.plugins.SnappingAgent);

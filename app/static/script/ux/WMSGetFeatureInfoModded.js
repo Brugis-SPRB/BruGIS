@@ -18,6 +18,30 @@
  *  class = WMSGetFeatureInfo
  */
 
+OpenLayers.Control.RightClick = OpenLayers.Class(OpenLayers.Control, {
+       defaultHandlerOptions: {
+           'single': true,
+           'double': true,
+           'pixelTolerance': 0,
+           'stopSingle': false,
+           'stopDouble': false
+       },
+       handleRightClicks: true,
+       initialize: function (options) {
+           this.handlerOptions = OpenLayers.Util.extend(
+             {}, this.defaultHandlerOptions
+           );
+           OpenLayers.Control.prototype.initialize.apply(
+             this, arguments
+            );
+           this.handler = new OpenLayers.Handler.Click(
+             this, this.eventMethods, this.handlerOptions
+           );
+       },
+       CLASS_NAME: "OpenLayers.Control.RightClick" 
+});
+
+ 
 /** api: (extends)
  *  plugins/Tool.js
  */
@@ -67,8 +91,14 @@ ux.plugins.WMSGetFeatureInfo = Ext.extend(gxp.plugins.Tool, {
 	 * is allowed at a time.
 	 * DocG - 05/11/2013
 	 */
-	 unique: false,
+	unique: false,
+	 
+	onRightClick: false,
     
+	blockContextMenu: function(e){
+		e.preventDefault();
+	},
+	
     /** api: method[addActions]
      */
     addActions: function() {
@@ -80,6 +110,7 @@ ux.plugins.WMSGetFeatureInfo = Ext.extend(gxp.plugins.Tool, {
             toggleGroup: this.toggleGroup,
             enableToggle: true,
             allowDepress: true,
+			//pressed: true,
             toggleHandler: function(button, pressed) {
                 for (var i = 0, len = info.controls.length; i < len; i++){
                     if (pressed) {
@@ -92,7 +123,8 @@ ux.plugins.WMSGetFeatureInfo = Ext.extend(gxp.plugins.Tool, {
         }]);
         var infoButton = this.actions[0].items[0];
 
-        var info = {controls: []};
+        var info = {controls: [], controls2: []};
+		
         var updateInfo = function() {
             var queryableLayers = this.target.mapPanel.layers.queryBy(function(x){
                 return x.get("queryable");
@@ -106,7 +138,14 @@ ux.plugins.WMSGetFeatureInfo = Ext.extend(gxp.plugins.Tool, {
                 control.destroy();
             }
 
+            for (var i = 0, len = info.controls2.length; i < len; i++){
+                control = info.controls2[i];
+                control.deactivate();  // TODO: remove when http://trac.openlayers.org/ticket/2130 is closed
+                control.destroy();
+            }
+			
             info.controls = [];
+			info.controls2 = [];
             queryableLayers.each(function(x){
                 var layer = x.getLayer();
                 var vendorParams = Ext.apply({}, this.vendorParams), param;
@@ -126,16 +165,15 @@ ux.plugins.WMSGetFeatureInfo = Ext.extend(gxp.plugins.Tool, {
 				vendorParams["buffer"] = 6;
 				
                 var control = new OpenLayers.Control.WMSGetFeatureInfo(Ext.applyIf({
-                    url: layer.url,
+					url: layer.url,
                     queryVisible: true,
                     layers: [layer],
-					//hover: true,
-                    infoFormat: infoFormat,
+					infoFormat: infoFormat,
                     vendorParams: vendorParams,
 					drillDown: true,
                     eventListeners: {
                         getfeatureinfo: function(evt) {
-                            var title = x.get("title") || x.get("name");
+							var title = x.get("title") || x.get("name");
 							var layer_name = x.get("name");
 							var currentLangage = GeoExt.Lang.locale;
 							if(layer_name) {
@@ -171,11 +209,51 @@ ux.plugins.WMSGetFeatureInfo = Ext.extend(gxp.plugins.Tool, {
                 if(infoButton.pressed) {
                     control.activate();
                 }
-				//control.activate();
+				
+				// DOCG // Pour obtenir le GFI sur le clic droit //////////////
+				var oClick = new OpenLayers.Control.RightClick({ eventMethods: {
+					'rightclick': function (e) {
+						control.request(e.xy);
+					}
+				}});
+				map.addControl(oClick);
+				info.controls2.push(oClick);
             }, this);
-
+			
+			var getFeatureInfoOnRightClick = 
+				(localStorage.getItem("shwPiRc") && localStorage.getItem("shwPiRc") == '0')?
+				false:
+				(localStorage.getItem("shwPiRc") && localStorage.getItem("shwPiRc") == '1')?
+				true:
+				false;
+				
+			for (var i = 0, len = info.controls2.length; i < len; i++){
+				var oClick = info.controls2[i];
+				if (getFeatureInfoOnRightClick == true) {
+					var controlActive = false;
+					for (var i = 0, len = info.controls.length; i < len; i++){
+						var control = info.controls[i];
+						var controlActive = control.active;
+						if (!controlActive) {
+							control.activate();
+						}
+					}
+					oClick.activate();
+					Ext.getDoc().on("contextmenu", this.blockContextMenu);
+					for (var i = 0, len = info.controls.length; i < len; i++){
+						var control = info.controls[i];
+						if (!controlActive) {
+							control.deactivate();
+						}
+					}
+				} else {
+					oClick.deactivate();
+					Ext.getDoc().un("contextmenu", this.blockContextMenu);
+				}
+			}
         };
-        
+		
+		this.target.on("preferencesChange", updateInfo, this);
         this.target.mapPanel.layers.on("update", updateInfo, this);
         this.target.mapPanel.layers.on("add", updateInfo, this);
         this.target.mapPanel.layers.on("remove", updateInfo, this);
@@ -367,16 +445,17 @@ ux.plugins.WMSGetFeatureInfo = Ext.extend(gxp.plugins.Tool, {
 				
 				// Calcul incompatible avec IE... le .getArea n'est pas accepté
 				if (OpenLayers.Util.getBrowserName() != 'msie'){
-					if (feature.geometry.getArea() > 0.0) {
+				
+					if (feature.geometry && feature.geometry.getArea() > 0.0) {
 						feature.attributes[this.areaLabel] = String(feature.geometry.getArea().toFixed(2)) + " m2";
 						feature.attributes[this.centroidLabel] = "X/Y: " + String(feature.geometry.getCentroid().x.toFixed(2)) + " m / " + String(feature.geometry.getCentroid().y.toFixed(2)) + " m";
 					}
 					else {
-						if (feature.geometry.getLength() > 0.0) {
+						if (feature.geometry && feature.geometry.getLength() > 0.0) {
 							feature.attributes[this.lengthLabel] = String(feature.geometry.getLength().toFixed(2)) + " m" ;
 							feature.attributes[this.centroidLabel] = "X/Y: " + String(feature.geometry.getCentroid().x.toFixed(2)) + " m / " + String(feature.geometry.getCentroid().y.toFixed(2)) + " m";
 						}
-						else
+						else if (feature.geometry)
 						{
 							feature.attributes[this.positionLabel] = "X/Y: " + String(feature.geometry.x) + " m / " + String(feature.geometry.y) + " m";
 						}
@@ -494,16 +573,13 @@ ux.plugins.WMSGetFeatureInfo = Ext.extend(gxp.plugins.Tool, {
 				popup.setTitle(this.popupTitle.concat(" (".concat(popup.numberOfEntries.toString().concat(")"))));
 			}
         }
-		
-        var features = evt.features, config = [];
-		
-        if (!text && features.length > 0) {
 
-		
+        var features = evt.features, config = [];
+        if (!text && features.length > 0) {
 			for (var i=0; i<features.length; ++i) {
 				var feature = features[i];
 				var new_attributes = {};
-				customRenderers = {};	
+				customRenderers = {};
 				for(var cpt=0; cpt<layerConfiguration.attributes.length; cpt++)
 				{
 					var n_attribute = layerConfiguration.attributes[cpt];
@@ -548,16 +624,17 @@ ux.plugins.WMSGetFeatureInfo = Ext.extend(gxp.plugins.Tool, {
 				}
 				// Calcul incompatible avec IE... le .getArea n'est pas accepté
 				if (OpenLayers.Util.getBrowserName() != 'msie'){
-					if (feature.geometry.getArea() > 0.0) {
+				
+					if (feature.geometry && feature.geometry.getArea() > 0.0) {
 						new_attributes[this.areaLabel]     = String(feature.geometry.getArea().toFixed(2)) + " m2";
 						new_attributes[this.centroidLabel] = "X/Y: " + String(feature.geometry.getCentroid().x.toFixed(2)) + " m / " + String(feature.geometry.getCentroid().y.toFixed(2)) + " m";
 					}
 					else {
-						if (feature.geometry.getLength() > 0.0) {
+						if (feature.geometry && feature.geometry.getLength() > 0.0) {
 							new_attributes[this.lengthLabel] = String(feature.geometry.getLength().toFixed(2)) + " m";
 							new_attributes[this.centroidLabel] = "X/Y: " + String(feature.geometry.getCentroid().x.toFixed(2)) + " m / " + String(feature.geometry.getCentroid().y.toFixed(2)) + " m";
 						}
-						else
+						else if (feature.geometry)
 						{
 							new_attributes[this.positionLabel] = "X/Y: " + String(feature.geometry.x) + " m " + String(feature.geometry.y) + " m";
 						}
@@ -615,7 +692,7 @@ ux.plugins.WMSGetFeatureInfo = Ext.extend(gxp.plugins.Tool, {
 					customRenderers : customRenderers,
 					source : new_attributes
 				});
-
+				delete p.getStore().sortInfo;
 				config.push(Ext.apply(p, this.itemConfig));
 			}
         } else if (text) {
@@ -624,7 +701,6 @@ ux.plugins.WMSGetFeatureInfo = Ext.extend(gxp.plugins.Tool, {
                 html: text
             }, this.itemConfig));
         }
-		
 		popup.add(config);
         popup.doLayout();
     },

@@ -85,6 +85,8 @@ ux.plugins.CirbGeocoder = Ext.extend(gxp.plugins.Tool, {
         if (this.updateField) {
             var map = this.target.mapPanel.map;
 			
+			console.log(record);
+			
 			var dest = new Proj4js.Proj('EPSG:31370');			
 			var myPoint = record.data.point;
 			var adnc    = record.data.adNc;
@@ -109,7 +111,7 @@ ux.plugins.CirbGeocoder = Ext.extend(gxp.plugins.Tool, {
 					)
 				);
 				map.addLayer(vectorLayer);
-			}			
+			}
 			if (record.data.addressNumber === ""){
 				 var position = new OpenLayers.LonLat(
 						myPoint.x, myPoint.y

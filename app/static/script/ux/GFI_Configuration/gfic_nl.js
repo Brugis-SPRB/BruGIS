@@ -97,20 +97,39 @@ ux.gfi.nl =  {
 		},
 		"BROH:Verkavelingen": {
 			"actiontype" : "GRID",
-			"title"		 : "[OBJET]",
+			"title"		 : "[REFSITEX]",
 			"attributes" : [
 				{ "name": "Naam"					, "label" : "[OBJET]"			, "type": "string"},
 				{ "name": "Adres"					, "label" : "[ADRES]"			, "type": "string"},
 				{ "name": "Aanvrager"				, "label" : "[AANVRAGER]"		, "type": "string"},
-				{ "name": "Datum betek"				, "label" : "[DATUMBETEK]"		, "type": "string"},
-				{ "name": "Staat"					, "label" : "[VERGAFGELEVERD]"	, "type": "string"},
-				{ "name": "NOVA referencie"			, "label" : "[REFNOVA]"			, "type": "string"},
-				{ "name": "SITEX referencie"		, "label" : "[REFSITEX]"		, "type": "string"},
-				{ "name": "Kadaster nummer"			, "label" : "[KADNUMMER]"		, "type": "string"},
+				{ "name": "Datum van betekening"	, "label" : "[DATUMBETEK]"		, "type": "string"},
+				{ "name": "Vergunning"				, "label" : "[VERGAFGELEVERD]"	, "type": "string"},
+				{ "name": "NOVA referentie"			, "label" : "[REFNOVA]"			, "type": "string"},
+				{ "name": "SITEX referentie"		, "label" : "[REFSITEX]"		, "type": "string"},
+				{ "name": "Kadastraal referentie"	, "label" : "[KADNUMMER]"		, "type": "string"},
 				{ "name": "ID"						, "label" : "[ID]"				, "type": "string"},
-				{ "name": "Eindtoestand"			, "label" : "[EINDTOESTAND]"	, "type": "string"}
+				{ "name": "Uiteindelijke toestand"	, "label" : "[EINDTOESTAND]"	, "type": "string"}
 			]
 		},
+		"BROH:BBP":{
+			"actiontype" : "GRID",
+			"title"		 : "BBP: [OBJET]",
+			"attributes" : [
+				{ "name": "Naam"						, "label" : "[OBJET]"			, "type" : "string"},
+				{ "name": "NOVA referentie"				, "label" : "[REFNOVA]"			, "type" : "string"},
+				{ "name": "SPEC referentie"				, "label" : "[REFSPEC]"			, "type" : "string"},
+				{ "name": "MER"							, "label" : "[MER]"				, "type" : "string"},
+				{ "name": "Besluit type"				, "label" : "[BESLUITTYPE]"		, "type" : "string"},
+				{ "name": "Datum van besluit"			, "label" : "[DATBESLUIT]"		, "type" : "string"},
+				{ "name": "DATBESONTWEIG"				, "label" : "[DATBESONTWEIG]"	, "type" : "string"},
+				{ "name": "DATBESONTWPLAN"				, "label" : "[DATBESONTWPLAN]"	, "type" : "string"},
+				{ "name": "In ZGB"						, "label" : "[ZGB]"				, "type" : "string"},
+				{ "name": "Beslissing"					, "label" : "[BESLISSING]"		, "type" : "string"},
+				{ "name": "BESLONTWPLAN"				, "label" : "[BESLONTWPLAN]"	, "type" : "string"},
+				{ "name": "ID"							, "label" : "[ID]"				, "type" : "string"}
+			]
+		},
+
 		"BROH:Patrimonium": {
 			"actiontype" : "GRID",
 			"title"      : "[ML]: [BESCHRIJVING]",

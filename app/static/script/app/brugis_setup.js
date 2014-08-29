@@ -349,7 +349,7 @@
             proxy: "../proxy/?url=",
             printService: "/geoserver/pdf/",
             about: {
-                title: "MyBruGIS v 1.1 Johann Joseph Fux",
+                title: "MyBruGIS v 1.1 Giulio Caccini",
                 "abstract": abstractText,
 				"help": localeHelp,
 		        contact: contactText

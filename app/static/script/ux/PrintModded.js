@@ -99,7 +99,6 @@ ux.plugins.Print = Ext.extend(gxp.plugins.Tool, {
                     beforeencodelegend: function(provider, jsonData, legend) {
                         if (legend && legend.ptype === "gxp_layermanager") {
                             var encodedLegends = [];
-
                             var output = legend.output;
                             if (output && output[0]) {
 								Ext.getCmp('west2').setActiveTab(1);
