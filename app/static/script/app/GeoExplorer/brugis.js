@@ -152,8 +152,8 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
 				targets: [{
 					source: 'BruGIS WMS - Geoserver',
 					name: "AATL:Parcelle_2013",
-					minResolution: 1.4000028082733496,		// 1/5.000
-					maxResolution: 0.014000028082733494,	// 1/50
+					minResolution: 0.014000028082733494,		// 1/50
+					maxResolution: 1.4000028082733496,			// 1/5.000
 					restrictedLayers: [
 						{ source: 'BruGIS WMS - Geoserver' , name: "AATL_DMS_PROT:Prises_actes" },
 						{ source: 'BruGIS WMS - Geoserver' , name: "POCDEV:POC_POLYGONES" }
@@ -200,7 +200,6 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
 				featureManager: "featuremanager",
 				outputConfig: {
 					id: "featuregrid",
-					autoExpand: true,
 					autoCollapse: true,
 					showTotalResults: true,
 					zoomOnSelect: true,
@@ -208,7 +207,7 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
 					selectOnMap: true
 				},
 				outputTarget: "south",
-				autoExpand: true,
+				autoExpand: false,
 				autoCollapse: true,
 				showTotalResults: true,
 				zoomOnSelect: true,
@@ -226,11 +225,11 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
 				needsAuthorization: true,
 				actionTarget: ["layers.tbar", "layers.contextMenu"],
 				appendActions: false
-			}, {
+			}/* , {
 				ptype: "ux_ReperageToolbox",
 				id: "myReperageManager",
 				actionTarget: {target: "paneltbar", index: 15}
-			}
+			} */
         ];
         delete config.apiKeys;
         GeoExplorer.Composer.superclass.constructor.apply(this, arguments);

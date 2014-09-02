@@ -149,8 +149,8 @@ ux.plugins.Preferences = Ext.extend(gxp.plugins.Tool, {
     /** private: method[constructor]
      */
     constructor: function(config) {
-		this.checkLocalStorage();
 		ux.plugins.Preferences.superclass.constructor.apply(this, arguments);
+		
     },
     
     /** api: method[addActions]
@@ -180,6 +180,8 @@ ux.plugins.Preferences = Ext.extend(gxp.plugins.Tool, {
     /** api: method[initPreferences]
      */
 	initPreferences: function() {
+		this.checkLocalStorage();
+		
 		if (this.validLocalStorage) {
 			var data = [];
 			// ! ne pas changer l'ordre dans les array !
