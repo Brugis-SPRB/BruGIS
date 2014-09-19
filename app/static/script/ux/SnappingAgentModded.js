@@ -167,10 +167,8 @@ ux.plugins.SnappingAgent = Ext.extend(gxp.plugins.Tool, {
         var min = snapTarget.minResolution || Number.NEGATIVE_INFINITY;
         var max = snapTarget.maxResolution || Number.POSITIVE_INFINITY;
         var resolution = this.target.mapPanel.map.getResolution();
-		//console.log(resolution);
-        if (min <= resolution && resolution < max) {
+		if (min <= resolution && resolution < max) {
 			if(this.target.authorizedRoles && this.target.authorizedRoles[0] == "ROLE_ADMINISTRATOR") {
-				//console.log("updateSnappingAgent");
 				//TODO unhack this - uses a non-API method (update) and sets a
 				// read-only property (visibility) to make the non-API method work
 				// in this context.
@@ -179,7 +177,6 @@ ux.plugins.SnappingAgent = Ext.extend(gxp.plugins.Tool, {
 				snapTarget.layer.strategies[0].update(options);
 				snapTarget.layer.visibility = visibility;
 			}
-            
         }
     },
     
@@ -305,7 +302,6 @@ ux.plugins.SnappingAgent = Ext.extend(gxp.plugins.Tool, {
             }
         }
     }
-
 
 });
 

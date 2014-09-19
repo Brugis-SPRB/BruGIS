@@ -97,18 +97,18 @@ ux.gfi.nl =  {
 		},
 		"BROH:Verkavelingen": {
 			"actiontype" : "GRID",
-			"title"		 : "[OBJET]",
+			"title"		 : "[REFSITEX]",
 			"attributes" : [
 				{ "name": "Naam"					, "label" : "[OBJET]"			, "type": "string"},
 				{ "name": "Adres"					, "label" : "[ADRES]"			, "type": "string"},
 				{ "name": "Aanvrager"				, "label" : "[AANVRAGER]"		, "type": "string"},
-				{ "name": "Datum betek"				, "label" : "[DATUMBETEK]"		, "type": "string"},
-				{ "name": "Staat"					, "label" : "[VERGAFGELEVERD]"	, "type": "string"},
-				{ "name": "NOVA referencie"			, "label" : "[REFNOVA]"			, "type": "string"},
-				{ "name": "SITEX referencie"		, "label" : "[REFSITEX]"		, "type": "string"},
-				{ "name": "Kadaster nummer"			, "label" : "[KADNUMMER]"		, "type": "string"},
+				{ "name": "Datum van betekening"	, "label" : "[DATUMBETEK]"		, "type": "string"},
+				{ "name": "Vergunning"				, "label" : "[VERGAFGELEVERD]"	, "type": "string"},
+				{ "name": "NOVA referentie"			, "label" : "[REFNOVA]"			, "type": "string"},
+				{ "name": "SITEX referentie"		, "label" : "[REFSITEX]"		, "type": "string"},
+				{ "name": "Kadastraal referentie"	, "label" : "[KADNUMMER]"		, "type": "string"},
 				{ "name": "ID"						, "label" : "[ID]"				, "type": "string"},
-				{ "name": "Eindtoestand"			, "label" : "[EINDTOESTAND]"	, "type": "string"}
+				{ "name": "Uiteindelijke toestand"	, "label" : "[EINDTOESTAND]"	, "type": "string"}
 			]
 		},
 		"BROH:BBP":{
@@ -129,51 +129,324 @@ ux.gfi.nl =  {
 				{ "name": "ID"							, "label" : "[ID]"				, "type" : "string"}
 			]
 		},
-		"BROH:Patrimonium": {
-			"actiontype" : "GRID",
-			"title"      : "[ML]: [BESCHRIJVING]",
-			"attributes" : [
-				{ "name": "Beschrijving"	, "label" : "[BESCHRIJVING]"	, "type" : "string"},
-				{ "name": "Gemeente"		, "label" : "[GEMEENTE]"		, "type" : "string"},
-				{ "name": "Adres"			, "label" : "[ADRES]"			, "type" : "string"},
-				{ "name": "Police nummer"	, "label" : "[NRPOLICE]"		, "type" : "string"},
-				{ "name": "Mon./Land./Geh."	, "label" : "[ML]"				, "type" : "string"},
-				{ "name": "Besch./Bewaar."	, "label" : "[CLBL]"			, "type" : "string"},
-				{ "name": "Datum DB"		, "label" : "[AD]"				, "type" : "string"},
-				{ "name": "Folder nummer"	, "label" : "[DMSFOLDERNR]"		, "type" : "string"},
-				{ "name": "Commentaar"		, "label" : "[COMMENTAAR]"		, "type" : "string"},
-				{ "name": "EXTPROT"			, "label" : "[EXTPROT]"			, "type" : "string"},
-				{ "name": "NB"				, "label" : "[NB]"				, "type" : "string"}
-			]
-		},
 		"BROH:Vrijwaringzone": {
 			"actiontype" : "GRID",
-			"title"      : "[ML] in [CLBL]: [Beschrijving]",
-			"attributes" : [
-				{ "name": "Beschrijving"	, "label" : "[Beschrijving]"	, "type" : "string"},
-				{ "name": "Gemeente"		, "label" : "[GEMEENTE]"		, "type" : "string"},
-				{ "name": "Adres"			, "label" : "[ADRES]"			, "type" : "string"},
-				{ "name": "Policie nummer"	, "label" : "[NRPOLICE]"		, "type" : "string"},
-				{ "name": "Mon./Site/Ens."	, "label" : "[ML]"				, "type" : "string"},
-				{ "name": "Class./Sauv."	, "label" : "[CLBL]"			, "type" : "string"},
-				{ "name": "AD datum"		, "label" : "[AD]"				, "type" : "string"},
-				{ "name": "Folder nummer"	, "label" : "[DMSFOLDERNR]"		, "type" : "string"},
-				{ "name": "Commentaar"		, "label" : "[COMMENTAAR]"		, "type" : "string"},
-				{ "name": "EXTPROT"			, "label" : "[EXTPROT]"			, "type" : "string"},
-				{ "name": "NB"				, "label" : "[NB]"				, "type" : "string"}
-			]
-		},
-		"AATL:Patrimoine_New": {
-			"actiontype" : "GRID",
+			"title"      : "Vrijwaringzone van [BESCHERMD_ALS_NL]: [BENAMING_PAT_VW_NL]",
 			"attributes" : [
 				{ "name": "Benaming"				, "label" : "[BENAMING_PAT_VW_NL]"								, "type" : "string"},
-				{ "name": "Adres van het goed"			, "label" : "[STRAAT_NL] [NUMMER_VAN], [POSTCODE] [GEMEENTE_NL]", "type" : "string"},
+				{ "name": "Adres van het goed"		, "label" : "[STRAAT_NL] [NUMMER_VAN], [POSTCODE] [GEMEENTE_NL]", "type" : "string"},
 				{ "name": "Type van vrijwaring"		, "label" : "[TYPE_VRIJWARING_NL]"								, "type" : "string"},
 				{ "name": "Gevrijwaard als"			, "label" : "[BESCHERMD_ALS_NL]"								, "type" : "string"},
-				{ "name": "Datum van het eerste	besluit"		, "label" : "[DATUM_AG1]"										, "type" : "string"},
-				{ "name": "Datatum van het laatste besluit"		, "label" : "[DATUM_AG2]"										, "type" : "string"},
-				{ "name": "Het eerste besluit"					, "label" : "[DOCUM_AG1]"										, "type" : "link"},
-				{ "name": "Het laatste besluit"					, "label" : "[DOCUM_AG2]"										, "type" : "link"},
+				{ "name": "Datum van het eerste	besluit"		, "label" : "[DATUM_AG1]"							, "type" : "string"},
+				{ "name": "Datatum van het laatste besluit"		, "label" : "[DATUM_AG2]"							, "type" : "string"},
+				{ "name": "Het eerste besluit"					, "label" : "[DOCUM_AG1]"							, "type" : "link"},
+				{ "name": "Het laatste besluit"					, "label" : "[DOCUM_AG2]"							, "type" : "link"},
+				{ "name": "Foto"					, "label" : "[FOTO]"											, "type" : "picture"},
+				{ "name": "Vrijwaringszone"			, "label" : "['Ja','Nee'][[VRIJWARINGSZONE]]"					, "type" : "eval"},
+				{ "name": "Referentie DML"			, "label" : "[NUMMER_DOSSIER]/[CODE_DOSSIER]"					, "type" : "string"}
+			]
+		},
+		"BROH:Patrimonium": {
+			"actiontype" : "GRID",
+			"title"      : "[BESCHERMD_ALS_NL]: [BENAMING_PAT_VW_NL]",
+			"attributes" : [
+				{ "name": "Benaming"				, "label" : "[BENAMING_PAT_VW_NL]"								, "type" : "string"},
+				{ "name": "Adres van het goed"		, "label" : "[STRAAT_NL] [NUMMER_VAN], [POSTCODE] [GEMEENTE_NL]", "type" : "string"},
+				{ "name": "Type van vrijwaring"		, "label" : "[TYPE_VRIJWARING_NL]"								, "type" : "string"},
+				{ "name": "Gevrijwaard als"			, "label" : "[BESCHERMD_ALS_NL]"								, "type" : "string"},
+				{ "name": "Datum van het eerste	besluit"		, "label" : "[DATUM_AG1]"							, "type" : "string"},
+				{ "name": "Datatum van het laatste besluit"		, "label" : "[DATUM_AG2]"							, "type" : "string"},
+				{ "name": "Het eerste besluit"					, "label" : "[DOCUM_AG1]"							, "type" : "link"},
+				{ "name": "Het laatste besluit"					, "label" : "[DOCUM_AG2]"							, "type" : "link"},
+				{ "name": "Foto"					, "label" : "[FOTO]"											, "type" : "picture"},
+				{ "name": "Vrijwaringszone"			, "label" : "['Ja','Nee'][[VRIJWARINGSZONE]]"					, "type" : "eval"},
+				{ "name": "Referentie DML"			, "label" : "[NUMMER_DOSSIER]/[CODE_DOSSIER]"					, "type" : "string"}
+			]
+		},
+		"BROH:Patrimonium": {
+			"actiontype" : "GRID",
+			"title"      : "[BESCHERMD_ALS_NL]: [BENAMING_PAT_VW_NL]",
+			"attributes" : [
+				{ "name": "Benaming"				, "label" : "[BENAMING_PAT_VW_NL]"								, "type" : "string"},
+				{ "name": "Adres van het goed"		, "label" : "[STRAAT_NL] [NUMMER_VAN], [POSTCODE] [GEMEENTE_NL]", "type" : "string"},
+				{ "name": "Type van vrijwaring"		, "label" : "[TYPE_VRIJWARING_NL]"								, "type" : "string"},
+				{ "name": "Gevrijwaard als"			, "label" : "[BESCHERMD_ALS_NL]"								, "type" : "string"},
+				{ "name": "Datum van het eerste	besluit"		, "label" : "[DATUM_AG1]"							, "type" : "string"},
+				{ "name": "Datatum van het laatste besluit"		, "label" : "[DATUM_AG2]"							, "type" : "string"},
+				{ "name": "Het eerste besluit"					, "label" : "[DOCUM_AG1]"							, "type" : "link"},
+				{ "name": "Het laatste besluit"					, "label" : "[DOCUM_AG2]"							, "type" : "link"},
+				{ "name": "Foto"					, "label" : "[FOTO]"											, "type" : "picture"},
+				{ "name": "Vrijwaringszone"			, "label" : "['Ja','Nee'][[VRIJWARINGSZONE]]"					, "type" : "eval"},
+				{ "name": "Referentie DML"			, "label" : "[NUMMER_DOSSIER]/[CODE_DOSSIER]"					, "type" : "string"}
+			]
+		},
+		"BROH:ARCHEOLOGISCHE_LANDSCHAP_BESCHERMING_AANVRAAG_PROCEDURE": {
+			"actiontype" : "GRID",
+			"title"      : "[BESCHERMD_ALS_NL]: [BENAMING_PAT_VW_NL]",
+			"attributes" : [
+				{ "name": "Benaming"				, "label" : "[BENAMING_PAT_VW_NL]"								, "type" : "string"},
+				{ "name": "Adres van het goed"		, "label" : "[STRAAT_NL] [NUMMER_VAN], [POSTCODE] [GEMEENTE_NL]", "type" : "string"},
+				{ "name": "Type van vrijwaring"		, "label" : "[TYPE_VRIJWARING_NL]"								, "type" : "string"},
+				{ "name": "Gevrijwaard als"			, "label" : "[BESCHERMD_ALS_NL]"								, "type" : "string"},
+				{ "name": "Datum van het eerste	besluit"		, "label" : "[DATUM_AG1]"							, "type" : "string"},
+				{ "name": "Datatum van het laatste besluit"		, "label" : "[DATUM_AG2]"							, "type" : "string"},
+				{ "name": "Het eerste besluit"					, "label" : "[DOCUM_AG1]"							, "type" : "link"},
+				{ "name": "Het laatste besluit"					, "label" : "[DOCUM_AG2]"							, "type" : "link"},
+				{ "name": "Foto"					, "label" : "[FOTO]"											, "type" : "picture"},
+				{ "name": "Vrijwaringszone"			, "label" : "['Ja','Nee'][[VRIJWARINGSZONE]]"					, "type" : "eval"},
+				{ "name": "Referentie DML"			, "label" : "[NUMMER_DOSSIER]/[CODE_DOSSIER]"					, "type" : "string"}
+			]
+		},
+		"BROH:ARCHEOLOGISCHE_LANDSCHAP_BESCHERMING_DEFINITIEF_BESLUIT": {
+			"actiontype" : "GRID",
+			"title"      : "[BESCHERMD_ALS_NL]: [BENAMING_PAT_VW_NL]",
+			"attributes" : [
+				{ "name": "Benaming"				, "label" : "[BENAMING_PAT_VW_NL]"								, "type" : "string"},
+				{ "name": "Adres van het goed"		, "label" : "[STRAAT_NL] [NUMMER_VAN], [POSTCODE] [GEMEENTE_NL]", "type" : "string"},
+				{ "name": "Type van vrijwaring"		, "label" : "[TYPE_VRIJWARING_NL]"								, "type" : "string"},
+				{ "name": "Gevrijwaard als"			, "label" : "[BESCHERMD_ALS_NL]"								, "type" : "string"},
+				{ "name": "Datum van het eerste	besluit"		, "label" : "[DATUM_AG1]"							, "type" : "string"},
+				{ "name": "Datatum van het laatste besluit"		, "label" : "[DATUM_AG2]"							, "type" : "string"},
+				{ "name": "Het eerste besluit"					, "label" : "[DOCUM_AG1]"							, "type" : "link"},
+				{ "name": "Het laatste besluit"					, "label" : "[DOCUM_AG2]"							, "type" : "link"},
+				{ "name": "Foto"					, "label" : "[FOTO]"											, "type" : "picture"},
+				{ "name": "Vrijwaringszone"			, "label" : "['Ja','Nee'][[VRIJWARINGSZONE]]"					, "type" : "eval"},
+				{ "name": "Referentie DML"			, "label" : "[NUMMER_DOSSIER]/[CODE_DOSSIER]"					, "type" : "string"}
+			]
+		},
+		"BROH:ARCHEOLOGISCHE_LANDSCHAP_BEWAARLIJST_AANVRAAG_PROCEDURE": {
+			"actiontype" : "GRID",
+			"title"      : "[BESCHERMD_ALS_NL]: [BENAMING_PAT_VW_NL]",
+			"attributes" : [
+				{ "name": "Benaming"				, "label" : "[BENAMING_PAT_VW_NL]"								, "type" : "string"},
+				{ "name": "Adres van het goed"		, "label" : "[STRAAT_NL] [NUMMER_VAN], [POSTCODE] [GEMEENTE_NL]", "type" : "string"},
+				{ "name": "Type van vrijwaring"		, "label" : "[TYPE_VRIJWARING_NL]"								, "type" : "string"},
+				{ "name": "Gevrijwaard als"			, "label" : "[BESCHERMD_ALS_NL]"								, "type" : "string"},
+				{ "name": "Datum van het eerste	besluit"		, "label" : "[DATUM_AG1]"							, "type" : "string"},
+				{ "name": "Datatum van het laatste besluit"		, "label" : "[DATUM_AG2]"							, "type" : "string"},
+				{ "name": "Het eerste besluit"					, "label" : "[DOCUM_AG1]"							, "type" : "link"},
+				{ "name": "Het laatste besluit"					, "label" : "[DOCUM_AG2]"							, "type" : "link"},
+				{ "name": "Foto"					, "label" : "[FOTO]"											, "type" : "picture"},
+				{ "name": "Vrijwaringszone"			, "label" : "['Ja','Nee'][[VRIJWARINGSZONE]]"					, "type" : "eval"},
+				{ "name": "Referentie DML"			, "label" : "[NUMMER_DOSSIER]/[CODE_DOSSIER]"					, "type" : "string"}
+			]
+		},
+		"BROH:ARCHEOLOGISCHE_LANDSCHAP_BEWAARLIJST_DEFINITIEF_BESLUIT": {
+			"actiontype" : "GRID",
+			"title"      : "[BESCHERMD_ALS_NL]: [BENAMING_PAT_VW_NL]",
+			"attributes" : [
+				{ "name": "Benaming"				, "label" : "[BENAMING_PAT_VW_NL]"								, "type" : "string"},
+				{ "name": "Adres van het goed"		, "label" : "[STRAAT_NL] [NUMMER_VAN], [POSTCODE] [GEMEENTE_NL]", "type" : "string"},
+				{ "name": "Type van vrijwaring"		, "label" : "[TYPE_VRIJWARING_NL]"								, "type" : "string"},
+				{ "name": "Gevrijwaard als"			, "label" : "[BESCHERMD_ALS_NL]"								, "type" : "string"},
+				{ "name": "Datum van het eerste	besluit"		, "label" : "[DATUM_AG1]"							, "type" : "string"},
+				{ "name": "Datatum van het laatste besluit"		, "label" : "[DATUM_AG2]"							, "type" : "string"},
+				{ "name": "Het eerste besluit"					, "label" : "[DOCUM_AG1]"							, "type" : "link"},
+				{ "name": "Het laatste besluit"					, "label" : "[DOCUM_AG2]"							, "type" : "link"},
+				{ "name": "Foto"					, "label" : "[FOTO]"											, "type" : "picture"},
+				{ "name": "Vrijwaringszone"			, "label" : "['Ja','Nee'][[VRIJWARINGSZONE]]"					, "type" : "eval"},
+				{ "name": "Referentie DML"			, "label" : "[NUMMER_DOSSIER]/[CODE_DOSSIER]"					, "type" : "string"}
+			]
+		},
+		"BROH:GEHEEL_BESCHERMING_AANVRAAG_PROCEDURE": {
+			"actiontype" : "GRID",
+			"title"      : "[BESCHERMD_ALS_NL]: [BENAMING_PAT_VW_NL]",
+			"attributes" : [
+				{ "name": "Benaming"				, "label" : "[BENAMING_PAT_VW_NL]"								, "type" : "string"},
+				{ "name": "Adres van het goed"		, "label" : "[STRAAT_NL] [NUMMER_VAN], [POSTCODE] [GEMEENTE_NL]", "type" : "string"},
+				{ "name": "Type van vrijwaring"		, "label" : "[TYPE_VRIJWARING_NL]"								, "type" : "string"},
+				{ "name": "Gevrijwaard als"			, "label" : "[BESCHERMD_ALS_NL]"								, "type" : "string"},
+				{ "name": "Datum van het eerste	besluit"		, "label" : "[DATUM_AG1]"							, "type" : "string"},
+				{ "name": "Datatum van het laatste besluit"		, "label" : "[DATUM_AG2]"							, "type" : "string"},
+				{ "name": "Het eerste besluit"					, "label" : "[DOCUM_AG1]"							, "type" : "link"},
+				{ "name": "Het laatste besluit"					, "label" : "[DOCUM_AG2]"							, "type" : "link"},
+				{ "name": "Foto"					, "label" : "[FOTO]"											, "type" : "picture"},
+				{ "name": "Vrijwaringszone"			, "label" : "['Ja','Nee'][[VRIJWARINGSZONE]]"					, "type" : "eval"},
+				{ "name": "Referentie DML"			, "label" : "[NUMMER_DOSSIER]/[CODE_DOSSIER]"					, "type" : "string"}
+			]
+		},
+		"BROH:GEHEEL_BESCHERMING_DEFINITIEF_BESLUIT": {
+			"actiontype" : "GRID",
+			"title"      : "[BESCHERMD_ALS_NL]: [BENAMING_PAT_VW_NL]",
+			"attributes" : [
+				{ "name": "Benaming"				, "label" : "[BENAMING_PAT_VW_NL]"								, "type" : "string"},
+				{ "name": "Adres van het goed"		, "label" : "[STRAAT_NL] [NUMMER_VAN], [POSTCODE] [GEMEENTE_NL]", "type" : "string"},
+				{ "name": "Type van vrijwaring"		, "label" : "[TYPE_VRIJWARING_NL]"								, "type" : "string"},
+				{ "name": "Gevrijwaard als"			, "label" : "[BESCHERMD_ALS_NL]"								, "type" : "string"},
+				{ "name": "Datum van het eerste	besluit"		, "label" : "[DATUM_AG1]"							, "type" : "string"},
+				{ "name": "Datatum van het laatste besluit"		, "label" : "[DATUM_AG2]"							, "type" : "string"},
+				{ "name": "Het eerste besluit"					, "label" : "[DOCUM_AG1]"							, "type" : "link"},
+				{ "name": "Het laatste besluit"					, "label" : "[DOCUM_AG2]"							, "type" : "link"},
+				{ "name": "Foto"					, "label" : "[FOTO]"											, "type" : "picture"},
+				{ "name": "Vrijwaringszone"			, "label" : "['Ja','Nee'][[VRIJWARINGSZONE]]"					, "type" : "eval"},
+				{ "name": "Referentie DML"			, "label" : "[NUMMER_DOSSIER]/[CODE_DOSSIER]"					, "type" : "string"}
+			]
+		},
+		"BROH:GEHEEL_BEWAARLIJST_AANVRAAG_PROCEDURE": {
+			"actiontype" : "GRID",
+			"title"      : "[BESCHERMD_ALS_NL]: [BENAMING_PAT_VW_NL]",
+			"attributes" : [
+				{ "name": "Benaming"				, "label" : "[BENAMING_PAT_VW_NL]"								, "type" : "string"},
+				{ "name": "Adres van het goed"		, "label" : "[STRAAT_NL] [NUMMER_VAN], [POSTCODE] [GEMEENTE_NL]", "type" : "string"},
+				{ "name": "Type van vrijwaring"		, "label" : "[TYPE_VRIJWARING_NL]"								, "type" : "string"},
+				{ "name": "Gevrijwaard als"			, "label" : "[BESCHERMD_ALS_NL]"								, "type" : "string"},
+				{ "name": "Datum van het eerste	besluit"		, "label" : "[DATUM_AG1]"							, "type" : "string"},
+				{ "name": "Datatum van het laatste besluit"		, "label" : "[DATUM_AG2]"							, "type" : "string"},
+				{ "name": "Het eerste besluit"					, "label" : "[DOCUM_AG1]"							, "type" : "link"},
+				{ "name": "Het laatste besluit"					, "label" : "[DOCUM_AG2]"							, "type" : "link"},
+				{ "name": "Foto"					, "label" : "[FOTO]"											, "type" : "picture"},
+				{ "name": "Vrijwaringszone"			, "label" : "['Ja','Nee'][[VRIJWARINGSZONE]]"					, "type" : "eval"},
+				{ "name": "Referentie DML"			, "label" : "[NUMMER_DOSSIER]/[CODE_DOSSIER]"					, "type" : "string"}
+			]
+		},
+		"BROH:GEHEEL_BEWAARLIJST_DEFINITIEF_BESLUIT": {
+			"actiontype" : "GRID",
+			"title"      : "[BESCHERMD_ALS_NL]: [BENAMING_PAT_VW_NL]",
+			"attributes" : [
+				{ "name": "Benaming"				, "label" : "[BENAMING_PAT_VW_NL]"								, "type" : "string"},
+				{ "name": "Adres van het goed"		, "label" : "[STRAAT_NL] [NUMMER_VAN], [POSTCODE] [GEMEENTE_NL]", "type" : "string"},
+				{ "name": "Type van vrijwaring"		, "label" : "[TYPE_VRIJWARING_NL]"								, "type" : "string"},
+				{ "name": "Gevrijwaard als"			, "label" : "[BESCHERMD_ALS_NL]"								, "type" : "string"},
+				{ "name": "Datum van het eerste	besluit"		, "label" : "[DATUM_AG1]"							, "type" : "string"},
+				{ "name": "Datatum van het laatste besluit"		, "label" : "[DATUM_AG2]"							, "type" : "string"},
+				{ "name": "Het eerste besluit"					, "label" : "[DOCUM_AG1]"							, "type" : "link"},
+				{ "name": "Het laatste besluit"					, "label" : "[DOCUM_AG2]"							, "type" : "link"},
+				{ "name": "Foto"					, "label" : "[FOTO]"											, "type" : "picture"},
+				{ "name": "Vrijwaringszone"			, "label" : "['Ja','Nee'][[VRIJWARINGSZONE]]"					, "type" : "eval"},
+				{ "name": "Referentie DML"			, "label" : "[NUMMER_DOSSIER]/[CODE_DOSSIER]"					, "type" : "string"}
+			]
+		},
+		"BROH:LANDSCHAP_BESCHERMING_AANVRAAG_PROCEDURE": {
+			"actiontype" : "GRID",
+			"title"      : "[BESCHERMD_ALS_NL]: [BENAMING_PAT_VW_NL]",
+			"attributes" : [
+				{ "name": "Benaming"				, "label" : "[BENAMING_PAT_VW_NL]"								, "type" : "string"},
+				{ "name": "Adres van het goed"		, "label" : "[STRAAT_NL] [NUMMER_VAN], [POSTCODE] [GEMEENTE_NL]", "type" : "string"},
+				{ "name": "Type van vrijwaring"		, "label" : "[TYPE_VRIJWARING_NL]"								, "type" : "string"},
+				{ "name": "Gevrijwaard als"			, "label" : "[BESCHERMD_ALS_NL]"								, "type" : "string"},
+				{ "name": "Datum van het eerste	besluit"		, "label" : "[DATUM_AG1]"							, "type" : "string"},
+				{ "name": "Datatum van het laatste besluit"		, "label" : "[DATUM_AG2]"							, "type" : "string"},
+				{ "name": "Het eerste besluit"					, "label" : "[DOCUM_AG1]"							, "type" : "link"},
+				{ "name": "Het laatste besluit"					, "label" : "[DOCUM_AG2]"							, "type" : "link"},
+				{ "name": "Foto"					, "label" : "[FOTO]"											, "type" : "picture"},
+				{ "name": "Vrijwaringszone"			, "label" : "['Ja','Nee'][[VRIJWARINGSZONE]]"					, "type" : "eval"},
+				{ "name": "Referentie DML"			, "label" : "[NUMMER_DOSSIER]/[CODE_DOSSIER]"					, "type" : "string"}
+			]
+		},
+		"BROH:LANDSCHAP_BESCHERMING_DEFINITIEF_BESLUIT": {
+			"actiontype" : "GRID",
+			"title"      : "[BESCHERMD_ALS_NL]: [BENAMING_PAT_VW_NL]",
+			"attributes" : [
+				{ "name": "Benaming"				, "label" : "[BENAMING_PAT_VW_NL]"								, "type" : "string"},
+				{ "name": "Adres van het goed"		, "label" : "[STRAAT_NL] [NUMMER_VAN], [POSTCODE] [GEMEENTE_NL]", "type" : "string"},
+				{ "name": "Type van vrijwaring"		, "label" : "[TYPE_VRIJWARING_NL]"								, "type" : "string"},
+				{ "name": "Gevrijwaard als"			, "label" : "[BESCHERMD_ALS_NL]"								, "type" : "string"},
+				{ "name": "Datum van het eerste	besluit"		, "label" : "[DATUM_AG1]"							, "type" : "string"},
+				{ "name": "Datatum van het laatste besluit"		, "label" : "[DATUM_AG2]"							, "type" : "string"},
+				{ "name": "Het eerste besluit"					, "label" : "[DOCUM_AG1]"							, "type" : "link"},
+				{ "name": "Het laatste besluit"					, "label" : "[DOCUM_AG2]"							, "type" : "link"},
+				{ "name": "Foto"					, "label" : "[FOTO]"											, "type" : "picture"},
+				{ "name": "Vrijwaringszone"			, "label" : "['Ja','Nee'][[VRIJWARINGSZONE]]"					, "type" : "eval"},
+				{ "name": "Referentie DML"			, "label" : "[NUMMER_DOSSIER]/[CODE_DOSSIER]"					, "type" : "string"}
+			]
+		},
+		"BROH:LANDSCHAP_BEWAARLIJST_AANVRAAG_PROCEDURE": {
+			"actiontype" : "GRID",
+			"title"      : "[BESCHERMD_ALS_NL]: [BENAMING_PAT_VW_NL]",
+			"attributes" : [
+				{ "name": "Benaming"				, "label" : "[BENAMING_PAT_VW_NL]"								, "type" : "string"},
+				{ "name": "Adres van het goed"		, "label" : "[STRAAT_NL] [NUMMER_VAN], [POSTCODE] [GEMEENTE_NL]", "type" : "string"},
+				{ "name": "Type van vrijwaring"		, "label" : "[TYPE_VRIJWARING_NL]"								, "type" : "string"},
+				{ "name": "Gevrijwaard als"			, "label" : "[BESCHERMD_ALS_NL]"								, "type" : "string"},
+				{ "name": "Datum van het eerste	besluit"		, "label" : "[DATUM_AG1]"							, "type" : "string"},
+				{ "name": "Datatum van het laatste besluit"		, "label" : "[DATUM_AG2]"							, "type" : "string"},
+				{ "name": "Het eerste besluit"					, "label" : "[DOCUM_AG1]"							, "type" : "link"},
+				{ "name": "Het laatste besluit"					, "label" : "[DOCUM_AG2]"							, "type" : "link"},
+				{ "name": "Foto"					, "label" : "[FOTO]"											, "type" : "picture"},
+				{ "name": "Vrijwaringszone"			, "label" : "['Ja','Nee'][[VRIJWARINGSZONE]]"					, "type" : "eval"},
+				{ "name": "Referentie DML"			, "label" : "[NUMMER_DOSSIER]/[CODE_DOSSIER]"					, "type" : "string"}
+			]
+		},
+		"BROH:LANDSCHAP_BEWAARLIJST_DEFINITIEF_BESLUIT": {
+			"actiontype" : "GRID",
+			"title"      : "[BESCHERMD_ALS_NL]: [BENAMING_PAT_VW_NL]",
+			"attributes" : [
+				{ "name": "Benaming"				, "label" : "[BENAMING_PAT_VW_NL]"								, "type" : "string"},
+				{ "name": "Adres van het goed"		, "label" : "[STRAAT_NL] [NUMMER_VAN], [POSTCODE] [GEMEENTE_NL]", "type" : "string"},
+				{ "name": "Type van vrijwaring"		, "label" : "[TYPE_VRIJWARING_NL]"								, "type" : "string"},
+				{ "name": "Gevrijwaard als"			, "label" : "[BESCHERMD_ALS_NL]"								, "type" : "string"},
+				{ "name": "Datum van het eerste	besluit"		, "label" : "[DATUM_AG1]"							, "type" : "string"},
+				{ "name": "Datatum van het laatste besluit"		, "label" : "[DATUM_AG2]"							, "type" : "string"},
+				{ "name": "Het eerste besluit"					, "label" : "[DOCUM_AG1]"							, "type" : "link"},
+				{ "name": "Het laatste besluit"					, "label" : "[DOCUM_AG2]"							, "type" : "link"},
+				{ "name": "Foto"					, "label" : "[FOTO]"											, "type" : "picture"},
+				{ "name": "Vrijwaringszone"			, "label" : "['Ja','Nee'][[VRIJWARINGSZONE]]"					, "type" : "eval"},
+				{ "name": "Referentie DML"			, "label" : "[NUMMER_DOSSIER]/[CODE_DOSSIER]"					, "type" : "string"}
+			]
+		},
+		"BROH:MONUMENT_BESCHERMING_AANVRAAG_PROCEDURE": {
+			"actiontype" : "GRID",
+			"title"      : "[BESCHERMD_ALS_NL]: [BENAMING_PAT_VW_NL]",
+			"attributes" : [
+				{ "name": "Benaming"				, "label" : "[BENAMING_PAT_VW_NL]"								, "type" : "string"},
+				{ "name": "Adres van het goed"		, "label" : "[STRAAT_NL] [NUMMER_VAN], [POSTCODE] [GEMEENTE_NL]", "type" : "string"},
+				{ "name": "Type van vrijwaring"		, "label" : "[TYPE_VRIJWARING_NL]"								, "type" : "string"},
+				{ "name": "Gevrijwaard als"			, "label" : "[BESCHERMD_ALS_NL]"								, "type" : "string"},
+				{ "name": "Datum van het eerste	besluit"		, "label" : "[DATUM_AG1]"							, "type" : "string"},
+				{ "name": "Datatum van het laatste besluit"		, "label" : "[DATUM_AG2]"							, "type" : "string"},
+				{ "name": "Het eerste besluit"					, "label" : "[DOCUM_AG1]"							, "type" : "link"},
+				{ "name": "Het laatste besluit"					, "label" : "[DOCUM_AG2]"							, "type" : "link"},
+				{ "name": "Foto"					, "label" : "[FOTO]"											, "type" : "picture"},
+				{ "name": "Vrijwaringszone"			, "label" : "['Ja','Nee'][[VRIJWARINGSZONE]]"					, "type" : "eval"},
+				{ "name": "Referentie DML"			, "label" : "[NUMMER_DOSSIER]/[CODE_DOSSIER]"					, "type" : "string"}
+			]
+		},
+		"BROH:MONUMENT_BEWAARLIJST_DEFINITIEF_BESLUIT": {
+			"actiontype" : "GRID",
+			"title"      : "[BESCHERMD_ALS_NL]: [BENAMING_PAT_VW_NL]",
+			"attributes" : [
+				{ "name": "Benaming"				, "label" : "[BENAMING_PAT_VW_NL]"								, "type" : "string"},
+				{ "name": "Adres van het goed"		, "label" : "[STRAAT_NL] [NUMMER_VAN], [POSTCODE] [GEMEENTE_NL]", "type" : "string"},
+				{ "name": "Type van vrijwaring"		, "label" : "[TYPE_VRIJWARING_NL]"								, "type" : "string"},
+				{ "name": "Gevrijwaard als"			, "label" : "[BESCHERMD_ALS_NL]"								, "type" : "string"},
+				{ "name": "Datum van het eerste	besluit"		, "label" : "[DATUM_AG1]"							, "type" : "string"},
+				{ "name": "Datatum van het laatste besluit"		, "label" : "[DATUM_AG2]"							, "type" : "string"},
+				{ "name": "Het eerste besluit"					, "label" : "[DOCUM_AG1]"							, "type" : "link"},
+				{ "name": "Het laatste besluit"					, "label" : "[DOCUM_AG2]"							, "type" : "link"},
+				{ "name": "Foto"					, "label" : "[FOTO]"											, "type" : "picture"},
+				{ "name": "Vrijwaringszone"			, "label" : "['Ja','Nee'][[VRIJWARINGSZONE]]"					, "type" : "eval"},
+				{ "name": "Referentie DML"			, "label" : "[NUMMER_DOSSIER]/[CODE_DOSSIER]"					, "type" : "string"}
+			]
+		},
+		"BROH:MONUMENT_BEWAARLIJST_AANVRAAG_PROCEDURE": {
+			"actiontype" : "GRID",
+			"title"      : "[BESCHERMD_ALS_NL]: [BENAMING_PAT_VW_NL]",
+			"attributes" : [
+				{ "name": "Benaming"				, "label" : "[BENAMING_PAT_VW_NL]"								, "type" : "string"},
+				{ "name": "Adres van het goed"		, "label" : "[STRAAT_NL] [NUMMER_VAN], [POSTCODE] [GEMEENTE_NL]", "type" : "string"},
+				{ "name": "Type van vrijwaring"		, "label" : "[TYPE_VRIJWARING_NL]"								, "type" : "string"},
+				{ "name": "Gevrijwaard als"			, "label" : "[BESCHERMD_ALS_NL]"								, "type" : "string"},
+				{ "name": "Datum van het eerste	besluit"		, "label" : "[DATUM_AG1]"							, "type" : "string"},
+				{ "name": "Datatum van het laatste besluit"		, "label" : "[DATUM_AG2]"							, "type" : "string"},
+				{ "name": "Het eerste besluit"					, "label" : "[DOCUM_AG1]"							, "type" : "link"},
+				{ "name": "Het laatste besluit"					, "label" : "[DOCUM_AG2]"							, "type" : "link"},
+				{ "name": "Foto"					, "label" : "[FOTO]"											, "type" : "picture"},
+				{ "name": "Vrijwaringszone"			, "label" : "['Ja','Nee'][[VRIJWARINGSZONE]]"					, "type" : "eval"},
+				{ "name": "Referentie DML"			, "label" : "[NUMMER_DOSSIER]/[CODE_DOSSIER]"					, "type" : "string"}
+			]
+		},
+		"BROH:MONUMENT_BEWAARLIJST_DEFINITIEF_BESLUIT": {
+			"actiontype" : "GRID",
+			"title"      : "[BESCHERMD_ALS_NL]: [BENAMING_PAT_VW_NL]",
+			"attributes" : [
+				{ "name": "Benaming"				, "label" : "[BENAMING_PAT_VW_NL]"								, "type" : "string"},
+				{ "name": "Adres van het goed"		, "label" : "[STRAAT_NL] [NUMMER_VAN], [POSTCODE] [GEMEENTE_NL]", "type" : "string"},
+				{ "name": "Type van vrijwaring"		, "label" : "[TYPE_VRIJWARING_NL]"								, "type" : "string"},
+				{ "name": "Gevrijwaard als"			, "label" : "[BESCHERMD_ALS_NL]"								, "type" : "string"},
+				{ "name": "Datum van het eerste	besluit"		, "label" : "[DATUM_AG1]"							, "type" : "string"},
+				{ "name": "Datatum van het laatste besluit"		, "label" : "[DATUM_AG2]"							, "type" : "string"},
+				{ "name": "Het eerste besluit"					, "label" : "[DOCUM_AG1]"							, "type" : "link"},
+				{ "name": "Het laatste besluit"					, "label" : "[DOCUM_AG2]"							, "type" : "link"},
 				{ "name": "Foto"					, "label" : "[FOTO]"											, "type" : "picture"},
 				{ "name": "Vrijwaringszone"			, "label" : "['Ja','Nee'][[VRIJWARINGSZONE]]"					, "type" : "eval"},
 				{ "name": "Referentie DML"			, "label" : "[NUMMER_DOSSIER]/[CODE_DOSSIER]"					, "type" : "string"}
@@ -265,5 +538,22 @@ ux.gfi.nl =  {
 			"actiontype" : "GRID",
 			"title"      : "Commune: [MUDN]",
 			"attributes" : []
+		},
+		"BROH:Goed_dat_beschermd_is_of_ingeschreven_op_de_bewaarlijst": {
+			"actiontype" : "GRID",
+			"title"      : "Goed: [BENAMING_PAT_VW_NL]",
+			"attributes" : [
+				{ "name": "Benaming"				, "label" : "[BENAMING_PAT_VW_NL]"								, "type" : "string"},
+				{ "name": "Adres van het goed"		, "label" : "[STRAAT_NL] [NUMMER_VAN], [POSTCODE] [GEMEENTE_NL]", "type" : "string"},
+				{ "name": "Type van vrijwaring"		, "label" : "[TYPE_VRIJWARING_NL]"								, "type" : "string"},
+				{ "name": "Gevrijwaard als"			, "label" : "[BESCHERMD_ALS_NL]"								, "type" : "string"},
+				{ "name": "Datum van het eerste	besluit"		, "label" : "[DATUM_AG1]"							, "type" : "string"},
+				{ "name": "Datatum van het laatste besluit"		, "label" : "[DATUM_AG2]"							, "type" : "string"},
+				{ "name": "Het eerste besluit"					, "label" : "[DOCUM_AG1]"							, "type" : "link"},
+				{ "name": "Het laatste besluit"					, "label" : "[DOCUM_AG2]"							, "type" : "link"},
+				{ "name": "Foto"					, "label" : "[FOTO]"											, "type" : "picture"},
+				{ "name": "Vrijwaringszone"			, "label" : "['Ja','Nee'][[VRIJWARINGSZONE]]"					, "type" : "eval"},
+				{ "name": "Referentie DML"			, "label" : "[NUMMER_DOSSIER]/[CODE_DOSSIER]"					, "type" : "string"}
+			]
 		}
 };

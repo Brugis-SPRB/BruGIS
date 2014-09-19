@@ -110,8 +110,7 @@ ux.plugins.WMSGetFeatureInfo = Ext.extend(gxp.plugins.Tool, {
             toggleGroup: this.toggleGroup,
             enableToggle: true,
             allowDepress: true,
-			//pressed: true,
-            toggleHandler: function(button, pressed) {
+			toggleHandler: function(button, pressed) {
                 for (var i = 0, len = info.controls.length; i < len; i++){
                     if (pressed) {
                         info.controls[i].activate();

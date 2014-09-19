@@ -141,8 +141,9 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
             }, {
                 ptype: "gxp_featureeditor",
                 featureManager: "featuremanager",
-                autoLoadFeature: false,
+                autoLoadFeature: true,
 				snappingAgent: "snapping-agent",
+				showSelectedOnly: false,
                 toggleGroup: this.toggleGroup,
                 actionTarget: {target: "paneltbar", index: 9}
             }, {
@@ -225,11 +226,11 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
 				needsAuthorization: true,
 				actionTarget: ["layers.tbar", "layers.contextMenu"],
 				appendActions: false
-			}/* , {
+			}, {
 				ptype: "ux_ReperageToolbox",
 				id: "myReperageManager",
 				actionTarget: {target: "paneltbar", index: 15}
-			} */
+			}
         ];
         delete config.apiKeys;
         GeoExplorer.Composer.superclass.constructor.apply(this, arguments);

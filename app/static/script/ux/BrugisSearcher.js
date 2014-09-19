@@ -52,10 +52,11 @@ ux.plugins.BrugisSearcher = Ext.extend(gxp.plugins.Tool, {
                 scope: this
             }
         }, this.outputConfig));
-		  
 		
 		var searchTypeCombo= new Ext.form.ComboBox({
-			store: ["ADR","CAD"],
+			id: "searchTypeCombo",
+			//store: ["ADR","CAD"],
+			store: ["ADR"],
 			typeAhead: true,
 			forceSelection: true,
 			width: 75,
@@ -67,6 +68,7 @@ ux.plugins.BrugisSearcher = Ext.extend(gxp.plugins.Tool, {
 					if(this.typecombo.getValue() == "ADR") {
 						this.cadtext.hide();
 						this.combo.show();
+						console.log(this.combo);
 					} else {
 						this.combo.hide();
 						this.cadtext.show();
@@ -75,7 +77,6 @@ ux.plugins.BrugisSearcher = Ext.extend(gxp.plugins.Tool, {
 			},
 			value : "ADR"
 		});
-		
 		
 		var cadTextField = new Ext.form.TextField({
 			hidden : true,
@@ -172,6 +173,7 @@ ux.plugins.BrugisSearcher = Ext.extend(gxp.plugins.Tool, {
 			Ext.Msg.alert('CAD Search', 'Your query did not return any result');
 		}
 	},
+	
     /** private: method[onComboSelect]
      *  Listener for combo's select event.
 	 *	DocG - 2014/02/20 update for zoom level based on extent returned by the CIRB webservice
@@ -221,22 +223,7 @@ ux.plugins.BrugisSearcher = Ext.extend(gxp.plugins.Tool, {
 				);
 				map.addLayer(vectorLayer);
 			}
-/* 			if (typeof extent=="object"){
-				map.zoomToExtent([extent.xmin, extent.ymin, extent.xmax, extent.ymax]);
-			}
-			else if (record.data.addressNumber === ""){
-				 var position = new OpenLayers.LonLat(
-						myPoint.x, myPoint.y
-				 );
-				map.setCenter(position, this.zoom);
-			}
-			else{
-				 var position = new OpenLayers.LonLat(
-						myPoint.x, myPoint.y
-				 );
-				map.setCenter(position, this.zoomToPolNum);
-			}
- */
+			
 			if (record.data.addressNumber === "") {
 				if (typeof extent=="object") {
 					map.zoomToExtent([extent.xmin, extent.ymin, extent.xmax, extent.ymax]);
@@ -254,7 +241,8 @@ ux.plugins.BrugisSearcher = Ext.extend(gxp.plugins.Tool, {
 				 );
 				map.setCenter(position, this.zoomToPolNum);
 			}
-        }
+			(function(){Ext.getCmp("searchTypeCombo").focus(true)}).defer(50, this);
+		}
     }
 });
 

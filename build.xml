@@ -167,6 +167,9 @@
         <java jar="${ringo}/run.jar" fork="true">
             <sysproperty key="app.debug" value="1"/>
             <sysproperty key="app.proxy.geoserver" value="${app.proxy.geoserver}"/>
+			<sysproperty key="app.debug" value="1"/>
+			<sysproperty key="app.preserveHost" value="1"/>
+			<sysproperty key="app.allowAuth" value="1"/>
             <sysproperty key="ringo.home" path="${ringo}"/>
             <sysproperty key="ringo.modulepath" path="externals"/>
             <arg path="app/main.js"/>
