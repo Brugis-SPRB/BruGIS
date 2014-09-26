@@ -151,7 +151,7 @@
 					ptype: "gxp_wmscsource"
 				},
 				'IBGE WMS - Mapserver': {
-					url: "http://wms.ibgebim.be/ibgewms?Service=WmS&Request=GetCapabilities",
+					url: "http://wms.ibgebim.be/ibgewms?",
 					ptype: "gxp_wmscsource",
 					version: "1.1.1"
 				},
@@ -184,7 +184,7 @@
 					ptype: "gxp_wmscsource"
 				},
 				'BIM WMS - Mapserver': {
-					url: "http://wms.ibgebim.be/bimwms?Service=WmS&Request=GetCapabilities",
+					url: "http://wms.ibgebim.be/ibgewms?",
 					ptype: "gxp_wmscsource",
 					version: "1.1.1"
 				},
@@ -217,7 +217,7 @@
 					ptype: "gxp_wmscsource"
 				},
 				'IBGE/BIM WMS - Mapserver': {
-					url: "http://wms.ibgebim.be/ibgewms?Service=WmS&Request=GetCapabilities",
+					url: "http://wms.ibgebim.be/ibgewms?",
 					ptype: "gxp_wmscsource",
 					version: "1.1.1"
 				},
@@ -252,7 +252,7 @@
 					ptype: "gxp_wmscsource"
 				},
 				'IBGE WMS - Mapserver': {
-					url: "http://wms.ibgebim.be/ibgewms?Service=WmS&Request=GetCapabilities",
+					url: "http://wms.ibgebim.be/ibgewms?",
 					version: "1.1.1",
 					ptype: "gxp_wmscsource"
 				},
@@ -285,7 +285,7 @@
 					ptype: "gxp_wmscsource"
 				},
 				'BIM WMS - Mapserver': {
-					url: "http://wms.ibgebim.be/bimwms?Service=WmS&Request=GetCapabilities",
+					url: "http://wms.ibgebim.be/bimwms?",
 					version: "1.1.1",
 					ptype: "gxp_wmscsource"
 				},
@@ -318,7 +318,7 @@
 					ptype: "gxp_wmscsource"
 				},
 				'IBGE/BIM WMS - Mapserver': {
-					url: "http://wms.ibgebim.be/ibgewms?Service=WmS&Request=GetCapabilities",
+					url: "http://wms.ibgebim.be/ibgewms?",
 					version: "1.1.1",
 					ptype: "gxp_wmscsource"
 				},
@@ -349,7 +349,7 @@
             proxy: "../proxy/?url=",
             printService: "/geoserver/pdf/",
             about: {
-                title: "MyBruGIS v 1.1 Giulio Caccini",
+                title: "MyBruGIS v 1.1 Ottorino Respighi",
                 "abstract": abstractText,
 				"help": localeHelp,
 		        contact: contactText

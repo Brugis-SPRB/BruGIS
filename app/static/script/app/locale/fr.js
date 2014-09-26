@@ -55,7 +55,7 @@ GeoExt.Lang.add("fr", {
 		newBrugisTitle: "Nouvelle version de BruGIS",
 		newBrugisMessagePart1: "BruGIS est passé à la version ",
 		newBrugisMessagePart2: ".\n Votre version courante est ",
-		newBrugisMessagePart3: ".\n Vous ne devez rien faire; votre carte est réinitialisée.",
+		newBrugisMessagePart3: ".\n Votre carte est réinitialisée. Taper Ctrl + F5 pour rafraîchir le site.",
 		wpsserver :"http://svappmavw019:8080/geoserver/wps",
 		//wpsserver :"http://mybrugis.irisnetlab.be/geoserver/wps",
 		//wpsserver :"http://www.mybrugis.irisnet.be/geoserver/wps",

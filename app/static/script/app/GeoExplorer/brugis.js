@@ -61,7 +61,7 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
 	newBrugisTitle: "New BruGIS version",
 	newBrugisMessagePart1: "The new BruGIS version is ",
 	newBrugisMessagePart2: ".\n your current version is ",
-	newBrugisMessagePart3: ".\n You have nothing to do, the default map shall be restored.",
+	newBrugisMessagePart3: ".\n The default map shall be restored. You should after that refresh the page by typing Ctrl + F5",
 	wpsserver :"http://svappmavw019:8080/geoserver/wps",
 	//wpsserver :"http://mybrugis.irisnetlab.be/geoserver/wps",
 	//wpsserver :"http://www.mybrugis.irisnet.be/geoserver/wps",
@@ -226,11 +226,11 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
 				needsAuthorization: true,
 				actionTarget: ["layers.tbar", "layers.contextMenu"],
 				appendActions: false
-			}, {
+			}/* , {
 				ptype: "ux_ReperageToolbox",
 				id: "myReperageManager",
 				actionTarget: {target: "paneltbar", index: 15}
-			}
+			} */
         ];
         delete config.apiKeys;
         GeoExplorer.Composer.superclass.constructor.apply(this, arguments);

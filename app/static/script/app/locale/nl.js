@@ -52,7 +52,7 @@ GeoExt.Lang.add("nl", {
 		newBrugisTitle: "Nieuwe versie van BruGIS",
 		newBrugisMessagePart1: "De nieuwe versie van BruGIS is ",
 		newBrugisMessagePart2: ".\n Uw versie is ",
-		newBrugisMessagePart3: ".\n De kaart word opnieuw geïnitializeerd.",
+		newBrugisMessagePart3: ".\n De kaart word opnieuw geïnitializeerd. Ctrl + F5 om de site te herladen",
 		wpsserver :"http://svappmavw019:8080/geoserver/wps",
 		//wpsserver :"http://mybrugis.irisnetlab.be/geoserver/wps",
 		//wpsserver :"http://www.mybrugis.irisnet.be/geoserver/wps",
