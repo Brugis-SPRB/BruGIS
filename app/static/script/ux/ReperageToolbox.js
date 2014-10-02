@@ -57,6 +57,7 @@ ux.plugins.ReperageToolbox = Ext.extend(gxp.plugins.Tool, {
 	
 	myReperageGridPanel_docx_tooltip: "Docx Download",
 	myReperageGridPanel_pdf_tooltip: "PDF Download",
+	myReperageGridPanel_recycle_tooltip: "restart Urbanalysis",
 
 	myReperageGridPanel_bbar_displayMsg: "Urbanalysis {0} - {1} of {2}",
 	myReperageGridPanel_bbar_emptyMsg: "No Urbanalysis",
@@ -198,7 +199,7 @@ ux.plugins.ReperageToolbox = Ext.extend(gxp.plugins.Tool, {
 		//Warning : the getfeatureInfo need a proxy defined in order to work
 		var parcelLayer = new OpenLayers.Layer.WMS("ParcelleReperage",
 			"http://www.mybrugis.irisnet.be/geoserver/wms", 
-			{'layers': 'AATL:Parcelle_2013', transparent: true, format: 'image/png'},
+			{'layers': 'AATL:Parcelle_2014', transparent: true, format: 'image/png'},
 			{isBaseLayer: false}
 		);
 		parcelLayer.displayInLayerSwitcher = false;
@@ -533,6 +534,10 @@ ux.plugins.ReperageToolbox = Ext.extend(gxp.plugins.Tool, {
 		lang = ((GeoExt.Lang.locale == "nl")||(GeoExt.Lang.locale == "nl-be")||(GeoExt.Lang.locale == "nl-BE")||(GeoExt.Lang.locale == "nl-nl"))?"NL":lang;
 		//lang = ((GeoExt.Lang.locale == "en")||(GeoExt.Lang.locale == "en-gb")||(GeoExt.Lang.locale == "en-us")||(GeoExt.Lang.locale == "en-US")||(GeoExt.Lang.locale == "en-en"))?"EN":lang;
 
+		var refreshReperageGridPanel = function(){
+			Ext.getCmp("myReperageGridPanel").getStore().reload();
+			Ext.getCmp("myReperageGridPanel").reload();
+		};
 		
 		this.myReperageGridPanel = new Ext.grid.GridPanel({
 			id: "myReperageGridPanel",
@@ -648,8 +653,39 @@ ux.plugins.ReperageToolbox = Ext.extend(gxp.plugins.Tool, {
 						}
 					}
 				]
-			}
-			],
+			},
+			{
+                xtype: 'actioncolumn',
+                width: 25,
+                sortable : false,
+                items: [{
+                	icon: '../theme/app/img/icon_refresh.png',
+					tooltip: this.myReperageGridPanel_recycle_tooltip,
+                	getClass : function( v, meta, record ) {
+                        if ( record.get('state') != "FAILED" ) {
+                            return 'x-hide-display';
+                        }
+                    },
+                    handler: function (grid, rowIndex, colIndex) {
+                    	var rec = grid.getStore().getAt(rowIndex);
+                    	if(rec.get('state') == "FAILED"){
+//                    		document.location.href='/WebReperage/detail?id='+rec.get('id');
+                    		Ext.Ajax.request({
+								type: "GET",
+                            	url: '/WebReperage/resources/WorkItems/restarting-'+rec.get('id'),
+                            	data: "{}",
+                            	contentType: "application/x-www-form-urlencoded; charset=utf-8",
+                            	success: this.refreshReperageGridPanel(),
+                    			error: function (msg, url, line) {
+                        			alert('Error: see console log');
+                        			console.log('msg = ' + msg + ', url = ' + url + ', line = ' + line);
+                        			this.refreshReperageGridPanel();
+                        		}
+                            });
+                    	}
+                    }
+                }]
+            }],
 			forceLayout: true,
 			
 			// paging bar on the bottom
@@ -680,7 +716,7 @@ ux.plugins.ReperageToolbox = Ext.extend(gxp.plugins.Tool, {
 			items: items,
 			layout: "border",
 			height: 450,
-			width: 710,
+			width: 725,
 			modal: true,
 			listeners: { 
 				hide: function(win) {

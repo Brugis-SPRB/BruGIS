@@ -82,9 +82,9 @@ GeoExt.Lang.add("fr", {
 		preferencesMenuText: 			"Préférences menu text",
 		availablePreferencesText: 		"Préférences",
 		ParametersText: 				"Préférences BruGIS",
-		sessionText: 					"Retenir la session",
-		keepSessionText: 				"Oui",
-		forgetSessionText: 				"Non",
+		sessionText: 					"Carte de démarrage",
+		keepSessionText: 				"Par défault",
+		forgetSessionText: 				"Aucune",
 		dataLegendText: 				"Onglet par défaut",
 		dataPanelText: 					"Données",
 		legendPanelText: 				"Légende",
@@ -125,7 +125,8 @@ GeoExt.Lang.add("fr", {
 		myReperageGridPanel_docx_tooltip: "Télécharger un Docx",
 		myReperageGridPanel_pdf_tooltip: "Télécharger un PDF",
 		myReperageGridPanel_bbar_displayMsg: "Urbanalyse {0} - {1} of {2}",
-		myReperageGridPanel_bbar_emptyMsg: "Aucune urbanalyse"
+		myReperageGridPanel_bbar_emptyMsg: "Aucune urbanalyse",
+		myReperageGridPanel_recycle_tooltip: "Relancer l'urbanalyse"
 	},
 	
 	"ux.plugins.MyMaps.prototype": {

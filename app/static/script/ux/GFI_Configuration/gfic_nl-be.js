@@ -163,23 +163,6 @@ ux.gfi.nl =  {
 				{ "name": "Referentie DML"			, "label" : "[NUMMER_DOSSIER]/[CODE_DOSSIER]"					, "type" : "string"}
 			]
 		},
-		"BROH:Patrimonium": {
-			"actiontype" : "GRID",
-			"title"      : "[BESCHERMD_ALS_NL]: [BENAMING_PAT_VW_NL]",
-			"attributes" : [
-				{ "name": "Benaming"				, "label" : "[BENAMING_PAT_VW_NL]"								, "type" : "string"},
-				{ "name": "Adres van het goed"		, "label" : "[STRAAT_NL] [NUMMER_VAN], [POSTCODE] [GEMEENTE_NL]", "type" : "string"},
-				{ "name": "Type van vrijwaring"		, "label" : "[TYPE_VRIJWARING_NL]"								, "type" : "string"},
-				{ "name": "Gevrijwaard als"			, "label" : "[BESCHERMD_ALS_NL]"								, "type" : "string"},
-				{ "name": "Datum van het eerste	besluit"		, "label" : "[DATUM_AG1]"							, "type" : "string"},
-				{ "name": "Datatum van het laatste besluit"		, "label" : "[DATUM_AG2]"							, "type" : "string"},
-				{ "name": "Het eerste besluit"					, "label" : "[DOCUM_AG1]"							, "type" : "link"},
-				{ "name": "Het laatste besluit"					, "label" : "[DOCUM_AG2]"							, "type" : "link"},
-				{ "name": "Foto"					, "label" : "[FOTO]"											, "type" : "picture"},
-				{ "name": "Vrijwaringszone"			, "label" : "['Ja','Nee'][[VRIJWARINGSZONE]]"					, "type" : "eval"},
-				{ "name": "Referentie DML"			, "label" : "[NUMMER_DOSSIER]/[CODE_DOSSIER]"					, "type" : "string"}
-			]
-		},
 		"BROH:ARCHEOLOGISCHE_LANDSCHAP_BESCHERMING_AANVRAAG_PROCEDURE": {
 			"actiontype" : "GRID",
 			"title"      : "[BESCHERMD_ALS_NL]: [BENAMING_PAT_VW_NL]",
@@ -401,7 +384,7 @@ ux.gfi.nl =  {
 				{ "name": "Referentie DML"			, "label" : "[NUMMER_DOSSIER]/[CODE_DOSSIER]"					, "type" : "string"}
 			]
 		},
-		"BROH:MONUMENT_BEWAARLIJST_DEFINITIEF_BESLUIT": {
+		"BROH:MONUMENT_BESCHERMING_DEFINITIEF_BESLUIT": {
 			"actiontype" : "GRID",
 			"title"      : "[BESCHERMD_ALS_NL]: [BENAMING_PAT_VW_NL]",
 			"attributes" : [
@@ -510,9 +493,9 @@ ux.gfi.nl =  {
 				{ "name": "SHAPE_AREA_IN_DB"	, "label" : "[SHAPE_AREA]"	, "type" : "string"}
 			]
 		},
-		"BROH:Perceel_2011": {
+		"BROH:Perceel_2014": {
 			"actiontype" : "GRID",
-			"title"      : "Perceel 2011: [CAPAKEY]",
+			"title"      : "Perceel 2014: [CAPAKEY]",
 			"attributes" : [
 				{ "name": "APNC_MAPC"			, "label" : "[APNC_MAPC]"	, "type" : "string"},
 				{ "name": "APNC_CADC"			, "label" : "[APNC_CADC]"	, "type" : "string"},

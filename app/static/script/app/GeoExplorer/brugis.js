@@ -79,6 +79,9 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
         this.addEvents(
 			"preferencesChange"
 		);
+		this.addEvents(
+			"mymapschange"
+		);
 		// Starting with this.authorizedRoles being undefined, which means no
         // authentication service is available
         if (config.authStatus === 401) {
@@ -226,11 +229,11 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
 				needsAuthorization: true,
 				actionTarget: ["layers.tbar", "layers.contextMenu"],
 				appendActions: false
-			}/* , {
+			}, {
 				ptype: "ux_ReperageToolbox",
 				id: "myReperageManager",
 				actionTarget: {target: "paneltbar", index: 15}
-			} */
+			}
         ];
         delete config.apiKeys;
         GeoExplorer.Composer.superclass.constructor.apply(this, arguments);
@@ -357,13 +360,9 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
 		var configStr = Ext.util.JSON.encode(this.app.getState());
 		configStr = configStr.replace("/geoserver/www/wmsaatl/geoweb_brugis.xml", "/geoserver/gwc/service/wms");
 		configStr = configStr.replace("/geoserver/www/wmsaatl/wmsc_brugis.xml", "/geoserver/ows");
-		if (localStorage) {
-			if(localStorage.getItem("session") && localStorage.getItem("session") == '1') {
-				// removing any currentMapState
-				if (localStorage.getItem('currentMapState')) {
-						localStorage.removeItem('currentMapState');
-					}
-			} else {
+		if (localStorage && localStorage.getItem("session")) {
+			var session = localStorage.getItem("session");
+			if(session == '0') {
 				if (localStorage.getItem("reset") && localStorage.getItem("reset") == 'True') {
 					// removing any currentMapState
 					localStorage.removeItem('reset');
@@ -373,6 +372,26 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
 				} else {
 					// saving current map state
 					localStorage.setItem('currentMapState', configStr);
+				}
+			} else if(session == '1') {
+				// removing any currentMapState
+				if (localStorage.getItem('currentMapState')) {
+						localStorage.removeItem('currentMapState');
+				}
+			} else {
+				// load one of my maps
+				if (localStorage.getItem('myMaps')) {
+					var MyMapsKeys = eval(localStorage.getItem("myMaps"));
+					var MyMapName = MyMapsKeys[parseInt(session)-2];
+					if (localStorage.getItem(MyMapName) && localStorage.getItem(MyMapName) !== null) {
+						localStorage.setItem('currentMapState', localStorage.getItem(MyMapName));
+					} else {
+						// removing any currentMapState in case the pointed mymap does not exist.
+						if (localStorage.getItem('currentMapState')) {
+							localStorage.removeItem('currentMapState');
+						}
+						localStorage.setItem("session",0)
+					}
 				}
 			}
 		}

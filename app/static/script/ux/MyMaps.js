@@ -141,7 +141,7 @@ ux.plugins.MyMaps = Ext.extend(gxp.plugins.Tool, {
 			var data = [];
 			if (localStorage.getItem("myMaps") !== null) {
 				this.myMapsKeys = eval(localStorage.getItem("myMaps"));
-				for (key in this.myMapsKeys) {
+				for (var key = 0; key < this.myMapsKeys.length; key++) {
 					var mapKey = this.myMapsKeys[key], 
 						mapContent = '', 
 						mapAbstract = '', 
@@ -258,7 +258,6 @@ ux.plugins.MyMaps = Ext.extend(gxp.plugins.Tool, {
 			new Ext.Button({
 				id: "saveButton",
                 text: this.saveMapText,
-                //iconCls: "gxp-icon-addlayers",
                 handler: this.saveMapState,
 				tooltip: this.saveButtonTooltipText,
                 scope : this
@@ -267,7 +266,6 @@ ux.plugins.MyMaps = Ext.extend(gxp.plugins.Tool, {
 				id: "deleteButton",
                 text: this.deleteMapText,
 				disabled: true,
-                //iconCls: "gxp-icon-addlayers",
                 handler: this.deleteMapState,
 				tooltip: this.deleteButtonTooltipText,
                 scope : this
@@ -276,7 +274,6 @@ ux.plugins.MyMaps = Ext.extend(gxp.plugins.Tool, {
 				id: "loadButton",
                 text: this.loadMapText,
 				disabled: true,
-                //iconCls: "gxp-icon-addlayers",
                 handler: this.loadMapState,
 				tooltip: this.loadButtonTooltipText,
                 scope : this
@@ -308,7 +305,8 @@ ux.plugins.MyMaps = Ext.extend(gxp.plugins.Tool, {
                     myMapsGridPanel.getSelectionModel().clearSelections();
                 },
                 scope: this
-            }
+            },
+			scope: this
         }, this.initialConfig.outputConfig));
         if (Cls === Ext.Panel) {
             this.addOutput(this.myMapsGrid);
@@ -429,16 +427,20 @@ ux.plugins.MyMaps = Ext.extend(gxp.plugins.Tool, {
 					var myMapsData = [];
 					var myMapsNames = [];
 					if (myMapsManager.myMaps.data) {
-						for (key in myMapsManager.myMaps.data.items) {
-							if (myMapsManager.myMaps.data.items[key] instanceof Ext.data.Record) {
+					
+						//console.log(myMapsManager.myMaps.data.length);
+						//console.log(myMapsManager.myMaps.data.items);
+						
+						for (var i=0; i < myMapsManager.myMaps.data.length; i++) {
+							if (myMapsManager.myMaps.data.items[i] instanceof Ext.data.Record) {
 								// On skip le record s'il a le même nom que le nouveau
 								// pour éviter les doublons
-								if (myMapsManager.myMaps.data.items[key].json[0] != myMapsManager.mapName) {
-									myMapsData.push([myMapsManager.myMaps.data.items[key].json[0],
-													 myMapsManager.myMaps.data.items[key].json[1],
-													 myMapsManager.myMaps.data.items[key].json[2],
-													 myMapsManager.myMaps.data.items[key].json[3]]);
-									myMapsNames.push(myMapsManager.myMaps.data.items[key].json[0]);
+								if (myMapsManager.myMaps.data.items[i].json[0] != myMapsManager.mapName) {
+									myMapsData.push([myMapsManager.myMaps.data.items[i].json[0],
+													 myMapsManager.myMaps.data.items[i].json[1],
+													 myMapsManager.myMaps.data.items[i].json[2],
+													 myMapsManager.myMaps.data.items[i].json[3]]);
+									myMapsNames.push(myMapsManager.myMaps.data.items[i].json[0]);
 								}
 							}
 						}
@@ -465,6 +467,7 @@ ux.plugins.MyMaps = Ext.extend(gxp.plugins.Tool, {
 				}
 				// On save, le select disparaît, les boutons soumis à select sont disablé
 				myMapsManager.deActivateButtons();
+				this.app.fireEvent("mymapschange");
 				win.close();
 			}
 			if (this.myMapsKeys.indexOf(this.mapName) != -1) {
@@ -546,6 +549,8 @@ ux.plugins.MyMaps = Ext.extend(gxp.plugins.Tool, {
 				myMapsGridPanel.store.remove(SelectedMapsToRemove[each]);
 			}
 			this.deActivateButtons();
+			//console.log(this);
+			this.target.fireEvent("mymapschange");
 		}
 		
 		Ext.Msg.show({

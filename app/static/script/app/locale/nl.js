@@ -78,9 +78,9 @@ GeoExt.Lang.add("nl", {
 		preferencesMenuText: 			"Opties menu text",
 		availablePreferencesText: 		"Opties",
 		ParametersText: 				"Opties BruGIS",
-		sessionText: 					"Sessie behouden",
-		keepSessionText: 				"Ja",
-		forgetSessionText: 				"Nee",
+		sessionText: 					"Kaart bij het starten",
+		keepSessionText: 				"Standaard kaart",
+		forgetSessionText: 				"Geen enkele kaart",
 		dataLegendText: 				"Tabblad",
 		dataPanelText: 					"Gegevens",
 		legendPanelText: 				"Legende",
@@ -118,10 +118,11 @@ GeoExt.Lang.add("nl", {
 		myReperageGridPanel_state_header: "Statut",
 		myReperageGridPanel_startdate_header: "Créé le :",
 		myReperageGridPanel_enddate_header: "Disponible jusqu'au :",
-		myReperageGridPanel_docx_tooltip: "Télécharger un Docx",
-		myReperageGridPanel_pdf_tooltip: "Télécharger un PDF",
+		myReperageGridPanel_docx_tooltip: "Download een Docx",
+		myReperageGridPanel_pdf_tooltip: "Download een PDF",
 		myReperageGridPanel_bbar_displayMsg: "Stedenanalysis {0} - {1} of {2}",
-		myReperageGridPanel_bbar_emptyMsg: "Aucune urbanalyse"
+		myReperageGridPanel_bbar_emptyMsg: "Geen Stedenanalysis",
+		myReperageGridPanel_recycle_tooltip: "Refresh stedenanalysis"
 	},
 	
 	"ux.plugins.MyMaps.prototype": {

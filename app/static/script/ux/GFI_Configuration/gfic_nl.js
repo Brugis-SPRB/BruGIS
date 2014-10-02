@@ -493,9 +493,9 @@ ux.gfi.nl =  {
 				{ "name": "SHAPE_AREA_IN_DB"	, "label" : "[SHAPE_AREA]"	, "type" : "string"}
 			]
 		},
-		"BROH:Perceel_2011": {
+		"BROH:Perceel_2014": {
 			"actiontype" : "GRID",
-			"title"      : "Perceel 2011: [CAPAKEY]",
+			"title"      : "Perceel 2014: [CAPAKEY]",
 			"attributes" : [
 				{ "name": "APNC_MAPC"			, "label" : "[APNC_MAPC]"	, "type" : "string"},
 				{ "name": "APNC_CADC"			, "label" : "[APNC_CADC]"	, "type" : "string"},

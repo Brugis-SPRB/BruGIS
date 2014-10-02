@@ -40,9 +40,9 @@ ux.plugins.Preferences = Ext.extend(gxp.plugins.Tool, {
 	availablePreferencesText: 	"Preferences",
 	ParametersText: 			"BruGIS interface parameters",
 	
-	sessionText: 				"session BruGIS",
-	keepSessionText: 			"Keep",
-	forgetSessionText: 			"Forget",
+	sessionText: 				"Starting map",
+	keepSessionText: 			"By default",
+	forgetSessionText: 			"Empty",
 	
 	dataLegendText: 			"Default panel",
 	dataPanelText: 				"Data",
@@ -150,7 +150,6 @@ ux.plugins.Preferences = Ext.extend(gxp.plugins.Tool, {
      */
     constructor: function(config) {
 		ux.plugins.Preferences.superclass.constructor.apply(this, arguments);
-		
     },
     
     /** api: method[addActions]
@@ -167,6 +166,7 @@ ux.plugins.Preferences = Ext.extend(gxp.plugins.Tool, {
 			scope: this
 		});
         var actions = ux.plugins.Preferences.superclass.addActions.apply(this, [options]);
+		
         this.target.on("ready", function() {
 			if (this.checkLocalStorage()) {
             actions[0].enable();
@@ -174,9 +174,38 @@ ux.plugins.Preferences = Ext.extend(gxp.plugins.Tool, {
 			actions[0].disable();
 			}
         }, this);
+		
+		this.target.on("mymapschange", function() {
+			//console.log('myMapsChange received');
+			this.initPreferences();
+		}, this);
+		
         return actions;
     },
 
+	/** api: method[]
+	 */
+	getMyMaps: function() {
+		if (localStorage.getItem("myMaps")) {
+			//console.log("check MyMaps");
+			return localMyMapsKeys = eval(localStorage.getItem("myMaps"));
+		} else {
+			return [];
+		}
+	},
+	
+	/** api: mathod[]
+	 */
+	completeSessionChoices: function(sessionChoices) {
+		myMapsNames = this.getMyMaps();
+		for (var i = 0; i < myMapsNames.length; i++) {
+			if (myMapsNames[i] !== '') {
+				sessionChoices.push(myMapsNames[i]);
+			}
+		}
+		return sessionChoices;
+	},
+	
     /** api: method[initPreferences]
      */
 	initPreferences: function() {
@@ -185,7 +214,7 @@ ux.plugins.Preferences = Ext.extend(gxp.plugins.Tool, {
 		if (this.validLocalStorage) {
 			var data = [];
 			// ! ne pas changer l'ordre dans les array !
-			this.sessionChoices 				= [this.keepSessionText, this.forgetSessionText];
+			this.sessionChoices 				= this.completeSessionChoices([this.keepSessionText, this.forgetSessionText]);
 			this.panelChoices   				= [this.legendPanelText, this.dataPanelText];
 			this.searchChoices  				= [this.multipleSearchText, this.uniqueSearchText];
 			this.showQueryToolChoices 			= [false, true];
@@ -258,11 +287,15 @@ ux.plugins.Preferences = Ext.extend(gxp.plugins.Tool, {
      */
     showPreferencesGrid: function() {
 		this.initPreferences();
+		/* if (this.preferencesWindow) {
+			this.preferencesWindow = false;
+		} */
         if(!this.preferencesWindow) {
             this.initPreferencesWindow();
         } else if (!(this.preferencesWindow instanceof Ext.Window)) {
             this.addOutput(this.preferencesWindow);
         }
+		//console.log(this.preferencesWindow);
 		this.preferencesWindow.show();
     },
 	
@@ -271,6 +304,7 @@ ux.plugins.Preferences = Ext.extend(gxp.plugins.Tool, {
      * Constructs a window with preferences
      */
     initPreferencesWindow: function() {
+		
         var preferencesPanel = new Ext.Panel({
 			id: "preferencesPanel",
             //store: this.preferencesStore,
@@ -295,7 +329,13 @@ ux.plugins.Preferences = Ext.extend(gxp.plugins.Tool, {
                         mode: "local",
                         triggerAction: "all",
                         editable: false,
+						queryMode: 'local',
                         listeners: {
+							/* expand: function() {
+								console.log(Ext.getCmp("session"));
+								//Ext.getCmp("session").store = this.sessionChoices;
+								//Ext.getCmp("session").value = this.sessionChoices[this.preferencesStore.reader.arrayData[0][1]];
+							}, */
                             select: this.updateChoice,
                             scope: this
                         }}]

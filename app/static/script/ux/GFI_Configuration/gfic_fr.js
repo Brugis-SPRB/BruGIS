@@ -544,9 +544,9 @@ ux.gfi.fr = {
 				{ "name": "SHAPE_AREA_IN_DB"	, "label" : "[SHAPE_AREA]"	, "type" : "string"}
 			]
 		},
-		"AATL:Parcelle_2011": {
+		"AATL:Parcelle_2014": {
 			"actiontype" : "GRID",
-			"title"      : "Parcelle 2011: [CAPAKEY]",
+			"title"      : "Parcelle 2014: [CAPAKEY]",
 			"attributes" : [
 				{ "name": "APNC_MAPC"			, "label" : "[APNC_MAPC]"	, "type" : "string"},
 				{ "name": "APNC_CADC"			, "label" : "[APNC_CADC]"	, "type" : "string"},
