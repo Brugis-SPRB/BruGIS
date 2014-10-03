@@ -349,15 +349,15 @@
             proxy: "../proxy/?url=",
             printService: "/geoserver/pdf/",
             about: {
-                title: "MyBruGIS v 1.1 Ottorino Respighi",
+                title: "MyBruGIS v 1.1 Christopher Simpson",
                 "abstract": abstractText,
 				"help": localeHelp,
 		        contact: contactText
             },
         	// layer sources
         	defaultSourceType: "gxp_wmssource",
-			//sources: sourcesDev,
-			sources: sourcesPrd,
+			sources: sourcesDev,
+			//sources: sourcesPrd,
 			
 		    map: {
 				id: "mymap", // id needed to reference map in portalConfig above

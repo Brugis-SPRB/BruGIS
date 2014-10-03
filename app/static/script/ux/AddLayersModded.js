@@ -593,6 +593,8 @@ ux.plugins.AddLayers = Ext.extend(gxp.plugins.Tool, {
         var layerStore = this.target.mapPanel.layers,
             extent, record, layer;
         for (var i=0, ii=records.length; i<ii; ++i) {
+			console.log("name: " + records[i].get("name"));
+            console.log("title: " + records[i].get("title"));
             record = source.createLayerRecord({
                 name: records[i].get("name"),// GVDS 15/10/2012
 				title: records[i].get("title"),// GVDS 15/10/2012

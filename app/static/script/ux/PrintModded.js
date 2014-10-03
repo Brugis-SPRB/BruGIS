@@ -276,8 +276,7 @@ ux.plugins.Print = Ext.extend(gxp.plugins.Tool, {
                             minWidth: 336,
                             //mapTitle: this.target.about && this.target.about["title"],
                             //comment: this.target.about && this.target.about["abstract"],
-							dateTime: "schtroumpftest",
-                            mapTitle: "",
+							mapTitle: "",
                             comment: "",
                             printMapPanel: {
                                 autoWidth: true,

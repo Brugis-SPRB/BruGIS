@@ -155,7 +155,7 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
 				autoActivate: false,
 				targets: [{
 					source: 'BruGIS WMS - Geoserver',
-					name: "AATL:Parcelle_2013",
+					name: "AATL:Parcelle_2014",
 					minResolution: 0.014000028082733494,		// 1/50
 					maxResolution: 1.4000028082733496,			// 1/5.000
 					restrictedLayers: [

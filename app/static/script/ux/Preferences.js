@@ -287,15 +287,17 @@ ux.plugins.Preferences = Ext.extend(gxp.plugins.Tool, {
      */
     showPreferencesGrid: function() {
 		this.initPreferences();
+		console.log(this);
 		/* if (this.preferencesWindow) {
 			this.preferencesWindow = false;
 		} */
         if(!this.preferencesWindow) {
+			console.log("initPreferencesWindow");
             this.initPreferencesWindow();
         } else if (!(this.preferencesWindow instanceof Ext.Window)) {
+			console.log("!(this.preferencesWindow instanceof Ext.Window)");
             this.addOutput(this.preferencesWindow);
         }
-		//console.log(this.preferencesWindow);
 		this.preferencesWindow.show();
     },
 	

@@ -201,11 +201,15 @@ ux.plugins.WMSTreeLegend = Ext.extend(gxp.plugins.Tool, {
 
 							var source = this.target.layerSources[this.sourceName];
 							var layer = node.attributes.layer; //type : Openlayer.WmsLayer
+							
+							console.log(layer);
+							
 							if(source.lazy) {
 								source.store.load({callback: (function() {
 									var record = source.createLayerRecord({ // createLayerRecord GVDS 18/12/2012
 										name : layer.params.LAYERS,
-										title: layer.metadata.title, // GVDS 15/10/2012
+										title: layer.params.LAYERS, // GVDS 03/10/2014
+										//title: layer.metadata.title, // GVDS 15/10/2012
 										url: layer.url,
 										source: source.id,
 										queryable: true
@@ -240,8 +244,8 @@ ux.plugins.WMSTreeLegend = Ext.extend(gxp.plugins.Tool, {
 							} else {
 								var record = source.createLayerRecord({ // createLayerRecord GVDS 18/12/2012
 									name : layer.params.LAYERS,
-									title: layer.metadata.title, // GVDS 15/10/2012
-									url: layer.url,
+									title: layer.params.LAYERS, // GVDS 03/10/2014
+									//title: layer.metadata.title, // GVDS 15/10/2012
 									source: source.id,
 									queryable: true
 								});
