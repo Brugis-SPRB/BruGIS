@@ -662,7 +662,7 @@ ux.plugins.ReperageToolbox = Ext.extend(gxp.plugins.Tool, {
                 	icon: '../theme/app/img/icon_refresh.png',
 					tooltip: this.myReperageGridPanel_recycle_tooltip,
                 	getClass : function( v, meta, record ) {
-                        if ( record.get('state') != "FAILED" ) {
+                        if ( record.get('state') != "FAILED" && record.get('state') != "REMOVE" ) {
                             return 'x-hide-display';
                         }
                     },
@@ -673,6 +673,21 @@ ux.plugins.ReperageToolbox = Ext.extend(gxp.plugins.Tool, {
                     		Ext.Ajax.request({
 								type: "GET",
                             	url: '/WebReperage/resources/WorkItems/restarting-'+rec.get('id'),
+                            	data: "{}",
+                            	contentType: "application/x-www-form-urlencoded; charset=utf-8",
+                            	success: this.refreshReperageGridPanel(),
+                    			error: function (msg, url, line) {
+                        			alert('Error: see console log');
+                        			console.log('msg = ' + msg + ', url = ' + url + ', line = ' + line);
+                        			this.refreshReperageGridPanel();
+                        		}
+                            });
+                    	}
+						if(rec.get('state') == "REMOVE"){
+//                    		document.location.href='/WebReperage/detail?id='+rec.get('id');
+                    		Ext.Ajax.request({
+								type: "GET",
+                            	url: '/WebReperage/resources/WorkItems/renew-'+rec.get('id'),
                             	data: "{}",
                             	contentType: "application/x-www-form-urlencoded; charset=utf-8",
                             	success: this.refreshReperageGridPanel(),
