@@ -683,7 +683,7 @@ ux.plugins.ReperageToolbox = Ext.extend(gxp.plugins.Tool, {
                         		}
                             });
                     	}
-						if(rec.get('state') == "REMOVE"){
+						if(rec.get('state') == "REMOVED"){
 //                    		document.location.href='/WebReperage/detail?id='+rec.get('id');
                     		Ext.Ajax.request({
 								type: "GET",
