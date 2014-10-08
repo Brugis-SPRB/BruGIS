@@ -659,6 +659,7 @@ ux.plugins.ReperageToolbox = Ext.extend(gxp.plugins.Tool, {
                 width: 25,
                 sortable : false,
                 items: [{
+					scope: this,
                 	icon: '../theme/app/img/icon_refresh.png',
 					tooltip: this.myReperageGridPanel_recycle_tooltip,
                 	getClass : function( v, meta, record ) {
@@ -670,29 +671,39 @@ ux.plugins.ReperageToolbox = Ext.extend(gxp.plugins.Tool, {
                     	var rec = grid.getStore().getAt(rowIndex);
                     	if(rec.get('state') == "FAILED"){
                             Ext.Ajax.request({
+								scope: this,
                             	type: "GET",
                             	url: '/WebReperage/resources/WorkItems/restarting-'+rec.get('id'),
                             	data: "{}",
                             	contentType: "application/x-www-form-urlencoded; charset=utf-8",
-                            	success: console.log("success"),
+                            	success: function (){
+                        			Ext.getCmp("myReperageGridPanel").getStore().reload();
+                        			Ext.getCmp("myReperageGridPanel").reload();
+								},	
                     			error: function (msg, url, line) {
                         			alert('Error: see console log');
                         			console.log('msg = ' + msg + ', url = ' + url + ', line = ' + line);
-                        			console.log("error");
+                        			Ext.getCmp("myReperageGridPanel").getStore().reload();
+                        			Ext.getCmp("myReperageGridPanel").reload();
                         		}
                             });
                     	}
 						if(rec.get('state') == "REMOVED"){
                             Ext.Ajax.request({
+								scope: this,
                             	type: "GET",
                             	url: '/WebReperage/resources/WorkItems/renew-'+rec.get('id'),
                             	data: "{}",
                             	contentType: "application/x-www-form-urlencoded; charset=utf-8",
-                            	success: console.log("success"),
+                            	success: function (){
+                        			Ext.getCmp("myReperageGridPanel").getStore().reload();
+                        			Ext.getCmp("myReperageGridPanel").reload();
+								},	
                     			error: function (msg, url, line) {
                         			alert('Error: see console log');
                         			console.log('msg = ' + msg + ', url = ' + url + ', line = ' + line);
-                        			console.log("error");
+                        			Ext.getCmp("myReperageGridPanel").getStore().reload();
+                        			Ext.getCmp("myReperageGridPanel").reload();
                         		}
                             });
                     	}
