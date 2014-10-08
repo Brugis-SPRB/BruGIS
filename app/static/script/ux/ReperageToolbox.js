@@ -659,7 +659,6 @@ ux.plugins.ReperageToolbox = Ext.extend(gxp.plugins.Tool, {
                 width: 25,
                 sortable : false,
                 items: [{
-					scope: this,
                 	icon: '../theme/app/img/icon_refresh.png',
 					tooltip: this.myReperageGridPanel_recycle_tooltip,
                 	getClass : function( v, meta, record ) {
@@ -671,7 +670,6 @@ ux.plugins.ReperageToolbox = Ext.extend(gxp.plugins.Tool, {
                     	var rec = grid.getStore().getAt(rowIndex);
                     	if(rec.get('state') == "FAILED"){
                             Ext.Ajax.request({
-								scope: this,
                             	type: "GET",
                             	url: '/WebReperage/resources/WorkItems/restarting-'+rec.get('id'),
                             	data: "{}",
@@ -690,7 +688,6 @@ ux.plugins.ReperageToolbox = Ext.extend(gxp.plugins.Tool, {
                     	}
 						if(rec.get('state') == "REMOVED"){
                             Ext.Ajax.request({
-								scope: this,
                             	type: "GET",
                             	url: '/WebReperage/resources/WorkItems/renew-'+rec.get('id'),
                             	data: "{}",
