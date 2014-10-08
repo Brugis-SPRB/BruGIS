@@ -565,7 +565,7 @@ ux.plugins.ReperageToolbox = Ext.extend(gxp.plugins.Tool, {
 			{
 				header: this.myReperageGridPanel_state_header,
 				dataIndex: 'state',
-				width: 65,
+				width: 70,
 				sortable: true,
 				renderer : function(value, metaData, record, row, col, store, gridView){
 					var newvalue;
@@ -662,24 +662,45 @@ ux.plugins.ReperageToolbox = Ext.extend(gxp.plugins.Tool, {
                 	icon: '../theme/app/img/icon_refresh.png',
 					tooltip: this.myReperageGridPanel_recycle_tooltip,
                 	getClass : function( v, meta, record ) {
-                        if ( record.get('state') != "FAILED" ) {
+                        if ( record.get('state') != "FAILED" && record.get('state') != "REMOVED" ) {
                             return 'x-hide-display';
                         }
                     },
                     handler: function (grid, rowIndex, colIndex) {
                     	var rec = grid.getStore().getAt(rowIndex);
                     	if(rec.get('state') == "FAILED"){
-//                    		document.location.href='/WebReperage/detail?id='+rec.get('id');
-                    		Ext.Ajax.request({
-								type: "GET",
+                            Ext.Ajax.request({
+                            	type: "GET",
                             	url: '/WebReperage/resources/WorkItems/restarting-'+rec.get('id'),
                             	data: "{}",
                             	contentType: "application/x-www-form-urlencoded; charset=utf-8",
-                            	success: this.refreshReperageGridPanel(),
+                            	success: function (){
+                        			Ext.getCmp("myReperageGridPanel").getStore().reload();
+                        			Ext.getCmp("myReperageGridPanel").reload();
+								},	
                     			error: function (msg, url, line) {
                         			alert('Error: see console log');
                         			console.log('msg = ' + msg + ', url = ' + url + ', line = ' + line);
-                        			this.refreshReperageGridPanel();
+                        			Ext.getCmp("myReperageGridPanel").getStore().reload();
+                        			Ext.getCmp("myReperageGridPanel").reload();
+                        		}
+                            });
+                    	}
+						if(rec.get('state') == "REMOVED"){
+                            Ext.Ajax.request({
+                            	type: "GET",
+                            	url: '/WebReperage/resources/WorkItems/renew-'+rec.get('id'),
+                            	data: "{}",
+                            	contentType: "application/x-www-form-urlencoded; charset=utf-8",
+                            	success: function (){
+                        			Ext.getCmp("myReperageGridPanel").getStore().reload();
+                        			Ext.getCmp("myReperageGridPanel").reload();
+								},	
+                    			error: function (msg, url, line) {
+                        			alert('Error: see console log');
+                        			console.log('msg = ' + msg + ', url = ' + url + ', line = ' + line);
+                        			Ext.getCmp("myReperageGridPanel").getStore().reload();
+                        			Ext.getCmp("myReperageGridPanel").reload();
                         		}
                             });
                     	}
