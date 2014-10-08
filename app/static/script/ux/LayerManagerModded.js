@@ -116,15 +116,17 @@ ux.plugins.LayerManager = Ext.extend(gxp.plugins.LayerTree, {
                     baseParams: Ext.apply({
                         transparent: true,
                         format: "image/png",
-                        legend_options: "fontAntiAliasing:true;fontSize:11;fontName:Arial"
+						legend_options: "fontAntiAliasing:true;fontSize:11;fontName:Arial"
                     }, baseParams),
                     layerRecord: this.target.mapPanel.layers.getByLayer(attr.layer),
-                    showTitle: false,
+					legendTitle: attr.layer.legendTitle,
+                    showTitle: true,
                     // custom class for css positioning
                     // see tree-legend.html
                     cls: "legend"
                 }
             });
+			this;
         }
     }
     

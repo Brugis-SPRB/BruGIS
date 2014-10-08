@@ -96,7 +96,7 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
 
         config.tools = [
             {
-                ptype: "gxp_layermanager",
+                ptype: "ux_layermanager",
 				id: "layermanager",
                 outputConfig: {
                     id: "layers",
@@ -362,7 +362,9 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
 		configStr = configStr.replace("/geoserver/www/wmsaatl/wmsc_brugis.xml", "/geoserver/ows");
 		if (localStorage && localStorage.getItem("session")) {
 			var session = localStorage.getItem("session");
+			//console.log(session);
 			if(session == '0') {
+				//console.log("session = 0");
 				if (localStorage.getItem("reset") && localStorage.getItem("reset") == 'True') {
 					// removing any currentMapState
 					localStorage.removeItem('reset');
@@ -374,11 +376,13 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
 					localStorage.setItem('currentMapState', configStr);
 				}
 			} else if(session == '1') {
+				//console.log("session = 1");
 				// removing any currentMapState
 				if (localStorage.getItem('currentMapState')) {
 						localStorage.removeItem('currentMapState');
 				}
 			} else {
+				//console.log("session > 1");
 				// load one of my maps
 				if (localStorage.getItem('myMaps')) {
 					var MyMapsKeys = eval(localStorage.getItem("myMaps"));
@@ -390,7 +394,7 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
 						if (localStorage.getItem('currentMapState')) {
 							localStorage.removeItem('currentMapState');
 						}
-						localStorage.setItem("session",0)
+						localStorage.setItem("session",0);
 					}
 				}
 			}
@@ -831,7 +835,6 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
 			/** DocG - 2014/04/01
 			 *  OpacitySlider is back!
 			 */
-
 			this.on("layerselectionchange", function(record) {
 					var opacitySlider = Ext.getCmp("gx_opacityslider");
 					if (!(!this.selectedLayer)){

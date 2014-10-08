@@ -90,7 +90,7 @@ ux.plugins.Preferences = Ext.extend(gxp.plugins.Tool, {
      *  ``Ext.data.ArrayStore``
      *  
      */
-	sessionChoices: [],
+	sessionChoices: false,
 
     /** api: config[panelChoices]
      *  ``Ext.data.ArrayStore``
@@ -210,11 +210,28 @@ ux.plugins.Preferences = Ext.extend(gxp.plugins.Tool, {
      */
 	initPreferences: function() {
 		this.checkLocalStorage();
-		
 		if (this.validLocalStorage) {
 			var data = [];
 			// ! ne pas changer l'ordre dans les array !
-			this.sessionChoices 				= this.completeSessionChoices([this.keepSessionText, this.forgetSessionText]);
+			// sessionChoicesData = la liste des champs de la combobox de session
+			var sessionChoicesData = this.completeSessionChoices([this.keepSessionText, this.forgetSessionText]);
+			// sessionChoicesDataForArrayStore = la liste des doublets pour construire un arraystore
+			var sessionChoicesDataForArrayStore = [];
+			for (i=0;i<sessionChoicesData.length;i++){
+				sessionChoicesDataForArrayStore.push([sessionChoicesData[i],sessionChoicesData[i]]);
+			}
+			// sessionChoices est un arrayStore, afin que le combobox soit mis à jour lors de l'update
+			// de sessionChoices via le mymapschange event.
+			if(!this.sessionChoices) {
+				this.sessionChoices = new Ext.data.ArrayStore({
+										fields: ["valueField", "displayField"],
+										data: sessionChoicesDataForArrayStore});
+			} else {
+				this.sessionChoices.loadData(sessionChoicesDataForArrayStore,false);
+				//this.sessionChoices.reload();
+			}
+			
+			// ! ne pas changer l'ordre dans les array !
 			this.panelChoices   				= [this.legendPanelText, this.dataPanelText];
 			this.searchChoices  				= [this.multipleSearchText, this.uniqueSearchText];
 			this.showQueryToolChoices 			= [false, true];
@@ -250,6 +267,28 @@ ux.plugins.Preferences = Ext.extend(gxp.plugins.Tool, {
 						localStorage.setItem(this.preferencesKeys[key], this.defaultPreferences[this.preferencesKeys[key]]);
 						localStorage.setItem("preferences", "['" + this.preferencesKeys.toString().replace(/\,/g,"','") + "']");
 					}
+					// en cas de contenu non numérique
+					if (isNaN(preferenceContent)) {
+						//console.log("Not a number for a preference content");
+						preferenceContent = this.defaultPreferences[this.preferencesKeys[key]];
+						localStorage.setItem(this.preferencesKeys[key], this.defaultPreferences[this.preferencesKeys[key]]);
+					} else {
+						// en cas de contenu numérique ne désignant rien de connu
+						// test pour voir si la valeur est acceptable selon le dictionnaire interne de choix.
+						// ! Il faut d'abord évaluer le type de dictionnaire interne (array ou arrayStore)
+						if (this.choicesPrefsKeysDic[this.preferencesKeys[key]] instanceof Ext.data.ArrayStore) {
+							if (preferenceContent >= this.choicesPrefsKeysDic[this.preferencesKeys[key]].reader.arrayData.length) {
+								//console.log("number but too high");
+								preferenceContent = this.defaultPreferences[this.preferencesKeys[key]];
+								localStorage.setItem(this.preferencesKeys[key], this.defaultPreferences[this.preferencesKeys[key]]);
+							}
+						} else {
+							if (preferenceContent >= this.choicesPrefsKeysDic[this.preferencesKeys[key]].length) {
+								preferenceContent = this.defaultPreferences[this.preferencesKeys[key]];
+								localStorage.setItem(this.preferencesKeys[key], this.defaultPreferences[this.preferencesKeys[key]]);
+							}
+						}
+					}
 					data.push([preferenceKey, preferenceContent]);
 				}
 			// Aucune prefs ne se trouve encore en localstorage
@@ -265,10 +304,17 @@ ux.plugins.Preferences = Ext.extend(gxp.plugins.Tool, {
 			// génération du store une fois data complété avec 
 			//		soit les defaults
 			//		soit le localstorage
-			this.preferencesStore = new Ext.data.ArrayStore({
-				fields: ["preferenceName", "preferencesContent"],
-				data: data
-			});
+			if(!this.preferencesStore)
+			{
+				this.preferencesStore = new Ext.data.ArrayStore({
+					fields: ["preferenceName", "preferencesContent"],
+					data: data
+				});
+			} else {
+				this.preferencesStore.loadData(data,false);
+			}
+			//console.log("in initPreferences, this.preferencesStore:");
+			//console.log(this.preferencesStore);
 		}
 	},
 
@@ -287,18 +333,14 @@ ux.plugins.Preferences = Ext.extend(gxp.plugins.Tool, {
      */
     showPreferencesGrid: function() {
 		this.initPreferences();
-		console.log(this);
-		/* if (this.preferencesWindow) {
-			this.preferencesWindow = false;
-		} */
-        if(!this.preferencesWindow) {
-			console.log("initPreferencesWindow");
-            this.initPreferencesWindow();
+		if(!this.preferencesWindow) {
+			this.initPreferencesWindow();
         } else if (!(this.preferencesWindow instanceof Ext.Window)) {
-			console.log("!(this.preferencesWindow instanceof Ext.Window)");
-            this.addOutput(this.preferencesWindow);
+			this.addOutput(this.preferencesWindow);
         }
 		this.preferencesWindow.show();
+		//console.log("in ShowPreferencesGrid, element session:");
+		//console.log(Ext.getCmp("session"));
     },
 	
     /**
@@ -306,7 +348,8 @@ ux.plugins.Preferences = Ext.extend(gxp.plugins.Tool, {
      * Constructs a window with preferences
      */
     initPreferencesWindow: function() {
-		
+		//console.log("in initPreferencesWindow");
+		//console.log(this.preferencesStore.reader.arrayData[0][1]);		
         var preferencesPanel = new Ext.Panel({
 			id: "preferencesPanel",
             //store: this.preferencesStore,
@@ -327,18 +370,15 @@ ux.plugins.Preferences = Ext.extend(gxp.plugins.Tool, {
                         width: 90,
                         listWidth: 150,
                         store: this.sessionChoices,
-                        value: this.sessionChoices[this.preferencesStore.reader.arrayData[0][1]],			// mettre la valeur trouvée en localstorage!!! à initialiser au début dans initPreferences
-                        mode: "local",
+                        value: this.sessionChoices.reader.arrayData[this.preferencesStore.reader.arrayData[0][1]][1],			// mettre la valeur trouvée en localstorage!!! à initialiser au début dans initPreferences
+                        valueField: "valueField",
+						displayField: "displayField",
+						autocreate: true,
+						mode: "local",
                         triggerAction: "all",
                         editable: false,
-						queryMode: 'local',
-                        listeners: {
-							/* expand: function() {
-								console.log(Ext.getCmp("session"));
-								//Ext.getCmp("session").store = this.sessionChoices;
-								//Ext.getCmp("session").value = this.sessionChoices[this.preferencesStore.reader.arrayData[0][1]];
-							}, */
-                            select: this.updateChoice,
+						listeners: {
+							select: this.updateChoice2,
                             scope: this
                         }}]
 					}, {
@@ -492,6 +532,28 @@ ux.plugins.Preferences = Ext.extend(gxp.plugins.Tool, {
 			//console.log("combo");
 			this.preferencesStore.data.items[this.preferencesStore.find("preferenceName",args.id)].data.preferencesContent = this.choicesPrefsKeysDic[args.id].indexOf(args.value);
 			localStorage.setItem(args.id, this.choicesPrefsKeysDic[args.id].indexOf(args.value));
+		} else if (args.xtype == "checkbox") {
+			//console.log("checkbox");
+			this.preferencesStore.data.items[this.preferencesStore.find("preferenceName",args.id)].data.preferencesContent = this.choicesPrefsKeysDic[args.id].indexOf(args.checked);
+			localStorage.setItem(args.id, this.choicesPrefsKeysDic[args.id].indexOf(args.checked));
+		}
+		this.target.fireEvent("preferencesChange");
+    },
+	
+    /** api: method[updateChoice]
+     * a very intelligent and advanced function.
+     */
+    updateChoice2: function(args) {
+		//console.log("in updateChoice2, args:");
+		//console.log(args);
+		if (args.xtype == "combo"){
+			//console.log("combo");
+			//console.log(this.choicesPrefsKeysDic);
+			//console.log(this.preferencesStore.data.items[this.preferencesStore.find("preferenceName",args.id)].data.preferencesContent);
+			this.preferencesStore.data.items[this.preferencesStore.find("preferenceName",args.id)].data.preferencesContent = this.choicesPrefsKeysDic[args.id].findExact(args.valueField, args.value);
+			//console.log(this.preferencesStore.data.items[this.preferencesStore.find("preferenceName",args.id)].data.preferencesContent);
+			localStorage.setItem(args.id, this.choicesPrefsKeysDic[args.id].findExact(args.valueField, args.value));
+			
 		} else if (args.xtype == "checkbox") {
 			//console.log("checkbox");
 			this.preferencesStore.data.items[this.preferencesStore.find("preferenceName",args.id)].data.preferencesContent = this.choicesPrefsKeysDic[args.id].indexOf(args.checked);

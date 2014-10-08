@@ -618,6 +618,7 @@ ux.plugins.AddLayers = Ext.extend(gxp.plugins.Tool, {
 			// DOCG 17/06/2013 On applique le resize au couches de fond, Alleluyah 2!!!!!!!!!!!!!!!
 			record.data.layer.transitionEffect = "resize";
 			record.data.layer.removeBackBufferDelay = 200;
+			record.data.layer.legendTitle = records[i].get("title");
         }
         if (extent) {
             this.target.mapPanel.map.zoomToExtent(extent);
