@@ -103,9 +103,12 @@ ux.plugins.LayerManager = Ext.extend(gxp.plugins.LayerTree, {
         }
         if (legendXType) {
             var baseParams;
-            if (loader && loader.baseAttrs && loader.baseAttrs.baseParams) {
+			if (loader && loader.baseAttrs && loader.baseAttrs.baseParams) {
                 baseParams = loader.baseAttrs.baseParams;
             }
+			
+			//console.log(attr.layer);
+            
             Ext.apply(attr, {
                 component: {
                     xtype: legendXType,
@@ -120,7 +123,7 @@ ux.plugins.LayerManager = Ext.extend(gxp.plugins.LayerTree, {
                     }, baseParams),
                     layerRecord: this.target.mapPanel.layers.getByLayer(attr.layer),
 					legendTitle: attr.layer.legendTitle,
-                    showTitle: true,
+                    showTitle: false,
                     // custom class for css positioning
                     // see tree-legend.html
                     cls: "legend"

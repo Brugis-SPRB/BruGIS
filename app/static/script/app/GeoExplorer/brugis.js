@@ -720,6 +720,7 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
 									bounds.top];
 					this.mapPanel.map.zoomToExtent(extend);
 					if (params.scale) {
+						//console.log("hé ben quoi?");
 						this.mapPanel.map.zoomToScale(params.scale, true);
 					}
 				} else if(params.qry && params.val && ux.qry && ux.qry[currentLangage] && ux.qry[currentLangage][params.qry]) {
