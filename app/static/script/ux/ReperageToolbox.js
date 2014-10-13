@@ -496,6 +496,7 @@ ux.plugins.ReperageToolbox = Ext.extend(gxp.plugins.Tool, {
 				}),
 				// store configs
 				autoDestroy: true,
+				pagesize: this.nbresultbypage,
 				//TODO: changer pour un Ext.data.ScriptTagProxy
 				proxy : new Ext.data.HttpProxy({
 					method: 'GET',
