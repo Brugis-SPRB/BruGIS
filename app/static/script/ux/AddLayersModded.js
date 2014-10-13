@@ -325,6 +325,7 @@ ux.plugins.AddLayers = Ext.extend(gxp.plugins.Tool, {
                     layerConfig.srs = mapProjection;
                     layerConfig.bbox = bbox.toArray();
                     var record = source.createLayerRecord(layerConfig);
+					console.log(record);
                     this.target.mapPanel.layers.add(record);
                 },
                 scope: this
@@ -593,8 +594,8 @@ ux.plugins.AddLayers = Ext.extend(gxp.plugins.Tool, {
         var layerStore = this.target.mapPanel.layers,
             extent, record, layer;
         for (var i=0, ii=records.length; i<ii; ++i) {
-			console.log("name: " + records[i].get("name"));
-            console.log("title: " + records[i].get("title"));
+			//console.log("name: " + records[i].get("name"));
+            //console.log("title: " + records[i].get("title"));
             record = source.createLayerRecord({
                 name: records[i].get("name"),// GVDS 15/10/2012
 				title: records[i].get("title"),// GVDS 15/10/2012
@@ -843,7 +844,6 @@ ux.plugins.AddLayers = Ext.extend(gxp.plugins.Tool, {
             tpl: new Ext.Template(this.expanderTemplateText)
         });
     }
-
 });
 
 Ext.preg(ux.plugins.AddLayers.prototype.ptype, ux.plugins.AddLayers);
