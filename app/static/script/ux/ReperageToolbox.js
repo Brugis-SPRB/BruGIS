@@ -126,6 +126,7 @@ ux.plugins.ReperageToolbox = Ext.extend(gxp.plugins.Tool, {
 			scope: this,
 			handler: function() {
 				this.showMyReperageGrid();
+				Ext.getCmp('reperageMenu').hide();
 			}
 		});
 		
@@ -237,13 +238,14 @@ ux.plugins.ReperageToolbox = Ext.extend(gxp.plugins.Tool, {
 		
 		//Reperage Form
 		var showReperageFormBtn = new Ext.Button({
+			scope: this,
 			tooltip: this.showReperageFormBtnToolTip,
 			iconCls: "ux-icon-sendreperage",
 			disabled: false,
 			handler: function() {
 				this.showReperageForm();
-			},
-			scope: this
+				Ext.getCmp('reperageMenu').hide();
+			}
 		});
 
 		var dataRepType = new Ext.data.JsonStore({
@@ -398,6 +400,7 @@ ux.plugins.ReperageToolbox = Ext.extend(gxp.plugins.Tool, {
 	addActions: function() {
 
 		var menuReperageTool = new Ext.menu.Menu({
+			scope: this,
 			id: 'reperageMenu',
 			showSeparator: false,
 			items: [
@@ -414,7 +417,6 @@ ux.plugins.ReperageToolbox = Ext.extend(gxp.plugins.Tool, {
 		});
 
 		this.button = new Ext.Button({
-			//hidden: this.hidden,
 			iconCls: "star",
 			tooltip: this.reperageButtonTip,
 			scope: this,
