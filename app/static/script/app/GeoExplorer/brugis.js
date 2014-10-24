@@ -451,7 +451,7 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
      *  Clear a certain cookie parameter.
      */
     clearCookieValue: function(param) {
-        document.cookie = param + "=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/";
+        document.cookie = param + "=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/geoserver";
     },
 
     /** private: method[getCookieValue]
