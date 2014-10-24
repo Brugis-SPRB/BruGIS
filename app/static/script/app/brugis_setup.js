@@ -349,7 +349,7 @@
             proxy: "../proxy/?url=",
             printService: "/geoserver/pdf/",
             about: {
-                title: "MyBruGIS v 1.1 Christopher Simpson",
+                title: "MyBruGIS v 1.1 Girolamo Frescobaldi",
                 "abstract": abstractText,
 				"help": localeHelp,
 		        contact: contactText
