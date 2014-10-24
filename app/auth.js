@@ -64,11 +64,12 @@ exports.authenticate = function(request) {
             }
         });
         exchange.wait();
-		print(exchange); 
+
         status = parseStatus(exchange);
+
         if (status === 200) {
             var cookie = exchange.headers.get("Set-Cookie");
-			print(exchange.headers.get("Set-Cookie"));
+
             if (cookie) {
                 token = cookie.split(";").shift();
             }

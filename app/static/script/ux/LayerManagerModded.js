@@ -107,8 +107,6 @@ ux.plugins.LayerManager = Ext.extend(gxp.plugins.LayerTree, {
                 baseParams = loader.baseAttrs.baseParams;
             }
 			
-			//console.log(attr.layer);
-            
             Ext.apply(attr, {
                 component: {
                     xtype: legendXType,

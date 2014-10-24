@@ -9,7 +9,7 @@ ux.qry.fr = {
 	},
 	"TAX_CAPA" : {
 		"source_name"   : "BruGIS WMS - Geoserver",
-		"layer_name"    : "AATL:parcelle_2012",
+		"layer_name"    : "AATL:Parcelle_2012",
 		"property_name" : "CAPAKEY"
 	},
 	"AR" : {

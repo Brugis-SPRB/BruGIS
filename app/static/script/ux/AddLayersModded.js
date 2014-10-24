@@ -325,7 +325,6 @@ ux.plugins.AddLayers = Ext.extend(gxp.plugins.Tool, {
                     layerConfig.srs = mapProjection;
                     layerConfig.bbox = bbox.toArray();
                     var record = source.createLayerRecord(layerConfig);
-					console.log(record);
                     this.target.mapPanel.layers.add(record);
                 },
                 scope: this
@@ -598,7 +597,7 @@ ux.plugins.AddLayers = Ext.extend(gxp.plugins.Tool, {
             //console.log("title: " + records[i].get("title"));
             record = source.createLayerRecord({
                 name: records[i].get("name"),// GVDS 15/10/2012
-				title: records[i].get("title"),// GVDS 15/10/2012
+				//title: records[i].get("title"),// GVDS 15/10/2012
                 source: source.id
             });
             if (record) {
@@ -619,7 +618,7 @@ ux.plugins.AddLayers = Ext.extend(gxp.plugins.Tool, {
 			// DOCG 17/06/2013 On applique le resize au couches de fond, Alleluyah 2!!!!!!!!!!!!!!!
 			record.data.layer.transitionEffect = "resize";
 			record.data.layer.removeBackBufferDelay = 200;
-			record.data.layer.legendTitle = records[i].get("title");
+			//record.data.layer.legendTitle = records[i].get("title");
         }
         if (extent) {
             this.target.mapPanel.map.zoomToExtent(extent);

@@ -148,7 +148,7 @@ ux.gfi.fr = {
 				{ "name": "Référence DMS"			, "label" : "[NUMMER_DOSSIER]/[CODE_DOSSIER]"					, "type" : "string"}
 			]
 		},
-		"AATL:MONUMENT_CLASSEMEMENT_ARRETE_DEFINITIF": {
+		"AATL:MONUMENT_CLASSEMENT_ARRETE_DEFINITIF": {
 			"actiontype" : "GRID",
 			"title"      : "[BESCHERMD_ALS_FR]: [BENAMING_PAT_VW_FR]",
 			"attributes" : [

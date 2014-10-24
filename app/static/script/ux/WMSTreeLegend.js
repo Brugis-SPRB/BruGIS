@@ -198,28 +198,21 @@ ux.plugins.WMSTreeLegend = Ext.extend(gxp.plugins.Tool, {
 					this.cheking = true;
 					if(this.reloading == false) {
 						if (checked === true) {
-
 							var source = this.target.layerSources[this.sourceName];
 							var layer = node.attributes.layer; //type : Openlayer.WmsLayer
-							
-							//console.log(layer);
 							
 							if(source.lazy) {
 								source.store.load({callback: (function() {
 									var record = source.createLayerRecord({ // createLayerRecord GVDS 18/12/2012
 										name : layer.params.LAYERS,
-										title: layer.params.LAYERS, 		// GVDS 03/10/2014
-										//title: layer.metadata.title, 		// GVDS 15/10/2012
 										url: layer.url,
 										source: source.id,
 										queryable: true
 									});
+			
 									// DOCG 17/06/2013 On applique le resize au couches de fond, Alleluyah 3!!!!!!!!!!!!!!!
 									record.data.layer.transitionEffect = "resize";
 									record.data.layer.removeBackBufferDelay = 200;
-									// DOCG 10/10/2014
-									record.data.layer.legendTitle = layer.metadata.title;
-									
 									
 									//NDU 24/01/2014 Fix Geowecache HIT Alignement de grid 
 									record.data.layer.addOptions({
@@ -241,22 +234,20 @@ ux.plugins.WMSTreeLegend = Ext.extend(gxp.plugins.Tool, {
 									// remember the record in the node for removing
 									node.attributes["record"] = record; 
 									
+									//console.log(record);
+									
 									this.target.mapPanel.layers.add(record);
 								}).createDelegate(this)});
 							} else {
-								console.log(layer);
+								//console.log(layer);
 								var record = source.createLayerRecord({ // createLayerRecord GVDS 18/12/2012
 									name : layer.params.LAYERS,
-									title: layer.params.LAYERS, // GVDS 03/10/2014
-									//title: layer.metadata.title, // GVDS 15/10/2012
 									source: source.id,
 									queryable: true
 								});
 								// DOCG 17/06/2013 On applique le resize au couches de fond, Alleluyah 3!!!!!!!!!!!!!!!
 								record.data.layer.transitionEffect = "resize";
 								record.data.layer.removeBackBufferDelay = 200;
-								// DOCG 10/10/2014 
-								record.data.layer.legendTitle = layer.metadata.title;
 								
 								// NDU 19/07/2013 Hack forcant l'utilisation de l'url du proposée dans le getcapabilities. voir bug #176
 								record.data.layer.url = layer.url;

@@ -96,7 +96,7 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
 
         config.tools = [
             {
-                ptype: "ux_layermanager",
+                ptype: "gxp_layermanager",
 				id: "layermanager",
                 outputConfig: {
                     id: "layers",
@@ -252,15 +252,17 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
     loadConfig: function(config) {
         var mapUrl = window.location.hash.substr(1);
         var match = mapUrl.match(/^maps\/(\d+)$/);
-		var query = Ext.urlDecode(document.location.search.substr(1));
-        if (match) {
+	var query = Ext.urlDecode(document.location.search.substr(1));
+        
+	if (match) {
             this.id = Number(match[1]);
             OpenLayers.Request.GET({
                 url: "../" + mapUrl,
                 success: function(request) {
                     var addConfig = Ext.util.JSON.decode(request.responseText);
                     // Don't use persisted tool configurations from old maps
-					this.originalSourcesUrl = config.sources["BruGIS WMS - Geoserver"].url;
+		    
+		    this.originalSourcesUrl = config.sources["BruGIS WMS - Geoserver"].url;
                     delete addConfig.tools;
                     this.applyConfig(Ext.applyIf(addConfig, config));
                 },
@@ -296,9 +298,28 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
 		} else if (localStorage && localStorage.getItem('mapStateToLoad')) {
 			var addConfig = Ext.util.JSON.decode(localStorage.getItem('mapStateToLoad'));
 			this.originalSourcesUrl = config.sources["BruGIS WMS - Geoserver"].url;
+			 /* Get the good url */
+			var mSource = config.sources["BruGIS WMS - Geoserver"];		
+				/*  We must create a layer configuration that ask to the source if the getcapabilities is loaded,
+					if not the wrong url is taken because WMS getMap is issued before the getcapabilities response 
+					override the getmap url */
+				var mLayer = [];
+				for(var ll=0; ll < addConfig.map.layers.length; ll++) {
+					var newLayer = {};
+					newLayer["source"] =  addConfig.map.layers[ll].source;
+					newLayer["name"] = addConfig.map.layers[ll].name;
+					newLayer["title"] = addConfig.map.layers[ll].title;
+					newLayer["id"] = addConfig.map.layers[ll].id;
+					newLayer["group"] = addConfig.map.layers[ll].group;
+					newLayer["fixed"] = addConfig.map.layers[ll].fixed;
+					newLayer["visibility"] = addConfig.map.layers[ll].visibility;
+					mLayer[ll] = newLayer;
+				}			
 			delete config.sources;
 			delete config.map;
 			addConfig = this.avoidTiledCacheUsage(addConfig, this.noTileslayersList);
+			addConfig.sources["BruGIS WMS - Geoserver"]=mSource;
+			addConfig.map.layers = mLayer;
 			Ext.applyIf(config, addConfig);
 			this.applyConfig(config);
 			localStorage.removeItem('mapStateToLoad');
@@ -306,15 +327,33 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
 			/** DocG - 13/03/2014
 			 *  Non chargement du currentMapState en cas de nouvelle version
 			 */
-            var addConfig = Ext.util.JSON.decode(localStorage.getItem('currentMapState'));
+			var addConfig = Ext.util.JSON.decode(localStorage.getItem('currentMapState'));
 			var titleFromConfig 	= config.about.title;
 			var titleFromAddConfig 	= addConfig.about.title;
 			if (titleFromConfig == titleFromAddConfig) {
 				this.originalSourcesUrl= config.sources["BruGIS WMS - Geoserver"].url;
+				var mSource = config.sources["BruGIS WMS - Geoserver"];		
+				/*  We must create a layer configuration that ask to the source if the getcapabilities is loaded,
+					if not the wrong url is taken because WMS getMap is issued before the getcapabilities response 
+					override the getmap url */
+				var mLayer = [];
+				for(var ll=0; ll < addConfig.map.layers.length; ll++) {
+					var newLayer = {};
+					newLayer["source"] =  addConfig.map.layers[ll].source;
+					newLayer["name"] = addConfig.map.layers[ll].name;
+					newLayer["title"] = addConfig.map.layers[ll].title;
+					newLayer["id"] = addConfig.map.layers[ll].id;
+					newLayer["group"] = addConfig.map.layers[ll].group;
+					newLayer["fixed"] = addConfig.map.layers[ll].fixed;
+					newLayer["visibility"] = addConfig.map.layers[ll].visibility;
+					mLayer[ll] = newLayer;
+				}
 				delete config.sources;
 				delete config.map;
-				addConfig = this.avoidTiledCacheUsage(addConfig, this.noTileslayersList);
-				Ext.apply(config, addConfig);
+				addConfig = this.avoidTiledCacheUsage(addConfig, this.noTileslayersList); //TODO NDU Still needed?
+				addConfig.sources["BruGIS WMS - Geoserver"]=mSource;
+				addConfig.map.layers = mLayer;
+				Ext.applyIf(config, addConfig);
 				this.applyConfig(config);
 			} else {
 				Ext.Msg.show({
@@ -643,8 +682,7 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
 					xtype: "container",
 					autoScroll: true
 				}]
-			}]/*,
-			tbar: this.addLocaleTools([])*/
+			}]
         });
 
         this.toolbar = new Ext.Toolbar({
@@ -736,12 +774,17 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
 					source.store.load({callback: (function() {
 						var myLayer = null;
 						
+						//console.log(layerName);
+						
 						store.each(function(rec,b,c) {
+							//console.log(rec.data.name);
 							if(rec.data.name == layerName) {
 								myLayer = rec;
 							}
 						},this);
 
+						//console.log(myLayer);
+						
 						var record = source.createLayerRecord({
 								name : myLayer.data.name,
 								title: myLayer.data.title,
@@ -752,7 +795,6 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
 						
 						// DocG - 20131002 - If some dedicated map is given too, the propertyValue contains a / at its end... Maybe good to suppress it?
 						propertyValue = propertyValue.replace("/", "");
-						
 						if(record != null) {	
 							theFeatureManager.on("layerchange",  function(rec,schema){
 									//Creation du spatial Filter
@@ -762,7 +804,10 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
 										value: propertyValue
 									});
 									
+									//console.log(ogcFilter);
+									
 									theFeatureManager.loadFeatures(ogcFilter, function(features){
+										//console.log("tugudu");
 										//Features sélectionnée et chargée, on zoom sur le résultat
 										var bounds, geom;
 										//console.log(bounds);
@@ -802,13 +847,13 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
 						}
 					}).createDelegate(this)});
 				}
-				if (params.json) {
+				/* if (params.json) {
 					console.log("Djééézonne");
 					console.log(params.json);
 					// stub du json
 					var jsonContent = "http://www.mybrugis.irisnet.be/geoserver/AATL/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=AATL:Affectations&maxFeatures=50&outputFormat=application%2Fjson";
 						
-					}
+				} */
 			}
 			
 			///////////////////////DOCG////////////////////////////////////////////
