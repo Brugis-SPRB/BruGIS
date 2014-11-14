@@ -166,6 +166,11 @@ ux.plugins.BrugisSearcher = Ext.extend(gxp.plugins.Tool, {
 				));
 				map.addLayer(vectorLayer);
 			}
+			
+			if(map.getLayersByName(this.searchLayerName).length > 0){
+				var vectorLayer = map.getLayersByName(this.searchLayerName)[0];
+				console.log(vectorLayer);
+			}
 			//the array should consist of four values (left, bottom, right, top)
 			map.zoomToExtent(result[0].data.bounds);
 		}
@@ -223,7 +228,7 @@ ux.plugins.BrugisSearcher = Ext.extend(gxp.plugins.Tool, {
 				);
 				map.addLayer(vectorLayer);
 			}
-			
+
 			if (record.data.addressNumber === "") {
 				if (typeof extent=="object") {
 					map.zoomToExtent([extent.xmin, extent.ymin, extent.xmax, extent.ymax]);

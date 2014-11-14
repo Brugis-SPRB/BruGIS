@@ -165,6 +165,7 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
 				}]
 			}, {
 				ptype: "ux_BrugisSearcher",
+				id: "ux_BrugisSearcher",
 				outputTarget: "paneltbar",
 				wpsserver : this.wpsserver,
 				outputConfig: {
@@ -491,7 +492,8 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
             icon: Ext.MessageBox.WARNING,
             fn: function(btn) {
                 if (btn === 'yes') {
-                    this.save(callback, this);
+                    //this.save(callback, this);
+					callback.call(this);
                 } else if (btn === 'no') {
                     callback.call(this);
                 }
@@ -891,6 +893,7 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
 					opacitySlider.setVisible(!(!this.selectedLayer));
 				}, this);
 			
+					///////////////////////DOCG////////////////////////////////////////////
 		});
 		
 		///////////////////////DOCG////////////////////////////////////////////
@@ -951,14 +954,30 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
 				showCoordinates(e);
 			}
         };
+		///////////////////////DOCG////////////////////////////////////////////
 	
 		///////////////////////DOCG////////////////////////////////////////////
 		// Qui l'eût cru! Il fallait encore un control.click...
 		var click = new OpenLayers.Control.Click({trigger: showPosition});
 		this.mapPanel.map.addControl(click);
 		click.activate();
+		///////////////////////DOCG////////////////////////////////////////////
 		
 		///////////////////////DOCG////////////////////////////////////////////
+		// Put back search layer on top of the layers if present
+		var putSearchLayerOnTop = function(e) {
+			var map = this.mapPanel.map;
+			var addedLayerIndex = map.getLayerIndex(e.layer);
+			var searchLayerName = app.tools.ux_BrugisSearcher.searchLayerName;
+			if(map.getLayersByName(searchLayerName).length > 0){
+				var vectorLayer = map.getLayersByName(searchLayerName)[0];
+				map.setLayerIndex(vectorLayer, map.getNumLayers());
+			}
+			this;
+		};
+		this.mapPanel.map.events.register("addlayer", this, putSearchLayerOnTop);
+		///////////////////////DOCG////////////////////////////////////////////
+		
 		
         this.mapPanelContainer = new Ext.Panel({
             layout: "card",
@@ -1002,7 +1021,7 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
         }];
 		
         GeoExplorer.superclass.initPortal.apply(this, arguments);
-		
+				
 		// DocG - 20140701 - update UI based on prefs conf
 		this.fireEvent("preferencesChange");
     },
