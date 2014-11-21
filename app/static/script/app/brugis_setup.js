@@ -183,10 +183,10 @@
 					version: "1.1.1",
 					ptype: "gxp_wmscsource"
 				},
-				'BIM WMS - Mapserver': {
-					url: "http://wms.ibgebim.be/ibgewms?",
-					ptype: "gxp_wmscsource",
-					version: "1.1.1"
+				'IGN': {
+					url: "http://www.ngi.be/cartoweb/1.0.0/WMTSCapabilities.xml",
+					version: "1.0.0",
+					ptype: "gxp_wmscsource"
 				},
 				'CIBG WMS - Geoserver': {
 					url: "http://geoserver.gis.irisnet.be/geoserver/ows",
@@ -368,6 +368,15 @@
 				maxExtent: [17646.52218435664, 21958.60926379636, 297198.78807110013, 245254.64733992796],
 				center: [149600, 170300],
 				zoom:2,
-				layers: baseMap
+				layers: baseMap,
+				controls:[
+                    new OpenLayers.Control.Navigation({
+                        zoomWheelOptions: {interval: 50, cumulative: false},
+                        dragPanOptions: {enableKinetic: false}
+                    }),
+                    new OpenLayers.Control.PanPanel(),
+                    new OpenLayers.Control.ZoomPanel(),
+                    new OpenLayers.Control.Attribution()
+                ]
 			}
         });

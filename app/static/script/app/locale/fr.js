@@ -124,7 +124,7 @@ GeoExt.Lang.add("fr", {
 		myReperageGridPanel_enddate_header: "Disponible jusqu'au :",
 		myReperageGridPanel_docx_tooltip: "Télécharger un Docx",
 		myReperageGridPanel_pdf_tooltip: "Télécharger un PDF",
-		myReperageGridPanel_bbar_displayMsg: "Urbanalyse {0} - {1} of {2}",
+		myReperageGridPanel_bbar_displayMsg: "Urbanalyse {0} - {1} sur {2}",
 		myReperageGridPanel_bbar_emptyMsg: "Aucune urbanalyse",
 		myReperageGridPanel_recycle_tooltip: "Relancer l'urbanalyse"
 	},

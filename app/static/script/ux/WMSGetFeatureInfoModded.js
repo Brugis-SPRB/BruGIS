@@ -22,7 +22,7 @@ OpenLayers.Control.RightClick = OpenLayers.Class(OpenLayers.Control, {
        defaultHandlerOptions: {
            'single': true,
            'double': true,
-           'pixelTolerance': 0,
+           'pixelTolerance': 10,
            'stopSingle': false,
            'stopDouble': false
        },
@@ -161,7 +161,7 @@ ux.plugins.WMSGetFeatureInfo = Ext.extend(gxp.plugins.Tool, {
                     infoFormat = this.format == "html" ? "text/html" : "application/vnd.ogc.gml";
                 }
 				
-				vendorParams["buffer"] = 0;
+				vendorParams["buffer"] = 10;
 				
                 var control = new OpenLayers.Control.WMSGetFeatureInfo(Ext.applyIf({
 					url: layer.url,
