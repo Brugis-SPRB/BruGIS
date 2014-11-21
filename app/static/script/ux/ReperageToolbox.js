@@ -184,8 +184,7 @@ ux.plugins.ReperageToolbox = Ext.extend(gxp.plugins.Tool, {
 			toggleGroup: toggleGroup,
 			scope: this,
 			toggleHandler: function(btn,state){
-				if (state) {
-					
+				if (state) {				
 					this.parcelLayer.setVisibility(true);
 					this.deleteOneFeatureControl.activate();
 				} else {
@@ -248,12 +247,23 @@ ux.plugins.ReperageToolbox = Ext.extend(gxp.plugins.Tool, {
 			}
 		});
 
+		
+		
 		var dataRepType = new Ext.data.JsonStore({
-			url: '/WebReperage/resources/ReperagesType',
+			proxy: new Ext.data.HttpProxy({
+				url: '/WebReperage/resources/ReperagesType',
+				method: 'GET'
+			}),
 			autoLoad: true,
 			idProperty: 'id',
 			fields: ['id',  'title']
 		});
+		
+		var brugisUserName = this.getBrugisUserName();
+		if(brugisUserName) {
+			dataRepType.setBaseParam('user',brugisUserName);
+		}
+		
 			
 		var reperageTypeCombo = new Ext.form.ComboBox({
 			fieldLabel: this.reperageTypeCombofieldLabel,
@@ -295,6 +305,10 @@ ux.plugins.ReperageToolbox = Ext.extend(gxp.plugins.Tool, {
 		var reperageUserHidden = new Ext.form.Hidden({
 			name: 'user'
 		});
+		
+		var brugisUserHidden = new Ext.form.Hidden({
+			name: 'brugisuser'
+		});
 
 		var reperageFormPanel = new Ext.FormPanel({
 			labelWidth: 100,
@@ -305,7 +319,8 @@ ux.plugins.ReperageToolbox = Ext.extend(gxp.plugins.Tool, {
 				reperageGeomHidden,
 				reperageAdrText,
 				reperageTypeCombo,
-				reperageUserHidden],
+				reperageUserHidden,
+				brugisUserHidden],
 			buttons : [{ 
 				text: 'OK',
 				minWidth: '75',
@@ -375,6 +390,8 @@ ux.plugins.ReperageToolbox = Ext.extend(gxp.plugins.Tool, {
 		this.reperageAdrText = reperageAdrText;
 		this.reperageGeomHidden = reperageGeomHidden;
 		this.reperageUserHidden = reperageUserHidden;
+		this.reperageTypeCombo = reperageTypeCombo;
+		this.brugisUserHidden = brugisUserHidden;
 		this.copyParcelFeatBtn = copyParcelFeatBtn;
 		this.copyParcelControl = copyParcelControl;
 		this.parcelLayer = parcelLayer;
@@ -777,6 +794,10 @@ ux.plugins.ReperageToolbox = Ext.extend(gxp.plugins.Tool, {
 	clearReperageLayer: function() {
 		this.reperageLayer.removeAllFeatures();	
 	},
+
+	getBrugisUserName : function() {
+		return this.getCookieValue("geoexplorer-user");
+	},
 	
 	//affiche le formulaire d'envoi de l'urbanalyse
 	showReperageForm: function() {
@@ -793,11 +814,23 @@ ux.plugins.ReperageToolbox = Ext.extend(gxp.plugins.Tool, {
 				break;
 			}
 		}
+
+		var brugisUserName = this.getBrugisUserName();
+		if(brugisUserName) {
+			this.reperageTypeCombo.store.setBaseParam('user',brugisUserName);
+			this.brugisUserHidden.setValue(brugisUserName);
+		} else {
+			this.reperageTypeCombo.store.setBaseParam('user','');
+			this.brugisUserHidden.setValue('');
+		}
+		this.reperageTypeCombo.store.reload();
+		
 		
 		//Get the geometry
 		this.reperageGeomHidden.setValue(this.serializeReperageArea());
 		//Get the user
 		this.reperageUserHidden.setValue(this.username);
+
 	},
 	
 	serializeReperageArea: function() {
@@ -845,7 +878,20 @@ ux.plugins.ReperageToolbox = Ext.extend(gxp.plugins.Tool, {
 		} else {
 			//console.log("Not A feature !");
 		}
-	}
+	},
+	
+	getCookieValue: function(param) {
+        var i, x, y, cookies = document.cookie.split(";");
+        for (i=0; i < cookies.length; i++) {
+            x = cookies[i].substr(0, cookies[i].indexOf("="));
+            y = cookies[i].substr(cookies[i].indexOf("=")+1);
+            x=x.replace(/^\s+|\s+$/g,"");
+            if (x==param) {
+                return unescape(y);
+            }
+        }
+        return null;
+    }
 });
 
 Ext.preg('ux_ReperageToolbox', ux.plugins.ReperageToolbox);
