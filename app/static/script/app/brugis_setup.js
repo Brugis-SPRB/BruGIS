@@ -85,7 +85,8 @@
 					id: "frBackground",
 					group:  "background",
 					fixed: true,
-					visibility: geoextLangFr
+					visibility: geoextLangFr,
+					buffer: 0
 				}]
 				:
 			(geoextLangNl)?
@@ -96,7 +97,8 @@
 					id: "nlBackground",
 					group:  "background",
 					fixed: true,
-					visibility: geoextLangNl
+					visibility: geoextLangNl,
+					buffer: 0
 				}]
 				:
 			(geoextLangEn)?
@@ -107,7 +109,8 @@
 					id: "frBackground",
 					group:  "background",
 					fixed: true,
-					visibility: geoextLangEn
+					visibility: geoextLangEn,
+					buffer: 0
 				}]
 				:[];
 				
@@ -371,7 +374,7 @@
 				layers: baseMap,
 				controls:[
                     new OpenLayers.Control.Navigation({
-                        zoomWheelOptions: {interval: 50, cumulative: false},
+                        zoomWheelOptions: {interval: 500, cumulative: true},
                         dragPanOptions: {enableKinetic: false}
                     }),
                     new OpenLayers.Control.PanPanel(),

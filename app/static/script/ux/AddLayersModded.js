@@ -598,7 +598,8 @@ ux.plugins.AddLayers = Ext.extend(gxp.plugins.Tool, {
             record = source.createLayerRecord({
                 name: records[i].get("name"),// GVDS 15/10/2012
 				//title: records[i].get("title"),// GVDS 15/10/2012
-                source: source.id
+                source: source.id,
+				buffer : 0
             });
             if (record) {
                 layer = record.getLayer();

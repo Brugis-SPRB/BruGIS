@@ -207,12 +207,13 @@ ux.plugins.WMSTreeLegend = Ext.extend(gxp.plugins.Tool, {
 										name : layer.params.LAYERS,
 										url: layer.url,
 										source: source.id,
-										queryable: true
+										queryable: true,
+										buffer: 0
 									});
 			
 									// DOCG 17/06/2013 On applique le resize au couches de fond, Alleluyah 3!!!!!!!!!!!!!!!
-									record.data.layer.transitionEffect = "resize";
-									record.data.layer.removeBackBufferDelay = 200;
+									//record.data.layer.transitionEffect = "resize";
+									//record.data.layer.removeBackBufferDelay = 200;
 									
 									//NDU 24/01/2014 Fix Geowecache HIT Alignement de grid 
 									record.data.layer.addOptions({
@@ -243,11 +244,12 @@ ux.plugins.WMSTreeLegend = Ext.extend(gxp.plugins.Tool, {
 								var record = source.createLayerRecord({ // createLayerRecord GVDS 18/12/2012
 									name : layer.params.LAYERS,
 									source: source.id,
-									queryable: true
+									queryable: true,
+									buffer: 0
 								});
 								// DOCG 17/06/2013 On applique le resize au couches de fond, Alleluyah 3!!!!!!!!!!!!!!!
-								record.data.layer.transitionEffect = "resize";
-								record.data.layer.removeBackBufferDelay = 200;
+								//record.data.layer.transitionEffect = "resize";
+								//record.data.layer.removeBackBufferDelay = 200;
 								
 								// NDU 19/07/2013 Hack forcant l'utilisation de l'url du proposée dans le getcapabilities. voir bug #176
 								record.data.layer.url = layer.url;

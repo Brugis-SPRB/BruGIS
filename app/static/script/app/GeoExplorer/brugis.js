@@ -106,7 +106,8 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
             }, {
                 ptype: "ux_addlayers",
                 actionTarget: "layers.tbar",
-                upload: true
+                upload: true,
+				search: false
             }, {
                 ptype: "gxp_removelayer",
                 actionTarget: ["layers.tbar", "layers.contextMenu"]
@@ -230,11 +231,11 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
 				needsAuthorization: true,
 				actionTarget: ["layers.tbar", "layers.contextMenu"],
 				appendActions: false
-			}, {
+			}/* , {
 				ptype: "ux_ReperageToolbox",
 				id: "myReperageManager",
 				actionTarget: {target: "paneltbar", index: 15}
-			}
+			} */
         ];
         delete config.apiKeys;
         GeoExplorer.Composer.superclass.constructor.apply(this, arguments);
@@ -484,6 +485,7 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
 				localStorage.setItem('reset', 'True');
 			}
             window.location.reload();
+			this.clearCookieValue(this.cookieParamName);
         };
         Ext.Msg.show({
             title: this.logoutConfirmTitle, 
@@ -644,6 +646,9 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
 				1:
 			(localStorage.getItem("defPanl") && localStorage.getItem("defPanl") == '1')?
 				0:1;
+				
+		console.log(this);
+			
         var westPanel = new Ext.Panel({
 			id: "west",
 			region: "west",
@@ -892,8 +897,7 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
 					}
 					opacitySlider.setVisible(!(!this.selectedLayer));
 				}, this);
-			
-					///////////////////////DOCG////////////////////////////////////////////
+			///////////////////////DOCG////////////////////////////////////////////
 
 		});
 		
@@ -963,6 +967,15 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
 		this.mapPanel.map.addControl(click);
 		click.activate();
 		///////////////////////DOCG////////////////////////////////////////////
+
+		/* var catalogueSearchPanel = new gxp.CatalogueSearchPanel({
+			map: this.map,
+			id: "catalogsearchpanel",
+			maxRecords: 10,
+			selectedSource: "BruGIS WMS - Geoserver",
+			sources: this.layerSources
+		}); */
+
 		
 		///////////////////////DOCG////////////////////////////////////////////
 		// Put back search layer on top of the layers if present
