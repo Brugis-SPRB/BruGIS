@@ -6,6 +6,7 @@
 		if (GeoExt.Lang) {
             GeoExt.Lang.set(OpenLayers.Util.getParameters()["locale"] || GeoExt.Lang.locale);
 		}
+				
         Ext.BLANK_IMAGE_URL = "../theme/app/img/blank.gif";
         OpenLayers.ImgPath = "../theme/app/img/";
 		OpenLayers.IMAGE_RELOAD_ATTEMPTS = 3;
@@ -20,26 +21,7 @@
 		if (!(geoextLangFr) == true && !(geoextLangNl) == true && !(geoextLangEn) == true){
 			geoextLangFr = true;
 		}
-		
-/*
-///////////////////////////////////////////////////////////////////////////////
-		if (OpenLayers.Util) {
-			//console.log(OpenLayers.Util.getBrowserName());
-			if (OpenLayers.Util.getBrowserName() == 'msie') {
-				// display a popup explaining the interest to install Firefox or Chrome :-)
-			}
-			else if (OpenLayers.Util.getBrowserName() == 'firefox') {
-				//console.log("good good");
-			}
-			else if (OpenLayers.Util.getBrowserName() == 'safari') {
-				//console.log("good good");
-			}
-			else if (OpenLayers.Util.getBrowserName() == 'chrome') {
-				//console.log("good good");
-			}
-		}
-///////////////////////////////////////////////////////////////////////////////
-*/	
+
 		var localeHelp = 
 			(geoextLangFr)?
 				"<a href='http://www.developpement-urbain.irisnet.be/cartographie/brugis/mode-demploi'target= '_blank'>Click here</a>"
@@ -144,12 +126,15 @@
 							scaleToResFactor * 100,
 							scaleToResFactor * 50
 							];
-							
+
+		var brugisWMSGeoserver_DEV = (globalAuthStatus != 404 && globalAuthStatus != 401) ? "http://svappmavw019:8080/geoserver/www/wmsaatl/wmsc_brugis.xml" :"http://svappmavw019:8080/geoserver/www/wmsaatl/wmsc_brugis.xml";	
+		var brugisWMSGeoserver_PRD = (globalAuthStatus != 404 && globalAuthStatus != 401) ? "/geoserver/www/wmsaatl/wmsc_brugis.xml" : "/geoserver/www/wmsaatl/wmsc_brugis.xml";					
+		//console.log(brugisWMSGeoserver_DEV);
 		var sourcesDev = 
 			(geoextLangFr)?
 			{
 				'BruGIS WMS - Geoserver': {
-					url: "http://svappmavw019:8080/geoserver/www/wmsaatl/wmsc_brugis.xml",
+					url: brugisWMSGeoserver_DEV,
 					version: "1.1.1",
 					ptype: "gxp_wmscsource"
 				},
@@ -182,7 +167,7 @@
 			(geoextLangNl)?
 			{
 				'BruGIS WMS - Geoserver': {
-					url: "http://svappmavw019:8080/geoserver/www/wmsaatl/wmsc_brugis.xml",
+					url: brugisWMSGeoserver_DEV,
 					version: "1.1.1",
 					ptype: "gxp_wmscsource"
 				},
@@ -215,7 +200,7 @@
 			(geoextLangEn)?
 			{
 				'BruGIS WMS - Geoserver': {
-					url: "http://svappmavw019:8080/geoserver/www/wmsaatl/wmsc_brugis.xml",
+					url: brugisWMSGeoserver_DEV ,
 					version: "1.1.1",
 					ptype: "gxp_wmscsource"
 				},
@@ -250,7 +235,7 @@
 			(geoextLangFr)?
 			{
 				'BruGIS WMS - Geoserver': {
-					url: "/geoserver/www/wmsaatl/wmsc_brugis.xml",
+					url: brugisWMSGeoserver_PRD,
 					version: "1.1.1",
 					ptype: "gxp_wmscsource"
 				},
@@ -283,7 +268,7 @@
 			(geoextLangNl)?
 			{
 				'BruGIS WMS - Geoserver': {
-					url: "/geoserver/www/wmsaatl/wmsc_brugis.xml",
+					url: brugisWMSGeoserver_PRD,
 					version: "1.1.1",
 					ptype: "gxp_wmscsource"
 				},
@@ -316,7 +301,7 @@
 			(geoextLangEn)?
 			{
 				'BruGIS WMS - Geoserver': {
-					url: "/geoserver/www/wmsaatl/wmsc_brugis.xml",
+					url: brugisWMSGeoserver_PRD,
 					version: "1.1.1",
 					ptype: "gxp_wmscsource"
 				},
@@ -374,7 +359,7 @@
 				layers: baseMap,
 				controls:[
                     new OpenLayers.Control.Navigation({
-                        zoomWheelOptions: {interval: 500, cumulative: true},
+                        zoomWheelOptions: {interval: 250, cumulative: true},
                         dragPanOptions: {enableKinetic: false}
                     }),
                     new OpenLayers.Control.PanPanel(),

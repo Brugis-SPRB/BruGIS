@@ -1,6 +1,7 @@
 var clientRequest = require("./httpclient").request;
 var Headers = require("ringo/utils/http").Headers;
 var objects = require("ringo/utils/objects");
+var log = require("ringo/logging").getLogger(module.id);
 
 function getGeoServerUrl(request) {
     var url = java.lang.System.getProperty("app.proxy.geoserver");
@@ -69,7 +70,7 @@ exports.authenticate = function(request) {
 
         if (status === 200) {
             var cookie = exchange.headers.get("Set-Cookie");
-
+			log.info("cookie {}",cookie);
             if (cookie) {
                 token = cookie.split(";").shift();
             }

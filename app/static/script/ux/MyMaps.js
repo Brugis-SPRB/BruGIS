@@ -420,7 +420,10 @@ ux.plugins.MyMaps = Ext.extend(gxp.plugins.Tool, {
 					var mapDateKey 	= myMapsManager.mapName + "_date";
 					
 					// sauvegarde du mapState courant
-					var configStr = Ext.util.JSON.encode(this.app.getState());
+					var myAppState = this.app.getState();
+					delete myAppState.map.controls;
+					
+					var configStr = Ext.util.JSON.encode(myAppState);
 					configStr = configStr.replace("/geoserver/www/wmsaatl/geoweb_brugis.xml", "/geoserver/gwc/service/wms");
 					configStr = configStr.replace("/geoserver/www/wmsaatl/wmsc_brugis.xml", "/geoserver/ows");
 					//bkp de this.myMaps

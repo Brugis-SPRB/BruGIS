@@ -121,10 +121,16 @@ function proxyPass(config) {
             password: outgoing.password,
             headers: outgoing.headers,
             data: outgoing.data,
-            async: false
+            async: true
         });
     }
-    exchange.wait();
+	
+	exchange.wait();
+	
+	if(exchange.status == 200) {
+	   console.log(exchange.content);
+	}	
+	
     var headers = new Headers(objects.clone(exchange.headers));
 	
 	headers.set("Cache-Control","no-cache, no-store, must-revalidate");

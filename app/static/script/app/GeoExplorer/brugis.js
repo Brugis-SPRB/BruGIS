@@ -82,6 +82,14 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
 		this.addEvents(
 			"mymapschange"
 		);
+		
+		var user = this.getCookieValue(this.cookieParamName);
+		if(user) {
+			this.authorizedRoles = ["ROLE_ADMINISTRATOR"];
+		} else {
+			this.authorizedRoles = [];
+		}
+		/*
 		// Starting with this.authorizedRoles being undefined, which means no
         // authentication service is available
         if (config.authStatus === 401) {
@@ -91,6 +99,7 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
             // user has authenticated
             this.authorizedRoles = ["ROLE_ADMINISTRATOR"];
         }
+		*/
         // should not be persisted or accessed again
         delete config.authStatus;
 
@@ -231,11 +240,11 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
 				needsAuthorization: true,
 				actionTarget: ["layers.tbar", "layers.contextMenu"],
 				appendActions: false
-			}/* , {
+			}, {
 				ptype: "ux_ReperageToolbox",
 				id: "myReperageManager",
 				actionTarget: {target: "paneltbar", index: 15}
-			} */
+			}
         ];
         delete config.apiKeys;
         GeoExplorer.Composer.superclass.constructor.apply(this, arguments);
@@ -453,7 +462,7 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
      *  Clear a certain cookie parameter.
      */
     clearCookieValue: function(param) {
-        document.cookie = param + "=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/geoserver";
+        document.cookie = param + "=; expires=Thu, 01 Jan 1970 00:00:00 GMT;";
     },
 
     /** private: method[getCookieValue]
@@ -485,7 +494,6 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
 				localStorage.setItem('reset', 'True');
 			}
             window.location.reload();
-			this.clearCookieValue(this.cookieParamName);
         };
         Ext.Msg.show({
             title: this.logoutConfirmTitle, 
@@ -563,6 +571,7 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
 
         function submitLogin() {
             panel.buttons[0].disable();
+			this.clearCookieValue("JSESSIONID");
             panel.getForm().submit({
                 success: function(form, action) {
                     Ext.getCmp('paneltbar').items.each(function(tool) {
@@ -647,8 +656,6 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
 			(localStorage.getItem("defPanl") && localStorage.getItem("defPanl") == '1')?
 				0:1;
 				
-		console.log(this);
-			
         var westPanel = new Ext.Panel({
 			id: "west",
 			region: "west",
