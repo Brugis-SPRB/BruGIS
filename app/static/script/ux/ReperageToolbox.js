@@ -93,6 +93,11 @@ ux.plugins.ReperageToolbox = Ext.extend(gxp.plugins.Tool, {
 	 */
 	myReperageGridPanel: false,
 	
+	/** api: config[myReperage]
+	 *  ``String``
+	 */
+	brugisWmsHost : "http://www.mybrugis.irisnet.be/geoserver/wms",
+	
 	/** private: method[constructor]
 	 */
 	constructor: function(config) {
@@ -110,6 +115,11 @@ ux.plugins.ReperageToolbox = Ext.extend(gxp.plugins.Tool, {
 	
 	init: function(target) {
 		this.id = "toolboxReperage";
+		
+		var brugisUrl = target.sources['BruGIS WMS - Geoserver'].url;
+		var parser = document.createElement('a');
+		parser.href = brugisUrl;
+		this.brugisWmsHost = "http://" + parser.host + "/geoserver/wms";
 		
 		if (this.validLocalStorage)
 			this.username = localStorage.getItem("repuser");
@@ -198,7 +208,7 @@ ux.plugins.ReperageToolbox = Ext.extend(gxp.plugins.Tool, {
 		//Copy 1 parcel
 		//Warning : the getfeatureInfo need a proxy defined in order to work
 		var parcelLayer = new OpenLayers.Layer.WMS("ParcelleReperage",
-			"http://www.mybrugis.irisnet.be/geoserver/wms", 
+			this.brugisWmsHost, 
 			{'layers': 'AATL:Parcelle_2014', transparent: true, format: 'image/png'},
 			{isBaseLayer: false}
 		);
@@ -206,7 +216,7 @@ ux.plugins.ReperageToolbox = Ext.extend(gxp.plugins.Tool, {
 		parcelLayer.setVisibility(false);
 		
 		var copyParcelControl = new OpenLayers.Control.WMSGetFeatureInfo({
-			url: 'http://www.mybrugis.irisnet.be/geoserver/wms', 
+			url: this.brugisWmsHost, 
 			title: 'Identify features by clicking',
 			layers: [parcelLayer],
 			queryVisible: true,

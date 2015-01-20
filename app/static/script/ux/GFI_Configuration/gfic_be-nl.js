@@ -32,12 +32,21 @@ ux.gfi.nl =  {
 		},
 		"BROH:Toegankelijkheid" : {
 			"actiontype" : "GRID",
+			"title"		 : "Toegankelijkheid: [ZONE]",
 			"attributes" : [
 				{ "name": "Soort zone"	, "label" : "[ZONE]"		, "type" : "string" }
 			]
 		},
 		"BROH:Uithangborden" : {
 			"actiontype" : "GRID",
+			"title"		 : "Uithangborden: [ZONE]",
+			"attributes" : [
+				{ "name": "Soort zone"	, "label" : "[ZONE]"		, "type" : "string" }
+			]
+		},
+		"BROH:Reclame" : {
+			"actiontype" : "GRID",
+			"title"		 : "Reclame: [ZONE]",
 			"attributes" : [
 				{ "name": "Soort zone"	, "label" : "[ZONE]"		, "type" : "string" }
 			]

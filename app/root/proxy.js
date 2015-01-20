@@ -121,17 +121,16 @@ function proxyPass(config) {
             password: outgoing.password,
             headers: outgoing.headers,
             data: outgoing.data,
-            async: true
+            async: false
         });
     }
+	var exchangeCompleted = exchange.wait();
 	
-	exchange.wait();
-	
-	if(exchange.status == 200) {
-	   console.log(exchange.content);
+	if(exchangeCompleted.status == 200) {
+	   //console.log(exchangeCompleted.content);
 	}	
 	
-    var headers = new Headers(objects.clone(exchange.headers));
+    var headers = new Headers(objects.clone(exchangeCompleted.headers));
 	
 	headers.set("Cache-Control","no-cache, no-store, must-revalidate");
 	headers.set("Pragma","no-cache");
@@ -143,9 +142,9 @@ function proxyPass(config) {
         headers.unset("Set-Cookie");
     }
     return {
-        status: exchange.status,
+        status: exchangeCompleted.status,
         headers: headers,
-        body: new MemoryStream(exchange.contentBytes)
+        body: new MemoryStream(exchangeCompleted.contentBytes)
     };
 }
 

@@ -40,6 +40,13 @@ ux.gfi.fr = {
 				{ "name": "Type de zone"	, "label" : "[ZONE]"		, "type" : "string" }
 			]
 		},
+		"AATL:Publicite" : {
+			"actiontype" : "GRID",
+			"title"		 : "Publicité: [ZONE]",
+			"attributes" : [
+				{ "name": "Type de zone"	, "label" : "[ZONE]"		, "type" : "string" }
+			]
+		},
 		"AATL_DMS_SITE_ARBR:Arbres_Remarquables": {
 			"actiontype" : "GRID",
 			"title"		 : "[tax_fr]",
