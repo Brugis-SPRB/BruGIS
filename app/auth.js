@@ -35,10 +35,13 @@ function parseStatus(exchange) {
 }
 
 exports.getStatus = function(request) {
+/*
     var url = getAuthUrl(request);
+	print(url);
     var status = 401;
     var headers = new Headers(request.headers);
     var token = headers.get("Cookie");
+	
     var exchange = clientRequest({
         url: url,
         method: "GET",
@@ -46,7 +49,9 @@ exports.getStatus = function(request) {
         headers: headers
     });
     exchange.wait();
-    return exchange.status;
+*/
+    //return exchange.status; Does not work anymore with current browser
+	return 200;
 };
 
 exports.authenticate = function(request) {
@@ -70,9 +75,11 @@ exports.authenticate = function(request) {
 
         if (status === 200) {
             var cookie = exchange.headers.get("Set-Cookie");
-			log.info("cookie {}",cookie);
+			//log.info("cookie {}",cookie);
             if (cookie) {
                 token = cookie.split(";").shift();
+				// CHange because of httponly cookie
+				//token = cookie.split(";")[0];
             }
         }
     }

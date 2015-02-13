@@ -408,8 +408,10 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
 	 */
 	saveMapStateOnExit: function() {
 		var configStr = Ext.util.JSON.encode(this.app.getState());
+	
 		configStr = configStr.replace("/geoserver/www/wmsaatl/geoweb_brugis.xml", "/geoserver/gwc/service/wms");
 		configStr = configStr.replace("/geoserver/www/wmsaatl/wmsc_brugis.xml", "/geoserver/ows");
+		
 		if (localStorage && localStorage.getItem("session")) {
 			var session = localStorage.getItem("session");
 			//console.log(session);
@@ -1240,6 +1242,9 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
      */ 
     save: function(callback, scope) {
         var configStr = Ext.util.JSON.encode(this.getState());
+		configStr = configStr.replace("/geoserver/www/wmsaatl/geoweb_brugis.xml", "/geoserver/gwc/service/wms");
+		configStr = configStr.replace("/geoserver/www/wmsaatl/wmsc_brugis.xml", "/geoserver/ows");
+		
         var method, url;
         if (this.id) {
             method = "PUT";

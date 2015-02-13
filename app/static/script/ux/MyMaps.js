@@ -431,9 +431,6 @@ ux.plugins.MyMaps = Ext.extend(gxp.plugins.Tool, {
 					var myMapsNames = [];
 					if (myMapsManager.myMaps.data) {
 					
-						//console.log(myMapsManager.myMaps.data.length);
-						//console.log(myMapsManager.myMaps.data.items);
-						
 						for (var i=0; i < myMapsManager.myMaps.data.length; i++) {
 							if (myMapsManager.myMaps.data.items[i] instanceof Ext.data.Record) {
 								// On skip le record s'il a le même nom que le nouveau

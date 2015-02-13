@@ -102,7 +102,7 @@ var handlers = {
     },
     "POST": function(request) {
         var resp;
-        if (isAuthorized(request)) {
+        if (isAuthorized(request)) { 
             var id = getId(request);
             if (id !== null) {
                 resp = createResponse({error: "Can't POST to map " + id}, 405);

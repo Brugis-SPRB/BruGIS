@@ -63,7 +63,16 @@
 				[{
 					source: "BruGIS WMS - Geoserver",
 					name:   "URBIS:urbisFR",
-					title:  "Urbis",
+					title:  "Urbis coloré",
+					id: "frBackground",
+					group:  "background",
+					fixed: true,
+					visibility: false,
+					buffer: 0
+				}, {
+					source: "BruGIS WMS - Geoserver",
+					name:   "URBIS:urbisFRGray",
+					title:  "Urbis grisé",
 					id: "frBackground",
 					group:  "background",
 					fixed: true,
@@ -75,7 +84,16 @@
 				[{
 					source: "BruGIS WMS - Geoserver",
 					name:   "URBIS:urbisNL",
-					title:  "Urbis",
+					title:  "Urbis gekleurd",
+					id: "nlBackground",
+					group:  "background",
+					fixed: true,
+					visibility: false,
+					buffer: 0
+				}, {
+					source: "BruGIS WMS - Geoserver",
+					name:   "URBIS:urbisNLGray",
+					title:  "Urbis grijs",
 					id: "nlBackground",
 					group:  "background",
 					fixed: true,
@@ -87,7 +105,16 @@
 				[{
 					source: "BruGIS WMS - Geoserver",
 					name:   "URBIS:urbisFR",
-					title:  "Urbis",
+					title:  "Urbis colored",
+					id: "frBackground",
+					group:  "background",
+					fixed: true,
+					visibility: false,
+					buffer: 0
+				}, {
+					source: "BruGIS WMS - Geoserver",
+					name:   "URBIS:urbisFRGray",
+					title:  "Urbis greyscale",
 					id: "frBackground",
 					group:  "background",
 					fixed: true,
@@ -171,10 +198,10 @@
 					version: "1.1.1",
 					ptype: "gxp_wmscsource"
 				},
-				'IGN': {
-					url: "http://www.ngi.be/cartoweb/1.0.0/WMTSCapabilities.xml",
-					version: "1.0.0",
-					ptype: "gxp_wmscsource"
+				'IBGE/BIM WMS - Mapserver': {
+					url: "http://wms.ibgebim.be/bimwms?",
+					ptype: "gxp_wmscsource",
+					version: "1.1.1"
 				},
 				'CIBG WMS - Geoserver': {
 					url: "http://geoserver.gis.irisnet.be/geoserver/ows",

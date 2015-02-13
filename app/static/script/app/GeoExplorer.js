@@ -481,7 +481,9 @@ var GeoExplorer = Ext.extend(gxp.Viewer, {
      */
     getState: function() {
         var state = GeoExplorer.superclass.getState.apply(this, arguments);
-        // Don't persist tools
+		// Don't persist controls
+		delete state.map.controls;
+		// Don't persist tools
         delete state.tools;
         return state;
     }
