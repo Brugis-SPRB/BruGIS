@@ -11,7 +11,7 @@ var auth = require("../auth");
 
 app.get("/", function(request) {
     var status = auth.getStatus(request);
-	console.dir(request);
-	log.info("Hello {}", "world", request, 2, 3);
+	//console.dir(request);
+	//log.info("Hello {}", "world", request, 2, 3);
     return app.render("authentication.html", {status: status || 404});
 });

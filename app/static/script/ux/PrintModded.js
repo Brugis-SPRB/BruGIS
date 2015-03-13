@@ -108,9 +108,11 @@ ux.plugins.Print = Ext.extend(gxp.plugins.Tool, {
                                         var cmp = node.component;
                                         var encFn = this.encoders.legends[cmp.getXType()];
 										//modif ndu
-										var tempRes = encFn.call(this, cmp, jsonData.pages[0].scale);
-										tempRes[0].name = node.layer.name;
-                                        encodedLegends = encodedLegends.concat(tempRes);
+										if(encFn) {
+											var tempRes = encFn.call(this, cmp, jsonData.pages[0].scale);
+											tempRes[0].name = node.layer.name;
+											encodedLegends = encodedLegends.concat(tempRes);
+										}
                                     }
                                 }, provider);
 								Ext.getCmp('west2').setActiveTab(0);
@@ -238,7 +240,8 @@ ux.plugins.Print = Ext.extend(gxp.plugins.Tool, {
             function isSupported(layer) {
                 return (
                     layer instanceof OpenLayers.Layer.WMS ||
-                    layer instanceof OpenLayers.Layer.OSM
+                    layer instanceof OpenLayers.Layer.OSM ||
+					layer instanceof OpenLayers.Layer.Vector
                 );
             }
 

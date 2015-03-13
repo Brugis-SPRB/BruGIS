@@ -240,11 +240,11 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
 				needsAuthorization: true,
 				actionTarget: ["layers.tbar", "layers.contextMenu"],
 				appendActions: false
-			}, {
+			}/* , {
 				ptype: "ux_ReperageToolbox",
 				id: "myReperageManager",
 				actionTarget: {target: "paneltbar", index: 15}
-			}
+			} */
         ];
         delete config.apiKeys;
         GeoExplorer.Composer.superclass.constructor.apply(this, arguments);
@@ -587,6 +587,11 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
                     this.showLogout(user);
                     win.un("beforedestroy", this.cancelAuthentication, this);
                     win.close();
+					
+					if (localStorage) {
+						localStorage.setItem('reset', 'True');
+					}
+					window.location.reload();
                 },
                 failure: function(form, action) {
                     this.authorizedRoles = [];
@@ -1083,7 +1088,6 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
 			scope: this
 		});
 		if (localStorage) {
-			
 			tools.push("-");
 			tools.push(frButton);
 			tools.push("-");
@@ -1101,10 +1105,8 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
      */
     createTools: function() {
         var tools = GeoExplorer.Composer.superclass.createTools.apply(this, arguments);
-		
         this.loginButton = new Ext.Button();
         tools.push(['->', this.loginButton]);
-
         //Maybe we are in debug mode
 		if(this.authorizedRoles)
 		{

@@ -38,4 +38,5 @@
  <url-pattern>*.js</url-pattern>
 </filter-mapping>
 
+<distribuable/>
 </web-app>

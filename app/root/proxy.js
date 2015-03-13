@@ -1,8 +1,10 @@
 var clientRequest = require("ringo/httpclient").request;
+var httpclient = require("ringo/httpclient");
 var Headers = require("ringo/utils/http").Headers;
 var MemoryStream = require("io").MemoryStream;
 var objects = require("ringo/utils/objects");
 var responseForStatus = require("../util").responseForStatus;
+var log = require("ringo/logging").getLogger(module.id);
 
 var URL = java.net.URL;
 
@@ -86,6 +88,7 @@ var createProxyRequestProps = exports.createProxyRequestProps = function(config)
             headers.unset("Authorization");
             headers.unset("Cookie");
         }
+		
         var data;
         var method = request.method;
         if (method == "PUT" || method == "POST") {
@@ -93,6 +96,7 @@ var createProxyRequestProps = exports.createProxyRequestProps = function(config)
                 data = request.input;
             }
         }
+		
         props = {
             url: urlProps.url,
             method: request.method,
@@ -121,30 +125,29 @@ function proxyPass(config) {
             password: outgoing.password,
             headers: outgoing.headers,
             data: outgoing.data,
+			binary: true,
             async: false
         });
+		
     }
-	var exchangeCompleted = exchange.wait();
-	
-	if(exchangeCompleted.status == 200) {
-	   //console.log(exchangeCompleted.content);
-	}	
-	
-    var headers = new Headers(objects.clone(exchangeCompleted.headers));
-	
-	headers.set("Cache-Control","no-cache, no-store, must-revalidate");
-	headers.set("Pragma","no-cache");
-	headers.set("Expires","0");
-	
-    if (!config.allowAuth) {
-        // strip out authorization and cookie headers
-        headers.unset("WWW-Authenticate");
-        headers.unset("Set-Cookie");
+    if (!exchange) {
+    	response = responseForStatus(404);
+    	return response;
+    } else {
+    	exchange.wait();
+        var headers = new Headers(objects.clone(exchange.headers));
+        if (!config.allowAuth) {
+            // strip out authorization and cookie headers
+            headers.unset("WWW-Authenticate");
+            headers.unset("Set-Cookie");
+        }
+        //headers.unset("Content-Length");
+		headers.unset("Transfer-Encoding");
+        return {
+            status: exchange.status,
+            headers: headers,
+            body: new MemoryStream(exchange.contentBytes)
+        };
     }
-    return {
-        status: exchangeCompleted.status,
-        headers: headers,
-        body: new MemoryStream(exchangeCompleted.contentBytes)
-    };
 }
 

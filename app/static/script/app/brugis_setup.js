@@ -6,10 +6,23 @@
 		if (GeoExt.Lang) {
             GeoExt.Lang.set(OpenLayers.Util.getParameters()["locale"] || GeoExt.Lang.locale);
 		}
+		
+		var getCookieValue = function(param) {
+			var i, x, y, cookies = document.cookie.split(";");
+			for (i=0; i < cookies.length; i++) {
+				x = cookies[i].substr(0, cookies[i].indexOf("="));
+				y = cookies[i].substr(cookies[i].indexOf("=")+1);
+				x=x.replace(/^\s+|\s+$/g,"");
+				if (x==param) {
+					return unescape(y);
+				}
+			}
+			return null;
+		}
 				
         Ext.BLANK_IMAGE_URL = "../theme/app/img/blank.gif";
         OpenLayers.ImgPath = "../theme/app/img/";
-		OpenLayers.IMAGE_RELOAD_ATTEMPTS = 3;
+		OpenLayers.IMAGE_RELOAD_ATTEMPTS = 2;
         // optionally set locale based on query string parameter
 		
         if (GeoExt.Lang) {
@@ -66,7 +79,7 @@
 					title:  "Urbis coloré",
 					id: "frBackground",
 					group:  "background",
-					fixed: true,
+					//fixed: true,
 					visibility: false,
 					buffer: 0
 				}, {
@@ -75,7 +88,7 @@
 					title:  "Urbis grisé",
 					id: "frBackground",
 					group:  "background",
-					fixed: true,
+					//fixed: true,
 					visibility: geoextLangFr,
 					buffer: 0
 				}]
@@ -154,9 +167,13 @@
 							scaleToResFactor * 50
 							];
 
-		var brugisWMSGeoserver_DEV = (globalAuthStatus != 404 && globalAuthStatus != 401) ? "http://svappmavw019:8080/geoserver/www/wmsaatl/wmsc_brugis.xml" :"http://svappmavw019:8080/geoserver/www/wmsaatl/wmsc_brugis.xml";	
-		var brugisWMSGeoserver_PRD = (globalAuthStatus != 404 && globalAuthStatus != 401) ? "/geoserver/www/wmsaatl/wmsc_brugis.xml" : "/geoserver/www/wmsaatl/wmsc_brugis.xml";					
-		//console.log(brugisWMSGeoserver_DEV);
+		globalAuthStatus = (getCookieValue("geoexplorer-user")) ?  200 :  401;
+		
+		var brugisWMSGeoserver_DEV = (globalAuthStatus != 404 && globalAuthStatus != 401) ? "http://svappmavw019:8080/geoserver/www/wmsaatl/wmsc_brugis.xml" :"http://svappmavw019:8080/geoserver/www/wmsaatl/wmsc_brugis_anon.xml";	
+		
+		var brugisWMSGeoserver_PRD = (globalAuthStatus != 404 && globalAuthStatus != 401) ? "/geoserver/www/wmsaatl/wmsc_brugis.xml" : "/geoserver/www/wmsaatl/wmsc_brugis_anon.xml";					
+		
+		
 		var sourcesDev = 
 			(geoextLangFr)?
 			{
@@ -362,9 +379,10 @@
         var app = new GeoExplorer.Brugis({
             authStatus: globalAuthStatus,
             proxy: "../proxy/?url=",
-            printService: "/geoserver/pdf/",
+			printService: "/print/pdf",
+            //printService: "http://mbr102.irisnet.be/print/pdf",
             about: {
-                title: "MyBruGIS v 1.1 Girolamo Frescobaldi",
+                title: "MyBruGIS v 1.1 Gregorio Allegri",
                 "abstract": abstractText,
 				"help": localeHelp,
 		        contact: contactText
