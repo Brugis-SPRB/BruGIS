@@ -97,6 +97,11 @@ ux.plugins.ReperageToolbox = Ext.extend(gxp.plugins.Tool, {
 	 *  ``String``
 	 */
 	brugisWmsHost : "http://www.mybrugis.irisnet.be/geoserver/wms",
+
+	/** api: config[myReperage]
+	 *  ``String``
+	 */	
+	reperageHost : "http://mbr102.irisnet.be/WebReperage",
 	
 	/** private: method[constructor]
 	 */
@@ -121,8 +126,9 @@ ux.plugins.ReperageToolbox = Ext.extend(gxp.plugins.Tool, {
 		parser.href = brugisUrl;
 		this.brugisWmsHost = "http://" + parser.host + "/geoserver/wms";
 		
-		if (this.validLocalStorage)
+		if (this.validLocalStorage) {
 			this.username = localStorage.getItem("repuser");
+		}
 		
 		//création du vecteur qui contiendra les polygone dessiner
 		this.reperageLayer = new OpenLayers.Layer.Vector(this.reperageLayerName,{
@@ -261,7 +267,7 @@ ux.plugins.ReperageToolbox = Ext.extend(gxp.plugins.Tool, {
 		
 		var dataRepType = new Ext.data.JsonStore({
 			proxy: new Ext.data.HttpProxy({
-				url: '/WebReperage/resources/ReperagesType',
+				url: this.reperageHost + '/resources/ReperagesType',
 				method: 'GET'
 			}),
 			autoLoad: true,
@@ -323,7 +329,7 @@ ux.plugins.ReperageToolbox = Ext.extend(gxp.plugins.Tool, {
 		var reperageFormPanel = new Ext.FormPanel({
 			labelWidth: 100,
 			frame:true,
-			url: '/WebReperage/res/reperage',
+			url: this.reperageHost + '/res/reperage',
 			defaults: {width: 200},
 			items: [reperageRefDossText,
 				reperageGeomHidden,
@@ -528,7 +534,7 @@ ux.plugins.ReperageToolbox = Ext.extend(gxp.plugins.Tool, {
 				proxy : new Ext.data.HttpProxy({
 					method: 'GET',
 					prettyUrls: false,
-					url: '/WebReperage/res/reperage/userextjs'
+					url: this.reperageHost + '/res/reperage/userextjs'
 				}),
 				storeId: 'ReperageStoreId',
 				// reader configs
@@ -648,7 +654,7 @@ ux.plugins.ReperageToolbox = Ext.extend(gxp.plugins.Tool, {
 							var rec = grid.getStore().getAt(rowIndex);
 							if(rec.get('state') == "DONE"){
 								var u = localStorage.getItem("repuser");
-								window.open("/WebReperage/res/reperage/"+rec.get('id')+".docx?lang="+lang+"&user="+u);
+								window.open(this.reperageHost + "/res/reperage/"+rec.get('id')+".docx?lang="+lang+"&user="+u);
 							}
 						},
 						getClass: function(v, meta, rec) {  // Or return a class from a function
@@ -673,7 +679,7 @@ ux.plugins.ReperageToolbox = Ext.extend(gxp.plugins.Tool, {
 							var rec = grid.getStore().getAt(rowIndex);
 							if(rec.get('state') == "DONE"){
 								var u = localStorage.getItem("repuser");
-								window.open("/WebReperage/res/reperage/"+rec.get('id')+".pdf?lang="+lang+"&user="+u);
+								window.open(this.reperageHost + "/res/reperage/"+rec.get('id')+".pdf?lang="+lang+"&user="+u);
 							}
 						},
 						getClass: function(v, meta, rec) {  // Or return a class from a function
@@ -701,7 +707,7 @@ ux.plugins.ReperageToolbox = Ext.extend(gxp.plugins.Tool, {
                     	if(rec.get('state') == "FAILED"){
                             Ext.Ajax.request({
                             	type: "GET",
-                            	url: '/WebReperage/resources/WorkItems/restarting-'+rec.get('id'),
+                            	url: this.reperageHost + '/resources/WorkItems/restarting-'+rec.get('id'),
                             	data: "{}",
                             	contentType: "application/x-www-form-urlencoded; charset=utf-8",
                             	success: function (){
@@ -719,7 +725,7 @@ ux.plugins.ReperageToolbox = Ext.extend(gxp.plugins.Tool, {
 						if(rec.get('state') == "REMOVED"){
                             Ext.Ajax.request({
                             	type: "GET",
-                            	url: '/WebReperage/resources/WorkItems/renew-'+rec.get('id'),
+                            	url: this.reperageHost + '/resources/WorkItems/renew-'+rec.get('id'),
                             	data: "{}",
                             	contentType: "application/x-www-form-urlencoded; charset=utf-8",
                             	success: function (){
