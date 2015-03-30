@@ -100,8 +100,10 @@ ux.plugins.ReperageToolbox = Ext.extend(gxp.plugins.Tool, {
 
 	/** api: config[myReperage]
 	 *  ``String``
-	 */	
-	reperageHost : "http://mbr102.irisnet.be/WebReperage",
+	 */
+	reperageHost : "http://svappmavw019:8080/WebReperage",	//development
+	//reperageHost : "http://mbr102.irisnet.be/WebReperage",	//staging
+	//reperageHost : "http://mbr102.irisnet.be/WebReperage",	//production
 	
 	/** private: method[constructor]
 	 */
@@ -650,6 +652,7 @@ ux.plugins.ReperageToolbox = Ext.extend(gxp.plugins.Tool, {
 					{
 						icon   : '../theme/app/img/down2.gif',	 // Use a URL in the icon config
 						tooltip: this.myReperageGridPanel_docx_tooltip,
+						scope: this,
 						handler: function(grid, rowIndex, colIndex) {
 							var rec = grid.getStore().getAt(rowIndex);
 							if(rec.get('state') == "DONE"){
@@ -675,6 +678,7 @@ ux.plugins.ReperageToolbox = Ext.extend(gxp.plugins.Tool, {
 					{
 						icon   : '../theme/app/img/down2.gif',	 // Use a URL in the icon config
 						tooltip: this.myReperageGridPanel_pdf_tooltip,
+						scope: this,
 						handler: function(grid, rowIndex, colIndex) {
 							var rec = grid.getStore().getAt(rowIndex);
 							if(rec.get('state') == "DONE"){
@@ -697,6 +701,7 @@ ux.plugins.ReperageToolbox = Ext.extend(gxp.plugins.Tool, {
                 items: [{
                 	icon: '../theme/app/img/icon_refresh.png',
 					tooltip: this.myReperageGridPanel_recycle_tooltip,
+					scope: this,
                 	getClass : function( v, meta, record ) {
                         if ( record.get('state') != "FAILED" && record.get('state') != "REMOVED" ) {
                             return 'x-hide-display';

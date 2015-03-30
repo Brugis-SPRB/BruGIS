@@ -151,7 +151,7 @@ ux.gfi.nl =  {
 				{ "name": "Het eerste besluit"					, "label" : "[DOCUM_AG1]"							, "type" : "link"},
 				{ "name": "Het laatste besluit"					, "label" : "[DOCUM_AG2]"							, "type" : "link"},
 				{ "name": "Foto"					, "label" : "[FOTO]"											, "type" : "picture"},
-				{ "name": "Vrijwaringszone"			, "label" : "['Ja','Nee'][[VRIJWARINGSZONE]]"					, "type" : "eval"},
+				{ "name": "Vrijwaringszone"			, "label" : "['Nee','Ja'][[VRIJWARINGSZONE]]"					, "type" : "eval"},
 				{ "name": "Referentie DML"			, "label" : "[NUMMER_DOSSIER]/[CODE_DOSSIER]"					, "type" : "string"}
 			]
 		},
@@ -168,7 +168,7 @@ ux.gfi.nl =  {
 				{ "name": "Het eerste besluit"					, "label" : "[DOCUM_AG1]"							, "type" : "link"},
 				{ "name": "Het laatste besluit"					, "label" : "[DOCUM_AG2]"							, "type" : "link"},
 				{ "name": "Foto"					, "label" : "[FOTO]"											, "type" : "picture"},
-				{ "name": "Vrijwaringszone"			, "label" : "['Ja','Nee'][[VRIJWARINGSZONE]]"					, "type" : "eval"},
+				{ "name": "Vrijwaringszone"			, "label" : "['Nee','Ja'][[VRIJWARINGSZONE]]"					, "type" : "eval"},
 				{ "name": "Referentie DML"			, "label" : "[NUMMER_DOSSIER]/[CODE_DOSSIER]"					, "type" : "string"}
 			]
 		},
@@ -185,7 +185,7 @@ ux.gfi.nl =  {
 				{ "name": "Het eerste besluit"					, "label" : "[DOCUM_AG1]"							, "type" : "link"},
 				{ "name": "Het laatste besluit"					, "label" : "[DOCUM_AG2]"							, "type" : "link"},
 				{ "name": "Foto"					, "label" : "[FOTO]"											, "type" : "picture"},
-				{ "name": "Vrijwaringszone"			, "label" : "['Ja','Nee'][[VRIJWARINGSZONE]]"					, "type" : "eval"},
+				{ "name": "Vrijwaringszone"			, "label" : "['Nee','Ja'][[VRIJWARINGSZONE]]"					, "type" : "eval"},
 				{ "name": "Referentie DML"			, "label" : "[NUMMER_DOSSIER]/[CODE_DOSSIER]"					, "type" : "string"}
 			]
 		},
@@ -202,7 +202,7 @@ ux.gfi.nl =  {
 				{ "name": "Het eerste besluit"					, "label" : "[DOCUM_AG1]"							, "type" : "link"},
 				{ "name": "Het laatste besluit"					, "label" : "[DOCUM_AG2]"							, "type" : "link"},
 				{ "name": "Foto"					, "label" : "[FOTO]"											, "type" : "picture"},
-				{ "name": "Vrijwaringszone"			, "label" : "['Ja','Nee'][[VRIJWARINGSZONE]]"					, "type" : "eval"},
+				{ "name": "Vrijwaringszone"			, "label" : "['Nee','Ja'][[VRIJWARINGSZONE]]"					, "type" : "eval"},
 				{ "name": "Referentie DML"			, "label" : "[NUMMER_DOSSIER]/[CODE_DOSSIER]"					, "type" : "string"}
 			]
 		},
@@ -219,7 +219,7 @@ ux.gfi.nl =  {
 				{ "name": "Het eerste besluit"					, "label" : "[DOCUM_AG1]"							, "type" : "link"},
 				{ "name": "Het laatste besluit"					, "label" : "[DOCUM_AG2]"							, "type" : "link"},
 				{ "name": "Foto"					, "label" : "[FOTO]"											, "type" : "picture"},
-				{ "name": "Vrijwaringszone"			, "label" : "['Ja','Nee'][[VRIJWARINGSZONE]]"					, "type" : "eval"},
+				{ "name": "Vrijwaringszone"			, "label" : "['Nee','Ja'][[VRIJWARINGSZONE]]"					, "type" : "eval"},
 				{ "name": "Referentie DML"			, "label" : "[NUMMER_DOSSIER]/[CODE_DOSSIER]"					, "type" : "string"}
 			]
 		},
@@ -236,7 +236,7 @@ ux.gfi.nl =  {
 				{ "name": "Het eerste besluit"					, "label" : "[DOCUM_AG1]"							, "type" : "link"},
 				{ "name": "Het laatste besluit"					, "label" : "[DOCUM_AG2]"							, "type" : "link"},
 				{ "name": "Foto"					, "label" : "[FOTO]"											, "type" : "picture"},
-				{ "name": "Vrijwaringszone"			, "label" : "['Ja','Nee'][[VRIJWARINGSZONE]]"					, "type" : "eval"},
+				{ "name": "Vrijwaringszone"			, "label" : "['Nee','Ja'][[VRIJWARINGSZONE]]"					, "type" : "eval"},
 				{ "name": "Referentie DML"			, "label" : "[NUMMER_DOSSIER]/[CODE_DOSSIER]"					, "type" : "string"}
 			]
 		},
@@ -253,7 +253,7 @@ ux.gfi.nl =  {
 				{ "name": "Het eerste besluit"					, "label" : "[DOCUM_AG1]"							, "type" : "link"},
 				{ "name": "Het laatste besluit"					, "label" : "[DOCUM_AG2]"							, "type" : "link"},
 				{ "name": "Foto"					, "label" : "[FOTO]"											, "type" : "picture"},
-				{ "name": "Vrijwaringszone"			, "label" : "['Ja','Nee'][[VRIJWARINGSZONE]]"					, "type" : "eval"},
+				{ "name": "Vrijwaringszone"			, "label" : "['Nee','Ja'][[VRIJWARINGSZONE]]"					, "type" : "eval"},
 				{ "name": "Referentie DML"			, "label" : "[NUMMER_DOSSIER]/[CODE_DOSSIER]"					, "type" : "string"}
 			]
 		},
@@ -270,7 +270,7 @@ ux.gfi.nl =  {
 				{ "name": "Het eerste besluit"					, "label" : "[DOCUM_AG1]"							, "type" : "link"},
 				{ "name": "Het laatste besluit"					, "label" : "[DOCUM_AG2]"							, "type" : "link"},
 				{ "name": "Foto"					, "label" : "[FOTO]"											, "type" : "picture"},
-				{ "name": "Vrijwaringszone"			, "label" : "['Ja','Nee'][[VRIJWARINGSZONE]]"					, "type" : "eval"},
+				{ "name": "Vrijwaringszone"			, "label" : "['Nee','Ja'][[VRIJWARINGSZONE]]"					, "type" : "eval"},
 				{ "name": "Referentie DML"			, "label" : "[NUMMER_DOSSIER]/[CODE_DOSSIER]"					, "type" : "string"}
 			]
 		},
@@ -287,7 +287,7 @@ ux.gfi.nl =  {
 				{ "name": "Het eerste besluit"					, "label" : "[DOCUM_AG1]"							, "type" : "link"},
 				{ "name": "Het laatste besluit"					, "label" : "[DOCUM_AG2]"							, "type" : "link"},
 				{ "name": "Foto"					, "label" : "[FOTO]"											, "type" : "picture"},
-				{ "name": "Vrijwaringszone"			, "label" : "['Ja','Nee'][[VRIJWARINGSZONE]]"					, "type" : "eval"},
+				{ "name": "Vrijwaringszone"			, "label" : "['Nee','Ja'][[VRIJWARINGSZONE]]"					, "type" : "eval"},
 				{ "name": "Referentie DML"			, "label" : "[NUMMER_DOSSIER]/[CODE_DOSSIER]"					, "type" : "string"}
 			]
 		},
@@ -304,7 +304,7 @@ ux.gfi.nl =  {
 				{ "name": "Het eerste besluit"					, "label" : "[DOCUM_AG1]"							, "type" : "link"},
 				{ "name": "Het laatste besluit"					, "label" : "[DOCUM_AG2]"							, "type" : "link"},
 				{ "name": "Foto"					, "label" : "[FOTO]"											, "type" : "picture"},
-				{ "name": "Vrijwaringszone"			, "label" : "['Ja','Nee'][[VRIJWARINGSZONE]]"					, "type" : "eval"},
+				{ "name": "Vrijwaringszone"			, "label" : "['Nee','Ja'][[VRIJWARINGSZONE]]"					, "type" : "eval"},
 				{ "name": "Referentie DML"			, "label" : "[NUMMER_DOSSIER]/[CODE_DOSSIER]"					, "type" : "string"}
 			]
 		},
@@ -321,7 +321,7 @@ ux.gfi.nl =  {
 				{ "name": "Het eerste besluit"					, "label" : "[DOCUM_AG1]"							, "type" : "link"},
 				{ "name": "Het laatste besluit"					, "label" : "[DOCUM_AG2]"							, "type" : "link"},
 				{ "name": "Foto"					, "label" : "[FOTO]"											, "type" : "picture"},
-				{ "name": "Vrijwaringszone"			, "label" : "['Ja','Nee'][[VRIJWARINGSZONE]]"					, "type" : "eval"},
+				{ "name": "Vrijwaringszone"			, "label" : "['Nee','Ja'][[VRIJWARINGSZONE]]"					, "type" : "eval"},
 				{ "name": "Referentie DML"			, "label" : "[NUMMER_DOSSIER]/[CODE_DOSSIER]"					, "type" : "string"}
 			]
 		},
@@ -338,7 +338,7 @@ ux.gfi.nl =  {
 				{ "name": "Het eerste besluit"					, "label" : "[DOCUM_AG1]"							, "type" : "link"},
 				{ "name": "Het laatste besluit"					, "label" : "[DOCUM_AG2]"							, "type" : "link"},
 				{ "name": "Foto"					, "label" : "[FOTO]"											, "type" : "picture"},
-				{ "name": "Vrijwaringszone"			, "label" : "['Ja','Nee'][[VRIJWARINGSZONE]]"					, "type" : "eval"},
+				{ "name": "Vrijwaringszone"			, "label" : "['Nee','Ja'][[VRIJWARINGSZONE]]"					, "type" : "eval"},
 				{ "name": "Referentie DML"			, "label" : "[NUMMER_DOSSIER]/[CODE_DOSSIER]"					, "type" : "string"}
 			]
 		},
@@ -355,7 +355,7 @@ ux.gfi.nl =  {
 				{ "name": "Het eerste besluit"					, "label" : "[DOCUM_AG1]"							, "type" : "link"},
 				{ "name": "Het laatste besluit"					, "label" : "[DOCUM_AG2]"							, "type" : "link"},
 				{ "name": "Foto"					, "label" : "[FOTO]"											, "type" : "picture"},
-				{ "name": "Vrijwaringszone"			, "label" : "['Ja','Nee'][[VRIJWARINGSZONE]]"					, "type" : "eval"},
+				{ "name": "Vrijwaringszone"			, "label" : "['Nee','Ja'][[VRIJWARINGSZONE]]"					, "type" : "eval"},
 				{ "name": "Referentie DML"			, "label" : "[NUMMER_DOSSIER]/[CODE_DOSSIER]"					, "type" : "string"}
 			]
 		},
@@ -372,7 +372,7 @@ ux.gfi.nl =  {
 				{ "name": "Het eerste besluit"					, "label" : "[DOCUM_AG1]"							, "type" : "link"},
 				{ "name": "Het laatste besluit"					, "label" : "[DOCUM_AG2]"							, "type" : "link"},
 				{ "name": "Foto"					, "label" : "[FOTO]"											, "type" : "picture"},
-				{ "name": "Vrijwaringszone"			, "label" : "['Ja','Nee'][[VRIJWARINGSZONE]]"					, "type" : "eval"},
+				{ "name": "Vrijwaringszone"			, "label" : "['Nee','Ja'][[VRIJWARINGSZONE]]"					, "type" : "eval"},
 				{ "name": "Referentie DML"			, "label" : "[NUMMER_DOSSIER]/[CODE_DOSSIER]"					, "type" : "string"}
 			]
 		},
@@ -389,7 +389,7 @@ ux.gfi.nl =  {
 				{ "name": "Het eerste besluit"					, "label" : "[DOCUM_AG1]"							, "type" : "link"},
 				{ "name": "Het laatste besluit"					, "label" : "[DOCUM_AG2]"							, "type" : "link"},
 				{ "name": "Foto"					, "label" : "[FOTO]"											, "type" : "picture"},
-				{ "name": "Vrijwaringszone"			, "label" : "['Ja','Nee'][[VRIJWARINGSZONE]]"					, "type" : "eval"},
+				{ "name": "Vrijwaringszone"			, "label" : "['Nee','Ja'][[VRIJWARINGSZONE]]"					, "type" : "eval"},
 				{ "name": "Referentie DML"			, "label" : "[NUMMER_DOSSIER]/[CODE_DOSSIER]"					, "type" : "string"}
 			]
 		},
@@ -406,7 +406,7 @@ ux.gfi.nl =  {
 				{ "name": "Het eerste besluit"					, "label" : "[DOCUM_AG1]"							, "type" : "link"},
 				{ "name": "Het laatste besluit"					, "label" : "[DOCUM_AG2]"							, "type" : "link"},
 				{ "name": "Foto"					, "label" : "[FOTO]"											, "type" : "picture"},
-				{ "name": "Vrijwaringszone"			, "label" : "['Ja','Nee'][[VRIJWARINGSZONE]]"					, "type" : "eval"},
+				{ "name": "Vrijwaringszone"			, "label" : "['Nee','Ja'][[VRIJWARINGSZONE]]"					, "type" : "eval"},
 				{ "name": "Referentie DML"			, "label" : "[NUMMER_DOSSIER]/[CODE_DOSSIER]"					, "type" : "string"}
 			]
 		},
@@ -423,7 +423,7 @@ ux.gfi.nl =  {
 				{ "name": "Het eerste besluit"					, "label" : "[DOCUM_AG1]"							, "type" : "link"},
 				{ "name": "Het laatste besluit"					, "label" : "[DOCUM_AG2]"							, "type" : "link"},
 				{ "name": "Foto"					, "label" : "[FOTO]"											, "type" : "picture"},
-				{ "name": "Vrijwaringszone"			, "label" : "['Ja','Nee'][[VRIJWARINGSZONE]]"					, "type" : "eval"},
+				{ "name": "Vrijwaringszone"			, "label" : "['Nee','Ja'][[VRIJWARINGSZONE]]"					, "type" : "eval"},
 				{ "name": "Referentie DML"			, "label" : "[NUMMER_DOSSIER]/[CODE_DOSSIER]"					, "type" : "string"}
 			]
 		},
@@ -440,7 +440,7 @@ ux.gfi.nl =  {
 				{ "name": "Het eerste besluit"					, "label" : "[DOCUM_AG1]"							, "type" : "link"},
 				{ "name": "Het laatste besluit"					, "label" : "[DOCUM_AG2]"							, "type" : "link"},
 				{ "name": "Foto"					, "label" : "[FOTO]"											, "type" : "picture"},
-				{ "name": "Vrijwaringszone"			, "label" : "['Ja','Nee'][[VRIJWARINGSZONE]]"					, "type" : "eval"},
+				{ "name": "Vrijwaringszone"			, "label" : "['Nee','Ja'][[VRIJWARINGSZONE]]"					, "type" : "eval"},
 				{ "name": "Referentie DML"			, "label" : "[NUMMER_DOSSIER]/[CODE_DOSSIER]"					, "type" : "string"}
 			]
 		},
@@ -544,7 +544,7 @@ ux.gfi.nl =  {
 				{ "name": "Het eerste besluit"					, "label" : "[DOCUM_AG1]"							, "type" : "link"},
 				{ "name": "Het laatste besluit"					, "label" : "[DOCUM_AG2]"							, "type" : "link"},
 				{ "name": "Foto"					, "label" : "[FOTO]"											, "type" : "picture"},
-				{ "name": "Vrijwaringszone"			, "label" : "['Ja','Nee'][[VRIJWARINGSZONE]]"					, "type" : "eval"},
+				{ "name": "Vrijwaringszone"			, "label" : "['Nee','Ja'][[VRIJWARINGSZONE]]"					, "type" : "eval"},
 				{ "name": "Referentie DML"			, "label" : "[NUMMER_DOSSIER]/[CODE_DOSSIER]"					, "type" : "string"}
 			]
 		}

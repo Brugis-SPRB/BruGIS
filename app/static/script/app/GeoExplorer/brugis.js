@@ -70,7 +70,8 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
 	//wmsTreeLegendSourceText: "http://mybrugis.irisnetlab.be/geoserver/www/wmsaatl/wmsaatl.xml",
 	//wmsTreeLegendSourceText: "http://www.mybrugis.irisnet.be/geoserver/www/wmsaatl/wmsaatl.xml",
     // End i18n.
-	noTileslayersList: ["AATL_DMS_SITE_ARBR:Arbres_Remarquables"],
+	noTileslayersList: ["AATL_DMS_SITE_ARBR:Arbres_remarquables",
+						"AATL_DMS_SITE_ARBR:Arbres_remarquables_abattus_ou_disparus"],
 	originalSourcesUrl : "",
 
     constructor: function(config) {
@@ -170,6 +171,7 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
 					maxResolution: 1.4000028082733496,			// 1/5.000
 					restrictedLayers: [
 						{ source: 'BruGIS WMS - Geoserver' , name: "AATL_DMS_PROT:Prises_actes" },
+						{ source: 'BruGIS WMS - Geoserver' , name: "AATL_DMS_PROT:Arretes_de_non_classement" },
 						{ source: 'BruGIS WMS - Geoserver' , name: "POCDEV:POC_POLYGONES" }
 					]
 				}]
@@ -324,13 +326,14 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
 					newLayer["group"] = addConfig.map.layers[ll].group;
 					newLayer["fixed"] = addConfig.map.layers[ll].fixed;
 					newLayer["visibility"] = addConfig.map.layers[ll].visibility;
+					newLayer["url"] 		= addConfig.map.layers[ll].url;
 					mLayer[ll] = newLayer;
 				}			
 			delete config.sources;
 			delete config.map;
-			addConfig = this.avoidTiledCacheUsage(addConfig, this.noTileslayersList);
 			addConfig.sources["BruGIS WMS - Geoserver"]=mSource;
 			addConfig.map.layers = mLayer;
+			addConfig = this.avoidTiledCacheUsage(addConfig, this.noTileslayersList);
 			Ext.applyIf(config, addConfig);
 			this.applyConfig(config);
 			localStorage.removeItem('mapStateToLoad');
@@ -350,20 +353,21 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
 				var mLayer = [];
 				for(var ll=0; ll < addConfig.map.layers.length; ll++) {
 					var newLayer = {};
-					newLayer["source"] =  addConfig.map.layers[ll].source;
-					newLayer["name"] = addConfig.map.layers[ll].name;
-					newLayer["title"] = addConfig.map.layers[ll].title;
-					newLayer["id"] = addConfig.map.layers[ll].id;
-					newLayer["group"] = addConfig.map.layers[ll].group;
-					newLayer["fixed"] = addConfig.map.layers[ll].fixed;
-					newLayer["visibility"] = addConfig.map.layers[ll].visibility;
-					mLayer[ll] = newLayer;
+					newLayer["source"] 		= addConfig.map.layers[ll].source;
+					newLayer["name"] 		= addConfig.map.layers[ll].name;
+					newLayer["title"] 		= addConfig.map.layers[ll].title;
+					newLayer["id"] 			= addConfig.map.layers[ll].id;
+					newLayer["group"] 		= addConfig.map.layers[ll].group;
+					newLayer["fixed"] 		= addConfig.map.layers[ll].fixed;
+					newLayer["visibility"] 	= addConfig.map.layers[ll].visibility;
+					newLayer["url"] 		= addConfig.map.layers[ll].url;
+					mLayer[ll] 				= newLayer;
 				}
 				delete config.sources;
 				delete config.map;
-				addConfig = this.avoidTiledCacheUsage(addConfig, this.noTileslayersList); //TODO NDU Still needed?
 				addConfig.sources["BruGIS WMS - Geoserver"]=mSource;
 				addConfig.map.layers = mLayer;
+				addConfig = this.avoidTiledCacheUsage(addConfig, this.noTileslayersList); //TODO NDU Still needed?
 				Ext.applyIf(config, addConfig);
 				this.applyConfig(config);
 			} else {
@@ -868,13 +872,7 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
 						}
 					}).createDelegate(this)});
 				}
-				/* if (params.json) {
-					console.log("Djééézonne");
-					console.log(params.json);
-					// stub du json
-					var jsonContent = "http://www.mybrugis.irisnet.be/geoserver/AATL/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=AATL:Affectations&maxFeatures=50&outputFormat=application%2Fjson";
-						
-				} */
+
 			}
 			
 			///////////////////////DOCG////////////////////////////////////////////

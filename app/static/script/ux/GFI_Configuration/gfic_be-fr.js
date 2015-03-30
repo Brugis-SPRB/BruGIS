@@ -47,7 +47,7 @@ ux.gfi.fr = {
 				{ "name": "Type de zone"	, "label" : "[ZONE]"		, "type" : "string" }
 			]
 		},
-		"AATL_DMS_SITE_ARBR:Arbres_Remarquables": {
+		"AATL_DMS_SITE_ARBR:Arbres_remarquables": {
 			"actiontype" : "GRID",
 			"title"		 : "[tax_fr]",
 			"attributes" : [
@@ -63,15 +63,16 @@ ux.gfi.fr = {
 				{ "name": "statut"				, "label" : "[Legendefr]"			, "type" : "string"}
 			]
 		},
-		"AATL_DMS_SITE_ARBR:arbres_remarquables_DEV": {
+		"AATL_DMS_SITE_ARBR:Arbres_remarquables_abattus_ou_disparus": {
 			"actiontype" : "GRID",
+			"title"		 : "[tax_fr]",
 			"attributes" : [
 				{ "name": "Circonférence"		, "label" : "[circonference] cm"	, "type" : "string"},
 				{ "name": "Nom"					, "label" : "[tax_fr]"				, "type" : "string"},
 				{ "name": "Taxon latin"			, "label" : "[tax_la]"				, "type" : "string"},
-				{ "name": "Lien CMS"			, "label" : "http://arbresinvdev.irisnet.be/manager/index.php?table=36&id=[id]", "type" : "link"},
-				{ "name": "Fiche de l'arbre"	, "label" : "http://arbresinvdev.irisnet.be/arbre/[results_fr]/[id]/", "type" : "link"},
-				{ "name": "Photo"				, "label" : "http://arbresinvdev.irisnet.be/medias/trees/[firstimage]", "type" : "picture"},
+				{ "name": "Lien CMS"			, "label" : "http://arbres-inventaire.irisnet.be/manager/index.php?table=36&id=[id]", "type" : "link"},
+				{ "name": "Fiche de l'arbre"	, "label" : "http://arbres-inventaire.irisnet.be/arbre/[results_fr]/[id]/", "type" : "link"},
+				{ "name": "Photo"				, "label" : "http://arbres-inventaire.irisnet.be/medias/trees/[firstimage]", "type" : "picture"},
 				{ "name": "Hauteur"				, "label" : "[hauteur] m"			, "type" : "string"},
 				{ "name": "Diamètre de la cîme"	, "label" : "[diametre_cime] m"		, "type" : "string"},
 				{ "name": "type d'emplacement"	, "label" : "[emplacement]"			, "type" : "string"},
@@ -151,7 +152,7 @@ ux.gfi.fr = {
 				{ "name": "Premier arrêté"			, "label" : "[DOCUM_AG1]"										, "type" : "link"},
 				{ "name": "Dernier arrêté"			, "label" : "[DOCUM_AG2]"										, "type" : "link"},
 				{ "name": "Photo"					, "label" : "[FOTO]"											, "type" : "picture"},
-				{ "name": "Zone de Protection"		, "label" : "['Oui','Non'][[VRIJWARINGSZONE]]"					, "type" : "eval"},
+				{ "name": "Zone de Protection"		, "label" : "['Non','Oui'][[VRIJWARINGSZONE]]"					, "type" : "eval"},
 				{ "name": "Référence DMS"			, "label" : "[NUMMER_DOSSIER]/[CODE_DOSSIER]"					, "type" : "string"}
 			]
 		},
@@ -168,7 +169,7 @@ ux.gfi.fr = {
 				{ "name": "Premier arrêté"			, "label" : "[DOCUM_AG1]"										, "type" : "link"},
 				{ "name": "Dernier arrêté"			, "label" : "[DOCUM_AG2]"										, "type" : "link"},
 				{ "name": "Photo"					, "label" : "[FOTO]"											, "type" : "picture"},
-				{ "name": "Zone de Protection"		, "label" : "['Oui','Non'][[VRIJWARINGSZONE]]"					, "type" : "eval"},
+				{ "name": "Zone de Protection"		, "label" : "['Non','Oui'][[VRIJWARINGSZONE]]"					, "type" : "eval"},
 				{ "name": "Référence DMS"			, "label" : "[NUMMER_DOSSIER]/[CODE_DOSSIER]"					, "type" : "string"}
 			]
 		},
@@ -185,7 +186,7 @@ ux.gfi.fr = {
 				{ "name": "Premier arrêté"			, "label" : "[DOCUM_AG1]"										, "type" : "link"},
 				{ "name": "Dernier arrêté"			, "label" : "[DOCUM_AG2]"										, "type" : "link"},
 				{ "name": "Photo"					, "label" : "[FOTO]"											, "type" : "picture"},
-				{ "name": "Zone de Protection"		, "label" : "['Oui','Non'][[VRIJWARINGSZONE]]"					, "type" : "eval"},
+				{ "name": "Zone de Protection"		, "label" : "['Non','Oui'][[VRIJWARINGSZONE]]"					, "type" : "eval"},
 				{ "name": "Référence DMS"			, "label" : "[NUMMER_DOSSIER]/[CODE_DOSSIER]"					, "type" : "string"}
 			]
 		},
@@ -202,7 +203,7 @@ ux.gfi.fr = {
 				{ "name": "Premier arrêté"			, "label" : "[DOCUM_AG1]"										, "type" : "link"},
 				{ "name": "Dernier arrêté"			, "label" : "[DOCUM_AG2]"										, "type" : "link"},
 				{ "name": "Photo"					, "label" : "[FOTO]"											, "type" : "picture"},
-				{ "name": "Zone de Protection"		, "label" : "['Oui','Non'][[VRIJWARINGSZONE]]"					, "type" : "eval"},
+				{ "name": "Zone de Protection"		, "label" : "['Non','Oui'][[VRIJWARINGSZONE]]"					, "type" : "eval"},
 				{ "name": "Référence DMS"			, "label" : "[NUMMER_DOSSIER]/[CODE_DOSSIER]"					, "type" : "string"}
 			]
 		},
@@ -219,7 +220,7 @@ ux.gfi.fr = {
 				{ "name": "Premier arrêté"			, "label" : "[DOCUM_AG1]"										, "type" : "link"},
 				{ "name": "Dernier arrêté"			, "label" : "[DOCUM_AG2]"										, "type" : "link"},
 				{ "name": "Photo"					, "label" : "[FOTO]"											, "type" : "picture"},
-				{ "name": "Zone de Protection"		, "label" : "['Oui','Non'][[VRIJWARINGSZONE]]"					, "type" : "eval"},
+				{ "name": "Zone de Protection"		, "label" : "['Non','Oui'][[VRIJWARINGSZONE]]"					, "type" : "eval"},
 				{ "name": "Référence DMS"			, "label" : "[NUMMER_DOSSIER]/[CODE_DOSSIER]"					, "type" : "string"}
 			]
 		},
@@ -236,7 +237,7 @@ ux.gfi.fr = {
 				{ "name": "Premier arrêté"			, "label" : "[DOCUM_AG1]"										, "type" : "link"},
 				{ "name": "Dernier arrêté"			, "label" : "[DOCUM_AG2]"										, "type" : "link"},
 				{ "name": "Photo"					, "label" : "[FOTO]"											, "type" : "picture"},
-				{ "name": "Zone de Protection"		, "label" : "['Oui','Non'][[VRIJWARINGSZONE]]"					, "type" : "eval"},
+				{ "name": "Zone de Protection"		, "label" : "['Non','Oui'][[VRIJWARINGSZONE]]"					, "type" : "eval"},
 				{ "name": "Référence DMS"			, "label" : "[NUMMER_DOSSIER]/[CODE_DOSSIER]"					, "type" : "string"}
 			]
 		},
@@ -253,7 +254,7 @@ ux.gfi.fr = {
 				{ "name": "Premier arrêté"			, "label" : "[DOCUM_AG1]"										, "type" : "link"},
 				{ "name": "Dernier arrêté"			, "label" : "[DOCUM_AG2]"										, "type" : "link"},
 				{ "name": "Photo"					, "label" : "[FOTO]"											, "type" : "picture"},
-				{ "name": "Zone de Protection"		, "label" : "['Oui','Non'][[VRIJWARINGSZONE]]"					, "type" : "eval"},
+				{ "name": "Zone de Protection"		, "label" : "['Non','Oui'][[VRIJWARINGSZONE]]"					, "type" : "eval"},
 				{ "name": "Référence DMS"			, "label" : "[NUMMER_DOSSIER]/[CODE_DOSSIER]"					, "type" : "string"}
 			]
 		},
@@ -270,7 +271,7 @@ ux.gfi.fr = {
 				{ "name": "Premier arrêté"			, "label" : "[DOCUM_AG1]"										, "type" : "link"},
 				{ "name": "Dernier arrêté"			, "label" : "[DOCUM_AG2]"										, "type" : "link"},
 				{ "name": "Photo"					, "label" : "[FOTO]"											, "type" : "picture"},
-				{ "name": "Zone de Protection"		, "label" : "['Oui','Non'][[VRIJWARINGSZONE]]"					, "type" : "eval"},
+				{ "name": "Zone de Protection"		, "label" : "['Non','Oui'][[VRIJWARINGSZONE]]"					, "type" : "eval"},
 				{ "name": "Référence DMS"			, "label" : "[NUMMER_DOSSIER]/[CODE_DOSSIER]"					, "type" : "string"}
 			]
 		},
@@ -287,7 +288,7 @@ ux.gfi.fr = {
 				{ "name": "Premier arrêté"			, "label" : "[DOCUM_AG1]"										, "type" : "link"},
 				{ "name": "Dernier arrêté"			, "label" : "[DOCUM_AG2]"										, "type" : "link"},
 				{ "name": "Photo"					, "label" : "[FOTO]"											, "type" : "picture"},
-				{ "name": "Zone de Protection"		, "label" : "['Oui','Non'][[VRIJWARINGSZONE]]"					, "type" : "eval"},
+				{ "name": "Zone de Protection"		, "label" : "['Non','Oui'][[VRIJWARINGSZONE]]"					, "type" : "eval"},
 				{ "name": "Référence DMS"			, "label" : "[NUMMER_DOSSIER]/[CODE_DOSSIER]"					, "type" : "string"}
 			]
 		},
@@ -304,7 +305,7 @@ ux.gfi.fr = {
 				{ "name": "Premier arrêté"			, "label" : "[DOCUM_AG1]"										, "type" : "link"},
 				{ "name": "Dernier arrêté"			, "label" : "[DOCUM_AG2]"										, "type" : "link"},
 				{ "name": "Photo"					, "label" : "[FOTO]"											, "type" : "picture"},
-				{ "name": "Zone de Protection"		, "label" : "['Oui','Non'][[VRIJWARINGSZONE]]"					, "type" : "eval"},
+				{ "name": "Zone de Protection"		, "label" : "['Non','Oui'][[VRIJWARINGSZONE]]"					, "type" : "eval"},
 				{ "name": "Référence DMS"			, "label" : "[NUMMER_DOSSIER]/[CODE_DOSSIER]"					, "type" : "string"}
 			]
 		},
@@ -321,7 +322,7 @@ ux.gfi.fr = {
 				{ "name": "Premier arrêté"			, "label" : "[DOCUM_AG1]"										, "type" : "link"},
 				{ "name": "Dernier arrêté"			, "label" : "[DOCUM_AG2]"										, "type" : "link"},
 				{ "name": "Photo"					, "label" : "[FOTO]"											, "type" : "picture"},
-				{ "name": "Zone de Protection"		, "label" : "['Oui','Non'][[VRIJWARINGSZONE]]"					, "type" : "eval"},
+				{ "name": "Zone de Protection"		, "label" : "['Non','Oui'][[VRIJWARINGSZONE]]"					, "type" : "eval"},
 				{ "name": "Référence DMS"			, "label" : "[NUMMER_DOSSIER]/[CODE_DOSSIER]"					, "type" : "string"}
 			]
 		},
@@ -338,7 +339,7 @@ ux.gfi.fr = {
 				{ "name": "Premier arrêté"			, "label" : "[DOCUM_AG1]"										, "type" : "link"},
 				{ "name": "Dernier arrêté"			, "label" : "[DOCUM_AG2]"										, "type" : "link"},
 				{ "name": "Photo"					, "label" : "[FOTO]"											, "type" : "picture"},
-				{ "name": "Zone de Protection"		, "label" : "['Oui','Non'][[VRIJWARINGSZONE]]"					, "type" : "eval"},
+				{ "name": "Zone de Protection"		, "label" : "['Non','Oui'][[VRIJWARINGSZONE]]"					, "type" : "eval"},
 				{ "name": "Référence DMS"			, "label" : "[NUMMER_DOSSIER]/[CODE_DOSSIER]"					, "type" : "string"}
 			]
 		},
@@ -355,7 +356,7 @@ ux.gfi.fr = {
 				{ "name": "Premier arrêté"			, "label" : "[DOCUM_AG1]"										, "type" : "link"},
 				{ "name": "Dernier arrêté"			, "label" : "[DOCUM_AG2]"										, "type" : "link"},
 				{ "name": "Photo"					, "label" : "[FOTO]"											, "type" : "picture"},
-				{ "name": "Zone de Protection"		, "label" : "['Oui','Non'][[VRIJWARINGSZONE]]"					, "type" : "eval"},
+				{ "name": "Zone de Protection"		, "label" : "['Non','Oui'][[VRIJWARINGSZONE]]"					, "type" : "eval"},
 				{ "name": "Référence DMS"			, "label" : "[NUMMER_DOSSIER]/[CODE_DOSSIER]"					, "type" : "string"}
 			]
 		},
@@ -372,7 +373,7 @@ ux.gfi.fr = {
 				{ "name": "Premier arrêté"			, "label" : "[DOCUM_AG1]"										, "type" : "link"},
 				{ "name": "Dernier arrêté"			, "label" : "[DOCUM_AG2]"										, "type" : "link"},
 				{ "name": "Photo"					, "label" : "[FOTO]"											, "type" : "picture"},
-				{ "name": "Zone de Protection"		, "label" : "['Oui','Non'][[VRIJWARINGSZONE]]"					, "type" : "eval"},
+				{ "name": "Zone de Protection"		, "label" : "['Non','Oui'][[VRIJWARINGSZONE]]"					, "type" : "eval"},
 				{ "name": "Référence DMS"			, "label" : "[NUMMER_DOSSIER]/[CODE_DOSSIER]"					, "type" : "string"}
 			]
 		},
@@ -389,7 +390,7 @@ ux.gfi.fr = {
 				{ "name": "Premier arrêté"			, "label" : "[DOCUM_AG1]"										, "type" : "link"},
 				{ "name": "Dernier arrêté"			, "label" : "[DOCUM_AG2]"										, "type" : "link"},
 				{ "name": "Photo"					, "label" : "[FOTO]"											, "type" : "picture"},
-				{ "name": "Zone de Protection"		, "label" : "['Oui','Non'][[VRIJWARINGSZONE]]"					, "type" : "eval"},
+				{ "name": "Zone de Protection"		, "label" : "['Non','Oui'][[VRIJWARINGSZONE]]"					, "type" : "eval"},
 				{ "name": "Référence DMS"			, "label" : "[NUMMER_DOSSIER]/[CODE_DOSSIER]"					, "type" : "string"}
 			]
 		},
@@ -406,7 +407,7 @@ ux.gfi.fr = {
 				{ "name": "Premier arrêté"			, "label" : "[DOCUM_AG1]"										, "type" : "link"},
 				{ "name": "Dernier arrêté"			, "label" : "[DOCUM_AG2]"										, "type" : "link"},
 				{ "name": "Photo"					, "label" : "[FOTO]"											, "type" : "picture"},
-				{ "name": "Zone de Protection"		, "label" : "['Oui','Non'][[VRIJWARINGSZONE]]"					, "type" : "eval"},
+				{ "name": "Zone de Protection"		, "label" : "['Non','Oui'][[VRIJWARINGSZONE]]"					, "type" : "eval"},
 				{ "name": "Référence DMS"			, "label" : "[NUMMER_DOSSIER]/[CODE_DOSSIER]"					, "type" : "string"}
 			]
 		},
@@ -423,7 +424,7 @@ ux.gfi.fr = {
 				{ "name": "Premier arrêté"			, "label" : "[DOCUM_AG1]"										, "type" : "link"},
 				{ "name": "Dernier arrêté"			, "label" : "[DOCUM_AG2]"										, "type" : "link"},
 				{ "name": "Photo"					, "label" : "[FOTO]"											, "type" : "picture"},
-				{ "name": "Zone de Protection"		, "label" : "['Oui','Non'][[VRIJWARINGSZONE]]"					, "type" : "eval"},
+				{ "name": "Zone de Protection"		, "label" : "['Non','Oui'][[VRIJWARINGSZONE]]"					, "type" : "eval"},
 				{ "name": "Référence DMS"			, "label" : "[NUMMER_DOSSIER]/[CODE_DOSSIER]"					, "type" : "string"}
 			]
 		},
@@ -440,7 +441,7 @@ ux.gfi.fr = {
 				{ "name": "Premier arrêté"			, "label" : "[DOCUM_AG1]"										, "type" : "link"},
 				{ "name": "Dernier arrêté"			, "label" : "[DOCUM_AG2]"										, "type" : "link"},
 				{ "name": "Photo"					, "label" : "[FOTO]"											, "type" : "picture"},
-				{ "name": "Zone de Protection"		, "label" : "['Oui','Non'][[VRIJWARINGSZONE]]"					, "type" : "eval"},
+				{ "name": "Zone de Protection"		, "label" : "['Non','Oui'][[VRIJWARINGSZONE]]"					, "type" : "eval"},
 				{ "name": "Référence DMS"			, "label" : "[NUMMER_DOSSIER]/[CODE_DOSSIER]"					, "type" : "string"}
 			]
 		},
@@ -618,7 +619,7 @@ ux.gfi.fr = {
 				{ "name": "Premier arrêté"			, "label" : "[DOCUM_AG1]"										, "type" : "link"},
 				{ "name": "Dernier arrêté"			, "label" : "[DOCUM_AG2]"										, "type" : "link"},
 				{ "name": "Photo"					, "label" : "[FOTO]"											, "type" : "picture"},
-				{ "name": "Zone de Protection"		, "label" : "['Oui','Non'][[VRIJWARINGSZONE]]"					, "type" : "eval"},
+				{ "name": "Zone de Protection"		, "label" : "['Non','Oui'][[VRIJWARINGSZONE]]"					, "type" : "eval"},
 				{ "name": "Référence DMS"			, "label" : "[NUMMER_DOSSIER]/[CODE_DOSSIER]"					, "type" : "string"}
 			]
 		}

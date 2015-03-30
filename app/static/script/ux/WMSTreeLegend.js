@@ -49,7 +49,10 @@ ux.plugins.WMSTreeLegend = Ext.extend(gxp.plugins.Tool, {
     actionTarget: null,
 	
 	sourceName : "",
-
+	
+	noTileslayersList: ["AATL_DMS_SITE_ARBR:Arbres_remarquables",
+						"AATL_DMS_SITE_ARBR:Arbres_remarquables_abattus_ou_disparus"],
+						
     /** private: method[constructor]
      */
     constructor: function(config) {
@@ -224,12 +227,13 @@ ux.plugins.WMSTreeLegend = Ext.extend(gxp.plugins.Tool, {
 									record.data.layer.url = layer.url;
 									
 									// DOCG 19/07/2013 Hack pour afficher les symboles des arbres sans les tronquer en bord de tuile. voir bug #179
-									if (record.data.name === "AATL_DMS_SITE_ARBR:Arbres_Remarquables"){
-										record.data.layer.url = record.data.layer.url.replace("gwc/service/","");
-										record.data.layer.singleTile = true;
-										record.data.layer.ratio = 3;
+									for (var i=this.noTileslayersList.length-1; i>=0; --i) {
+										if (record.data.name === this.noTileslayersList[i]){
+											record.data.layer.url = record.data.layer.url.replace("gwc/service/","");
+											record.data.layer.singleTile = true;
+											record.data.layer.ratio = 3;
+										}
 									}
-
 									//remember the node id for unchecking the node
 									record["NodeId"] = node.id;	
 									// remember the record in the node for removing
@@ -245,7 +249,8 @@ ux.plugins.WMSTreeLegend = Ext.extend(gxp.plugins.Tool, {
 									name : layer.params.LAYERS,
 									source: source.id,
 									queryable: true,
-									buffer: 0
+									buffer: 0,
+									url: layer.url
 								});
 								// DOCG 17/06/2013 On applique le resize au couches de fond, Alleluyah 3!!!!!!!!!!!!!!!
 								//record.data.layer.transitionEffect = "resize";
@@ -253,14 +258,15 @@ ux.plugins.WMSTreeLegend = Ext.extend(gxp.plugins.Tool, {
 								
 								// NDU 19/07/2013 Hack forcant l'utilisation de l'url du proposée dans le getcapabilities. voir bug #176
 								record.data.layer.url = layer.url;
-								
+
 								// DOCG 19/07/2013 Hack pour afficher les symboles des arbres sans les tronquer en bord de tuile. voir bug #179
-								if (record.data.name === "AATL_DMS_SITE_ARBR:Arbres_Remarquables"){
-									record.data.layer.url = record.data.layer.url.replace("gwc/service/","");
-									record.data.layer.singleTile = true;
-									record.data.layer.ratio = 3;
+								for (var i=this.noTileslayersList.length-1; i>=0; --i) {
+									if (record.data.name === this.noTileslayersList[i]){
+										record.data.layer.url = record.data.layer.url.replace("gwc/service/","");
+										record.data.layer.singleTile = true;
+										record.data.layer.ratio = 3;
+									}
 								}
-						
 								// remember the node id for unchecking the node
 								record["NodeId"] = node.id;	
 								// remember the record in the node for removing
