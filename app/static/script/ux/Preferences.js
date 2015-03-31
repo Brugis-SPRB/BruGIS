@@ -256,40 +256,42 @@ ux.plugins.Preferences = Ext.extend(gxp.plugins.Tool, {
 			if (localStorage.getItem("preferences") !== null) {
 				var preferencesKeysTemp = this.preferencesKeys;
 				for (key in this.preferencesKeys) {
-					var preferenceKey = this.preferencesKeys[key], 
-						preferenceContent = '';
-					if (localStorage.getItem(preferenceKey) !== null) {
-						//La prefs existe en localstorage
-						preferenceContent = localStorage.getItem(preferenceKey);
-					} else {
-						// ou pas, on l'initialise, on l'ajoute
-						preferenceContent = this.defaultPreferences[this.preferencesKeys[key]];
-						localStorage.setItem(this.preferencesKeys[key], this.defaultPreferences[this.preferencesKeys[key]]);
-						localStorage.setItem("preferences", "['" + this.preferencesKeys.toString().replace(/\,/g,"','") + "']");
-					}
-					// en cas de contenu non numérique
-					if (isNaN(preferenceContent)) {
-						//console.log("Not a number for a preference content");
-						preferenceContent = this.defaultPreferences[this.preferencesKeys[key]];
-						localStorage.setItem(this.preferencesKeys[key], this.defaultPreferences[this.preferencesKeys[key]]);
-					} else {
-						// en cas de contenu numérique ne désignant rien de connu
-						// test pour voir si la valeur est acceptable selon le dictionnaire interne de choix.
-						// ! Il faut d'abord évaluer le type de dictionnaire interne (array ou arrayStore)
-						if (this.choicesPrefsKeysDic[this.preferencesKeys[key]] instanceof Ext.data.ArrayStore) {
-							if (preferenceContent >= this.choicesPrefsKeysDic[this.preferencesKeys[key]].reader.arrayData.length) {
-								//console.log("number but too high");
-								preferenceContent = this.defaultPreferences[this.preferencesKeys[key]];
-								localStorage.setItem(this.preferencesKeys[key], this.defaultPreferences[this.preferencesKeys[key]]);
-							}
+					if (key !== "remove") {
+						var preferenceKey = this.preferencesKeys[key], 
+							preferenceContent = '';
+						if (localStorage.getItem(preferenceKey) !== null) {
+							//La prefs existe en localstorage
+							preferenceContent = localStorage.getItem(preferenceKey);
 						} else {
-							if (preferenceContent >= this.choicesPrefsKeysDic[this.preferencesKeys[key]].length) {
-								preferenceContent = this.defaultPreferences[this.preferencesKeys[key]];
-								localStorage.setItem(this.preferencesKeys[key], this.defaultPreferences[this.preferencesKeys[key]]);
+							// ou pas, on l'initialise, on l'ajoute
+							preferenceContent = this.defaultPreferences[this.preferencesKeys[key]];
+							localStorage.setItem(this.preferencesKeys[key], this.defaultPreferences[this.preferencesKeys[key]]);
+							localStorage.setItem("preferences", "['" + this.preferencesKeys.toString().replace(/\,/g,"','") + "']");
+						}
+						// en cas de contenu non numérique
+						if (isNaN(preferenceContent)) {
+							//console.log("Not a number for a preference content");
+							preferenceContent = this.defaultPreferences[this.preferencesKeys[key]];
+							localStorage.setItem(this.preferencesKeys[key], this.defaultPreferences[this.preferencesKeys[key]]);
+						} else {
+							// en cas de contenu numérique ne désignant rien de connu
+							// test pour voir si la valeur est acceptable selon le dictionnaire interne de choix.
+							// ! Il faut d'abord évaluer le type de dictionnaire interne (array ou arrayStore)
+							if (this.choicesPrefsKeysDic[this.preferencesKeys[key]] instanceof Ext.data.ArrayStore) {
+								if (preferenceContent >= this.choicesPrefsKeysDic[this.preferencesKeys[key]].reader.arrayData.length) {
+									//console.log("number but too high");
+									preferenceContent = this.defaultPreferences[this.preferencesKeys[key]];
+									localStorage.setItem(this.preferencesKeys[key], this.defaultPreferences[this.preferencesKeys[key]]);
+								}
+							} else {
+								if (preferenceContent >= this.choicesPrefsKeysDic[this.preferencesKeys[key]].length) {
+									preferenceContent = this.defaultPreferences[this.preferencesKeys[key]];
+									localStorage.setItem(this.preferencesKeys[key], this.defaultPreferences[this.preferencesKeys[key]]);
+								}
 							}
 						}
+						data.push([preferenceKey, preferenceContent]);
 					}
-					data.push([preferenceKey, preferenceContent]);
 				}
 			// Aucune prefs ne se trouve encore en localstorage
 			} else {
@@ -297,8 +299,10 @@ ux.plugins.Preferences = Ext.extend(gxp.plugins.Tool, {
 				// ici créer les var de prefs en localstorage
 				// ici compléter le data
 				for (key in this.preferencesKeys) {
-					localStorage.setItem(this.preferencesKeys[key], this.defaultPreferences[this.preferencesKeys[key]]);
-					data.append([this.preferencesKeys[key], this.defaultPreferences[this.preferencesKeys[key]]]);
+					if (key !== "remove") {
+						localStorage.setItem(this.preferencesKeys[key], this.defaultPreferences[this.preferencesKeys[key]]);
+						data.append([this.preferencesKeys[key], this.defaultPreferences[this.preferencesKeys[key]]]);
+					}
 				}
 			}
 			// génération du store une fois data complété avec 
