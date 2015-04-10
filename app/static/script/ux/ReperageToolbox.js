@@ -102,7 +102,7 @@ ux.plugins.ReperageToolbox = Ext.extend(gxp.plugins.Tool, {
 	 *  ``String``
 	 */
 	reperageHost : "http://svappmavw019:8080/WebReperage",	//development
-	//reperageHost : "http://mbr102.irisnet.be/WebReperage",	//staging
+	reperageHost : "http://mbr102.irisnet.be/WebReperage",	//staging
 	//reperageHost : "http://mbr102.irisnet.be/WebReperage",	//production
 	
 	/** private: method[constructor]

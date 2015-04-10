@@ -168,7 +168,7 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
 					source: 'BruGIS WMS - Geoserver',
 					name: "AATL:Parcelle_2014",
 					minResolution: 0.014000028082733494,		// 1/50
-					maxResolution: 1.4000028082733496,			// 1/5.000
+					maxResolution: 14.000028082733494,			// 1/5.000
 					restrictedLayers: [
 						{ source: 'BruGIS WMS - Geoserver' , name: "AATL_DMS_PROT:Prises_actes" },
 						{ source: 'BruGIS WMS - Geoserver' , name: "AATL_DMS_PROT:Arretes_de_non_classement" },
@@ -185,7 +185,8 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
 					width: 300
 				}
 			}, {
-                ptype: "gxux_measure", toggleGroup: this.toggleGroup,
+                ptype: "gxux_measure", 
+				toggleGroup: this.toggleGroup,
                 controlOptions: {immediate: true,
 								 outputTarget: "bbar_measure"},
                 actionTarget: {target: "paneltbar", index: 11}
@@ -747,6 +748,7 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
             disabled.each(function(item) {
                 item.disable();
             });
+			
 			// DOCG // idem dessus, mais pour la bottomToolbar
             var bottomDisabled = this.bottomtoolbar.items.filterBy(function(item) {
                 return item.initialConfig && item.initialConfig.disabled;
@@ -756,10 +758,6 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
                 item.disable();
             });
 			
-			OpenLayers.Projection.defaults["EPSG:31370"] = {
-				units:"m", maxExtent:[0,0,300000,300000]
-			};
-
 			if(this.tools.featuremanager)
 			{
 				var params = Ext.urlDecode(location.search.substring(1));
@@ -783,7 +781,6 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
 									bounds.top];
 					this.mapPanel.map.zoomToExtent(extend);
 					if (params.scale) {
-						//console.log("hé ben quoi?");
 						this.mapPanel.map.zoomToScale(params.scale, true);
 					}
 				} else if(params.qry && params.val && ux.qry && ux.qry[currentLangage] && ux.qry[currentLangage][params.qry]) {
@@ -798,18 +795,12 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
 					var store = source.store;
 					source.store.load({callback: (function() {
 						var myLayer = null;
-						
-						//console.log(layerName);
-						
 						store.each(function(rec,b,c) {
 							//console.log(rec.data.name);
 							if(rec.data.name == layerName) {
 								myLayer = rec;
 							}
 						},this);
-
-						//console.log(myLayer);
-						
 						var record = source.createLayerRecord({
 								name : myLayer.data.name,
 								title: myLayer.data.title,
@@ -1103,27 +1094,6 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
      */
     createTools: function() {
         var tools = GeoExplorer.Composer.superclass.createTools.apply(this, arguments);
-        this.loginButton = new Ext.Button();
-        tools.push(['->', this.loginButton]);
-        //Maybe we are in debug mode
-		if(this.authorizedRoles)
-		{
-		    // unauthorized, show login button
-			if (this.authorizedRoles.length === 0) {
-				this.showLogin();
-			} else {
-				var user = this.getCookieValue(this.cookieParamName);
-				if (user === null) {
-					user = "unknown";
-				}
-				this.showLogout(user);
-			}
-		}
-		else
-		{
-			this.showLogin();
-		}
-
         var aboutButton = new Ext.Button({
             //text: this.appInfoText,
             iconCls: "icon-about",
@@ -1175,6 +1145,30 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
 		
         tools.unshift("-");
         tools.unshift(aboutButton);
+		
+		this.loginButton = new Ext.Button();
+		this.loginButton.id = "login";
+		tools.push(['->', this.loginButton]);
+		
+        //Maybe we are in debug mode
+		if(this.authorizedRoles)
+		{
+		    // unauthorized, show login button
+			if (this.authorizedRoles.length === 0) {
+				this.showLogin();
+			} else {
+				var user = this.getCookieValue(this.cookieParamName);
+				if (user === null) {
+					user = "unknown";
+				}
+				this.showLogout(user);
+			}
+		}
+		else
+		{
+			this.showLogin();
+		}
+		//console.log(tools);
         return tools;
     },
 

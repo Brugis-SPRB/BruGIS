@@ -169,10 +169,12 @@
 
 		globalAuthStatus = (getCookieValue("geoexplorer-user")) ?  200 :  401;
 		
-		var brugisWMSGeoserver_DEV = (globalAuthStatus != 404 && globalAuthStatus != 401) ? "http://svappmavw019:8080/geoserver/www/wmsaatl/wmsc_brugis.xml" :"http://svappmavw019:8080/geoserver/www/wmsaatl/wmsc_brugis_anon.xml";	
+		//var brugisWMSGeoserver_DEV = (globalAuthStatus != 404 && globalAuthStatus != 401) ? "http://svappmavw019:8080/geoserver/www/wmsaatl/wmsc_brugis.xml" :"http://svappmavw019:8080/geoserver/www/wmsaatl/wmsc_brugis_anon.xml";	
 		
-		var brugisWMSGeoserver_PRD = (globalAuthStatus != 404 && globalAuthStatus != 401) ? "/geoserver/www/wmsaatl/wmsc_brugis.xml" : "/geoserver/www/wmsaatl/wmsc_brugis_anon.xml";					
+		//var brugisWMSGeoserver_PRD = (globalAuthStatus != 404 && globalAuthStatus != 401) ? "/geoserver/www/wmsaatl/wmsc_brugis.xml" : "/geoserver/www/wmsaatl/wmsc_brugis_anon.xml";					
 		
+		var brugisWMSGeoserver_DEV  = "http://svappmavw019:8080/geoserver/ows";
+		var brugisWMSGeoserver_PRD  = "/geoserver/ows";
 		
 		var sourcesDev = 
 			(geoextLangFr)?
@@ -180,7 +182,7 @@
 				'BruGIS WMS - Geoserver': {
 					url: brugisWMSGeoserver_DEV,
 					version: "1.1.1",
-					ptype: "gxp_wmscsource"
+					ptype: "ux_brugiswmssource"
 				},
 				'IBGE WMS - Mapserver': {
 					url: "http://wms.ibgebim.be/ibgewms?",
@@ -213,7 +215,7 @@
 				'BruGIS WMS - Geoserver': {
 					url: brugisWMSGeoserver_DEV,
 					version: "1.1.1",
-					ptype: "gxp_wmscsource"
+					ptype: "ux_brugiswmssource"
 				},
 				'IBGE/BIM WMS - Mapserver': {
 					url: "http://wms.ibgebim.be/bimwms?",
@@ -246,7 +248,7 @@
 				'BruGIS WMS - Geoserver': {
 					url: brugisWMSGeoserver_DEV ,
 					version: "1.1.1",
-					ptype: "gxp_wmscsource"
+					ptype: "ux_brugiswmssource"
 				},
 				'IBGE/BIM WMS - Mapserver': {
 					url: "http://wms.ibgebim.be/ibgewms?",
@@ -281,7 +283,7 @@
 				'BruGIS WMS - Geoserver': {
 					url: brugisWMSGeoserver_PRD,
 					version: "1.1.1",
-					ptype: "gxp_wmscsource"
+					ptype:"ux_brugiswmssource"
 				},
 				'IBGE WMS - Mapserver': {
 					url: "http://wms.ibgebim.be/ibgewms?",
@@ -314,7 +316,7 @@
 				'BruGIS WMS - Geoserver': {
 					url: brugisWMSGeoserver_PRD,
 					version: "1.1.1",
-					ptype: "gxp_wmscsource"
+					ptype: "ux_brugiswmssource"
 				},
 				'BIM WMS - Mapserver': {
 					url: "http://wms.ibgebim.be/bimwms?",
@@ -347,7 +349,7 @@
 				'BruGIS WMS - Geoserver': {
 					url: brugisWMSGeoserver_PRD,
 					version: "1.1.1",
-					ptype: "gxp_wmscsource"
+					ptype: "ux_brugiswmssource"
 				},
 				'IBGE/BIM WMS - Mapserver': {
 					url: "http://wms.ibgebim.be/ibgewms?",
@@ -375,6 +377,10 @@
 					ptype: "gxp_wmssource"
 				}
 			}:{};
+
+			OpenLayers.Projection.defaults["EPSG:31370"] = {
+				units:"m", maxExtent:[0,0,300000,300000]
+			};
 			
         var app = new GeoExplorer.Brugis({
             authStatus: globalAuthStatus,
