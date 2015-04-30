@@ -387,7 +387,7 @@
 			printService: "/print/pdf",
             //printService: "http://mbr102.irisnet.be/print/pdf",
             about: {
-                title: "MyBruGIS v 1.1 Gregorio Allegri",
+                title: "MyBruGIS v 1.2 Louis Couperin",
                 "abstract": abstractText,
 				"help": localeHelp,
 		        contact: contactText

@@ -46,7 +46,7 @@ ux.plugins.MyMaps = Ext.extend(gxp.plugins.Tool, {
 	
 	resetText: "reset",
 	importText: "Import",
-	exportText: "Export",
+	exportText: "Link",
 	saveMapText: "Save",
 	loadMapText: "Load",
 	deleteMapText: "Delete",
@@ -54,7 +54,7 @@ ux.plugins.MyMaps = Ext.extend(gxp.plugins.Tool, {
 	
 	resetButtonTooltipText: "Reset the BruGIS map to its default state",
 	importButtonTooltipText: "Import maps from file",
-	exportButtonTooltipText: "Export selected maps to file",
+	exportButtonTooltipText: "Temporary link towards the map",
 	saveButtonTooltipText: "Save current map state",
 	deleteButtonTooltipText: "Delete selected map state",
 	loadButtonTooltipText: "Load selected map state",
