@@ -77,6 +77,8 @@ ux.plugins.MyMaps = Ext.extend(gxp.plugins.Tool, {
 	sameMapNameTitle: "Warning",
 	sameMapNameMessage: "This name already exists. Do you want to overwrite this map?",
 	
+	exportMapPromptTitle: "Use this link to share your maps :",
+	
     /** api: config[myMaps]
      *  ``String``
      *  Text for the grid expander (i18n).
@@ -240,14 +242,15 @@ ux.plugins.MyMaps = Ext.extend(gxp.plugins.Tool, {
 				tooltip: this.importButtonTooltipText,
                 scope : this
             }),
+*/			
 			new Ext.Button({
 				id: "exportButton",
                 text: this.exportText,
-                handler: this.aFunction,
+                handler: this.exportMapState,
 				tooltip: this.exportButtonTooltipText,
                 scope : this
             }),
- */         new Ext.Button({
+            new Ext.Button({
 				id: "resetButton",
                 text: this.resetText,
                 handler: this.resetMapState,
@@ -333,7 +336,7 @@ ux.plugins.MyMaps = Ext.extend(gxp.plugins.Tool, {
 			Ext.getCmp("loadButton").disable();
 		}
 		Ext.getCmp("deleteButton").enable();
-		//Ext.getCmp("exportButton").enable();
+		Ext.getCmp("exportButton").enable();
 	},
 	
 	/**
@@ -342,7 +345,7 @@ ux.plugins.MyMaps = Ext.extend(gxp.plugins.Tool, {
 	deActivateButtons: function() {
 		Ext.getCmp("deleteButton").disable();
 		Ext.getCmp("loadButton").disable();
-		//Ext.getCmp("exportButton").disable();
+		Ext.getCmp("exportButton").disable();
 	},
 	
     /** private: method[saveMapState]
@@ -636,7 +639,33 @@ ux.plugins.MyMaps = Ext.extend(gxp.plugins.Tool, {
         return new Ext.grid.RowExpander({
             tpl: new Ext.Template(this.expanderTemplateText)
         });
-    }
+    },
+	
+	exportMapState: function() {		
+		var myMapsGridPanel = Ext.getCmp("myMapsGridPanel");
+		var selectedMap = myMapsGridPanel.selModel.selections.items[0];
+		var mapContent = selectedMap.data.content;
+		
+	    OpenLayers.Request.issue({
+            method: 'POST',
+            url: '../sharemaps/',
+            data: mapContent,
+            callback: function(request) {
+				if (request.status == 200) {
+					var config = Ext.util.JSON.decode(request.responseText);
+					var mapId = config.id;
+					if (mapId) {
+						this.id = mapId;
+						var mapLinkUrl = window.location +  "#sharemaps/" + mapId;
+						prompt(this.exportMapPromptTitle, mapLinkUrl);
+					}
+				} else {
+					console.error("Cannot export the map");
+				}
+            },
+            scope: this
+        });
+	}
 
 });
 

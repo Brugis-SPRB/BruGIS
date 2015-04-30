@@ -169,12 +169,11 @@
 
 		globalAuthStatus = (getCookieValue("geoexplorer-user")) ?  200 :  401;
 		
-		//var brugisWMSGeoserver_DEV = (globalAuthStatus != 404 && globalAuthStatus != 401) ? "http://svappmavw019:8080/geoserver/www/wmsaatl/wmsc_brugis.xml" :"http://svappmavw019:8080/geoserver/www/wmsaatl/wmsc_brugis_anon.xml";	
+		var brugisWMSGeoserver_DEV = (globalAuthStatus != 404 && globalAuthStatus != 401) ? "http://svappmavw019:8080/geoserver/ows" :"http://svappmavw019:8080/geoserver/www/wmsaatl/wmsc_brugis_anon.xml";	
+		var brugisWMSGeoserver_PRD = (globalAuthStatus != 404 && globalAuthStatus != 401) ? "/geoserver/ows" : "/geoserver/www/wmsaatl/wmsc_brugis_anon.xml";					
 		
-		//var brugisWMSGeoserver_PRD = (globalAuthStatus != 404 && globalAuthStatus != 401) ? "/geoserver/www/wmsaatl/wmsc_brugis.xml" : "/geoserver/www/wmsaatl/wmsc_brugis_anon.xml";					
-		
-		var brugisWMSGeoserver_DEV  = "http://svappmavw019:8080/geoserver/ows";
-		var brugisWMSGeoserver_PRD  = "/geoserver/ows";
+		//var brugisWMSGeoserver_DEV  = "http://svappmavw019:8080/geoserver/ows";
+		//var brugisWMSGeoserver_PRD  = "/geoserver/ows";
 		
 		var sourcesDev = 
 			(geoextLangFr)?

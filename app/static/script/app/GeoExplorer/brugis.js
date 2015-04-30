@@ -266,19 +266,48 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
     loadConfig: function(config) {
         var mapUrl = window.location.hash.substr(1);
         var match = mapUrl.match(/^maps\/(\d+)$/);
-	var query = Ext.urlDecode(document.location.search.substr(1));
+		var matchShareMaps = mapUrl.match(/^sharemaps\/(\d+)$/);
+	    var query = Ext.urlDecode(document.location.search.substr(1));
         
-	if (match) {
-            this.id = Number(match[1]);
-            OpenLayers.Request.GET({
+	    if (match || matchShareMaps) {
+			this.id = matchShareMaps ? Number(matchShareMaps[1]) : Number(match[1]);
+            
+			OpenLayers.Request.GET({
                 url: "../" + mapUrl,
                 success: function(request) {
-                    var addConfig = Ext.util.JSON.decode(request.responseText);
-                    // Don't use persisted tool configurations from old maps
-		    
-		    this.originalSourcesUrl = config.sources["BruGIS WMS - Geoserver"].url;
+					var addConfig = Ext.util.JSON.decode(request.responseText);						
+					//http://svappmavw019:8080/geoserver/www/wmsaatl/wmsc_brugis_anon.xml
+					this.originalSourcesUrl = config.sources["BruGIS WMS - Geoserver"].url;
+					var mSource = config.sources["BruGIS WMS - Geoserver"];		
+						/*  We must create a layer configuration that ask to the source if the getcapabilities is loaded,
+							if not the wrong url is taken because WMS getMap is issued before the getcapabilities response 
+							override the getmap url */
+					var mLayer = [];
+					for(var ll=0; ll < addConfig.map.layers.length; ll++) {
+						var newLayer = {};
+						newLayer["source"] =  addConfig.map.layers[ll].source;
+						newLayer["name"] = addConfig.map.layers[ll].name;
+						newLayer["title"] = addConfig.map.layers[ll].title;
+						newLayer["id"] = addConfig.map.layers[ll].id;
+						newLayer["group"] = addConfig.map.layers[ll].group;
+						newLayer["fixed"] = addConfig.map.layers[ll].fixed;
+						newLayer["visibility"] = addConfig.map.layers[ll].visibility;
+						newLayer["url"] 		= addConfig.map.layers[ll].url;
+						mLayer[ll] = newLayer;
+					}			
+					delete config.sources;
+					delete config.map;
+					// Don't use persisted tool configurations from old maps
                     delete addConfig.tools;
-                    this.applyConfig(Ext.applyIf(addConfig, config));
+					addConfig.sources["BruGIS WMS - Geoserver"]=mSource;
+					addConfig.map.layers = mLayer;
+					if(window.history && window.history.pushState) {
+						window.history.pushState('','',window.location.pathname);
+					} else {
+						window.location.href = windows.location.href.replace(/#.*$/, '#');
+					}
+					
+					this.applyConfig(Ext.applyIf(config, addConfig));
                 },
                 failure: function(request) {
                     var obj;

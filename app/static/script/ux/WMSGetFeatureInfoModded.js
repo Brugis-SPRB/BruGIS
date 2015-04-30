@@ -263,7 +263,7 @@ ux.plugins.WMSGetFeatureInfo = Ext.extend(gxp.plugins.Tool, {
 	/*
 	*	Display the feture geometry on map
 	*    there will be only one (geometry)
-	*   ALL YOUR BASE ARE BELONG O US
+	*   ALL OUR BASE ARE BELONG TO US NEWS
 	*/
 	highlightFeature : function(feature) {
 		var styleMap = new OpenLayers.StyleMap({

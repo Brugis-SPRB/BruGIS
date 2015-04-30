@@ -19,6 +19,7 @@ app.mount("/brugis", require("./root/brugis").app);
 app.mount("/composer", require("./root/composer").app);
 app.mount("/login", require("./root/login").app);
 app.mount("/maps/", require("./root/maps").app);
+app.mount("/sharemaps/", require("./root/sharemaps").app);
 app.mount("/proxy", require("./root/proxy").app);
 //app.mount("/login", require("./root/login").app);
 app.mount("/auth", require("./root/authentication").app);

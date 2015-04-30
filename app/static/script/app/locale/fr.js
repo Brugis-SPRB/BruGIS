@@ -145,6 +145,7 @@ GeoExt.Lang.add("fr", {
 		deleteMapText: "Supprimer",
 		doneText: "Terminé",
 		resetButtonTooltipText: "Réinitialiser la carte de BruGIS",
+		exportButtonTooltipText: "Exporter la carte sélectionnée comme lien",
 		saveButtonTooltipText: "Sauver la carte courante",
 		deleteButtonTooltipText: "Supprimer la carte",
 		loadButtonTooltipText: "Charger la carte",
