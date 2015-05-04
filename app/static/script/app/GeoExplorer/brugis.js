@@ -268,12 +268,19 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
         var match = mapUrl.match(/^maps\/(\d+)$/);
 		var matchShareMaps = mapUrl.match(/^sharemaps\/(\d+)$/);
 	    var query = Ext.urlDecode(document.location.search.substr(1));
+		var preUrl = "";
         
+		if (match) {
+			preUrl = "../";
+		} 
+		else if (matchShareMaps) {
+			preUrl = "http://mbr102.irisnet.be/MyBruGIS/";
+		}
 	    if (match || matchShareMaps) {
 			this.id = matchShareMaps ? Number(matchShareMaps[1]) : Number(match[1]);
             
 			OpenLayers.Request.GET({
-                url: "../" + mapUrl,
+                url: preUrl + mapUrl,
                 success: function(request) {
 					var addConfig = Ext.util.JSON.decode(request.responseText);						
 					//http://svappmavw019:8080/geoserver/www/wmsaatl/wmsc_brugis_anon.xml

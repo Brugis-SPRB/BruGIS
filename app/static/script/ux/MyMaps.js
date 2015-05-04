@@ -648,7 +648,7 @@ ux.plugins.MyMaps = Ext.extend(gxp.plugins.Tool, {
 		
 	    OpenLayers.Request.issue({
             method: 'POST',
-            url: '../sharemaps/',
+            url: 'http://mbr102.irisnet.be/MyBruGIS/sharemaps/',
             data: mapContent,
             callback: function(request) {
 				if (request.status == 200) {
