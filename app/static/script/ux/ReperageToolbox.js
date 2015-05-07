@@ -76,7 +76,6 @@ ux.plugins.ReperageToolbox = Ext.extend(gxp.plugins.Tool, {
 	 */
 	reperageLayerName: "reperagework",
 	
-	
 	/** api: config[LocalStorageState]
 	 *  ``String``
 	 *  Boolean LocalStorage State.
@@ -87,7 +86,6 @@ ux.plugins.ReperageToolbox = Ext.extend(gxp.plugins.Tool, {
 	 *  ``Ext.data.Store``
 	 */
 	myReperage: false,
-	
 	
 	/** api: config[myReperage]
 	 *  ``Ext.grid.GridPanel``
@@ -133,7 +131,7 @@ ux.plugins.ReperageToolbox = Ext.extend(gxp.plugins.Tool, {
 			this.username = localStorage.getItem("repuser");
 		}
 		
-		//création du vecteur qui contiendra les polygone dessiner
+		//création du vecteur qui contiendra les polygone dessinés
 		this.reperageLayer = new OpenLayers.Layer.Vector(this.reperageLayerName,{
 			rendererOptions: { zIndexing: true }
 		});
@@ -252,8 +250,6 @@ ux.plugins.ReperageToolbox = Ext.extend(gxp.plugins.Tool, {
 			}
 		});
 		
-		
-		
 		//Reperage Form
 		var showReperageFormBtn = new Ext.Button({
 			scope: this,
@@ -266,8 +262,6 @@ ux.plugins.ReperageToolbox = Ext.extend(gxp.plugins.Tool, {
 			}
 		});
 
-		
-		
 		var dataRepType = new Ext.data.JsonStore({
 			proxy: new Ext.data.HttpProxy({
 				url: this.reperageHost + '/resources/ReperagesType',
@@ -283,7 +277,6 @@ ux.plugins.ReperageToolbox = Ext.extend(gxp.plugins.Tool, {
 			dataRepType.setBaseParam('user',brugisUserName);
 		}
 		
-			
 		var reperageTypeCombo = new Ext.form.ComboBox({
 			fieldLabel: this.reperageTypeCombofieldLabel,
 			hiddenName:'reptype',
@@ -525,7 +518,7 @@ ux.plugins.ReperageToolbox = Ext.extend(gxp.plugins.Tool, {
 					totalProperty: 'totalProperties',
 					successProperty: 'success',
 					fields: [
-						'id', 'docref', 'adress', 'state', 
+						'id', 'docref', 'adress', 'state', 'type',
 						{name: 'startdate', mapping: 'startdate', type: 'date', dateFormat: 'timestamp'},
 						{name: 'enddate', type: 'date', dateFormat: 'timestamp'}
 					]
@@ -625,7 +618,8 @@ ux.plugins.ReperageToolbox = Ext.extend(gxp.plugins.Tool, {
 			{
 				header: this.myReperageGridPanel_type_header,
 				dataIndex: 'type',
-				width: 200
+				width: 70,
+				sortable: true
 			},
 			{
 				header: this.myReperageGridPanel_startdate_header,
