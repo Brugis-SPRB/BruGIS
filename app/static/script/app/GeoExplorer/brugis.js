@@ -279,8 +279,10 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
 	    if (match || matchShareMaps) {
 			this.id = matchShareMaps ? Number(matchShareMaps[1]) : Number(match[1]);
             
-			OpenLayers.Request.GET({
+			OpenLayers.Request.issue({
+				method: 'GET',
                 url: preUrl + mapUrl,
+				proxy : "../proxy/?url=",
                 success: function(request) {
 					var addConfig = Ext.util.JSON.decode(request.responseText);						
 					//http://svappmavw019:8080/geoserver/www/wmsaatl/wmsc_brugis_anon.xml

@@ -52,6 +52,7 @@ ux.plugins.ReperageToolbox = Ext.extend(gxp.plugins.Tool, {
 	myReperageGridPanel_docref_header: "File",
 	myReperageGridPanel_adress_header: "Address",
 	myReperageGridPanel_state_header: "Status",
+	myReperageGridPanel_type_header: "Type",
 	myReperageGridPanel_startdate_header: "Creation date:",
 	myReperageGridPanel_enddate_header: "Expiration date:",
 	
@@ -620,6 +621,11 @@ ux.plugins.ReperageToolbox = Ext.extend(gxp.plugins.Tool, {
 					}
 					return newvalue;
 				}
+			},
+			{
+				header: this.myReperageGridPanel_type_header,
+				dataIndex: 'type',
+				width: 200
 			},
 			{
 				header: this.myReperageGridPanel_startdate_header,
