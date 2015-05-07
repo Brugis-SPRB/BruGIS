@@ -310,12 +310,7 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
                     delete addConfig.tools;
 					addConfig.sources["BruGIS WMS - Geoserver"]=mSource;
 					addConfig.map.layers = mLayer;
-					if(window.history && window.history.pushState) {
-						window.history.pushState('','',window.location.pathname);
-					} else {
-						window.location.href = windows.location.href.replace(/#.*$/, '#');
-					}
-					
+										
 					this.applyConfig(Ext.applyIf(config, addConfig));
                 },
                 failure: function(request) {
@@ -940,6 +935,12 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
 				}, this);
 			///////////////////////DOCG////////////////////////////////////////////
 
+			//Clean de l'url des #maps ou #savemaps ou lambx lamby
+			if(window.history && window.history.pushState) {
+				window.history.pushState('','',window.location.pathname);
+			} else {
+				window.location.href = windows.location.href.replace(/#.*$/, '#');
+			}
 		});
 		
 		///////////////////////DOCG////////////////////////////////////////////
