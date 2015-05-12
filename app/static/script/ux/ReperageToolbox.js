@@ -518,9 +518,9 @@ ux.plugins.ReperageToolbox = Ext.extend(gxp.plugins.Tool, {
 					totalProperty: 'totalProperties',
 					successProperty: 'success',
 					fields: [
-						'id', 'docref', 'adress', 'state', 'type',
-						{name: 'startdate', mapping: 'startdate', type: 'date', dateFormat: 'timestamp'},
-						{name: 'enddate', type: 'date', dateFormat: 'timestamp'}
+						'id', 'docref', 'adress', 'state', 'reperageTypeTitle',
+						{name: 'startdate', mapping: 'startdate', type: 'date', dateFormat: 'time'},
+						{name: 'enddate', type: 'date', dateFormat: 'time'}
 					]
 				}),
 				// store configs
@@ -617,7 +617,7 @@ ux.plugins.ReperageToolbox = Ext.extend(gxp.plugins.Tool, {
 			},
 			{
 				header: this.myReperageGridPanel_type_header,
-				dataIndex: 'type',
+				dataIndex: 'reperageTypeTitle',
 				width: 70,
 				sortable: true
 			},
