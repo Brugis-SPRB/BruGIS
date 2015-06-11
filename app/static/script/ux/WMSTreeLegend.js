@@ -56,31 +56,26 @@ ux.plugins.WMSTreeLegend = Ext.extend(gxp.plugins.Tool, {
     /** private: method[constructor]
      */
     constructor: function(config) {
-	
 		ux.plugins.WMSTreeLegend.superclass.constructor.apply(this, arguments);
-		
         if (!this.outputConfig) {
             this.outputConfig = {
 				autoWidth: true,
 				autoHeight: true
             };
         }
-		
         Ext.applyIf(this.outputConfig, {title: this.menuText}); 
     },
- 
- 
+
     /** api: method[addActions]
      */
     addActions: function() {
-	
         var actions = [{
             menuText: this.menuText,
             iconCls: "gxp-icon-legend",
             tooltip: this.tooltip,
             handler: function() {
                 this.removeOutput();
-                this.addOutput();
+				this.addOutput();
             },
             scope: this
         }];
@@ -92,7 +87,6 @@ ux.plugins.WMSTreeLegend = Ext.extend(gxp.plugins.Tool, {
 			}
 		};
 		
-	
 		var addLayer = function(obj,record,index) {		
 			if(this.cheking == false){
 				this.reloading = true;
@@ -139,17 +133,16 @@ ux.plugins.WMSTreeLegend = Ext.extend(gxp.plugins.Tool, {
 			treepanel.expandPath(node.getPath());
 			node.getUI().toggleCheck(true);
 			//remember the node id for unchecking the node
-			layerRecord["NodeId"] = node.id;	
+			layerRecord["NodeId"] = node.id;
 			// remember the record in the node for removing
 			node.attributes["record"] = layerRecord; 
-		}		
+		}
 	},
 	
     /** private: method[addOutput]
      *  :arg config: ``Object``
      */
     addOutput: function(config) {
-
         var root = new GeoExt.tree.LayerNode({
             text: 'WMS',
             loader: new GeoExt.tree.WMSCapabilitiesLoader({
@@ -161,18 +154,19 @@ ux.plugins.WMSTreeLegend = Ext.extend(gxp.plugins.Tool, {
                 layerParams: { 'TRANSPARENT': 'TRUE', 'INFO_FORMAT': "text/xml" },
                 // customize the createNode method to add a checkbox to nodes
                 createNode: function(attr) {
+					//console.log(attr);
                     attr.checked = attr.leaf ? false : undefined;
 					// Ceci déplie le premier Node appelé "AATL" ou "BROH"
 					attr.expanded = ((attr.text == "Bruxelles Développement urbain") ||
 									 (attr.text == "Brussel Stedelijke Ontwikkeling") ||
 									 (attr.text == "Fonds de plan") ||
 									 (attr.text == "Basiskaart"));
+					//attr.source = "machin";
                     return GeoExt.tree.WMSCapabilitiesLoader.prototype.createNode.apply(this, [attr]);
                 }
             })
         });
 
-		
         return ux.plugins.WMSTreeLegend.superclass.addOutput.call(this, Ext.apply({
             xtype: 'treepanel',
             rootVisible: false,
@@ -201,9 +195,9 @@ ux.plugins.WMSTreeLegend = Ext.extend(gxp.plugins.Tool, {
 					this.cheking = true;
 					if(this.reloading == false) {
 						if (checked === true) {
+							//console.log(node.attributes);
 							var source = this.target.layerSources[this.sourceName];
 							var layer = node.attributes.layer; //type : Openlayer.WmsLayer
-							
 							if(source.lazy) {
 								source.store.load({callback: (function() {
 									var record = source.createLayerRecord({ // createLayerRecord GVDS 18/12/2012

@@ -23,12 +23,16 @@ ux.gfi.nl =  {
 				{ "name": "Bestemmingen"		, "label" : "[AFFECTATION]" , "type" : "string" }
 			]
 		},
-		"BROH:Maas" : {
+		/*"BROH:Maas" : {
 			"actiontype" : "GRID",
 			"attributes" : [
 				{ "name": "Code"	, "label" : "[GMLINK]"			, "type" : "string" },
-				{ "name": "Link"	, "label" : "[PATH_INTER]"		, "type" : "string" }
+				{ "name": "Link"	, "label" : "[PATH_INTER]"		, "type" : "link" }
 			]
+		},*/
+		"BROH:Maas": {
+			"actiontype" : "REDIRECT",
+			"url"		 : "[PATH_INTER]"
 		},
 		"BROH:Toegankelijkheid" : {
 			"actiontype" : "GRID",

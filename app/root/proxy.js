@@ -126,6 +126,8 @@ function proxyPass(config) {
             headers: outgoing.headers,
             data: outgoing.data,
 			binary: true,
+            connectTimeout : 1000,
+            readTimeout: 1000,
             async: false
         });
 		

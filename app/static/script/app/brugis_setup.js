@@ -207,6 +207,11 @@
 					url: "http://gis.irisnet.be/geoserver/ibsa_bisa/wms?",
 					version: "1.3.0",
 					ptype: "gxp_wmssource"
+				},
+				'AGIV WMS - Basiskaart': {
+					url: "http://grb.agiv.be/geodiensten/raadpleegdiensten/GRB-basiskaart/wms?",
+					version: "1.3.0",
+					ptype: "gxp_wmssource"
 				}
 			}:
 			(geoextLangNl)?
@@ -240,6 +245,11 @@
 					url: "http://gis.irisnet.be/geoserver/ibsa_bisa/wms?",
 					version: "1.3.0",
 					ptype: "gxp_wmssource"
+				},
+				'AGIV WMS - Basiskaart': {
+					url: "http://grb.agiv.be/geodiensten/raadpleegdiensten/GRB-basiskaart/wms?",
+					version: "1.3.0",
+					ptype: "gxp_wmssource"
 				}
 			}:
 			(geoextLangEn)?
@@ -271,6 +281,11 @@
 				},
 				'IBSA WMS - Geoserver': {
 					url: "http://gis.irisnet.be/geoserver/ibsa_bisa/wms?",
+					version: "1.3.0",
+					ptype: "gxp_wmssource"
+				},
+				'AGIV WMS - Basiskaart': {
+					url: "http://grb.agiv.be/geodiensten/raadpleegdiensten/GRB-basiskaart/wms?",
 					version: "1.3.0",
 					ptype: "gxp_wmssource"
 				}
@@ -308,6 +323,11 @@
 					url: "http://gis.irisnet.be/geoserver/ibsa_bisa/wms?",
 					version: "1.3.0",
 					ptype: "gxp_wmssource"
+				},
+				'AGIV WMS - Basiskaart': {
+					url: "http://grb.agiv.be/geodiensten/raadpleegdiensten/GRB-basiskaart/wms?",
+					version: "1.3.0",
+					ptype: "gxp_wmssource"
 				}
 			}:
 			(geoextLangNl)?
@@ -339,6 +359,11 @@
 				},
 				'BISA WMS - Geoserver': {
 					url: "http://gis.irisnet.be/geoserver/ibsa_bisa/wms?",
+					version: "1.3.0",
+					ptype: "gxp_wmssource"
+				},
+				'AGIV WMS - Basiskaart': {
+					url: "http://grb.agiv.be/geodiensten/raadpleegdiensten/GRB-basiskaart/wms?",
 					version: "1.3.0",
 					ptype: "gxp_wmssource"
 				}
@@ -374,6 +399,11 @@
 					url: "http://gis.irisnet.be/geoserver/ibsa_bisa/wms?",
 					version: "1.3.0",
 					ptype: "gxp_wmssource"
+				},
+				'AGIV WMS - Basiskaart': {
+					url: "http://grb.agiv.be/geodiensten/raadpleegdiensten/GRB-basiskaart/wms?",
+					version: "1.3.0",
+					ptype: "gxp_wmssource"
 				}
 			}:{};
 
@@ -384,6 +414,7 @@
         var app = new GeoExplorer.Brugis({
             authStatus: globalAuthStatus,
             proxy: "../proxy/?url=",
+            //printService: "http://localhost:8080/print/print/dep",
 			printService: "/print/pdf",
             //printService: "http://mbr102.irisnet.be/print/pdf",
             about: {

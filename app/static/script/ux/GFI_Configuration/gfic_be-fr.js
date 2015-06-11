@@ -18,13 +18,17 @@ ux.gfi.fr = {
 				 { "name" : "Lien"			, "label" : "[URL_P_FR]"  	, "type" : "link" }
 			]
 		},
-		"AATL:Maille" : {
+		/*"AATL:Maille" : {
 			"actiontype" : "GRID",
 			"title"		 : "Maille: [GMLINK]",
 			"attributes" : [
 				{ "name": "Code"	, "label" : "[GMLINK]"			, "type" : "string" },
-				{ "name": "Lien"	, "label" : "[PATH_INTER]"		, "type" : "string" }
+				{ "name": "Lien"	, "label" : "[PATH_INTER]"		, "type" : "link" }
 			]
+		},*/
+		"AATL:Maille": {
+			"actiontype" : "REDIRECT",
+			"url"		 : "[PATH_INTER]"
 		},
 		"AATL:Accessibilite" : {
 			"actiontype" : "GRID",

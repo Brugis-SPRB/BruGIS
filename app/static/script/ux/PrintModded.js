@@ -109,8 +109,11 @@ ux.plugins.Print = Ext.extend(gxp.plugins.Tool, {
                                         var encFn = this.encoders.legends[cmp.getXType()];
 										//modif ndu
 										if(encFn) {
+                                            cmp.insert(0,{});
 											var tempRes = encFn.call(this, cmp, jsonData.pages[0].scale);
+
 											tempRes[0].name = node.layer.name;
+                                            tempRes[0].classes[0].name = node.layer.name;
 											encodedLegends = encodedLegends.concat(tempRes);
 										}
                                     }

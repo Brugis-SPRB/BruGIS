@@ -116,7 +116,7 @@ GeoExt.ux.Measure = Ext.extend(gxp.plugins.Tool, {
         };
 
         var makeString = function(metricData) {
-            var metric = metricData.measure;
+			var metric = metricData.measure;
             var metricUnit = metricData.units;
 
             measureControl.displaySystem = "english";

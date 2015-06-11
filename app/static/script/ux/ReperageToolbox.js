@@ -653,7 +653,7 @@ ux.plugins.ReperageToolbox = Ext.extend(gxp.plugins.Tool, {
 						icon   : '../theme/app/img/down2.gif',	 // Use a URL in the icon config
 						tooltip: this.myReperageGridPanel_docx_tooltip,
 						scope: this,
-						handler: function(grid, rowIndex, colIndex) {
+						handler: function(grid, rowIndex, colIndex, event) {
 							var rec = grid.getStore().getAt(rowIndex);
 							if(rec.get('state') == "DONE"){
 								var u = localStorage.getItem("repuser");

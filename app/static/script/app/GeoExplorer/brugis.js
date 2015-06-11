@@ -69,6 +69,7 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
 	wmsTreeLegendSourceText: "http://svappmavw019:8080/geoserver/www/wmsaatl/wmsaatl.xml",
 	//wmsTreeLegendSourceText: "http://mybrugis.irisnetlab.be/geoserver/www/wmsaatl/wmsaatl.xml",
 	//wmsTreeLegendSourceText: "http://www.mybrugis.irisnet.be/geoserver/www/wmsaatl/wmsaatl.xml",
+	IBGEwmsTreeLegendSourceText: "http://svappmavw019:8080/geoserver/www/wmsaatl/ibgewms.xml",
     // End i18n.
 	noTileslayersList: ["AATL_DMS_SITE_ARBR:Arbres_remarquables",
 						"AATL_DMS_SITE_ARBR:Arbres_remarquables_abattus_ou_disparus"],
@@ -204,7 +205,18 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
 				ptype: "ux_preferences",
 				id: "preferencesmanager",
 				actionTarget: {target: "paneltbar", index: 19}
-			}, {
+			}, /* {
+				ptype: "ux_wmstreelegend",
+				id: "wmsTreeLegendManager",
+				outputTarget: "treeTab",
+				sourceName : [	"BruGIS WMS - Geoserver",
+								"IBGE WMS - Mapserver"],
+				outputConfig: {
+					id: "wmsTree",
+					url : [	this.wmsTreeLegendSourceText,
+							this.IBGEwmsTreeLegendSourceText]
+				}
+			},  */{
 				ptype: "ux_wmstreelegend",
 				id: "wmsTreeLegendManager",
 				outputTarget: "treeTab",
@@ -1241,7 +1253,7 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
 		tools.push(['->', {
 						id: 'disclaimerText',
 						text: this.disclaimerText,
-					    width: 300,
+					    width: 350,
 					    xtype: "tbtext"
 						}
 				]);
