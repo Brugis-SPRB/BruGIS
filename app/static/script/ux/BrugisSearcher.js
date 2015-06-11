@@ -122,7 +122,8 @@ ux.plugins.BrugisSearcher = Ext.extend(gxp.plugins.Tool, {
      */
     addOutput: function(config) {
 		 this.btGroup = new Ext.ButtonGroup({
-			items : [this.combo,this.cadtext,this.typecombo]
+			//items : [this.combo,this.cadtext,this.typecombo]
+			items : [this.combo]
 		 });
 
         return ux.plugins.BrugisSearcher.superclass.addOutput.call(this, this.btGroup);
