@@ -143,11 +143,11 @@ ux.plugins.WMSTreeLegend = Ext.extend(gxp.plugins.Tool, {
 
 	findSource: function(keywords) {
 		var source = this.target.layerSources[this.sourceName];
-		for(var i=0; i < keywords.length; i++) {
-			if(keywords[i] in this.target.layerSources) {
-				source = this.target.layerSources[keywords[i]];
-			}			
-		}
+		keywords.forEach(function(element, index, array) {
+			if(element in this.target.layerSources) {
+				source = this.target.layerSources[element];
+			}
+		},this);
 		return source;
 	},
 	
@@ -207,6 +207,7 @@ ux.plugins.WMSTreeLegend = Ext.extend(gxp.plugins.Tool, {
 					this.cheking = true;
 					if(this.reloading == false) {
 						if (checked === true) {
+							//console.log(node.attributes);
 							var source = this.findSource.call(this,node.attributes.layer.metadata.keywords);
 							var layer = node.attributes.layer; //type : Openlayer.WmsLayer
 							if(source.lazy) {
@@ -250,6 +251,7 @@ ux.plugins.WMSTreeLegend = Ext.extend(gxp.plugins.Tool, {
 									this.target.mapPanel.layers.add(record);
 								}).createDelegate(this)});
 							} else {
+								//console.log(layer);
 								var record = source.createLayerRecord({ // createLayerRecord GVDS 18/12/2012
 									name : layer.params.LAYERS,
 									source: source.id,
