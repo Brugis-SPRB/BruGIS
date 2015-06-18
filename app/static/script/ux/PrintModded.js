@@ -32,6 +32,7 @@ ux.plugins.Print = Ext.extend(gxp.plugins.Tool, {
     /** api: ptype = ux_print */
     ptype: "ux_print",
 
+    downloadBaseUrl : "http://mbr102.irisnet.be",
     // Begin i18n.
     menuText: "Print Map",
     tooltip: "Print Map",
@@ -94,7 +95,10 @@ ux.plugins.Print = Ext.extend(gxp.plugins.Tool, {
                         if (this.openInNewWindow === true) {
                             window.open(url);
                             return false;
+                        } else {
+                            window.location.href =  this.downloadBaseUrl + url;
                         }
+                        return false;
                     },
                     beforeencodelegend: function(provider, jsonData, legend) {
                         if (legend && legend.ptype === "gxp_layermanager") {
@@ -112,7 +116,7 @@ ux.plugins.Print = Ext.extend(gxp.plugins.Tool, {
                                             cmp.insert(0,{});
 											var tempRes = encFn.call(this, cmp, jsonData.pages[0].scale);
 
-											tempRes[0].name = node.layer.name;
+											//tempRes[0].name = node.layer.name;
                                             tempRes[0].classes[0].name = node.layer.name;
 											encodedLegends = encodedLegends.concat(tempRes);
 										}
@@ -125,7 +129,7 @@ ux.plugins.Print = Ext.extend(gxp.plugins.Tool, {
                             return false;
                         }
                     },
-                    beforeprint: function() {
+                    beforeprint: function(printProvider,b,c) {
                         // The print module does not like array params.
                         // TODO Remove when http://trac.geoext.org/ticket/216 is fixed.
                         printWindow.items.get(0).printMapPanel.layers.each(function(l) {

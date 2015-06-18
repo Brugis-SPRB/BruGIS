@@ -477,7 +477,7 @@ ux.gfi.fr = {
 			"attributes" : [
 				{ "name": "Nom de zone"			, "label" : "[NOM_FR]"	, "type" : "string"},
 				{ "name": "Lien"				, "label" : "[URL_FR]"				, "type" : "link"},
-				{ "name": "actif/inactif"		, "label" : "[ACTIF]"				, "type" : "string"}
+				{ "name": "Statut"		, "label" : "['Inactif','Actif'][[ACTIF]]"				, "type" : "eval"}
 			]
 		},
 		"AATL:PPAS":{

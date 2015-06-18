@@ -172,9 +172,6 @@
 		var brugisWMSGeoserver_DEV = (globalAuthStatus != 404 && globalAuthStatus != 401) ? "http://svappmavw019:8080/geoserver/ows" :"http://svappmavw019:8080/geoserver/www/wmsaatl/wmsc_brugis_anon.xml";	
 		var brugisWMSGeoserver_PRD = (globalAuthStatus != 404 && globalAuthStatus != 401) ? "/geoserver/ows" : "/geoserver/www/wmsaatl/wmsc_brugis_anon.xml";					
 		
-		//var brugisWMSGeoserver_DEV  = "http://svappmavw019:8080/geoserver/ows";
-		//var brugisWMSGeoserver_PRD  = "/geoserver/ows";
-		
 		var sourcesDev = 
 			(geoextLangFr)?
 			{
@@ -411,12 +408,12 @@
 				units:"m", maxExtent:[0,0,300000,300000]
 			};
 			
+        var downloadBaseUrl = "http://svappmavw019:8080";
         var app = new GeoExplorer.Brugis({
             authStatus: globalAuthStatus,
             proxy: "../proxy/?url=",
-            //printService: "http://localhost:8080/print/print/dep",
-			printService: "/print/pdf",
-            //printService: "http://mbr102.irisnet.be/print/pdf",
+            printCapabilities : printCapabilities,
+            downloadBaseUrl : downloadBaseUrl,
             about: {
                 title: "MyBruGIS v 1.2 Louis Couperin",
                 "abstract": abstractText,

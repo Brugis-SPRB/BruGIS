@@ -4,10 +4,10 @@
 
 OpenLayers.Control.Click = OpenLayers.Class(OpenLayers.Control, { 
 	defaultHandlerOptions: { 
-		'single': true, 
-		'double': false, 
-		'pixelTolerance': 0, 
-		'stopSingle': false, 
+		'single': true,
+		'double': false,
+		'pixelTolerance': 0,
+		'stopSingle': false,
 		'stopDouble': false
 	},
 	initialize: function(options) {
@@ -72,7 +72,9 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
 	IBGEwmsTreeLegendSourceText: "http://svappmavw019:8080/geoserver/www/wmsaatl/ibgewms.xml",
     // End i18n.
 	noTileslayersList: ["AATL_DMS_SITE_ARBR:Arbres_remarquables",
-						"AATL_DMS_SITE_ARBR:Arbres_remarquables_abattus_ou_disparus"],
+						"AATL_DMS_SITE_ARBR:Arbres_remarquables_abattus_ou_disparus",
+						"BROH_DML_LAND_BOOM:Opmerkelijke_bomen",
+						"BROH_DML_LAND_BOOM:Gevelde_of_verdwenen_bomen"],
 	originalSourcesUrl : "",
 
     constructor: function(config) {
@@ -134,7 +136,9 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
 				actionTarget: {target: "paneltbar", index: 4}
 			}, {
                 ptype: "ux_print",
-                printService: config.printService,
+                //printService: config.printService,
+                printCapabilities: config.printCapabilities,
+                downloadBaseUrl: config.downloadBaseUrl,
                 actionTarget: {target: "paneltbar", index: 6}
             }, {
                 ptype: "gxp_navigation", 
@@ -297,7 +301,6 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
 				proxy : "../proxy/?url=",
                 success: function(request) {
 					var addConfig = Ext.util.JSON.decode(request.responseText);						
-					//http://svappmavw019:8080/geoserver/www/wmsaatl/wmsc_brugis_anon.xml
 					this.originalSourcesUrl = config.sources["BruGIS WMS - Geoserver"].url;
 					var mSource = config.sources["BruGIS WMS - Geoserver"];		
 						/*  We must create a layer configuration that ask to the source if the getcapabilities is loaded,
@@ -1311,7 +1314,7 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
             scope: this
         });
     },
-        
+
     /** private: method[handleSave]
      *  :arg: ``XMLHttpRequest``
      */

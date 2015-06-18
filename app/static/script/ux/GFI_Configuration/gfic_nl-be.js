@@ -55,37 +55,62 @@ ux.gfi.nl =  {
 				{ "name": "Soort zone"	, "label" : "[ZONE]"		, "type" : "string" }
 			]
 		},
-		"DMS_INV_ARBR:Arbres_Remarquables": {
+		"BUV:Voorkooprecht": {
+			"actiontype" : "GRID",
+			"title"		 : "Voorkooprecht: [NOM_NL]",
+			"attributes" : [
+				{ "name": "Naam "				, "label" : "[NOM_NL]"	, "type" : "string"},
+				{ "name": "Lien"				, "label" : "[URL_NL]"				, "type" : "link"},
+				{ "name": "Status"		, "label" : "['Niet actief','Actief'][[ACTIF]]"				, "type" : "eval"}
+			]
+		},
+		"BROH_DML_LAND_BOOM:Opmerkelijke_bomen": {
 			"actiontype" : "GRID",
 			"title"		 : "[tax_nl]",
 			"attributes" : [
 				{ "name": "Omtrek"				, "label" : "[circonference] cm"	, "type" : "string"},
 				{ "name": "Naam"				, "label" : "[tax_nl]"				, "type" : "string"},
-				{ "name": "Latijn taxon"		, "label" : "[tax_la]"				, "type" : "string"},
-				{ "name": "Link CMS"			, "label" : "http://bomen-inventaris.irisnet.be/manager/index.php?table=36&id=[id]", "type" : "link"},
-				{ "name": "Fiche van de boom"	, "label" : "http://bomen-inventaris.irisnet.be/arbre/[results_nl]/[id]/", "type" : "link"},
-				{ "name": "Foto"				, "label" : "http://bomen-inventaris.irisnet.be/medias/trees/[firstimage]", "type" : "link"},
+				{ "name": "Latijnse benaming"	, "label" : "[tax_la]"				, "type" : "string"},
+				{ "name": "CMS link"			, "label" : "http://bomen-inventaris.irisnet.be/manager/index.php?table=36&id=[id]", "type" : "link"},
+				{ "name": "Boomfiche"			, "label" : "http://bomen-inventaris.irisnet.be/arbre/[results_nl]/[id]/", "type" : "link"},
+				{ "name": "Foto"				, "label" : "http://bomen-inventaris.irisnet.be/medias/trees/[firstimage]", "type" : "picture"},
 				{ "name": "Hoogte"				, "label" : "[hauteur] m"			, "type" : "string"},
-				{ "name": "Diameter van de top"	, "label" : "[diametre_cime] m"		, "type" : "string"},
-				{ "name": "Soort plaats"		, "label" : "[emplacement]"			, "type" : "string"},
-				{ "name": "Statuut"				, "label" : "[Legendenl]"			, "type" : "string"}
+				{ "name": "Diameter kroon"		, "label" : "[diametre_cime] m"		, "type" : "string"},
+				{ "name": "Localisatie"			, "label" : "[emplacement]"			, "type" : "string"},
+				{ "name": "Toestand"			, "label" : "[Legendenl]"			, "type" : "string"}
 			]
 		},
-		"DMS_INV_ARBR:Arbres_remarquables_rarete": {
-			"actiontype" : "GRID",
-			"title"		 : "[tax_nl]: [rarete]",
-			"attributes" : [
-				{ "name": "Identificatie"			, "label" : "[id]"					, "type" : "string"},
-				{ "name": "Latijn taxon"			, "label" : "[tax_la]"				, "type" : "string"},
-				{ "name": "Zeldzamheid"				, "label" : "[rarete]"				, "type" : "string"}
-			]
-		},
-		"DMS_INV_ARBR:Arbres_remarquables_100_biggest": {
+		"BROH_DML_LAND_BOOM:Gevelde_ofverdwenen_bomen": {
 			"actiontype" : "GRID",
 			"title"		 : "[tax_nl]",
 			"attributes" : [
-				{ "name": "Omtrek"					, "label" : "[circonference] cm"	, "type" : "string"},
-				{ "name": "Indeling van maten"		, "label" : "[ClassementTailles]"	, "type" : "string"}
+				{ "name": "Omtrek"				, "label" : "[circonference] cm"	, "type" : "string"},
+				{ "name": "Naam"				, "label" : "[tax_nl]"				, "type" : "string"},
+				{ "name": "Latijnse benaming"	, "label" : "[tax_la]"				, "type" : "string"},
+				{ "name": "CMS link"			, "label" : "http://bomen-inventaris.irisnet.be/manager/index.php?table=36&id=[id]", "type" : "link"},
+				{ "name": "Boomfiche"			, "label" : "http://bomen-inventaris.irisnet.be/arbre/[results_nl]/[id]/", "type" : "link"},
+				{ "name": "Foto"				, "label" : "http://bomen-inventaris.irisnet.be/medias/trees/[firstimage]", "type" : "picture"},
+				{ "name": "Hoogte"				, "label" : "[hauteur] m"			, "type" : "string"},
+				{ "name": "Diameter kroon"		, "label" : "[diametre_cime] m"		, "type" : "string"},
+				{ "name": "Localisatie"			, "label" : "[emplacement]"			, "type" : "string"},
+				{ "name": "Toestand"			, "label" : "[Legendenl]"			, "type" : "string"}
+			]
+		},
+		"BROH_DML_LAND_BOOM:Opmerkelijke_bomen_zeldzaamheid": {
+			"actiontype" : "GRID",
+			"title"		 : "[tax_la]: [rarete]",
+			"attributes" : [
+				{ "name": "Id"					, "label" : "[id]"					, "type" : "string"},
+				{ "name": "Latijnse benaming"	, "label" : "[tax_la]"				, "type" : "string"},
+				{ "name": "Zeldzaamheid"		, "label" : "[rarete]"				, "type" : "string"}
+			]
+		},
+		"BROH_DML_LAND_BOOM:Opmerkelijke_bomen_100_biggest": {
+			"actiontype" : "GRID",
+			"title"		 : "[tax_nl]",
+			"attributes" : [
+				{ "name": "Omtrek"			, "label" : "[circonference] cm"	, "type" : "string"},
+				{ "name": "Afmetingenindex"	, "label" : "[ClassementTailles]"	, "type" : "string"}
 			]
 		},
 		"BROH:Wijkcontract": {

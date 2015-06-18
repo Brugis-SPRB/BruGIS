@@ -51,7 +51,9 @@ ux.plugins.WMSTreeLegend = Ext.extend(gxp.plugins.Tool, {
 	sourceName : "",
 	
 	noTileslayersList: ["AATL_DMS_SITE_ARBR:Arbres_remarquables",
-						"AATL_DMS_SITE_ARBR:Arbres_remarquables_abattus_ou_disparus"],
+						"AATL_DMS_SITE_ARBR:Arbres_remarquables_abattus_ou_disparus",
+						"BROH_DML_LAND_BOOM:Opmerkelijke_bomen",
+						"BROH_DML_LAND_BOOM:Gevelde_of_verdwenen_bomen"],
 						
     /** private: method[constructor]
      */
@@ -138,6 +140,16 @@ ux.plugins.WMSTreeLegend = Ext.extend(gxp.plugins.Tool, {
 			node.attributes["record"] = layerRecord; 
 		}
 	},
+
+	findSource: function(keywords) {
+		var source = this.target.layerSources[this.sourceName];
+		for(var i=0; i < keywords.length; i++) {
+			if(keywords[i] in this.target.layerSources) {
+				source = this.target.layerSources[keywords[i]];
+			}			
+		}
+		return source;
+	},
 	
     /** private: method[addOutput]
      *  :arg config: ``Object``
@@ -195,8 +207,7 @@ ux.plugins.WMSTreeLegend = Ext.extend(gxp.plugins.Tool, {
 					this.cheking = true;
 					if(this.reloading == false) {
 						if (checked === true) {
-							//console.log(node.attributes);
-							var source = this.target.layerSources[this.sourceName];
+							var source = this.findSource.call(this,node.attributes.layer.metadata.keywords);
 							var layer = node.attributes.layer; //type : Openlayer.WmsLayer
 							if(source.lazy) {
 								source.store.load({callback: (function() {
@@ -218,7 +229,8 @@ ux.plugins.WMSTreeLegend = Ext.extend(gxp.plugins.Tool, {
 									});
 									
 									// NDU 19/07/2013 Hack forcant l'utilisation de l'url proposée dans le getcapabilities. voir bug #176
-									record.data.layer.url = layer.url;
+									// NDU 18/06/2015 Hack enlevé pour le multi-source. En attente de regression
+									//record.data.layer.url = layer.url;
 									
 									// DOCG 19/07/2013 Hack pour afficher les symboles des arbres sans les tronquer en bord de tuile. voir bug #179
 									for (var i=this.noTileslayersList.length-1; i>=0; --i) {
@@ -238,7 +250,6 @@ ux.plugins.WMSTreeLegend = Ext.extend(gxp.plugins.Tool, {
 									this.target.mapPanel.layers.add(record);
 								}).createDelegate(this)});
 							} else {
-								//console.log(layer);
 								var record = source.createLayerRecord({ // createLayerRecord GVDS 18/12/2012
 									name : layer.params.LAYERS,
 									source: source.id,
@@ -251,7 +262,8 @@ ux.plugins.WMSTreeLegend = Ext.extend(gxp.plugins.Tool, {
 								//record.data.layer.removeBackBufferDelay = 200;
 								
 								// NDU 19/07/2013 Hack forcant l'utilisation de l'url du proposée dans le getcapabilities. voir bug #176
-								record.data.layer.url = layer.url;
+								// NDU 18/06/2015 Hack enlevé pour le multi-source. En attente de regression
+								//record.data.layer.url = layer.url;
 
 								// DOCG 19/07/2013 Hack pour afficher les symboles des arbres sans les tronquer en bord de tuile. voir bug #179
 								for (var i=this.noTileslayersList.length-1; i>=0; --i) {
