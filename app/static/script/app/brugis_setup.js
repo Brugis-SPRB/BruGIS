@@ -125,7 +125,7 @@ Ext.onReady(function () {
             proxy: "../proxy/?url=",
             printCapabilities : printCapabilities,
             downloadBaseUrl : brugisConfig.getPrintDownloadBaseUrl(),
-            
+            reperageHost    : brugisConfig.getReperageHost(),
             about: {
                 title: "MyBruGIS v 1.2 Louis Couperin",
                 "abstract": brugisConfig.abstractText,

@@ -64,6 +64,22 @@ Brugis.Config = Ext.extend(Object,  {
 				break;
 		}
 		return url;
+	},
+	getReperageHost : function() {
+		var env = this.getEnvironment.call(this);
+		var url = "/";
+		switch(env) {
+			case this.DEV:
+				url = "http://svappmavw019:8080/WebReperage";
+				break;
+			case this.STA:
+				url = "http://mbr64.irisnetlab.be/WebReperage";
+				break;
+			case this.PRD:
+				url = "http://mbr102.irisnet.be/WebReperage";
+				break;
+		}
+		return url;		
 	}
 });
 

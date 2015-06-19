@@ -100,15 +100,14 @@ ux.plugins.ReperageToolbox = Ext.extend(gxp.plugins.Tool, {
 	/** api: config[myReperage]
 	 *  ``String``
 	 */
-	reperageHost : "http://svappmavw019:8080/WebReperage",	//development
-	//reperageHost : "http://mbr64.irisnetlab.be/WebReperage",	//staging
-	//reperageHost : "http://mbr102.irisnet.be/WebReperage",	//production
+	reperageHost : "http://mbr102.irisnet.be/WebReperage",	
+
 	
 	/** private: method[constructor]
 	 */
 	constructor: function(config) {
-		this.checkLocalStorage();
-		
+		this.reperageHost = config.outputConfig.reperageHost;
+		this.checkLocalStorage();				
 		ux.plugins.ReperageToolbox.superclass.constructor.apply(this, arguments);
 	},
 	
@@ -121,7 +120,7 @@ ux.plugins.ReperageToolbox = Ext.extend(gxp.plugins.Tool, {
 	
 	init: function(target) {
 		this.id = "toolboxReperage";
-		
+
 		var brugisUrl = target.sources['BruGIS WMS - Geoserver'].url;
 		var parser = document.createElement('a');
 		parser.href = brugisUrl;
