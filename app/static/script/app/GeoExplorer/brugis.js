@@ -69,7 +69,7 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
 	wmsTreeLegendSourceText: "http://svappmavw019:8080/geoserver/www/wmsaatl/wmsaatl.xml",
 	//wmsTreeLegendSourceText: "http://mybrugis.irisnetlab.be/geoserver/www/wmsaatl/wmsaatl.xml",
 	//wmsTreeLegendSourceText: "http://www.mybrugis.irisnet.be/geoserver/www/wmsaatl/wmsaatl.xml",
-	IBGEwmsTreeLegendSourceText: "http://svappmavw019:8080/geoserver/www/wmsaatl/ibgewms.xml",
+
     // End i18n.
 	noTileslayersList: ["AATL_DMS_SITE_ARBR:Arbres_remarquables",
 						"AATL_DMS_SITE_ARBR:Arbres_remarquables_abattus_ou_disparus",
@@ -177,7 +177,8 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
 					restrictedLayers: [
 						{ source: 'BruGIS WMS - Geoserver' , name: "AATL_DMS_PROT:Prises_actes" },
 						{ source: 'BruGIS WMS - Geoserver' , name: "AATL_DMS_PROT:Arretes_de_non_classement" },
-						{ source: 'BruGIS WMS - Geoserver' , name: "POCDEV:POC_POLYGONES" }
+						{ source: 'BruGIS WMS - Geoserver' , name: "BROH_DML_BESC:Akteneming" },
+						{ source: 'BruGIS WMS - Geoserver' , name: "BROH_DML_BESC:Besluit_tot_niet_bescherming" }
 					]
 				}]
 			}, {
@@ -209,18 +210,7 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
 				ptype: "ux_preferences",
 				id: "preferencesmanager",
 				actionTarget: {target: "paneltbar", index: 19}
-			}, /* {
-				ptype: "ux_wmstreelegend",
-				id: "wmsTreeLegendManager",
-				outputTarget: "treeTab",
-				sourceName : [	"BruGIS WMS - Geoserver",
-								"IBGE WMS - Mapserver"],
-				outputConfig: {
-					id: "wmsTree",
-					url : [	this.wmsTreeLegendSourceText,
-							this.IBGEwmsTreeLegendSourceText]
-				}
-			},  */{
+			},{
 				ptype: "ux_wmstreelegend",
 				id: "wmsTreeLegendManager",
 				outputTarget: "treeTab",
