@@ -919,22 +919,20 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
 			/**
 			 *	On tente de checker les couches ajoutées à la carte
 			 */
-			if (app.initialConfig.map) {
-				for (var layerConfig in app.initialConfig.map.layers) {
-					if (app.initialConfig.map.layers[layerConfig].source){
+			 
+			if (this.initialConfig.map) {
+				for (var layerConfig in this.initialConfig.map.layers) {
+					if (this.initialConfig.map.layers[layerConfig].source){
 						try {
-							app.getLayerRecordFromMap(app.initialConfig.map.layers[layerConfig]).getLayer().transitionEffect = 'resize';
-							app.getLayerRecordFromMap(app.initialConfig.map.layers[layerConfig]).getLayer().removeBackBufferDelay = 200;
+							this.getLayerRecordFromMap(this.initialConfig.map.layers[layerConfig]).getLayer().transitionEffect = 'resize';
+							this.getLayerRecordFromMap(this.initialConfig.map.layers[layerConfig]).getLayer().removeBackBufferDelay = 200;
 						} catch(ex) {
 							console.log(ex);
 						}
 					}
-					/*if (app.initialConfig.map.layers[layerConfig].source){
-						console.log(app.initialConfig.map.layers[layerConfig]);
-						console.log(this.tools.wmsTreeLegendManager);
-					}*/
 				}
 			}
+			
 			
 			/** DocG - 2014/04/01
 			 *  OpacitySlider is back!
@@ -1039,12 +1037,11 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
 		var putSearchLayerOnTop = function(e) {
 			var map = this.mapPanel.map;
 			var addedLayerIndex = map.getLayerIndex(e.layer);
-			var searchLayerName = app.tools.ux_BrugisSearcher.searchLayerName;
+			var searchLayerName = this.tools.ux_BrugisSearcher.searchLayerName;
 			if(map.getLayersByName(searchLayerName).length > 0){
 				var vectorLayer = map.getLayersByName(searchLayerName)[0];
 				map.setLayerIndex(vectorLayer, map.getNumLayers());
 			}
-			this;
 		};
 		this.mapPanel.map.events.register("addlayer", this, putSearchLayerOnTop);
 		///////////////////////DOCG////////////////////////////////////////////
