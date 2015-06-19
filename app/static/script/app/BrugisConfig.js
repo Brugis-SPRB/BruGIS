@@ -20,12 +20,12 @@ Brugis.Config = Ext.extend(Object,  {
 	getCookieValue : function(param) {
 		var i, x, y, cookies = document.cookie.split(";");
 		for (i=0; i < cookies.length; i++) {
-				x = cookies[i].substr(0, cookies[i].indexOf("="));
-				y = cookies[i].substr(cookies[i].indexOf("=")+1);
-				x=x.replace(/^\s+|\s+$/g,"");
-				if (x==param) {
-					return unescape(y);
-				}
+			x = cookies[i].substr(0, cookies[i].indexOf("="));
+			y = cookies[i].substr(cookies[i].indexOf("=")+1);
+			x=x.replace(/^\s+|\s+$/g,"");
+			if (x==param) {
+				return unescape(y);
+			}
 		}
 		return null;
 	},

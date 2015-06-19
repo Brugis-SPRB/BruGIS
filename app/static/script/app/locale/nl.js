@@ -64,12 +64,7 @@ GeoExt.Lang.add("nl", {
 		newBrugisMessagePart2: ".\n Uw versie is ",
 		newBrugisMessagePart3: ".\n De kaart word opnieuw geïnitializeerd. Ctrl + F5 om de site te herladen",
 		wpsserver :"http://svappmavw019:8080/geoserver/wps",
-		//wpsserver :"http://mybrugis.irisnetlab.be/geoserver/wps",
-		//wpsserver :"http://www.mybrugis.irisnet.be/geoserver/wps",
-		//wmsTreeLegendSourceText: "http://localhost:8080/geoserver/www/wmsaatl/wmsaatl_nl.xml"
-		wmsTreeLegendSourceText: "http://svappmavw019:8080/geoserver/www/wmsaatl/wmsaatl_nl.xml"
-		//wmsTreeLegendSourceText: "http://mybrugis.irisnetlab.be/geoserver/www/wmsaatl/wmsaatl_nl.xml"
-		//wmsTreeLegendSourceText: "http://www.mybrugis.irisnet.be/geoserver/www/wmsaatl/wmsaatl_nl.xml"
+        wmsTreeLegendSourceUrl: "/geoserver/www/wmsaatl/wmsaatl_nl.xml"
 	},
 	"ux.form.CirbGeocoderComboBox.prototype" : {
 		loadingText: "Lopend onderzoek...",

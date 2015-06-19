@@ -67,13 +67,7 @@ GeoExt.Lang.add("en", {
 		newBrugisMessagePart1: "BruGIS version is now",
 		newBrugisMessagePart2: ".\n your BruGIS version is ",
 		newBrugisMessagePart3: ".\n You have nothing to do; you map is reinitialized",
-		wpsserver :"http://svappmavw019:8080/geoserver/wps",
-		//wpsserver :"http://mybrugis.irisnetlab.be/geoserver/wps",
-		//wpsserver :"http://www.mybrugis.irisnet.be/geoserver/wps",
-		//wmsTreeLegendSourceText: "http://localhost:8080/geoserver/www/wmsaatl/wmsaatl_en.xml"
-		wmsTreeLegendSourceText: "http://svappmavw019:8080/geoserver/www/wmsaatl/wmsaatl_en.xml"
-		//wmsTreeLegendSourceText: "http://mybrugis.irisnetlab.be/geoserver/www/wmsaatl/wmsaatl_en.xml"
-		//wmsTreeLegendSourceText: "http://www.mybrugis.irisnet.be/geoserver/www/wmsaatl/wmsaatl_en.xml"
+		wmsTreeLegendSourceUrl: "/geoserver/www/wmsaatl/wmsaatl_en.xml"
 	},
 	
 	"ux.form.CirbGeocoderComboBox.prototype" : {
