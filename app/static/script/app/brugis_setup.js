@@ -120,10 +120,11 @@ Ext.onReady(function () {
 				units:"m", maxExtent:[0,0,300000,300000]
 			};
 			
+
         var app = new GeoExplorer.Brugis({
             //authStatus: globalAuthStatus,
             proxy: "../proxy/?url=",
-            printCapabilities : printCapabilities,
+            printCapabilities : printCapabilities ? printCapabilities : {},
             downloadBaseUrl : brugisConfig.getPrintDownloadBaseUrl(),
             reperageHost    : brugisConfig.getReperageHost(),
             about: {
