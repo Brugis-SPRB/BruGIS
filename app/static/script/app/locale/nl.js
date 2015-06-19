@@ -4,6 +4,16 @@
 
  
 GeoExt.Lang.add("nl", {
+    "Brugis.Config.prototype": {
+        localeHelp : "<a href='http://stedelijke-ontwikkeling.irisnet.be/nl/cartografie/brugis-r/gebruiksaanwijzing-brugis?set_language=nl'target= '_blank'>Click here</a>",
+        abstractText : "BruGIS, Geografische Informatie Portaal voor Brussel Stedelijke Ontwikkeling (GOB).",
+        contactText : "e-mail: <a href='mailto:brugis@sprb.irisnet.be'>brugis@sprb.irisnet.be</a>.",
+        baseLayerName     : "URBIS:urbisNL",
+        baseLayerTitle    : "Urbis gekleurd",
+        baseGrayLayerName : "URBIS:urbisNLGray",
+        baseGrayLayerTitle: "Urbis grijs",
+        BMBWMSUrl : "http://data-mobility.irisnet.be/inspire/capabilities/nl/wms"
+    },
     "GeoExplorer.prototype": {
         zoomSliderText: "<div> Niveau van zoom: {zoom}</div><div Schaal: 1:{scale}</div>",
         loadConfigErrorText: "Moeilijkheid om geregistreerde configuratie te lezen: <br>",

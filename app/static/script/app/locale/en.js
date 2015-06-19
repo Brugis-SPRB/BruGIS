@@ -4,6 +4,17 @@
  
 
 GeoExt.Lang.add("en", {
+    "Brugis.Config.prototype": {
+        localeHelp : "<a href='http://www.developpement-urbain.irisnet.be/cartographie/brugis/mode-demploi'target= '_blank'>Click here</a>",
+        abstractText : "BruGIS, Geographic Information Portal for Brussels Urban Development (BRPS).",
+        contactText : "e-mail: <a href='mailto:brugis@sprb.irisnet.be'>brugis@sprb.irisnet.be</a>.",
+        baseGrayLayerName : "URBIS:urbisFRGray",
+        baseLayerName     : "URBIS:urbisFR",
+        baseLayerTitle    : "Urbis coloré",
+        baseGrayLayerName : "URBIS:urbisFRGray",
+        baseGrayLayerTitle: "Urbis grisé",
+        BMBWMSUrl : "http://data-mobility.irisnet.be/inspire/capabilities/fr/wms"
+    },
     "GeoExplorer.prototype": {
         zoomSliderText: "<div>Zoom Level: {zoom}</div><div>Scale: 1:{scale}</div>",
         loadConfigErrorText: "Trouble reading saved configuration: <br />",
