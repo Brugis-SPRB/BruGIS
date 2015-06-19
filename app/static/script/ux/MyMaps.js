@@ -415,7 +415,7 @@ ux.plugins.MyMaps = Ext.extend(gxp.plugins.Tool, {
 			var overwriteChoice = false;
 			
 			var applyValidMapName = function() {
-				var myMapsManager = this.app.tools.mymapsmanager;
+				var myMapsManager = this.target.tools.mymapsmanager;
 				
 				if (myMapsManager.mapName != "") {
 					//var mapAbstract = myMapsManager;
@@ -423,7 +423,7 @@ ux.plugins.MyMaps = Ext.extend(gxp.plugins.Tool, {
 					var mapDateKey 	= myMapsManager.mapName + "_date";
 					
 					// sauvegarde du mapState courant
-					var myAppState = this.app.getState();
+					var myAppState = this.target.getState();
 					delete myAppState.map.controls;
 					
 					var configStr = Ext.util.JSON.encode(myAppState);
@@ -470,7 +470,7 @@ ux.plugins.MyMaps = Ext.extend(gxp.plugins.Tool, {
 				}
 				// On save, le select disparaît, les boutons soumis à select sont disablé
 				myMapsManager.deActivateButtons();
-				this.app.fireEvent("mymapschange");
+				this.target.fireEvent("mymapschange");
 				win.close();
 			}
 			if (this.myMapsKeys.indexOf(this.mapName) != -1) {
@@ -482,7 +482,7 @@ ux.plugins.MyMaps = Ext.extend(gxp.plugins.Tool, {
 					fn: function(btn) {
 						overwriteChoice = (btn === 'yes');
 						if (btn === 'yes') {
-							applyValidMapName();
+							applyValidMapName.call(this);
 						} else if (btn === 'cancel') {
 							this.mapName = "";
 							win.close();
@@ -493,7 +493,7 @@ ux.plugins.MyMaps = Ext.extend(gxp.plugins.Tool, {
 					scope: this
 				});
 			} else {
-				applyValidMapName();
+				applyValidMapName.call(this);
 			}
         }
 		

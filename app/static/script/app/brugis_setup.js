@@ -77,9 +77,7 @@ Ext.onReady(function () {
 							scaleToResFactor * 100,
 							scaleToResFactor * 50
 							];
-
-		globalAuthStatus = (brugisConfig.getCookieValue("geoexplorer-user")) ?  200 :  401;
-				
+	
 		var sources = {
 			'BruGIS WMS - Geoserver': {
 				url: brugisConfig.getBrugisGeoserverUrl(),
@@ -122,13 +120,11 @@ Ext.onReady(function () {
 				units:"m", maxExtent:[0,0,300000,300000]
 			};
 			
-        var downloadBaseUrl = "http://svappmavw019:8080";
-
         var app = new GeoExplorer.Brugis({
             //authStatus: globalAuthStatus,
             proxy: "../proxy/?url=",
             printCapabilities : printCapabilities,
-            downloadBaseUrl : downloadBaseUrl,
+            downloadBaseUrl : brugisConfig.getPrintDownloadBaseUrl(),
             
             about: {
                 title: "MyBruGIS v 1.2 Louis Couperin",

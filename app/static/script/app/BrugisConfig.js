@@ -48,6 +48,22 @@ Brugis.Config = Ext.extend(Object,  {
 			ENV = this.STA;
 		}
 		return ENV;
+	},
+	getPrintDownloadBaseUrl : function() {
+		var env = this.getEnvironment.call(this);
+		var url = "/";
+		switch(env) {
+			case this.DEV:
+				url = "http://svappmavw019:8080";
+				break;
+			case this.STA:
+				url = "http://mbr66.irisnetlab.be";
+				break;
+			case this.PRD:
+				url = "http://mbr102.irisnet.be";
+				break;
+		}
+		return url;
 	}
 });
 
