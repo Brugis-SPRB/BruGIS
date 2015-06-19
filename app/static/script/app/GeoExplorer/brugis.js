@@ -450,7 +450,7 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
 	 *	reset mode added.
 	 */
 	saveMapStateOnExit: function() {
-		var configStr = Ext.util.JSON.encode(this.app.getState());
+		var configStr = Ext.util.JSON.encode(this.getState());
 	
 		configStr = configStr.replace("/geoserver/www/wmsaatl/geoweb_brugis.xml", "/geoserver/gwc/service/wms");
 		configStr = configStr.replace("/geoserver/www/wmsaatl/wmsc_brugis.xml", "/geoserver/ows");
@@ -699,7 +699,7 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
 		* DocG - 2014/06/17 - param from localStorage for active panel by default
 		*
 		*/
-		window.onbeforeunload = this.saveMapStateOnExit;
+		window.onbeforeunload = this.saveMapStateOnExit.bind(this);
 		var westPanelActiveTab = 
 			(localStorage.getItem("defPanl") && localStorage.getItem("defPanl") == '0')?
 				1:
