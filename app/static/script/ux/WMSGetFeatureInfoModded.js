@@ -387,7 +387,13 @@ ux.plugins.WMSGetFeatureInfo = Ext.extend(gxp.plugins.Tool, {
 				var new_attributes = {};
 				var customRenderers = {};					
 				//Récupèrele nom de la feature
-				var layer_name = feature.gml.featureNSPrefix + ":" + feature.gml.featureType;
+				var layer_name = "";
+				if(feature.gml) {
+					layer_name = feature.gml.featureNSPrefix + ":" + feature.gml.featureType;
+				} else {
+					layer_name = feature.type;
+				}
+				
 				var currentLangage = GeoExt.Lang.locale;
 				var layerConfiguration = {};
 				if (layer_name && ux.gfi[currentLangage] && ux.gfi[currentLangage][layer_name]) {
