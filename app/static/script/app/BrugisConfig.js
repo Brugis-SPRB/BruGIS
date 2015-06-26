@@ -31,12 +31,22 @@ Brugis.Config = Ext.extend(Object,  {
 	},
 
 	getBrugisGeoserverUrl : function() {
+		var isAuthenticatedAsTax = this.isAuthenticatedAs(this, "tax");
+		var isAuthenticatedAsFieldCheckTax = this.isAuthenticatedAs(this, "fieldchecktax");
+		var isAuthenticatedAsProtec = this.isAuthenticatedAs(this, "protec");
 		var isAuthenticated = this.isAuthenticated.call(this);
-		var url = isAuthenticated ? "/geoserver/ows" : "/geoserver/www/wmsaatl/wmsc_brugis_anon.xml";
+		var url = isAuthenticatedAsTax ? "/geoserver/www/wmsaatl/wmsc_brugis_tax.xml" 
+				: isAuthenticatedAsFieldCheckTax ? "/geoserver/www/wmsaatl/wmsc_brugis_tax.xml" 
+				: isAuthenticatedAsProtec ? "/geoserver/www/wmsaatl/wmsc_brugis_anon.xml" 
+				: isAuthenticated ? "/geoserver/ows" 
+				: "/geoserver/www/wmsaatl/wmsc_brugis_anon.xml";
 		return url;				
 	},
 	isAuthenticated : function() {
 		return this.getCookieValue("geoexplorer-user") ?  true :  false;
+	},
+	isAuthenticatedAs : function(param, login) {
+		return (this.getCookieValue("geoexplorer-user") === login) ? true :  false;
 	},
 	getEnvironment : function() {
 		var hostname = window.location.hostname;
