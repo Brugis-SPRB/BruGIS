@@ -1,6 +1,6 @@
 ﻿/**
  * Copyright (c) 2013-2014 The Open Planning Project
- * 
+ *
  * Published under the GPL license.
  * See https://github.com/opengeo/gxp/raw/master/license.txt for the full text
  * of the license.
@@ -26,10 +26,10 @@ Ext.namespace("ux.plugins");
  *    Plugin for managing preferences
  */
 ux.plugins.Preferences = Ext.extend(gxp.plugins.Tool, {
-    
+
     /** api: ptype = ux_preferences */
     ptype: "ux_preferences",
-    
+
     /** api: config[...]
      *  ``String``
      *  Text for (i18n).
@@ -39,19 +39,19 @@ ux.plugins.Preferences = Ext.extend(gxp.plugins.Tool, {
     preferencesMenuText: 		"Preferences menu text",
 	availablePreferencesText: 	"Preferences",
 	ParametersText: 			"BruGIS interface parameters",
-	
+
 	sessionText: 				"Starting map",
 	keepSessionText: 			"By default",
 	forgetSessionText: 			"Empty",
-	
+
 	dataLegendText: 			"Default panel",
 	dataPanelText: 				"Data",
 	legendPanelText: 			"Legend",
-	
+
 	searchResultText: 			"Search result",
 	multipleSearchText: 		"Multiple",
 	uniqueSearchText: 			"Unique",
-	
+
 	toolsVisibilityOptionLabelText:			"Tools visibility options",
 	showQueryToolLabelText: 				"Show Query tool",
 	showGeolocatorToolLabelText: 			"Show geolocator tool",
@@ -59,7 +59,7 @@ ux.plugins.Preferences = Ext.extend(gxp.plugins.Tool, {
 	showDataEditorToolslabelText: 			"Show Edition tools",
 	showDedicatedMapAdvancedToolsLabelText:	"Show advanced creation map tools",
 	showPopupInfoOnRightClickLabelText:		"Show information popup on right clic",
-	
+
     /** api: config[validLocalStorage]
      *  ``Boolean``
      *  Text for the grid expander (i18n).
@@ -71,7 +71,7 @@ ux.plugins.Preferences = Ext.extend(gxp.plugins.Tool, {
      *  Text for the grid expander (i18n).
      */
 	preferencesStore: false,
-	
+
     /** api: config[preferencesStore]
      *  ``Ext.data.ArrayStore``
 	 *	! ne pas changer ces valeurs !
@@ -85,73 +85,73 @@ ux.plugins.Preferences = Ext.extend(gxp.plugins.Tool, {
 							"shwDeTl":0,
 							"shwDmTl":0,
 							"shwPiRc":0},
-							
+
     /** api: config[sessionChoices]
      *  ``Ext.data.ArrayStore``
-     *  
+     *
      */
 	sessionChoices: false,
 
     /** api: config[panelChoices]
      *  ``Ext.data.ArrayStore``
-     *  
+     *
      */
 	panelChoices: [],
 
     /** api: config[searchChoices]
      *  ``Ext.data.ArrayStore``
-     *  
+     *
      */
 	searchChoices: [],
-	
+
     /** api: config[showQueryToolChoices]
      *  ``Ext.data.ArrayStore``
-     *  
+     *
      */
 	showQueryToolChoices: [],
-	
+
     /** api: config[showGeolocatorToolChoices]
      *  ``Ext.data.ArrayStore``
-     *  
+     *
      */
 	showGeolocatorToolChoices: [],
-	
+
     /** api: config[showUrbanalysisToolboxChoices]
      *  ``Ext.data.ArrayStore``
-     *  
+     *
      */
 	showUrbanalysisToolboxChoices: [],
-	
+
     /** api: config[showDataEditoToolsChoices]
      *  ``Ext.data.ArrayStore``
-     *  
+     *
      */
 	showDataEditoToolsChoices: [],
-	
+
     /** api: config[showDedicatedMapToolsChoices]
      *  ``Ext.data.ArrayStore``
-     *  
+     *
      */
 	showDedicatedMapToolsChoices: [],
-	
+
     /** api: config[preferencesKeys]
      *  ``Array``
      *  ! ne pas changer l'ordre !
      */
 	preferencesKeys: ["session", "defPanl", "searchN", "shwQrTl", "shwGlTl", "shwUaTb", "shwDeTl", "shwDmTl", "shwPiRc"],
-	
+
     /** api: config[choicesPrefsKeysDic]
      *  ``Dictionnary``
-     *  
+     *
      */
 	choicesPrefsKeysDic: {},
-	
+
     /** private: method[constructor]
      */
     constructor: function(config) {
 		ux.plugins.Preferences.superclass.constructor.apply(this, arguments);
     },
-    
+
     /** api: method[addActions]
      */
     addActions: function() {
@@ -166,20 +166,21 @@ ux.plugins.Preferences = Ext.extend(gxp.plugins.Tool, {
 			scope: this
 		});
         var actions = ux.plugins.Preferences.superclass.addActions.apply(this, [options]);
-		
+
         this.target.on("ready", function() {
 			if (this.checkLocalStorage()) {
+            this.initPreferences();
             actions[0].enable();
 			} else {
 			actions[0].disable();
 			}
         }, this);
-		
+
 		this.target.on("mymapschange", function() {
 			//console.log('myMapsChange received');
 			this.initPreferences();
 		}, this);
-		
+
         return actions;
     },
 
@@ -193,7 +194,7 @@ ux.plugins.Preferences = Ext.extend(gxp.plugins.Tool, {
 			return [];
 		}
 	},
-	
+
 	/** api: mathod[]
 	 */
 	completeSessionChoices: function(sessionChoices) {
@@ -205,7 +206,7 @@ ux.plugins.Preferences = Ext.extend(gxp.plugins.Tool, {
 		}
 		return sessionChoices;
 	},
-	
+
     /** api: method[initPreferences]
      */
 	initPreferences: function() {
@@ -230,7 +231,7 @@ ux.plugins.Preferences = Ext.extend(gxp.plugins.Tool, {
 				this.sessionChoices.loadData(sessionChoicesDataForArrayStore,false);
 				//this.sessionChoices.reload();
 			}
-			
+
 			// ! ne pas changer l'ordre dans les array !
 			this.panelChoices   				= [this.legendPanelText, this.dataPanelText];
 			this.searchChoices  				= [this.multipleSearchText, this.uniqueSearchText];
@@ -240,10 +241,10 @@ ux.plugins.Preferences = Ext.extend(gxp.plugins.Tool, {
 			this.showDataEditoToolsChoices 		= [false, true];
 			this.showDedicatedMapToolsChoices 	= [false, true];
 			this.showPopupInfoOnRightClick		= [false, true];
-			
+
 			this.choicesPrefsKeysDic = {
-				"session" : this.sessionChoices, 
-				"defPanl" : this.panelChoices, 
+				"session" : this.sessionChoices,
+				"defPanl" : this.panelChoices,
 				"searchN" : this.searchChoices,
 				"shwQrTl" : this.showQueryToolChoices,
 				"shwGlTl" : this.showGeolocatorToolChoices,
@@ -251,13 +252,13 @@ ux.plugins.Preferences = Ext.extend(gxp.plugins.Tool, {
 				"shwDeTl" : this.showDataEditoToolsChoices,
 				"shwDmTl" : this.showDedicatedMapToolsChoices,
 				"shwPiRc" : this.showPopupInfoOnRightClick};
-				
+
 			// les prefs sont déjà en localstorage
 			if (localStorage.getItem("preferences") !== null) {
 				var preferencesKeysTemp = this.preferencesKeys;
 				for (key in this.preferencesKeys) {
 					if (key !== "remove") {
-						var preferenceKey = this.preferencesKeys[key], 
+						var preferenceKey = this.preferencesKeys[key],
 							preferenceContent = '';
 						if (localStorage.getItem(preferenceKey) !== null) {
 							//La prefs existe en localstorage
@@ -305,7 +306,7 @@ ux.plugins.Preferences = Ext.extend(gxp.plugins.Tool, {
 					}
 				}
 			}
-			// génération du store une fois data complété avec 
+			// génération du store une fois data complété avec
 			//		soit les defaults
 			//		soit le localstorage
 			if(!this.preferencesStore)
@@ -331,11 +332,11 @@ ux.plugins.Preferences = Ext.extend(gxp.plugins.Tool, {
 		}
 		return this.validLocalStorage;
 	},
-	
+
     /** api: method[showPreferencesGrid]
      * Shows the window with a Preferences grid.
      */
-    showPreferencesGrid: function() {
+  showPreferencesGrid: function() {
 		this.initPreferences();
 		if(!this.preferencesWindow) {
 			this.initPreferencesWindow();
@@ -346,14 +347,14 @@ ux.plugins.Preferences = Ext.extend(gxp.plugins.Tool, {
 		//console.log("in ShowPreferencesGrid, element session:");
 		//console.log(Ext.getCmp("session"));
     },
-	
+
     /**
      * private: method[initPreferencesWindow]
      * Constructs a window with preferences
      */
     initPreferencesWindow: function() {
 		//console.log("in initPreferencesWindow");
-		//console.log(this.preferencesStore.reader.arrayData[0][1]);		
+		//console.log(this.preferencesStore.reader.arrayData[0][1]);
         var preferencesPanel = new Ext.Panel({
 			id: "preferencesPanel",
             //store: this.preferencesStore,
@@ -500,16 +501,16 @@ ux.plugins.Preferences = Ext.extend(gxp.plugins.Tool, {
 					}]
 				}]
 		});
-		
+
         var items = {
             xtype: "container",
             region: "center",
             layout: "fit",
 			items: [preferencesPanel]
         };
-		
+
         var Cls = this.outputTarget ? Ext.Panel : Ext.Window;
-		
+
         this.preferencesWindow = new Cls(Ext.apply({
 			id: "preferencesWindow",
             title: this.availablePreferencesText,
@@ -526,11 +527,11 @@ ux.plugins.Preferences = Ext.extend(gxp.plugins.Tool, {
             this.addOutput(this.preferencesWindow);
         }
 	},
-		
+
     /** api: method[updateChoice]
      * a very intelligent and advanced function.
      */
-    updateChoice: function(args) {
+  updateChoice: function(args) {
 		//console.log(args);
 		if (args.xtype == "combo"){
 			//console.log("combo");
@@ -543,7 +544,7 @@ ux.plugins.Preferences = Ext.extend(gxp.plugins.Tool, {
 		}
 		this.target.fireEvent("preferencesChange");
     },
-	
+
     /** api: method[updateChoice]
      * a very intelligent and advanced function.
      */
@@ -557,7 +558,7 @@ ux.plugins.Preferences = Ext.extend(gxp.plugins.Tool, {
 			this.preferencesStore.data.items[this.preferencesStore.find("preferenceName",args.id)].data.preferencesContent = this.choicesPrefsKeysDic[args.id].findExact(args.valueField, args.value);
 			//console.log(this.preferencesStore.data.items[this.preferencesStore.find("preferenceName",args.id)].data.preferencesContent);
 			localStorage.setItem(args.id, this.choicesPrefsKeysDic[args.id].findExact(args.valueField, args.value));
-			
+
 		} else if (args.xtype == "checkbox") {
 			//console.log("checkbox");
 			this.preferencesStore.data.items[this.preferencesStore.find("preferenceName",args.id)].data.preferencesContent = this.choicesPrefsKeysDic[args.id].indexOf(args.checked);
