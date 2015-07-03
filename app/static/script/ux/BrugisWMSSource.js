@@ -1,6 +1,6 @@
 /**
  * Copyright (c) 2008-2011 The Open Planning Project
- * 
+ *
  * Published under the GPL license.
  * See https://github.com/opengeo/gxp/raw/master/license.txt for the full text
  * of the license.
@@ -27,7 +27,7 @@ Ext.namespace("ux.plugins");
  *    Plugin for using WMS-C layers with :class:`gxp.Viewer` instances. The
  *    plugin issues a GetCapabilities request to create a store of the WMS's
  *    layers. If tilesets are available, it will use them.
- */   
+ */
 /** api: example
  *  Configuration in the  :class:`gxp.Viewer`:
  *
@@ -53,10 +53,10 @@ Ext.namespace("ux.plugins");
  *
  */
 ux.plugins.BrugisWMSSource = Ext.extend(gxp.plugins.WMSSource, {
-    
+
     /** api: ptype = ux_brugiswmssource */
     ptype: "ux_brugiswmssource",
-    
+
     /** api: config[version]
      *  ``String``
      *  Only WMS 1.1.1 is supported at the moment.
@@ -79,7 +79,7 @@ ux.plugins.BrugisWMSSource = Ext.extend(gxp.plugins.WMSSource, {
         config.baseParams = {
             SERVICE: "WMS",
             REQUEST: "GetCapabilities",
-            TILED: true
+            TILED: false
         };
         if (!config.format) {
             this.format = new OpenLayers.Format.WMSCapabilities({
@@ -88,9 +88,9 @@ ux.plugins.BrugisWMSSource = Ext.extend(gxp.plugins.WMSSource, {
                 allowFallback: true
             });
         }
-        gxp.plugins.WMSCSource.superclass.constructor.apply(this, arguments); 
+        gxp.plugins.WMSCSource.superclass.constructor.apply(this, arguments);
     },
-    
+
     /** private: method[createLayerRecord] */
     createLayerRecord: function(config) {
         var record = gxp.plugins.WMSCSource.superclass.createLayerRecord.apply(this, arguments);
@@ -103,8 +103,8 @@ ux.plugins.BrugisWMSSource = Ext.extend(gxp.plugins.WMSSource, {
         }
 
         var layer = record.get("layer");
-		layer.tileOrigin = OpenLayers.LonLat.fromString("140000.0,160000.0");
-
+		    layer.tileOrigin = OpenLayers.LonLat.fromString("140000.0,160000.0");
+        layer.params.FORMAT = 'image/png8';
         // unless explicitly configured otherwise, use cached version
         layer.params.TILED = (config.cached !== false) && true;
         return record;
@@ -121,6 +121,7 @@ ux.plugins.BrugisWMSSource = Ext.extend(gxp.plugins.WMSSource, {
             name = config.name,
             tileSetsCap,
             layer = record.getLayer();
+
         if (config.capability && this.store.reader.raw) {
             var capability = this.store.reader.raw.capability;
             var tileSets = capability.vendorSpecific && capability.vendorSpecific.tileSets;
@@ -148,7 +149,7 @@ ux.plugins.BrugisWMSSource = Ext.extend(gxp.plugins.WMSSource, {
             cached: !!layer.params.TILED
         });
     }
-    
+
 });
 
 Ext.preg(ux.plugins.BrugisWMSSource.prototype.ptype, ux.plugins.BrugisWMSSource);
