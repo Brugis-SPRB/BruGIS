@@ -104,7 +104,13 @@ ux.plugins.BrugisWMSSource = Ext.extend(gxp.plugins.WMSSource, {
 
         var layer = record.get("layer");
 		    layer.tileOrigin = OpenLayers.LonLat.fromString("140000.0,160000.0");
-        layer.params.FORMAT = 'image/png8';
+
+        if(layer.name.indexOf('Ortho') >= 0) {
+          layer.params.FORMAT = 'image/jpeg';
+        } else {
+          layer.params.FORMAT = 'image/png8';
+        }
+
         // unless explicitly configured otherwise, use cached version
         layer.params.TILED = (config.cached !== false) && true;
         return record;
