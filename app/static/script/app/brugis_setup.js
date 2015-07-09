@@ -8,19 +8,19 @@ Ext.onReady(function () {
 		var geoextLangFr = ((GeoExt.Lang.locale == "fr")||(GeoExt.Lang.locale == "fr-be")||(GeoExt.Lang.locale == "fr-BE")||(GeoExt.Lang.locale == "fr-fr"))?true:false;
 		var geoextLangNl = ((GeoExt.Lang.locale == "nl")||(GeoExt.Lang.locale == "nl-be")||(GeoExt.Lang.locale == "nl-BE")||(GeoExt.Lang.locale == "nl-nl"))?true:false;
 		var geoextLangEn = ((GeoExt.Lang.locale == "en")||(GeoExt.Lang.locale == "en-gb")||(GeoExt.Lang.locale == "en-us")||(GeoExt.Lang.locale == "en-US")||(GeoExt.Lang.locale == "en-en"))?true:false;
-		
+
 
 		if (GeoExt.Lang) {
             GeoExt.Lang.set(OpenLayers.Util.getParameters()["locale"] || GeoExt.Lang.locale);
 		}
-		
+
 		var brugisConfig = new Brugis.Config();
-	
+
         Ext.BLANK_IMAGE_URL = "../theme/app/img/blank.gif";
         OpenLayers.ImgPath = "../theme/app/img/";
 		OpenLayers.IMAGE_RELOAD_ATTEMPTS = 2;
         // optionally set locale based on query string parameter
-		
+
         if (GeoExt.Lang) {
             GeoExt.Lang.set(OpenLayers.Util.getParameters()["locale"] || GeoExt.Lang.locale);
         }
@@ -49,13 +49,13 @@ Ext.onReady(function () {
 
 		// screen pixels per screen inch
 		var dpi = 90;
-		
+
 		// quite clear factor to have round scales
 		var buggerThemAllInHellFactor = 90.71410375/90.00;
-		
+
 		// 1/ screen inch per screen meter * screen pixels per screen inch = 1/ screen pixels per screen meter = screen meter / screen pixels
 		var scaleToResFactor = 2.54/(100 * dpi * buggerThemAllInHellFactor);
-				
+
 		var resolutions = [	scaleToResFactor * 175000,
 							scaleToResFactor * 150000,
 							scaleToResFactor * 100000,
@@ -77,7 +77,7 @@ Ext.onReady(function () {
 							scaleToResFactor * 100,
 							scaleToResFactor * 50
 							];
-	
+
 		var sources = {
 			'BruGIS WMS - Geoserver': {
 				url: brugisConfig.getBrugisGeoserverUrl(),
@@ -115,11 +115,11 @@ Ext.onReady(function () {
 				ptype: "gxp_wmssource"
 			}
 		};
-		
+
 			OpenLayers.Projection.defaults["EPSG:31370"] = {
 				units:"m", maxExtent:[0,0,300000,300000]
 			};
-			
+
 
         var app = new GeoExplorer.Brugis({
             //authStatus: globalAuthStatus,
@@ -137,7 +137,7 @@ Ext.onReady(function () {
         	// layer sources
         	defaultSourceType: "gxp_wmssource",
 			sources: sources,
-			
+
 		    map: {
 				id: "mymap", // id needed to reference map in portalConfig above
 				projection: 'EPSG:31370',

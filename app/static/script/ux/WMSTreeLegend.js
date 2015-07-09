@@ -1,6 +1,6 @@
 /**
  * Copyright (c) 2012 George & Doc
- * 
+ *
  * Published under the GPL license.
  * See https://github.com/opengeo/gxp/raw/master/license.txt for the full text
  * of the license.
@@ -28,7 +28,7 @@ Ext.namespace("ux.plugins");
 ux.plugins.WMSTreeLegend = Ext.extend(gxp.plugins.Tool, {
     /** api: ptype = ux_wmstreelegend */
     ptype: "ux_wmstreelegend",
-    
+
     /** api: config[menuText]
      *  ``String``
      *  Text for legend menu item (i18n).
@@ -43,18 +43,18 @@ ux.plugins.WMSTreeLegend = Ext.extend(gxp.plugins.Tool, {
 
     /** api: config[actionTarget]
      *  ``Object`` or ``String`` or ``Array`` Where to place the tool's actions
-     *  (e.g. buttons or menus)? Use null as the default since our tool has both 
+     *  (e.g. buttons or menus)? Use null as the default since our tool has both
      *  output and action(s).
      */
     actionTarget: null,
-	
+
 	sourceName : "",
-	
+
 	noTileslayersList: ["AATL_DMS_SITE_ARBR:Arbres_remarquables",
 						"AATL_DMS_SITE_ARBR:Arbres_remarquables_abattus_ou_disparus",
 						"BROH_DML_LAND_BOOM:Opmerkelijke_bomen",
 						"BROH_DML_LAND_BOOM:Gevelde_of_verdwenen_bomen"],
-						
+
     /** private: method[constructor]
      */
     constructor: function(config) {
@@ -65,7 +65,7 @@ ux.plugins.WMSTreeLegend = Ext.extend(gxp.plugins.Tool, {
 				autoHeight: true
             };
         }
-        Ext.applyIf(this.outputConfig, {title: this.menuText}); 
+        Ext.applyIf(this.outputConfig, {title: this.menuText});
     },
 
     /** api: method[addActions]
@@ -81,15 +81,15 @@ ux.plugins.WMSTreeLegend = Ext.extend(gxp.plugins.Tool, {
             },
             scope: this
         }];
-		
-		var unselectLayer = function(obj,record,index) {			
+
+		var unselectLayer = function(obj,record,index) {
 			if(record.NodeId) {
 				var theGoodNode = Ext.getCmp("wmsTree").getNodeById(record.NodeId);
-				theGoodNode.getUI().toggleCheck(false); 
+				theGoodNode.getUI().toggleCheck(false);
 			}
 		};
-		
-		var addLayer = function(obj,record,index) {		
+
+		var addLayer = function(obj,record,index) {
 			if(this.cheking == false){
 				this.reloading = true;
 				for(i=0, l=record.length; i<l; i++) {
@@ -99,14 +99,14 @@ ux.plugins.WMSTreeLegend = Ext.extend(gxp.plugins.Tool, {
 					}
 				}
 				this.reloading = false;
-			}			
+			}
 		};
-		
+
 		this.target.mapPanel.layers.on({
 			"add": { fn : addLayer , scope: this},
 			"remove" : {fn : unselectLayer, scope: this}
 		});
-		
+
         return ux.plugins.WMSTreeLegend.superclass.addActions.apply(this, [actions]);
     },
 
@@ -118,7 +118,7 @@ ux.plugins.WMSTreeLegend = Ext.extend(gxp.plugins.Tool, {
     getLegendPanel: function() {
         return this.output[0];
     },
-	
+
 	checkAndExpandNodeFromLayerName: function(myLayerName,layerRecord) {
 		var node = Ext.getCmp("wmsTree").root.findChildBy(function(curnode) {
 			if(curnode.attributes.layer && curnode.leaf) {
@@ -129,7 +129,7 @@ ux.plugins.WMSTreeLegend = Ext.extend(gxp.plugins.Tool, {
 			}
 			return false;
 		} , Ext.getCmp("wmsTree").root, true);
-							
+
 		if (node && layerRecord) {
 			var treepanel = Ext.getCmp("wmsTree");
 			treepanel.expandPath(node.getPath());
@@ -137,7 +137,7 @@ ux.plugins.WMSTreeLegend = Ext.extend(gxp.plugins.Tool, {
 			//remember the node id for unchecking the node
 			layerRecord["NodeId"] = node.id;
 			// remember the record in the node for removing
-			node.attributes["record"] = layerRecord; 
+			node.attributes["record"] = layerRecord;
 		}
 	},
 
@@ -150,7 +150,7 @@ ux.plugins.WMSTreeLegend = Ext.extend(gxp.plugins.Tool, {
 		},this);
 		return source;
 	},
-	
+
     /** private: method[addOutput]
      *  :arg config: ``Object``
      */
@@ -171,7 +171,9 @@ ux.plugins.WMSTreeLegend = Ext.extend(gxp.plugins.Tool, {
 					// Ceci déplie le premier Node appelé "AATL" ou "BROH"
 					attr.expanded = ((attr.text == "Bruxelles Développement urbain") ||
 									 (attr.text == "Brussel Stedelijke Ontwikkeling") ||
+                   (attr.text == "Brussels urban Development") ||
 									 (attr.text == "Fonds de plan") ||
+                   (attr.text == "Map backgrounds") ||
 									 (attr.text == "Basiskaart"));
 					//attr.source = "machin";
                     return GeoExt.tree.WMSCapabilitiesLoader.prototype.createNode.apply(this, [attr]);
@@ -198,7 +200,7 @@ ux.plugins.WMSTreeLegend = Ext.extend(gxp.plugins.Tool, {
 								var layerRecord = this.target.mapPanel.layers.getById(layerid);
 								this.checkAndExpandNodeFromLayerName(myLayerName,layerRecord);
 							}
-						},this);	
+						},this);
 						this.reloading = false;
 					}
 					,scope : this
@@ -219,20 +221,20 @@ ux.plugins.WMSTreeLegend = Ext.extend(gxp.plugins.Tool, {
 										queryable: true,
 										buffer: 0
 									});
-			
+
 									// DOCG 17/06/2013 On applique le resize au couches de fond, Alleluyah 3!!!!!!!!!!!!!!!
 									//record.data.layer.transitionEffect = "resize";
 									//record.data.layer.removeBackBufferDelay = 200;
-									
-									//NDU 24/01/2014 Fix Geowecache HIT Alignement de grid 
+
+									//NDU 24/01/2014 Fix Geowecache HIT Alignement de grid
 									record.data.layer.addOptions({
-										tileOrigin: new OpenLayers.LonLat(140000, 160000) 
+										tileOrigin: new OpenLayers.LonLat(140000, 160000)
 									});
-									
+
 									// NDU 19/07/2013 Hack forcant l'utilisation de l'url proposée dans le getcapabilities. voir bug #176
 									// NDU 18/06/2015 Hack enlevé pour le multi-source. En attente de regression
 									//record.data.layer.url = layer.url;
-									
+
 									// DOCG 19/07/2013 Hack pour afficher les symboles des arbres sans les tronquer en bord de tuile. voir bug #179
 									for (var i=this.noTileslayersList.length-1; i>=0; --i) {
 										if (record.data.name === this.noTileslayersList[i]){
@@ -242,12 +244,12 @@ ux.plugins.WMSTreeLegend = Ext.extend(gxp.plugins.Tool, {
 										}
 									}
 									//remember the node id for unchecking the node
-									record["NodeId"] = node.id;	
+									record["NodeId"] = node.id;
 									// remember the record in the node for removing
-									node.attributes["record"] = record; 
-									
+									node.attributes["record"] = record;
+
 									//console.log(record);
-									
+
 									this.target.mapPanel.layers.add(record);
 								}).createDelegate(this)});
 							} else {
@@ -262,7 +264,7 @@ ux.plugins.WMSTreeLegend = Ext.extend(gxp.plugins.Tool, {
 								// DOCG 17/06/2013 On applique le resize au couches de fond, Alleluyah 3!!!!!!!!!!!!!!!
 								//record.data.layer.transitionEffect = "resize";
 								//record.data.layer.removeBackBufferDelay = 200;
-								
+
 								// NDU 19/07/2013 Hack forcant l'utilisation de l'url du proposée dans le getcapabilities. voir bug #176
 								// NDU 18/06/2015 Hack enlevé pour le multi-source. En attente de regression
 								//record.data.layer.url = layer.url;
@@ -276,12 +278,12 @@ ux.plugins.WMSTreeLegend = Ext.extend(gxp.plugins.Tool, {
 									}
 								}
 								// remember the node id for unchecking the node
-								record["NodeId"] = node.id;	
+								record["NodeId"] = node.id;
 								// remember the record in the node for removing
-								node.attributes["record"] = record; 
-								
+								node.attributes["record"] = record;
+
 								this.target.mapPanel.layers.add(record);
-							}						
+							}
 						} else {
 							this.target.mapPanel.layers.remove(node.attributes.record);
 						}
