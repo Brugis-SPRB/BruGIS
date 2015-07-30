@@ -121,7 +121,7 @@ Ext.onReady(function () {
 			};
 
      if(typeof printCapabilities === 'undefined') {
-			 printCapabilities = {};
+			 printCapabilities = null;
 		 }
 
 
