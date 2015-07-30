@@ -119,9 +119,11 @@ Ext.onReady(function () {
 			OpenLayers.Projection.defaults["EPSG:31370"] = {
 				units:"m", maxExtent:[0,0,300000,300000]
 			};
+
      if(typeof printCapabilities === 'undefined') {
 			 printCapabilities = {};
 		 }
+
 
         var app = new GeoExplorer.Brugis({
             //authStatus: globalAuthStatus,
