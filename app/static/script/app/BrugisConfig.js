@@ -35,12 +35,12 @@ Brugis.Config = Ext.extend(Object,  {
 		var isAuthenticatedAsFieldCheckTax = this.isAuthenticatedAs(this, "fieldchecktax");
 		var isAuthenticatedAsProtec = this.isAuthenticatedAs(this, "protec");
 		var isAuthenticated = this.isAuthenticated.call(this);
-		var url = isAuthenticatedAsTax ? "/geoserver/www/wmsaatl/wmsc_brugis_tax.xml" 
-				: isAuthenticatedAsFieldCheckTax ? "/geoserver/www/wmsaatl/wmsc_brugis_tax.xml" 
-				: isAuthenticatedAsProtec ? "/geoserver/www/wmsaatl/wmsc_brugis_anon.xml" 
-				: isAuthenticated ? "/geoserver/ows" 
+		var url = isAuthenticatedAsTax ? "/geoserver/www/wmsaatl/wmsc_brugis_tax.xml"
+				: isAuthenticatedAsFieldCheckTax ? "/geoserver/www/wmsaatl/wmsc_brugis_tax.xml"
+				: isAuthenticatedAsProtec ? "/geoserver/www/wmsaatl/wmsc_brugis_anon.xml"
+				: isAuthenticated ? "/geoserver/ows"
 				: "/geoserver/www/wmsaatl/wmsc_brugis_anon.xml";
-		return url;				
+		return url;
 	},
 	isAuthenticated : function() {
 		return this.getCookieValue("geoexplorer-user") ?  true :  false;
@@ -58,6 +58,11 @@ Brugis.Config = Ext.extend(Object,  {
 			ENV = this.STA;
 		}
 		return ENV;
+	},
+	getPrintCapabilitiesUrl : function() {
+		 var baseUrl = this.getPrintDownloadBaseUrl.call(this);
+		 var capUrl  = baseUrl + "/print/print/dep";
+		 return capUrl;
 	},
 	getPrintDownloadBaseUrl : function() {
 		var env = this.getEnvironment.call(this);
@@ -89,7 +94,6 @@ Brugis.Config = Ext.extend(Object,  {
 				url = "http://mbr102.irisnet.be/WebReperage";
 				break;
 		}
-		return url;		
+		return url;
 	}
 });
-

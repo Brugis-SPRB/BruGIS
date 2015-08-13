@@ -128,7 +128,8 @@ Ext.onReady(function () {
         var app = new GeoExplorer.Brugis({
             //authStatus: globalAuthStatus,
             proxy: "../proxy/?url=",
-            printCapabilities : printCapabilities,
+            //printCapabilities : printCapabilities,
+						printService : brugisConfig.getPrintCapabilitiesUrl(),
             downloadBaseUrl : brugisConfig.getPrintDownloadBaseUrl(),
             reperageHost    : brugisConfig.getReperageHost(),
             about: {

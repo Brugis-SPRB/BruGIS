@@ -2,8 +2,8 @@
 ///////////////////////////////////////////////////////////////////////////////
 // DocG - Nouveau contrôleur pour intercepter le click même sur une tablette //
 
-OpenLayers.Control.Click = OpenLayers.Class(OpenLayers.Control, { 
-	defaultHandlerOptions: { 
+OpenLayers.Control.Click = OpenLayers.Class(OpenLayers.Control, {
+	defaultHandlerOptions: {
 		'single': true,
 		'double': false,
 		'pixelTolerance': 0,
@@ -49,7 +49,7 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
     logoutConfirmTitle: "Warning",
     logoutConfirmMessage: "Logging out will undo any unsaved changes, remove any layers you may have added, and reset the map composition. Do you want to save your composition first?",
     userFieldText: "User",
-    passwordFieldText: "Password", 
+    passwordFieldText: "Password",
     saveErrorText: "Trouble saving: ",
     dataTabTitleText: "Composition",
 	treeTabTitleText: "Data",
@@ -84,7 +84,7 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
 		this.addEvents(
 			"mymapschange"
 		);
-		
+
 		var user = this.getCookieValue(this.cookieParamName);
 		if(user) {
 			this.authorizedRoles = ["ROLE_ADMINISTRATOR"];
@@ -134,12 +134,12 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
 				actionTarget: {target: "paneltbar", index: 4}
 			}, {
                 ptype: "ux_print",
-                //printService: config.printService,
-                printCapabilities: config.printCapabilities,
+                printService: config.printService,
+                //printCapabilities: config.printCapabilities,
                 downloadBaseUrl: config.downloadBaseUrl,
                 actionTarget: {target: "paneltbar", index: 6}
             }, {
-                ptype: "gxp_navigation", 
+                ptype: "gxp_navigation",
 				//toggleGroup: this.toggleGroup,
                 actionTarget: {target: "paneltbar", hidden: false, index: 7},
 				autoActivate: false
@@ -189,7 +189,7 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
 					width: 300
 				}
 			}, {
-                ptype: "gxux_measure", 
+                ptype: "gxux_measure",
 				toggleGroup: this.toggleGroup,
                 controlOptions: {immediate: true,
 								 outputTarget: "bbar_measure"},
@@ -276,26 +276,26 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
 		var matchShareMaps = mapUrl.match(/^sharemaps\/(\d+)$/);
 	    var query = Ext.urlDecode(document.location.search.substr(1));
 		var preUrl = "";
-        
+
 		if (match) {
 			preUrl = "../";
-		} 
+		}
 		else if (matchShareMaps) {
 			preUrl = "http://mbr102.irisnet.be/MyBruGIS/";
 		}
 	    if (match || matchShareMaps) {
 			this.id = matchShareMaps ? Number(matchShareMaps[1]) : Number(match[1]);
-            
+
 			OpenLayers.Request.issue({
 				method: 'GET',
                 url: preUrl + mapUrl,
 				proxy : "../proxy/?url=",
                 success: function(request) {
-					var addConfig = Ext.util.JSON.decode(request.responseText);						
+					var addConfig = Ext.util.JSON.decode(request.responseText);
 					this.originalSourcesUrl = config.sources["BruGIS WMS - Geoserver"].url;
-					var mSource = config.sources["BruGIS WMS - Geoserver"];		
+					var mSource = config.sources["BruGIS WMS - Geoserver"];
 						/*  We must create a layer configuration that ask to the source if the getcapabilities is loaded,
-							if not the wrong url is taken because WMS getMap is issued before the getcapabilities response 
+							if not the wrong url is taken because WMS getMap is issued before the getcapabilities response
 							override the getmap url */
 					var mLayer = [];
 					for(var ll=0; ll < addConfig.map.layers.length; ll++) {
@@ -309,14 +309,14 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
 						newLayer["visibility"] = addConfig.map.layers[ll].visibility;
 						newLayer["url"] 		= addConfig.map.layers[ll].url;
 						mLayer[ll] = newLayer;
-					}			
+					}
 					delete config.sources;
 					delete config.map;
 					// Don't use persisted tool configurations from old maps
                     delete addConfig.tools;
 					addConfig.sources["BruGIS WMS - Geoserver"]=mSource;
 					addConfig.map.layers = mLayer;
-										
+
 					this.applyConfig(Ext.applyIf(config, addConfig));
                 },
                 failure: function(request) {
@@ -352,9 +352,9 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
 			var addConfig = Ext.util.JSON.decode(localStorage.getItem('mapStateToLoad'));
 			this.originalSourcesUrl = config.sources["BruGIS WMS - Geoserver"].url;
 			 /* Get the good url */
-			var mSource = config.sources["BruGIS WMS - Geoserver"];		
+			var mSource = config.sources["BruGIS WMS - Geoserver"];
 				/*  We must create a layer configuration that ask to the source if the getcapabilities is loaded,
-					if not the wrong url is taken because WMS getMap is issued before the getcapabilities response 
+					if not the wrong url is taken because WMS getMap is issued before the getcapabilities response
 					override the getmap url */
 				var mLayer = [];
 				for(var ll=0; ll < addConfig.map.layers.length; ll++) {
@@ -368,7 +368,7 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
 					newLayer["visibility"] = addConfig.map.layers[ll].visibility;
 					newLayer["url"] 		= addConfig.map.layers[ll].url;
 					mLayer[ll] = newLayer;
-				}			
+				}
 			delete config.sources;
 			delete config.map;
 			addConfig.sources["BruGIS WMS - Geoserver"]=mSource;
@@ -386,9 +386,9 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
 			var titleFromAddConfig 	= addConfig.about.title;
 			if (titleFromConfig == titleFromAddConfig) {
 				this.originalSourcesUrl= config.sources["BruGIS WMS - Geoserver"].url;
-				var mSource = config.sources["BruGIS WMS - Geoserver"];		
+				var mSource = config.sources["BruGIS WMS - Geoserver"];
 				/*  We must create a layer configuration that ask to the source if the getcapabilities is loaded,
-					if not the wrong url is taken because WMS getMap is issued before the getcapabilities response 
+					if not the wrong url is taken because WMS getMap is issued before the getcapabilities response
 					override the getmap url */
 				var mLayer = [];
 				for(var ll=0; ll < addConfig.map.layers.length; ll++) {
@@ -412,8 +412,8 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
 				this.applyConfig(config);
 			} else {
 				Ext.Msg.show({
-					title: this.newBrugisTitle, 
-					msg: this.newBrugisMessagePart1 + titleFromConfig + this.newBrugisMessagePart2 + titleFromAddConfig + this.newBrugisMessagePart3, 
+					title: this.newBrugisTitle,
+					msg: this.newBrugisMessagePart1 + titleFromConfig + this.newBrugisMessagePart2 + titleFromAddConfig + this.newBrugisMessagePart3,
 					buttons: Ext.Msg.OK,
 					icon: Ext.MessageBox.INFO,
 					scope: this
@@ -425,11 +425,11 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
 			this.applyConfig(config);
 		}
     },
- 	
+
 	/** private: method[avoidTiledCacheUsage]
 	 *	DocG - 2014/02/17
-	 *	
-	 *	
+	 *
+	 *
 	 */
 	avoidTiledCacheUsage: function(config, layersList) {
 		for (var i=layersList.length-1; i>=0; --i) {
@@ -443,7 +443,7 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
 		}
 		return config;
 	},
-	
+
 	/** private: method[saveMapStateOnExit]
 	 *	DocG - 2013/11/21
 	 *  DocG - 2014/01/17
@@ -452,10 +452,10 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
 	 */
 	saveMapStateOnExit: function() {
 		var configStr = Ext.util.JSON.encode(this.getState());
-	
+
 		configStr = configStr.replace("/geoserver/www/wmsaatl/geoweb_brugis.xml", "/geoserver/gwc/service/wms");
 		configStr = configStr.replace("/geoserver/www/wmsaatl/wmsc_brugis.xml", "/geoserver/ows");
-		
+
 		if (localStorage && localStorage.getItem("session")) {
 			var session = localStorage.getItem("session");
 			//console.log(session);
@@ -496,7 +496,7 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
 			}
 		}
 	},
-	
+
 	/** private: method[setCookieValue]
      *  Set the value for a cookie parameter
      */
@@ -535,15 +535,15 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
             this.clearCookieValue("JSESSIONID");
             this.clearCookieValue(this.cookieParamName);
             this.setAuthorizedRoles([]);
-			// DocG - 2014/02/10 
+			// DocG - 2014/02/10
 			if (localStorage) {
 				localStorage.setItem('reset', 'True');
 			}
             window.location.reload();
         };
         Ext.Msg.show({
-            title: this.logoutConfirmTitle, 
-            msg: this.logoutConfirmMessage, 
+            title: this.logoutConfirmTitle,
+            msg: this.logoutConfirmMessage,
             buttons: Ext.Msg.YESNOCANCEL,
             icon: Ext.MessageBox.WARNING,
             fn: function(btn) {
@@ -608,8 +608,8 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
                 handler: submitLogin,
                 scope: this
             }],
-            keys: [{ 
-                key: [Ext.EventObject.ENTER], 
+            keys: [{
+                key: [Ext.EventObject.ENTER],
                 handler: submitLogin,
                 scope: this
             }]
@@ -631,7 +631,7 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
                     this.showLogout(user);
                     win.un("beforedestroy", this.cancelAuthentication, this);
                     win.close();
-					
+
 					if (localStorage) {
 						localStorage.setItem('reset', 'True');
 					}
@@ -648,7 +648,7 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
                 scope: this
             });
         }
-                
+
         var win = new Ext.Window({
             title: this.loginText,
             layout: "fit",
@@ -694,19 +694,19 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
         var handler = this.logout;
         this.applyLoginState('logout', text, handler, this);
     },
-    
+
     initPortal: function() {
 		/* DocG - 2013/11/21
 		* DocG - 2014/06/17 - param from localStorage for active panel by default
 		*
 		*/
 		window.onbeforeunload = this.saveMapStateOnExit.bind(this);
-		var westPanelActiveTab = 
+		var westPanelActiveTab =
 			(localStorage.getItem("defPanl") && localStorage.getItem("defPanl") == '0')?
 				1:
 			(localStorage.getItem("defPanl") && localStorage.getItem("defPanl") == '1')?
 				0:1;
-				
+
         var westPanel = new Ext.Panel({
 			id: "west",
 			region: "west",
@@ -729,7 +729,7 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
 				html: '<img src=../theme/app/img/brugisBrussels_small.png />',
 				flex: 0,
 				height: 100
-			}, 
+			},
 			{
 				id: "west2",
 				xtype: "tabpanel",
@@ -755,7 +755,7 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
             id: 'paneltbar',
             items: this.createTools()
         });
-		
+
 		///////////////////////DOCG////////////////////////////////////////////
 		// creation of the bottom toolbar
         this.bottomtoolbar = new Ext.Toolbar({
@@ -774,7 +774,7 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
 				this.layerSources["BruGIS WMS - Geoserver"].url = this.originalSourcesUrl;
 				this.layerSources["BruGIS WMS - Geoserver"].createStore();
 			}
-			
+
 			//Raph ajout des layers de reperage dans la liste
 			if (this.tools.toolboxReperage) {
 				this.tools.toolboxReperage.raiseLayers();
@@ -787,7 +787,7 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
             disabled.each(function(item) {
                 item.disable();
             });
-			
+
 			// DOCG // idem dessus, mais pour la bottomToolbar
             var bottomDisabled = this.bottomtoolbar.items.filterBy(function(item) {
                 return item.initialConfig && item.initialConfig.disabled;
@@ -796,11 +796,11 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
             bottomDisabled.each(function(item) {
                 item.disable();
             });
-			
+
 			if(this.tools.featuremanager)
 			{
 				var params = Ext.urlDecode(location.search.substring(1));
-				
+
 				var currentLangage = GeoExt.Lang.locale;
 				/*** DocG - 2013/12/03
 				 *	url interface to zoom on a lambert coordinates
@@ -827,10 +827,10 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
 					var layerName = ux.qry[currentLangage][params.qry]["layer_name"];
 					var propertyName = ux.qry[currentLangage][params.qry]["property_name"];
 					var propertyValue = params.val;
-					
+
 					var theFeatureManager = this.tools.featuremanager;
 					var source = this.layerSources[sourceName];
-					
+
 					var store = source.store;
 					source.store.load({callback: (function() {
 						var myLayer = null;
@@ -847,10 +847,10 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
 								source: source.id,
 								queryable: true
 						});
-						
+
 						// DocG - 20131002 - If some dedicated map is given too, the propertyValue contains a / at its end... Maybe good to suppress it?
 						propertyValue = propertyValue.replace("/", "");
-						if(record != null) {	
+						if(record != null) {
 							theFeatureManager.on("layerchange",  function(rec,schema){
 									//Creation du spatial Filter
 									var ogcFilter = new OpenLayers.Filter.Comparison({
@@ -858,9 +858,9 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
 										property: propertyName,
 										value: propertyValue
 									});
-									
+
 									//console.log(ogcFilter);
-									
+
 									theFeatureManager.loadFeatures(ogcFilter, function(features){
 										//console.log("tugudu");
 										//Features sélectionnée et chargée, on zoom sur le résultat
@@ -890,7 +890,7 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
 											}
 											this.mapPanel.map.zoomToExtent(bounds);
 										}
-									},this);				
+									},this);
 								},this,{single: true});
 							if(theFeatureManager.setLayer(record)){
 								//console.log("LayerChanged");
@@ -904,13 +904,13 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
 				}
 
 			}
-			
+
 			///////////////////////DOCG////////////////////////////////////////////
 			// On applique le resize aux couches de la carte
 			/**
 			 *	On tente de checker les couches ajoutées à la carte
 			 */
-			 
+
 			if (this.initialConfig.map) {
 				for (var layerConfig in this.initialConfig.map.layers) {
 					if (this.initialConfig.map.layers[layerConfig].source){
@@ -923,8 +923,8 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
 					}
 				}
 			}
-			
-			
+
+
 			/** DocG - 2014/04/01
 			 *  OpacitySlider is back!
 			 */
@@ -946,7 +946,7 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
 				window.location.href = windows.location.href.replace(/#.*$/, '#');
 			}
 		});
-		
+
 		///////////////////////DOCG////////////////////////////////////////////
 		// Show the x y coordinates of the event
 		var showCoordinates = function(e) {
@@ -971,7 +971,7 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
 		// What we do when the mouse moves
         this.mapPanel.map.events.register("mousemove", this.mapPanel.map, showCoordinates);
 		///////////////////////DOCG////////////////////////////////////////////
-		
+
 		///////////////////////DOCG////////////////////////////////////////////
 		// touchend interception
 		var showPosition = function(e) {
@@ -982,7 +982,7 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
 				if (mapPanel.map.getLayersByName('location').length > 0) {
 					vector = mapPanel.map.getLayersByName('location')[0];
 				}
-				else 
+				else
 				{
 					vector = new OpenLayers.Layer.Vector("location");
 					mapPanel.map.addLayer(vector);
@@ -1006,7 +1006,7 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
 			}
         };
 		///////////////////////DOCG////////////////////////////////////////////
-	
+
 		///////////////////////DOCG////////////////////////////////////////////
 		// Qui l'eût cru! Il fallait encore un control.click...
 		var click = new OpenLayers.Control.Click({trigger: showPosition});
@@ -1022,7 +1022,7 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
 			sources: this.layerSources
 		}); */
 
-		
+
 		///////////////////////DOCG////////////////////////////////////////////
 		// Put back search layer on top of the layers if present
 		var putSearchLayerOnTop = function(e) {
@@ -1036,8 +1036,8 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
 		};
 		this.mapPanel.map.events.register("addlayer", this, putSearchLayerOnTop);
 		///////////////////////DOCG////////////////////////////////////////////
-		
-		
+
+
         this.mapPanelContainer = new Ext.Panel({
             layout: "card",
             region: "center",
@@ -1051,7 +1051,7 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
 			bbar: this.bottomtoolbar,
             activeItem: 0
         });
-		
+
 		var queryContainer = new Ext.Panel({
             region: "south",
             id: "south",
@@ -1068,7 +1068,7 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
                 //border: true
             }
         });
-       
+
         this.portalItems = [{
             region: "center",
             layout: "border",
@@ -1078,9 +1078,9 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
 				queryContainer
             ]
         }];
-		
+
         GeoExplorer.superclass.initPortal.apply(this, arguments);
-				
+
 		// DocG - 20140701 - update UI based on prefs conf
 		this.fireEvent("preferencesChange");
     },
@@ -1096,7 +1096,7 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
 			tooltip: this.frenchText,
 			handler: function() {
 				localStorage.setItem('BruGISLanguage', "fr");
-				window.location.reload(); 
+				window.location.reload();
 			},
 			scope: this
 		});
@@ -1105,7 +1105,7 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
 			tooltip: this.deutchText,
 			handler: function() {
 				localStorage.setItem('BruGISLanguage', "nl");
-				window.location.reload(); 
+				window.location.reload();
 			},
 			scope: this
 		});
@@ -1114,7 +1114,7 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
 			tooltip: this.englishText,
 			handler: function() {
 				localStorage.setItem('BruGISLanguage', "en");
-				window.location.reload();  
+				window.location.reload();
 			},
 			scope: this
 		});
@@ -1129,7 +1129,7 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
         return tools;
 	},
 	//DocG/////////////////////////////////////////////////////////////////////////
-	
+
     /**
      * api: method[createTools]
      * Create the toolbar configuration for the main view.
@@ -1142,7 +1142,7 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
             handler: this.displayAppInfo,
             scope: this
         });
-		
+
 		var exportMapButton = new Ext.Button({
             tooltip: this.exportMapText,
             needsAuthorization: true,
@@ -1153,7 +1153,7 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
             scope: this,
             iconCls: 'icon-export'
         });
-				
+
 		var saveMapButton = new Ext.Button({
             tooltip: this.saveMapText,
             needsAuthorization: true,
@@ -1164,9 +1164,9 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
             scope: this,
             iconCls: "icon-save"
         });
-		
+
 		this.addListener("preferencesChange", function() {
-			var showButton = 
+			var showButton =
 				(localStorage.getItem("shwDmTl") && localStorage.getItem("shwDmTl") == '0')?
 				false:
 				(localStorage.getItem("shwDmTl") && localStorage.getItem("shwDmTl") == '1')?
@@ -1180,18 +1180,18 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
 				exportMapButton.hide();
 			}
 		}, this);
-		
+
         tools.unshift("-");
         tools.unshift(exportMapButton);
         tools.unshift(saveMapButton);
-		
+
         tools.unshift("-");
         tools.unshift(aboutButton);
-		
+
 		this.loginButton = new Ext.Button();
 		this.loginButton.id = "login";
 		tools.push(['->', this.loginButton]);
-		
+
         //Maybe we are in debug mode
 		if(this.authorizedRoles)
 		{
@@ -1221,7 +1221,7 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
      */
     createBottomTools: function() {
         var tools = GeoExplorer.Composer.superclass.createTools.apply(this, arguments);
-		
+
 		tools.unshift({
 					id: 'bbar_measure',
 					text: "",
@@ -1248,9 +1248,9 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
 					    xtype: "tbtext"
 						}
 				]);
-				
-		tools = this.addLocaleTools(tools);		
-		
+
+		tools = this.addLocaleTools(tools);
+
         return tools;
     },
 	///////////////////////////////////////////////////////////////////////////
@@ -1275,12 +1275,12 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
     /** private: method[save]
      *
      * Saves the map config and displays the URL in a window.
-     */ 
+     */
     save: function(callback, scope) {
         var configStr = Ext.util.JSON.encode(this.getState());
 		configStr = configStr.replace("/geoserver/www/wmsaatl/geoweb_brugis.xml", "/geoserver/gwc/service/wms");
 		configStr = configStr.replace("/geoserver/www/wmsaatl/wmsc_brugis.xml", "/geoserver/ows");
-		
+
         var method, url;
         if (this.id) {
             method = "PUT";
@@ -1322,13 +1322,13 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
     /** private: method[showEmbedWindow]
      */
     showEmbedWindow: function() {
-        var toolsArea = new Ext.tree.TreePanel({title: this.toolsTitle, 
+        var toolsArea = new Ext.tree.TreePanel({title: this.toolsTitle,
            autoScroll: true,
            root: {
-               nodeType: 'async', 
-               expanded: true, 
+               nodeType: 'async',
+               expanded: true,
                children: this.viewerTools
-           }, 
+           },
            rootVisible: false,
            id: 'geobuilder-0'
        });

@@ -1,6 +1,6 @@
 /**
  * Copyright (c) 2008-2011 The Open Planning Project
- * 
+ *
  * Published under the GPL license.
  * See https://github.com/opengeo/gxp/raw/master/license.txt for the full text
  * of the license.
@@ -28,7 +28,7 @@ Ext.namespace("ux.plugins");
  *    which is currently mirrored at git://github.com/GeoNode/PrintPreview.git.
  */
 ux.plugins.Print = Ext.extend(gxp.plugins.Tool, {
-    
+
     /** api: ptype = ux_print */
     ptype: "ux_print",
 
@@ -85,7 +85,7 @@ ux.plugins.Print = Ext.extend(gxp.plugins.Tool, {
         // don't add any action if there is no print service configured
         if (this.printService !== null || this.printCapabilities != null) {
 
-            var printProvider = new GeoExt.data.PrintProvider({
+            var printProvider = new GeoExt.data.BrugisPrintProvider({
                 capabilities: this.printCapabilities,
                 url: this.printService,
                 customParams: this.customParams,
@@ -105,26 +105,26 @@ ux.plugins.Print = Ext.extend(gxp.plugins.Tool, {
                             var encodedLegends = [];
                             var output = legend.output;
                             if (output && output[0]) {
-								Ext.getCmp('west2').setActiveTab(1);
-								Ext.getCmp('west2').doLayout();
-                                output[0].getRootNode().cascade(function(node) {
-                                    if (node.component && !node.component.hidden) {
-                                        var cmp = node.component;
-                                        var encFn = this.encoders.legends[cmp.getXType()];
-										//modif ndu
-										if(encFn) {
-                                            cmp.insert(0,{});
-											var tempRes = encFn.call(this, cmp, jsonData.pages[0].scale);
+                              Ext.getCmp('west2').setActiveTab(1);
+								              Ext.getCmp('west2').doLayout();
+                              output[0].getRootNode().cascade(function(node) {
+                                if (node.component && !node.component.hidden) {
+                                  var cmp = node.component;
+                                  var encFn = this.encoders.legends[cmp.getXType()];
+										              //modif ndu
+              										if(encFn) {
+                                    cmp.insert(0,{});
+              											var tempRes = encFn.call(this, cmp, jsonData.pages[0].scale);
 
-											//tempRes[0].name = node.layer.name;
-                                            tempRes[0].classes[0].name = node.layer.name;
-											encodedLegends = encodedLegends.concat(tempRes);
-										}
-                                    }
-                                }, provider);
-								Ext.getCmp('west2').setActiveTab(0);
-                            }
-                            jsonData.legends = encodedLegends;
+              											//tempRes[0].name = node.layer.name;
+                                    tempRes[0].classes[0].name = node.layer.name;
+              											encodedLegends = encodedLegends.concat(tempRes);
+              										}
+                                }
+                              }, provider);
+								              Ext.getCmp('west2').setActiveTab(0);
+                           }
+                           jsonData.legends = encodedLegends;
                             // cancel normal encoding of legend
                             return false;
                         }
@@ -140,30 +140,30 @@ ux.plugins.Print = Ext.extend(gxp.plugins.Tool, {
                                 }
                             }
                         });
-						// The print module dont like tiled wms. Replace the url for the simple wms one
-						// Work only for geoserver with integrated geowebcache
-						printWindow.items.get(0).printMapPanel.layers.each(function(l) {
-						    var layer = l.get("layer");
-							if (layer instanceof OpenLayers.Layer.WMS) {
-								//console.log(layer);
-								layer.url = layer.url.replace("geoserver/gwc/service/wms","geoserver/ows");
-								// DocG - 2014/02/19 - obsolète depuis la publication casdacdée des FDPs UrbIS
-								/*if (layer.name.search("Urbis") === 0) {
-									layer.url = layer.url.replace(layer.url,"http://geoserver.gis.irisnet.be/geoserver/wms?SERVICE=WMS&");
-								};
-								*/
-								// Hardcode pour corriger la non impression des orthophotoplans 
-								if (layer.name.search("Orthophotoplans 2004") === 0) {
-									layer.url = layer.url.replace(layer.url,"http://geoserver.gis.irisnet.be/geoserver/wms?SERVICE=WMS&");
-								};
-								if (layer.name.search("Orthophotoplans 2009") === 0) {
-									layer.url = layer.url.replace(layer.url,"http://geoserver.gis.irisnet.be/geoserver/wms?SERVICE=WMS&");
-								};
-								if (layer.name.search("Orthophotoplans 2012") === 0) {
-									layer.url = layer.url.replace(layer.url,"http://geoserver.gis.irisnet.be/geoserver/wms?SERVICE=WMS&");
-								};
-							}
-                        });
+        						// The print module dont like tiled wms. Replace the url for the simple wms one
+        						// Work only for geoserver with integrated geowebcache
+        						printWindow.items.get(0).printMapPanel.layers.each(function(l) {
+        						    var layer = l.get("layer");
+          							if (layer instanceof OpenLayers.Layer.WMS) {
+          								//console.log(layer);
+          								layer.url = layer.url.replace("geoserver/gwc/service/wms","geoserver/ows");
+          								// DocG - 2014/02/19 - obsolï¿½te depuis la publication casdacdï¿½e des FDPs UrbIS
+          								/*if (layer.name.search("Urbis") === 0) {
+          									layer.url = layer.url.replace(layer.url,"http://geoserver.gis.irisnet.be/geoserver/wms?SERVICE=WMS&");
+          								};
+          								*/
+          								// Hardcode pour corriger la non impression des orthophotoplans
+          								if (layer.name.search("Orthophotoplans 2004") === 0) {
+          									layer.url = layer.url.replace(layer.url,"http://geoserver.gis.irisnet.be/geoserver/wms?SERVICE=WMS&");
+          								};
+          								if (layer.name.search("Orthophotoplans 2009") === 0) {
+          									layer.url = layer.url.replace(layer.url,"http://geoserver.gis.irisnet.be/geoserver/wms?SERVICE=WMS&");
+          								};
+          								if (layer.name.search("Orthophotoplans 2012") === 0) {
+          									layer.url = layer.url.replace(layer.url,"http://geoserver.gis.irisnet.be/geoserver/wms?SERVICE=WMS&");
+          								};
+          							}
+                     });
                     },
                     loadcapabilities: function() {
                         if (printButton) {
@@ -232,11 +232,12 @@ ux.plugins.Print = Ext.extend(gxp.plugins.Tool, {
             }
 
             var mapPanel = this.target.mapPanel;
+
             function getSupportedLayers() {
                 var supported = [];
                 mapPanel.layers.each(function(record) {
                     var layer = record.getLayer();
-					
+
                     if (isSupported(layer)) {
                         supported.push(layer);
                     }
@@ -248,7 +249,7 @@ ux.plugins.Print = Ext.extend(gxp.plugins.Tool, {
                 return (
                     layer instanceof OpenLayers.Layer.WMS ||
                     layer instanceof OpenLayers.Layer.OSM ||
-					layer instanceof OpenLayers.Layer.Vector
+					          layer instanceof OpenLayers.Layer.Vector
                 );
             }
 
@@ -286,7 +287,7 @@ ux.plugins.Print = Ext.extend(gxp.plugins.Tool, {
                             minWidth: 336,
                             //mapTitle: this.target.about && this.target.about["title"],
                             //comment: this.target.about && this.target.about["abstract"],
-							mapTitle: "",
+							              mapTitle: "",
                             comment: "",
                             printMapPanel: {
                                 autoWidth: true,
