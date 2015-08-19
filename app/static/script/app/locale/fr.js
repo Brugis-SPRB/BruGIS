@@ -87,7 +87,7 @@ GeoExt.Lang.add("fr", {
 		availablePreferencesText: 		"Préférences",
 		ParametersText: 				"Préférences BruGIS",
 		sessionText: 					"Carte de démarrage",
-		keepSessionText: 				"Par défault",
+		keepSessionText: 				"Par défaut",
 		forgetSessionText: 				"Aucune",
 		dataLegendText: 				"Onglet par défaut",
 		dataPanelText: 					"Données",

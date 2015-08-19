@@ -1,7 +1,7 @@
 /**
  * Copyright (c) 2009-2010 The Open Planning Project
  */
- 
+
 
 GeoExt.Lang.add("en", {
     "Brugis.Config.prototype": {
@@ -32,7 +32,7 @@ GeoExt.Lang.add("en", {
         contactText: "Contact",
         aboutThisMapText: "About this Map"
     },
-	
+
     "GeoExplorer.Composer.prototype": {
         exportMapText: "Publish Map",
         saveMapText: "Save Map",
@@ -46,7 +46,7 @@ GeoExt.Lang.add("en", {
         userFieldText: "User",
         passwordFieldText: "Password"
     },
-	
+
 	"GeoExplorer.Brugis.prototype" : {
         exportMapText: "Export map",
         saveMapText: "Save map",
@@ -69,18 +69,18 @@ GeoExt.Lang.add("en", {
 		newBrugisMessagePart3: ".\n You have nothing to do; you map is reinitialized",
 		wmsTreeLegendSourceUrl: "/geoserver/www/wmsaatl/wmsaatl_en.xml"
 	},
-	
+
 	"ux.form.CirbGeocoderComboBox.prototype" : {
 		loadingText: "Searching...",
         emptyText: "Search",
 		language: 'en'
 	},
-	
+
 	"ux.plugins.BrugisSearcher.prototype" : {
 		searchLayerName: "search results",
 		cadSearchTipText: "enter here the CAPAKEY searched"
 	},
-	
+
 	"ux.plugins.Preferences.prototype" : {
 		preferencesTip: "Preferences",
 		preferencesText: "Preferences text",
@@ -95,9 +95,46 @@ GeoExt.Lang.add("en", {
 		legendPanelText: "Legend",
 		searchResultText: "Search result",
 		multipleSearchText: "Multiple",
-		uniqueSearchText: "Unique"
+		uniqueSearchText: "Unique",
+		toolsVisibilityOptionLabelText:			"Tools: Display options",
+		showQueryToolLabelText: 				"Search tool",
+		showGeolocatorToolLabelText: 			"Geolocalisation tool",
+		showUrbanalysisToolLabelText: 			"Urbanalysis tools",
+		showDataEditorToolslabelText: 			"Edition tools",
+		showDedicatedMapAdvancedToolsLabelText:	"Creation maps tools",
+		showPopupInfoOnRightClickLabelText:		"GetFeatureInfo on right-clic"
+
 	},
-		
+
+  "ux.plugins.ReperageToolbox.prototype" : {
+		showReperageGrid: "ShowReperageGrid",
+		drawReperageAreaToolTip: "Draw polygon",
+		showReperageFormBtnToolTip: "Urbanalysis form",
+		modifyReperageAreaToolTip: "Modify polygon",
+		copyParcelFeatBtnToolTip : "Copy polygon from a Cadastral parcel",
+		deleteOneFeatureBtnToolTip: "Erase polygon",
+		reperageButtonTip: "Urbanalysis tool",
+		showReperageFormDlgTitle: "Urbanalysis",
+		reperageTypeCombofieldLabel: "Urbanalysis type",
+		reperageTypeComboemptyText: "Choose an Urbanalysis type",
+		reperageRefDossTextfieldLabel: "File reference",
+		reperageAdrTextfieldLabel: "Address",
+		myReperageTip: "My Urbanalysis",
+		myReperageText: "Urbanalysis",
+		myReperageMenuText: "My Urbanalysis",
+		availableMyReperageText: "My Urbanalysis",
+		myReperageGridPanel_docref_header: "File",
+		myReperageGridPanel_adress_header: "Address",
+		myReperageGridPanel_state_header: "Status",
+		myReperageGridPanel_startdate_header: "Created :",
+		myReperageGridPanel_enddate_header: "Available until :",
+		myReperageGridPanel_docx_tooltip: "Docx download",
+		myReperageGridPanel_pdf_tooltip: "PDF download",
+		myReperageGridPanel_bbar_displayMsg: "Urbanalysis {0} - {1} of {2}",
+		myReperageGridPanel_bbar_emptyMsg: "No Urbanalysis",
+		myReperageGridPanel_recycle_tooltip: "Repost Urbanalysis"
+	},
+
 	"ux.plugins.MyMaps.prototype": {
 		myMapsTip: "My maps",
 		myMapsText: "my maps text",
@@ -132,7 +169,7 @@ GeoExt.Lang.add("en", {
 		sameMapNameTitle: "Warning",
 		sameMapNameMessage: "This mapname is already used. Do you want to replace the existing map definition by the new one?"
 	},
-	
+
 	"gxp.menu.LayerMenu.prototype": {
         layerText: "Layer"
     },
@@ -151,7 +188,7 @@ GeoExt.Lang.add("en", {
         doneText: "Done",
         uploadText: "Upload layers"
     },
-    
+
     "gxp.plugins.BingSource.prototype": {
         title: "Bing Layers",
         roadTitle: "Bing Roads",
@@ -163,7 +200,7 @@ GeoExt.Lang.add("en", {
         createFeatureActionTip: "Create a new feature",
         editFeatureActionTip: "Edit existing feature"
     },
-    
+
     "gxp.plugins.FeatureGrid.prototype": {
         displayFeatureText: "Display on map",
         firstPageTip: "First page",
@@ -178,7 +215,7 @@ GeoExt.Lang.add("en", {
         menuText: "3D Viewer",
         tooltip: "Switch to 3D Viewer"
     },
-    
+
     "gxp.plugins.GoogleSource.prototype": {
         title: "Google Layers",
         roadmapAbstract: "Show street map",
@@ -191,12 +228,16 @@ GeoExt.Lang.add("en", {
         menuText: "Layer Properties",
         toolTip: "Layer Properties"
     },
-    
+
     "gxp.plugins.LayerTree.prototype": {
         shortTitle: "Layers",
         rootNodeText: "Layers",
         overlayNodeText: "Overlays",
         baseNodeText: "Base Layers"
+    },
+
+    "gxp.plugins.LayerManager.prototype": {
+        baseNodeText: "Basemap"
     },
 
     "gxp.plugins.Legend.prototype": {
@@ -284,7 +325,7 @@ GeoExt.Lang.add("en", {
         removeMenuText: "Remove layer",
         removeActionTip: "Remove layer"
     },
-    
+
     "gxp.plugins.Styler.prototype": {
         menuText: "Edit Styles",
         tooltip: "Manage layer styles"
@@ -302,12 +343,12 @@ GeoExt.Lang.add("en", {
         zoomInTooltip: "Zoom In",
         zoomOutTooltip: "Zoom Out"
     },
-    
+
     "gxp.plugins.ZoomToExtent.prototype": {
         menuText: "Zoom To Max Extent",
         tooltip: "Zoom To Max Extent"
     },
-    
+
     "gxp.plugins.ZoomToDataExtent.prototype": {
         menuText: "Zoom to layer extent",
         tooltip: "Zoom to layer extent"
@@ -317,7 +358,7 @@ GeoExt.Lang.add("en", {
         menuText: "Zoom to layer extent",
         tooltip: "Zoom to layer extent"
     },
-    
+
     "gxp.plugins.ZoomToSelectedFeatures.prototype": {
         menuText: "Zoom to selected features",
         tooltip: "Zoom to selected features"
@@ -337,13 +378,13 @@ GeoExt.Lang.add("en", {
         saveButtonText: "Save",
         saveButtonTooltip: "Save changes"
     },
-    
+
     "gxp.FillSymbolizer.prototype": {
         fillText: "Fill",
         colorText: "Color",
         opacityText: "Opacity"
     },
-    
+
     "gxp.FilterBuilder.prototype": {
         builderTypeNames: ["any", "all", "none", "not all"],
         preComboText: "Match",
@@ -352,7 +393,7 @@ GeoExt.Lang.add("en", {
         addGroupText: "add group",
         removeConditionText: "remove condition"
     },
-    
+
     "gxp.grid.CapabilitiesGrid.prototype": {
         nameHeaderText : "Name",
         titleHeaderText : "Title",
@@ -361,7 +402,7 @@ GeoExt.Lang.add("en", {
         layerAdditionLabel: "or add a new server.",
         expanderTemplateText: "<p><b>Abstract:</b> {abstract}</p>"
     },
-    
+
     "gxp.PointSymbolizer.prototype": {
         graphicCircleText: "circle",
         graphicSquareText: "square",
@@ -383,7 +424,7 @@ GeoExt.Lang.add("en", {
         queryByAttributesText: "Query by attributes",
         layerText: "Layer"
     },
-    
+
     "gxp.RulePanel.prototype": {
         scaleSliderTemplate: "{scaleType} Scale 1:{scale}",
         labelFeaturesText: "Label Features",
@@ -395,13 +436,13 @@ GeoExt.Lang.add("en", {
         symbolText: "Symbol",
         nameText: "Name"
     },
-    
+
     "gxp.ScaleLimitPanel.prototype": {
         scaleSliderTemplate: "{scaleType} Scale 1:{scale}",
         minScaleLimitText: "Min scale limit",
         maxScaleLimitText: "Max scale limit"
     },
-    
+
     "gxp.StrokeSymbolizer.prototype": {
         solidStrokeName: "solid",
         dashStrokeName: "dash",
@@ -412,20 +453,20 @@ GeoExt.Lang.add("en", {
         widthText: "Width",
         opacityText: "Opacity"
     },
-    
-    "gxp.StylePropertiesDialog.prototype": {   
+
+    "gxp.StylePropertiesDialog.prototype": {
         titleText: "General",
         nameFieldText: "Name",
         titleFieldText: "Title",
         abstractFieldText: "Abstract"
     },
-    
+
     "gxp.TextSymbolizer.prototype": {
         labelValuesText: "Label values",
         haloText: "Halo",
         sizeText: "Size"
     },
-    
+
     "gxp.WMSLayerPanel.prototype": {
         aboutText: "About",
         titleText: "Title",
@@ -452,7 +493,7 @@ GeoExt.Lang.add("en", {
         premiumSizeLabel: 'Premium',
         largeSizeLabel: 'Large'
     },
-    
+
     "gxp.WMSStylesDialog.prototype": {
          addStyleText: "Add",
          addStyleTip: "Add a new style",
@@ -496,7 +537,7 @@ GeoExt.Lang.add("en", {
         dataStoreLabel: "Store",
         dataStoreEmptyText: "Create new store"
     },
-    
+
     "gxp.NewSourceDialog.prototype": {
         title: "Add New Server...",
         cancelText: "Cancel",
@@ -505,7 +546,7 @@ GeoExt.Lang.add("en", {
         contactingServerText: "Contacting Server..."
     },
 
-    "gxp.ScaleOverlay.prototype": { 
+    "gxp.ScaleOverlay.prototype": {
         zoomLevelText: "Zoom level"
     }
 });
