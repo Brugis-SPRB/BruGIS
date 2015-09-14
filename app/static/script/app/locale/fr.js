@@ -2,17 +2,18 @@
  * Copyright (c) 2009-2010 The Open Planning Project
  */
 
- 
+
 GeoExt.Lang.add("fr", {
     "Brugis.Config.prototype": {
         localeHelp : "<a href='http://www.developpement-urbain.irisnet.be/cartographie/brugis/mode-demploi'target= '_blank'>Click here</a>",
         abstractText : "BruGIS, Portail d'Information Géographique pour Bruxelles Développement urbain (SPRB).",
-        contactText : "e-mail: <a href='mailto:brugis@sprb.irisnet.be'>brugis@sprb.irisnet.be</a>.",
+        contactText : "e-mail: <a href='mailto:brugis@sprb.brussels'>brugis@sprb.brussels</a>.",
         baseLayerName     : "URBIS:urbisFR",
         baseLayerTitle    : "Urbis coloré",
         baseGrayLayerName : "URBIS:urbisFRGray",
         baseGrayLayerTitle: "Urbis grisé",
-        BMBWMSUrl : "http://data-mobility.irisnet.be/inspire/capabilities/fr/wms"
+        BMBWMSUrl : "http://data-mobility.irisnet.be/geoserver/ows"/*,
+		    BMBWMSUrl2: "http://data-mobility.irisnet.be/geoserver/bm_public_space/wms"*/
     },
     "GeoExplorer.prototype": {
         zoomSliderText: "<div> Niveau de zoom: {zoom}</div><div Echelle: 1:{scale}</div>",
@@ -31,7 +32,7 @@ GeoExt.Lang.add("fr", {
         contactText: "Contact",
         aboutThisMapText: "À propos de cette carte"
     },
-	
+
     "GeoExplorer.Composer.prototype": {
         exportMapText: "Carte Export",
         saveMapText: "Enregistrer la carte",
@@ -45,7 +46,7 @@ GeoExt.Lang.add("fr", {
         userFieldText: "Nom",
         passwordFieldText: "Mot de passe"
     },
-	
+
 	"GeoExplorer.Brugis.prototype" : {
         exportMapText: "Exporter la carte",
         saveMapText: "Enregistrer la carte",
@@ -68,18 +69,18 @@ GeoExt.Lang.add("fr", {
 		newBrugisMessagePart3: ".\n Votre carte est réinitialisée. Taper Ctrl + F5 pour rafraîchir le site.",
         wmsTreeLegendSourceUrl: "/geoserver/www/wmsaatl/wmsaatl_fr.xml"
 	},
-	
+
 	"ux.form.CirbGeocoderComboBox.prototype" : {
 		loadingText: "Recherche en cours...",
         emptyText: "Rechercher",
 		language: 'en'
 	},
-	
+
 	"ux.plugins.BrugisSearcher.prototype" : {
 		searchLayerName: "resultats de la recherche",
 		cadSearchTipText: "entrez ici le code CAPAKEY recherché"
 	},
-	
+
 	"ux.plugins.Preferences.prototype" : {
 	    preferencesTip: 				"Préférences",
 		preferencesText: 				"Préférences",
@@ -103,7 +104,7 @@ GeoExt.Lang.add("fr", {
 		showDedicatedMapAdvancedToolsLabelText:	"Outils de création de carte",
 		showPopupInfoOnRightClickLabelText:		"Infos attributaires au clic droit"
 	},
-	
+
 	"ux.plugins.ReperageToolbox.prototype" : {
 		showReperageGrid: "ShowReperageGrid",
 		drawReperageAreaToolTip: "Dessiner une surface",
@@ -132,7 +133,7 @@ GeoExt.Lang.add("fr", {
 		myReperageGridPanel_bbar_emptyMsg: "Aucune urbanalyse",
 		myReperageGridPanel_recycle_tooltip: "Relancer l'urbanalyse"
 	},
-	
+
 	"ux.plugins.MyMaps.prototype": {
 		myMapsTip: "Mes cartes",
 		myMapsText: "my maps text",
@@ -168,12 +169,12 @@ GeoExt.Lang.add("fr", {
 		sameMapNameTitle: "Attention",
 		sameMapNameMessage: "Ce nom est déjà utilisé par une carte. Voulez-vous la remplacer?"
 	},
-	
+
 	"ux.plugins.Geolocator.prototype" : {
 	menuText: "Position courante",
 	tooltip: "Position courante"
 	},
-	
+
 	"GeoExt.ux.Measure.prototype" : {
 		lengthMenuText: "Distance",
 		areaMenuText: "Surface",
@@ -181,7 +182,7 @@ GeoExt.Lang.add("fr", {
 		areaTooltip: "Mesurer une surface",
 		measureTooltip: "Mesurer"
 	},
-	
+
 	"ux.plugins.Print.prototype" : {
 		menuText: "Imprimer la carte",
 		tooltip: "Imprimer la carte",
@@ -189,7 +190,7 @@ GeoExt.Lang.add("fr", {
 		nonePrintableText: "Aucune couche de la carte n'est imprimable",
 		previewText: "Prévisualisation de l'impression"
 	},
-	
+
 	"ux.plugins.WMSGetFeatureInfo.prototype" : {
 		infoActionTip: "Informations attributaires",
 		popupTitle: "Informations attributaires",
@@ -198,7 +199,7 @@ GeoExt.Lang.add("fr", {
 		positionLabel: "Coordonnées",
 		centroidLabel: "Centroïde"
 	},
-	
+
     "gxp.plugins.AddLayers.prototype": {
         addActionMenuText: "Ajouter des calques",
         addActionTip: "Ajouter des calques",
@@ -211,7 +212,7 @@ GeoExt.Lang.add("fr", {
 		addButtonText: "Ajouter",
 		layerSelectionText: "Visualiser les données de: "
     },
-    
+
     "ux.plugins.AddLayers.prototype": {
         addActionMenuText: "Ajouter des calques",
         addActionTip: "Ajouter des calques",
@@ -224,19 +225,19 @@ GeoExt.Lang.add("fr", {
 		addButtonText: "Ajouter",
 		layerSelectionText: "Visualiser les données de: "
     },
-    
+
     "gxp.plugins.BingSource.prototype": {
         title: "Calques Bing",
         roadTitle: "Bing routes",
         aerialTitle: "Bing images aériennes",
         labeledAerialTitle: "Bing images aériennes avec étiquettes"
-    },    
+    },
 
     "gxp.plugins.FeatureEditor.prototype": {
         createFeatureActionTip: "Créer un nouvel objet",
         editFeatureActionTip: "Modifier un objet existant"
     },
-    
+
     "gxp.plugins.FeatureGrid.prototype": {
         displayFeatureText: "Afficher sur la carte",
         firstPageTip: "Première page",
@@ -251,7 +252,7 @@ GeoExt.Lang.add("fr", {
         menuText: "Passer à la visionneuse 3D",
         tooltip: "Passer à la visionneuse 3D"
     },
-    
+
     "gxp.plugins.GoogleSource.prototype": {
         title: "Calques Google",
         roadmapAbstract: "Carte routière",
@@ -264,7 +265,7 @@ GeoExt.Lang.add("fr", {
         menuText: "Propriétés de la couche",
         toolTip: "Propriétés de la couche"
     },
-    
+
     "gxp.plugins.LayerTree.prototype": {
         shortTitle: "couches sélectionnées",
         rootNodeText: "couches sélectionnées",
@@ -276,7 +277,7 @@ GeoExt.Lang.add("fr", {
         baseNodeText: "Fond de plan"
     },
 
-    "gxp.plugins.Legend.prototype": { 
+    "gxp.plugins.Legend.prototype": {
         menuText: "Légende",
         tooltip: "Légende"
     },
@@ -369,12 +370,12 @@ GeoExt.Lang.add("fr", {
         zoomInTooltip: "Zoom avant",
         zoomOutTooltip: "Zoom arrière"
     },
-    
+
     "gxp.plugins.ZoomToExtent.prototype": {
         menuText: "Zoomer sur la carte max",
         tooltip: "Zoomer sur la carte max"
     },
-    
+
     "gxp.plugins.ZoomToDataExtent.prototype": {
         menuText: "Zoomer sur la couche",
         tooltip: "Zoomer sur la couche"
@@ -384,7 +385,7 @@ GeoExt.Lang.add("fr", {
         menuText: "Zoomer sur la couche",
         tooltip: "Zoomer sur la couche"
     },
-    
+
     "gxp.plugins.ZoomToSelectedFeatures.prototype": {
         menuText: "Zoomer sur les objets sélectionnés",
         tooltip: "Zoomer sur les objets sélectionnés"
@@ -404,13 +405,13 @@ GeoExt.Lang.add("fr", {
         saveButtonText: "Enregistrer",
         saveButtonTooltip: "Enregistrer les modifications"
     },
-    
+
     "gxp.FillSymbolizer.prototype": {
         fillText: "Remplir",
         colorText: "Couleur",
         opacityText: "Opacité"
     },
-    
+
     "gxp.FilterBuilder.prototype": {
         builderTypeNames: ["Tout", "tous", "aucun", "pas tout"],
         preComboText: "Match",
@@ -419,7 +420,7 @@ GeoExt.Lang.add("fr", {
         addGroupText: "Ajouter un groupe",
         removeConditionText: "Supprimer la condition"
     },
-    
+
     "gxp.grid.CapabilitiesGrid.prototype": {
         nameHeaderText : "Nom",
         titleHeaderText : "Titre",
@@ -428,7 +429,7 @@ GeoExt.Lang.add("fr", {
         layerAdditionLabel: "ou ajouter un nouveau serveur.",
         expanderTemplateText: "<p><b>Résumé:</b> {abstract}</p>"
     },
-    
+
     "gxp.PointSymbolizer.prototype": {
         graphicCircleText: "Cercle",
         graphicSquareText: "Carré",
@@ -450,7 +451,7 @@ GeoExt.Lang.add("fr", {
         queryByAttributesText: "Requête par attributs",
         layerText: "Calque"
     },
-    
+
     "gxp.RulePanel.prototype": {
         scaleSliderTemplate: "{scaleType} échelle 1:{scale}",
         labelFeaturesText: "Label Caractéristiques",
@@ -462,19 +463,19 @@ GeoExt.Lang.add("fr", {
         symbolText: "Symbole",
         nameText: "Nom"
     },
-    
+
     "gxp.ScaleLimitPanel.prototype": {
         scaleSliderTemplate: "{scaleType} échelle 1:{scale}",
         minScaleLimitText: "Echelle minimale",
         maxScaleLimitText: "Echelle maximale"
     },
-    
+
     "gxp.TextSymbolizer.prototype": {
         labelValuesText: "Label valeurs",
         haloText: "Halo",
         sizeText: "Taille"
     },
-    
+
     "gxp.WMSLayerPanel.prototype": {
         aboutText: "A propos",
         titleText: "Titre",
@@ -527,7 +528,7 @@ GeoExt.Lang.add("fr", {
         contactingServerText: "Interrogation du serveur..."
     },
 
-    "gxp.ScaleOverlay.prototype": { 
+    "gxp.ScaleOverlay.prototype": {
         zoomLevelText: "Niveau de zoom"
     }
 });

@@ -101,9 +101,14 @@ Ext.onReady(function () {
 			},
 			'Bruxelles Mobilité WMS - Geoserver': {
 				url: brugisConfig.BMBWMSUrl,
-				version: "1.1.1",
+				version: "1.3.0",
 				ptype: "gxp_wmssource"
 			},
+			/*'Bruxelles Mobilité WMS - Geoserver': {
+				url: brugisConfig.BMBWMSUrl2,
+				version: "1.1.1",
+				ptype: "gxp_wmssource"
+			},*/
 			'IBSA WMS - Geoserver': {
 				url: "http://gis.irisnet.be/geoserver/ibsa_bisa/wms?",
 				version: "1.3.0",

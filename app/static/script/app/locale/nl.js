@@ -2,17 +2,18 @@
  * Copyright (c) 2009-2010 The Open Planning Project
  */
 
- 
+
 GeoExt.Lang.add("nl", {
     "Brugis.Config.prototype": {
         localeHelp : "<a href='http://stedelijke-ontwikkeling.irisnet.be/nl/cartografie/brugis-r/gebruiksaanwijzing-brugis?set_language=nl'target= '_blank'>Click here</a>",
         abstractText : "BruGIS, Geografische Informatie Portaal voor Brussel Stedelijke Ontwikkeling (GOB).",
-        contactText : "e-mail: <a href='mailto:brugis@sprb.irisnet.be'>brugis@sprb.irisnet.be</a>.",
+        contactText : "e-mail: <a href='mailto:brugis@sprb.brussels'>brugis@sprb.brussels</a>.",
         baseLayerName     : "URBIS:urbisNL",
         baseLayerTitle    : "Urbis gekleurd",
         baseGrayLayerName : "URBIS:urbisNLGray",
         baseGrayLayerTitle: "Urbis grijs",
-        BMBWMSUrl : "http://data-mobility.irisnet.be/inspire/capabilities/nl/wms"
+        BMBWMSUrl : "http://data-mobility.irisnet.be/geoserver/ows"/*,
+		    BMBWMSUrl2: "http://data-mobility.irisnet.be/geoserver/bm_public_space/wms"*/
     },
     "GeoExplorer.prototype": {
         zoomSliderText: "<div> Niveau van zoom: {zoom}</div><div Schaal: 1:{scale}</div>",
@@ -71,12 +72,12 @@ GeoExt.Lang.add("nl", {
         emptyText: "Zoeken",
 		language: 'en'
 	},
-	
+
 	"ux.plugins.BrugisSearcher.prototype" : {
 		searchLayerName: "resultaten van de opzoeking",
 		cadSearchTipText: "vul hier de CAPAKEY"
 	},
-	
+
 	"ux.plugins.Preferences.prototype" : {
 		preferencesTip: 				"Opties",
 		preferencesText: 				"Opties tekst",
@@ -100,7 +101,7 @@ GeoExt.Lang.add("nl", {
 		showDedicatedMapAdvancedToolsLabelText:	"Kaart bescherming tools",
 		showPopupInfoOnRightClickLabelText:		"Attribuut informatie op recht klik"
 	},
-	
+
 	"ux.plugins.ReperageToolbox.prototype" : {
 		showReperageGrid: "ShowReperageGrid",
 		drawReperageAreaToolTip: "oppervlak teken",
@@ -129,7 +130,7 @@ GeoExt.Lang.add("nl", {
 		myReperageGridPanel_bbar_emptyMsg: "Geen urbanalyse",
 		myReperageGridPanel_recycle_tooltip: "Refresh urbanalyse"
 	},
-	
+
 	"ux.plugins.MyMaps.prototype": {
 		myMapsTip: "Mijn kaarten",
 		myMapsText: "Mijn kaarten tekst",
@@ -165,7 +166,7 @@ GeoExt.Lang.add("nl", {
 		sameMapNameTitle: "Opgelet",
 		sameMapNameMessage: "Deze naam is al gebruikt voor een andere kaart. Wens je deze te vervangen?"
 	},
-	
+
 	"ux.plugins.Geolocator.prototype" : {
 	menuText: "U bent hier",
 	tooltip: "U bent hier"
@@ -203,7 +204,7 @@ GeoExt.Lang.add("nl", {
 		addButtonText: "Toevoegen",
 		layerSelectionText: "Visualiseren kaartlagen van:"
     },
-    
+
 	   "ux.plugins.AddLayers.prototype": {
         addActionMenuText: "Voeg kaartlagen toe",
         addActionTip: "Voeg kaartlagen toe",
@@ -215,19 +216,19 @@ GeoExt.Lang.add("nl", {
 		addButtonText: "Toevoegen",
 		layerSelectionText: "Visualiseren kaartlagen van:"
     },
-    
+
     "gxp.plugins.BingSource.prototype": {
         title: "Bing kaartlagen",
         roadTitle: "Bing wegen",
         aerialTitle: "Bing luchtfoto's",
         labeledAerialTitle: "Bing luchtfoto's met labels"
-    },    
+    },
 
     "gxp.plugins.FeatureEditor.prototype": {
         createFeatureActionTip: "Maak een nieuw object",
         editFeatureActionTip: "Wijzig een bestand object"
     },
-    
+
     "gxp.plugins.FeatureGrid.prototype": {
         displayFeatureText: "Toon op kaart",
         firstPageTip: "Eerste pagina",
@@ -242,7 +243,7 @@ GeoExt.Lang.add("nl", {
         menuText: "3D weergave",
         tooltip: "Bekijk kaart in 3D"
     },
-    
+
     "gxp.plugins.GoogleSource.prototype": {
         title: "Google Maps kaartlagen",
         roadmapAbstract: "Toon stratenkaart",
@@ -255,7 +256,7 @@ GeoExt.Lang.add("nl", {
         menuText: "Kaartlaag eigenschappen",
         toolTip: "Kaartlaag eigenschappen"
     },
-    
+
     "gxp.plugins.LayerTree.prototype": {
         shortTitle: "Gekozen lagen",
         rootNodeText: "Gekozen lagen",
@@ -364,12 +365,12 @@ GeoExt.Lang.add("nl", {
         zoomInTooltip: "Inzoomen",
         zoomOutTooltip: "Uitzoomen"
     },
-    
+
     "gxp.plugins.ZoomToExtent.prototype": {
         menuText: "Zoom naar de maximale uitsnede",
         tooltip: "Zoom naar de maximale uitsnede"
     },
-    
+
     "gxp.plugins.ZoomToDataExtent.prototype": {
         menuText: "Zoom naar de uitsnede van de kaartlaag",
         tooltip: "Zoom naar de uitsnede van de kaartlaag"
@@ -379,7 +380,7 @@ GeoExt.Lang.add("nl", {
         menuText: "Zoom naar de uitsnede van de kaartlaag",
         tooltip: "Zoom naar de uitsnede van de kaartlaag"
     },
-    
+
     "gxp.plugins.ZoomToSelectedFeatures.prototype": {
         menuText: "Zoom naar de geselecteerde objecten",
         tooltip: "Zoom naar de geselecteerde objecten"
@@ -399,13 +400,13 @@ GeoExt.Lang.add("nl", {
         saveButtonText: "Opslaan",
         saveButtonTooltip: "Wijzigingen opslaan"
     },
-    
+
     "gxp.FillSymbolizer.prototype": {
         fillText: "Opvulling",
         colorText: "Kleur",
         opacityText: "Opaciteit"
     },
-    
+
     "gxp.FilterBuilder.prototype": {
         builderTypeNames: ["om het even welk", "alle", "geen", "niet alle"],
         preComboText: "Overeenkomst",
@@ -414,7 +415,7 @@ GeoExt.Lang.add("nl", {
         addGroupText: "voeg groep toe",
         removeConditionText: "verwijder voorwaarde"
     },
-    
+
     "gxp.grid.CapabilitiesGrid.prototype": {
         nameHeaderText : "Naam",
         titleHeaderText : "Titel",
@@ -423,7 +424,7 @@ GeoExt.Lang.add("nl", {
         layerAdditionLabel: "of voeg een nieuwe server toe.",
         expanderTemplateText: "<p><b>Samenvatting:</b> {abstract}</p>"
     },
-    
+
     "gxp.PointSymbolizer.prototype": {
         graphicCircleText: "cirkel",
         graphicSquareText: "vierkant",
@@ -445,7 +446,7 @@ GeoExt.Lang.add("nl", {
         queryByAttributesText: "Bevraag middels attributen",
         layerText: "Kaartlaag"
     },
-    
+
     "gxp.RulePanel.prototype": {
         scaleSliderTemplate: "{scaleType} Schaal 1:{scale}",
         labelFeaturesText: "Label objecten",
@@ -455,18 +456,18 @@ GeoExt.Lang.add("nl", {
         symbolText: "Symbool",
         nameText: "Naam"
     },
-    
+
     "gxp.ScaleLimitPanel.prototype": {
         scaleSliderTemplate: "{scaleType} Schaal 1:{scale}",
         maxScaleLimitText: "Maximale schaal"
     },
-    
+
     "gxp.TextSymbolizer.prototype": {
         labelValuesText: "Label waardes",
         haloText: "Halo",
         sizeText: "Grootte"
     },
-    
+
     "gxp.WMSLayerPanel.prototype": {
         aboutText: "Informatie",
         titleText: "Titel",
@@ -493,7 +494,7 @@ GeoExt.Lang.add("nl", {
         premiumSizeLabel: 'Extra groot',
         largeSizeLabel: 'Groot'
     },
-    
+
     "gxp.WMSStylesDialog.prototype": {
          addStyleText: "Voeg toe",
          addStyleTip: "Voeg een nieuwe stijl toe",
@@ -543,7 +544,7 @@ GeoExt.Lang.add("nl", {
         contactingServerText: "Contacting Server..."
     },
 
-    "gxp.ScaleOverlay.prototype": { 
+    "gxp.ScaleOverlay.prototype": {
         zoomLevelText: "Zoom niveau"
     }
 });

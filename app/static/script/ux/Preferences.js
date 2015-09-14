@@ -81,7 +81,7 @@ ux.plugins.Preferences = Ext.extend(gxp.plugins.Tool, {
 							"searchN":0,
 							"shwQrTl":0,
 							"shwGlTl":1,
-							"shwUaTb":0,
+							"shwUaTb":1,
 							"shwDeTl":0,
 							"shwDmTl":0,
 							"shwPiRc":0},
