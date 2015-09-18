@@ -12,7 +12,6 @@ Brugis.Config = Ext.extend(Object,  {
 	baseGrayLayerTitle: "Urbis grisé",
 
 	BMBWMSUrl 	: "http://data-mobility.irisnet.be/geoserver/ows",
-	//BMBWMSUrl2 	: "http://data-mobility.irisnet.be/geoserver/bm_public_space/wms",
 
 	DEV : 'DEV',
 	STA : 'STA',

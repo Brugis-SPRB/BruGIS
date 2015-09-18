@@ -11,7 +11,7 @@ var getDb = exports.getDb = function(request) {
     }
     if (!dataDir) {
         dataDir = String(
-            System.getProperty("GEOEXPLORER_DATA") || 
+            System.getProperty("GEOEXPLORER_DATA") ||
             System.getenv("GEOEXPLORER_DATA") || "."
         );
     }
@@ -27,7 +27,7 @@ var getDb = exports.getDb = function(request) {
     try {
         var statement = connection.createStatement();
         statement.executeUpdate(
-            "CREATE TABLE IF NOT EXISTS maps (" + 
+            "CREATE TABLE IF NOT EXISTS maps (" +
                 "id INTEGER PRIMARY KEY ASC," +
 				"config BLOB," +
 				"created TEXT" +
@@ -104,7 +104,7 @@ var handlers = {
     },
     "POST": function(request) {
         var resp;
-        if (isAuthorized(request)) { 
+        if (isAuthorized(request)) {
             var id = getId(request);
             if (id !== null) {
                 resp = createResponse({error: "Can't POST to map " + id}, 405);
@@ -136,7 +136,7 @@ var getMapList = exports.getMapList = function(request) {
         while (results.next()) {
             config = JSON.parse(results.getString("config"));
             items.push({
-                id: results.getInt("id"), 
+                id: results.getInt("id"),
                 title: config.about && config.about.title,
                 "abstract": config.about && config.about["abstract"],
                 created: config.created,
@@ -208,7 +208,7 @@ var deleteOldMaps = function(request) {
     var connection = SQLITE.open(getDb(request));
     try {
         var prep = connection.prepareStatement(
-            "DELETE FROM maps WHERE  datetime(created) <= datetime('now', '-2 days');"
+            "DELETE FROM maps WHERE  datetime(created) <= datetime('now', '-7 days');"
         );
         var rows = prep.executeUpdate();
     } finally {
@@ -225,12 +225,12 @@ exports.app = function(request) {
 	deleteOldMaps();
     if (handler) {
         try {
-            resp = handler(request);            
+            resp = handler(request);
         } catch (x) {
             resp = createResponse({error: x.message}, x.code || 500);
         }
     } else {
         resp = createResponse({error: "Not allowed: " + method}, 405);
     }
-    return resp;    
+    return resp;
 };

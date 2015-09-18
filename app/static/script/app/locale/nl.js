@@ -12,8 +12,7 @@ GeoExt.Lang.add("nl", {
         baseLayerTitle    : "Urbis gekleurd",
         baseGrayLayerName : "URBIS:urbisNLGray",
         baseGrayLayerTitle: "Urbis grijs",
-        BMBWMSUrl : "http://data-mobility.irisnet.be/geoserver/ows"/*,
-		    BMBWMSUrl2: "http://data-mobility.irisnet.be/geoserver/bm_public_space/wms"*/
+        BMBWMSUrl : "http://data-mobility.irisnet.be/geoserver/ows"
     },
     "GeoExplorer.prototype": {
         zoomSliderText: "<div> Niveau van zoom: {zoom}</div><div Schaal: 1:{scale}</div>",
