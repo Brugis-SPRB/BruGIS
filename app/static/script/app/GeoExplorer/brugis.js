@@ -71,7 +71,11 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
 	noTileslayersList: ["AATL_DMS_SITE_ARBR:Arbres_remarquables",
 						"AATL_DMS_SITE_ARBR:Arbres_remarquables_abattus_ou_disparus",
 						"BROH_DML_LAND_BOOM:Opmerkelijke_bomen",
-						"BROH_DML_LAND_BOOM:Gevelde_of_verdwenen_bomen"],
+						"BROH_DML_LAND_BOOM:Gevelde_of_verdwenen_bomen",
+						"bm_public_space:trees",
+						"BDU_DLO_CLI:Sibelga_BC",
+						"BDU_DLO_CLI:HydroBru_BC",
+						"BDU_DLO_CLI:BCx2"],
 	originalSourcesUrl : "",
 
     constructor: function(config) {
@@ -434,9 +438,13 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
 		for (var i=layersList.length-1; i>=0; --i) {
 			for (var j=config.map.layers.length-1; j>=0; --j) {
 				if (config.map.layers[j].name == layersList[i]) {
-					config.map.layers[j].url = config.map.layers[j].url.replace("gwc/service/","");
+					if (config.map.layers[j].url) {
+						config.map.layers[j].url = config.map.layers[j].url.replace("gwc/service/","");
+					}
 					config.map.layers[j].tiled = false;
-					config.map.layers[j].ratio = 3;
+					if (j < 5) {
+						config.map.layers[j].ratio = 3;
+					}
 				}
 			}
 		}

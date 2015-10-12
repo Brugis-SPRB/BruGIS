@@ -54,7 +54,10 @@ ux.plugins.WMSTreeLegend = Ext.extend(gxp.plugins.Tool, {
 						            "AATL_DMS_SITE_ARBR:Arbres_remarquables_abattus_ou_disparus",
 						            "BROH_DML_LAND_BOOM:Opmerkelijke_bomen",
 						            "BROH_DML_LAND_BOOM:Gevelde_of_verdwenen_bomen",
-                        "bm_public_space:trees"],
+                        "bm_public_space:trees",
+                        "BDU_DLO_CLI:Sibelga_BC",
+                        "BDU_DLO_CLI:HydroBru_BC",
+                        "BDU_DLO_CLI:BCx2"],
 
     /** private: method[constructor]
      */
@@ -263,7 +266,9 @@ ux.plugins.WMSTreeLegend = Ext.extend(gxp.plugins.Tool, {
   								if (record.data.name === this.noTileslayersList[i]){
   									record.data.layer.url = record.data.layer.url.replace("gwc/service/","");
   									record.data.layer.singleTile = true;
-  									//record.data.layer.ratio = 3;
+                    if (i < 5) {
+          						record.data.layer.ratio = 3;
+          					}
   								}
   							}
   							//remember the node id for unchecking the node
@@ -303,7 +308,7 @@ ux.plugins.WMSTreeLegend = Ext.extend(gxp.plugins.Tool, {
   							if (record.data.name === this.noTileslayersList[i]){
   								record.data.layer.url = record.data.layer.url.replace("gwc/service/","");
   								record.data.layer.singleTile = true;
-  								//record.data.layer.ratio = 3;
+  								record.data.layer.ratio = 3;
   							}
   						}
   						// remember the node id for unchecking the node
