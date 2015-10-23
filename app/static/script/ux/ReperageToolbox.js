@@ -1,3 +1,12 @@
+
+/**
+ * Copyright (c) Brugis (S.P.R.B)
+ *
+ * Published under the GPL V3 license.
+ * See www.gnu.org/licences/gpl-3.0 for the full text
+ * of the license.
+ */
+
 /**
  * //@requires gxp/plugins/Tool.js
  * @requires OpenLayers/Control/DrawFeature.js

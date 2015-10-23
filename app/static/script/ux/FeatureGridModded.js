@@ -1,8 +1,8 @@
 /**
- * Copyright (c) 2008-2011 The Open Planning Project
- * 
- * Published under the GPL license.
- * See https://github.com/opengeo/gxp/raw/master/license.txt for the full text
+ * Copyright (c) Brugis (S.P.R.B)
+ *
+ * Published under the GPL V3 license.
+ * See www.gnu.org/licences/gpl-3.0 for the full text
  * of the license.
  */
 
@@ -28,9 +28,9 @@ Ext.namespace("ux.plugins");
  *    Plugin for displaying vector features in a grid. Requires a
  *    :class:`gxp.plugins.FeatureManager`. Also provides a context menu for
  *    the grid.
- */   
+ */
 ux.plugins.FeatureGrid = Ext.extend(gxp.plugins.ClickableFeatures, {
-    
+
     /** api: ptype = gxp_featuregrid */
     ptype: "ux_featuregrid",
 
@@ -44,7 +44,7 @@ ux.plugins.FeatureGrid = Ext.extend(gxp.plugins.ClickableFeatures, {
      *  in the bottom toolbar of the grid, if available.
      */
     showTotalResults: false,
-    
+
     /** api: config[alwaysDisplayOnMap]
      *  ``Boolean`` If set to true, the features that are shown in the grid
      *  will always be displayed on the map, and there will be no "Display on
@@ -52,28 +52,28 @@ ux.plugins.FeatureGrid = Ext.extend(gxp.plugins.ClickableFeatures, {
      *  "Display on map" button will be shown.
      */
     alwaysDisplayOnMap: false,
-    
+
     /** api: config[displayMode]
      *  ``String`` Should we display all features on the map, or only the ones
      *  that are currently selected on the grid. Valid values are "all" and
      *  "selected". Default is "all".
      */
     displayMode: "all",
-    
+
     /** api: config[autoExpand]
      *  ``Boolean`` If set to true, and when this tool's output is added to a
      *  container that can be expanded, it will be expanded when features are
      *  loaded. Default is false.
      */
     autoExpand: false,
-    
+
     /** api: config[autoCollapse]
      *  ``Boolean`` If set to true, and when this tool's output is added to a
      *  container that can be collapsed, it will be collapsed when no features
      *  are to be displayed. Default is false.
      */
     autoCollapse: false,
-    
+
     /** api: config[selectOnMap]
      *  ``Boolean`` If set to true, features can not only be selected on the
      *  grid, but also on the map, and multi-selection will be enabled. Only
@@ -81,14 +81,14 @@ ux.plugins.FeatureGrid = Ext.extend(gxp.plugins.ClickableFeatures, {
      *  the underlying feature manager. Default is false.
      */
     selectOnMap: false,
-	
+
     /** api: config[zoomOnSelectInGrid]
      *  ``Boolean`` If set to true, features  selected on the grid
      *  or on the map will zoom on the corresponding object on the map
 	 *  DocG - 07/11/2013
      */
 	zoomOnSelect: true,
-    
+
     /** api: config[displayFeatureText]
      * ``String``
      * Text for feature display button (i18n).
@@ -130,7 +130,7 @@ ux.plugins.FeatureGrid = Ext.extend(gxp.plugins.ClickableFeatures, {
      *  String template for showing total number of records (i18n).
      */
     totalMsg: "Total: {0} records",
-	
+
     /** private: method[displayTotalResults]
      */
     displayTotalResults: function() {
@@ -144,7 +144,7 @@ ux.plugins.FeatureGrid = Ext.extend(gxp.plugins.ClickableFeatures, {
             );
         }
     },
-    	
+
     /** api: method[addOutput]
      */
     addOutput: function(config) {
@@ -155,7 +155,7 @@ ux.plugins.FeatureGrid = Ext.extend(gxp.plugins.ClickableFeatures, {
         this.selectControl = new OpenLayers.Control.SelectFeature(
             featureManager.featureLayer, this.initialConfig.controlOptions
         );
-		
+
 		/** DocG - 07/11/2013
 		 *	Mod added to zoom on the selected feature
 		 */
@@ -168,7 +168,7 @@ ux.plugins.FeatureGrid = Ext.extend(gxp.plugins.ClickableFeatures, {
 				}
 			};
 		}
-		
+
         if (this.selectOnMap) {
              if (featureManager.paging) {
                 this.selectControl.events.on({
@@ -205,12 +205,12 @@ ux.plugins.FeatureGrid = Ext.extend(gxp.plugins.ClickableFeatures, {
             };
         }
         this.displayItem = new Ext.Toolbar.TextItem({});
-		
-		
+
+
 		/** DocG - 07/11/2013 gxp_featuregrid peut recevoir un
-		 * customRenderers. Ne peut-on pas exploiter le même
+		 * customRenderers. Ne peut-on pas exploiter le mï¿½me
 		 * fonctionnement que dans wMSGetFeatureInfoModded.js?
-		 * dateFormat pourrait aussi être exploité afin de formatter
+		 * dateFormat pourrait aussi ï¿½tre exploitï¿½ afin de formatter
 		 * correctement les dates?
 		 */
         config = Ext.apply({
@@ -289,7 +289,7 @@ ux.plugins.FeatureGrid = Ext.extend(gxp.plugins.ClickableFeatures, {
                         "query": function(tool, store) {
                             if (store && store.getCount()) {
                                 onPopulate.call(this);
-								
+
                             } else {
                                 onClear.call(this);
                             }
@@ -314,11 +314,11 @@ ux.plugins.FeatureGrid = Ext.extend(gxp.plugins.ClickableFeatures, {
             contextMenu: new Ext.menu.Menu({items: []})
         }, config || {});
         var featureGrid = ux.plugins.FeatureGrid.superclass.addOutput.call(this, config);
-        
+
         if (this.alwaysDisplayOnMap || this.selectOnMap) {
             featureManager.showLayer(this.id, this.displayMode);
         }
-		
+
         featureManager.paging && featureManager.on({
             "beforesetpage": function() {
                 featureGrid.zoomToPageButton.disable();
@@ -335,7 +335,7 @@ ux.plugins.FeatureGrid = Ext.extend(gxp.plugins.ClickableFeatures, {
             },
             scope: this
         });
-                
+
         function onLayerChange() {
             var schema = featureManager.schema,
                 ignoreFields = ["feature", "state", "fid"];
@@ -351,10 +351,10 @@ ux.plugins.FeatureGrid = Ext.extend(gxp.plugins.ClickableFeatures, {
             onLayerChange.call(this);
         }
         featureManager.on("layerchange", onLayerChange, this);
-        
+
         return featureGrid;
     }
-                
+
 });
 
 Ext.preg("ux_featuregrid", ux.plugins.FeatureGrid);

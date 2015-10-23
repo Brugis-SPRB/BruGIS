@@ -1,3 +1,11 @@
+/**
+ * Copyright (c) Brugis (S.P.R.B)
+ *
+ * Published under the GPL V3 license.
+ * See www.gnu.org/licences/gpl-3.0 for the full text
+ * of the license.
+ */
+ 
 Ext.namespace("GeoExt.data");
 
 GeoExt.data.BrugisPrintProvider = Ext.extend(GeoExt.data.PrintProvider, {

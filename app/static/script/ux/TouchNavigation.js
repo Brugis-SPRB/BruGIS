@@ -1,8 +1,8 @@
 /**
- * Copyright (c) 2008-2011 The Open Planning Project
- * 
- * Published under the GPL license.
- * See https://github.com/opengeo/gxp/raw/master/license.txt for the full text
+ * Copyright (c) Brugis (S.P.R.B)
+ *
+ * Published under the GPL V3 license.
+ * See www.gnu.org/licences/gpl-3.0 for the full text
  * of the license.
  */
 
@@ -27,10 +27,10 @@ Ext.namespace("ux.plugins");
  *    Provides one action for panning the map and zooming by touch
  */
 ux.plugins.TouchNavigation = Ext.extend(gxp.plugins.Tool, {
-    
+
     /** api: ptype = ux_touchnavigation */
     ptype: "ux_touchnavigation",
-    
+
     /** private: method[constructor]
      */
     constructor: function(config) {

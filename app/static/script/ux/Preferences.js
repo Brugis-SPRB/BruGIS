@@ -1,8 +1,8 @@
-﻿/**
- * Copyright (c) 2013-2014 The Open Planning Project
+/**
+ * Copyright (c) Brugis (S.P.R.B)
  *
- * Published under the GPL license.
- * See https://github.com/opengeo/gxp/raw/master/license.txt for the full text
+ * Published under the GPL V3 license.
+ * See www.gnu.org/licences/gpl-3.0 for the full text
  * of the license.
  */
 

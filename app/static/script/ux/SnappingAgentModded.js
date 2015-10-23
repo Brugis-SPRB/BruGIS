@@ -1,8 +1,8 @@
 /**
- * Copyright (c) 2008-2011 The Open Planning Project
- * 
- * Published under the GPL license.
- * See https://github.com/opengeo/gxp/raw/master/license.txt for the full text
+ * Copyright (c) Brugis (S.P.R.B)
+ *
+ * Published under the GPL V3 license.
+ * See www.gnu.org/licences/gpl-3.0 for the full text
  * of the license.
  */
 
@@ -26,27 +26,27 @@ Ext.namespace("ux.plugins");
  *  .. class:: SnappingAgent(config)
  *
  *    Plugin for managing snapping while editing.
- */   
+ */
 ux.plugins.SnappingAgent = Ext.extend(gxp.plugins.Tool, {
-    
+
     /** api: ptype = gxp_snappingagent */
-    ptype: "ux_snappingagent",    
-    
+    ptype: "ux_snappingagent",
+
     /** api: config[controlOptions]
      *  ``Object`` Options for the ``OpenLayers.Control.Snapping`` used with
      *  this tool.
      */
-    
+
     /** api: config[targets]
      *  ``Array`` Shortcut to the targets control option of the
      *  ``OpenLayers.Control.Snapping`` used with this tool.
      */
-    
+
     /** private: property[controls]
      *  ``Object``
-     *  Object property names are editor ids and values are snapping controls 
+     *  Object property names are editor ids and values are snapping controls
      *  associated with each editor.
-     */ 
+     */
 
     /** private: method[init]
      */
@@ -56,7 +56,7 @@ ux.plugins.SnappingAgent = Ext.extend(gxp.plugins.Tool, {
         this.controls = {};
         this.setSnappingTargets(this.targets);
     },
-    
+
     /** private: method[setSnappingTargets]
      *  :arg targets: ``Array`` List of snapping target configurations.
      */
@@ -70,10 +70,10 @@ ux.plugins.SnappingAgent = Ext.extend(gxp.plugins.Tool, {
             }
         }
     },
-    
+
     /** private: method[clearSnappingTargets]
      *  Removes all existing snapping targets.  Snapping targets have references
-     *  to vector layers that are created in :meth:`addSnappingTarget`.  This 
+     *  to vector layers that are created in :meth:`addSnappingTarget`.  This
      *  method destroys those layers.
      */
     clearSnappingTargets: function() {
@@ -86,10 +86,10 @@ ux.plugins.SnappingAgent = Ext.extend(gxp.plugins.Tool, {
         }
         this.snappingTargets.length = 0;
     },
-    
+
     /** private: method[addSnappingTarget]
      *  :arg snapTarget: ``Object`` Snapping target configuration.
-     * 
+     *
      *  Create vector layers for the given snapping target based on ``source``
      *  and ``name`` properties.  When the schema for the related feature source
      *  is loaded, a vector layer will be created and set on the snapping
@@ -99,7 +99,7 @@ ux.plugins.SnappingAgent = Ext.extend(gxp.plugins.Tool, {
     addSnappingTarget: function(snapTarget) {
         snapTarget = Ext.apply({}, snapTarget);
 
-        // Generate a layer for the snapTarget. This layer is not given a 
+        // Generate a layer for the snapTarget. This layer is not given a
         // protocol until the feature manager below gives it one.
         var map = this.target.mapPanel.map;
         var layer = new OpenLayers.Layer.Vector(snapTarget.name, {
@@ -118,7 +118,7 @@ ux.plugins.SnappingAgent = Ext.extend(gxp.plugins.Tool, {
         this.snappingTargets.push(snapTarget);
 
         // TODO: Discuss simplifying this.  What we want here is a WFS protocol
-        // given a WMS layer config.  We're only using the FeatureManager for 
+        // given a WMS layer config.  We're only using the FeatureManager for
         // generating the protocol options.
         var featureManager = new gxp.plugins.FeatureManager({
             maxFeatures: null,
@@ -154,7 +154,7 @@ ux.plugins.SnappingAgent = Ext.extend(gxp.plugins.Tool, {
 
         featureManager.init(this.target);
     },
-    
+
     /** private: method[updateSnappingTarget]
      *  :arg snapTarget: ``Object`` The snapTarget to update
      *  :arg options: ``Object`` 1st argument for
@@ -179,7 +179,7 @@ ux.plugins.SnappingAgent = Ext.extend(gxp.plugins.Tool, {
 			}
         }
     },
-    
+
     /** private: method[createSnappingControl]
      *  :arg layer: ``OpenLayers.Layer.Vector`` An editable vector layer.
      *
@@ -194,7 +194,7 @@ ux.plugins.SnappingAgent = Ext.extend(gxp.plugins.Tool, {
 		control.deactivate();
         return control;
     },
-    
+
     /** api: method[registerEditor]
      *  :arg editor: :class:`gxp.plugins.FeatureEditor`
      *
@@ -211,14 +211,14 @@ ux.plugins.SnappingAgent = Ext.extend(gxp.plugins.Tool, {
             scope: this
         });
     },
-    
+
     /** private: method[onLayerEditable]
      *  :arg editor: :class:`gxp.plugins.SnappingAgent`
      *  :arg record: ``GeoExt.data.LayerRecord``
      *  :arg editable: ``Boolean``
      *
-     *  Called when ``layereditable`` is fired on the one of the registered 
-     *  feature editors.  The purpose of this listener is to set snapping 
+     *  Called when ``layereditable`` is fired on the one of the registered
+     *  feature editors.  The purpose of this listener is to set snapping
      *  targets for the snapping control associated with the given editor
      *  while respecting the snapping target ``restrictedLayer``
      *  property.
@@ -262,8 +262,8 @@ ux.plugins.SnappingAgent = Ext.extend(gxp.plugins.Tool, {
      *  :arg record: ``OpenLayers.Feature.Vector``
      *  :arg editable: ``Boolean``
      *
-     *  Called when a feature is selected or unselected for editing.  The 
-     *  purpose of this listener is to set or unset any filter on snapping 
+     *  Called when a feature is selected or unselected for editing.  The
+     *  purpose of this listener is to set or unset any filter on snapping
      *  targets for the snapping control associated with the given editor
      *  so features are not snapped to themselves during editing.
      */

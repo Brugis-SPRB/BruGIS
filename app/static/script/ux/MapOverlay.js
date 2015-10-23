@@ -1,8 +1,8 @@
 /**
- * Copyright (c) 2012 Prodevelop S.L.
- * 
- * Published under the GPL license.
- * See https://github.com/opengeo/gxp/raw/master/license.txt for the full text
+ * Copyright (c) Brugis (S.P.R.B)
+ *
+ * Published under the GPL V3 license.
+ * See www.gnu.org/licences/gpl-3.0 for the full text
  * of the license.
  */
 
@@ -87,7 +87,7 @@ ux.plugins.OverviewMap = Ext.extend(gxp.plugins.Tool, {
                                 if (lyr_ instanceof OpenLayers.Layer.OSM) {
                                         lyr = new OpenLayers.Layer.OSM();
                                 } else {
-                                        lyr = new OpenLayers.Layer.WMS("OverviewMap", 
+                                        lyr = new OpenLayers.Layer.WMS("OverviewMap",
                                                lyr_.url,
                                                {layers: lyr_.params.LAYERS}, lyr_.options);
                                 }
@@ -126,11 +126,11 @@ ux.plugins.OverviewMap = Ext.extend(gxp.plugins.Tool, {
                 if (this.initialConfig.outputTarget) {
                         var divComp = Ext.get(this.initialConfig.outputTarget);
                         mconopt.div = divComp.dom;
-                } 
+                }
                 //console.log("we are here 7");
 
 				mconopt.autoPan = true;
-				
+
                 //finally add the control to the map
 
                 map.addControl(new OpenLayers.Control.OverviewMap(mconopt));

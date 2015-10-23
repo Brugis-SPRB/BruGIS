@@ -1,8 +1,8 @@
 /**
- * Copyright (c) 2008-2011 The Open Planning Project
- * 
- * Published under the GPL license.
- * See https://github.com/opengeo/gxp/raw/master/license.txt for the full text
+ * Copyright (c) Brugis (S.P.R.B)
+ *
+ * Published under the GPL V3 license.
+ * See www.gnu.org/licences/gpl-3.0 for the full text
  * of the license.
  */
 
@@ -17,16 +17,16 @@ Ext.namespace("ux.form");
  *
  *  Creates a combo box that issues queries to the CIRB geocoding service.
  *  If the user enters a valid address in the search box, the combo's store
- *  will be populated with records that match the address.  Records have the 
+ *  will be populated with records that match the address.  Records have the
  *  following fields:
- *  
+ *
  *  * address - ``String`` The formatted address.
  *  * location - ``OpenLayers.LonLat`` Location matching address.
  *  * viewport - ``OpenLayers.Bounds`` Recommended viewing bounds.
  *
- */   
+ */
 ux.form.CirbGeocoderComboBox = Ext.extend(Ext.form.ComboBox, {
-    
+
     /** api: xtype = ux_cirbgeocodercombo */
     xtype: "ux_cirbgeocodercombo",
 
@@ -78,7 +78,7 @@ ux.form.CirbGeocoderComboBox = Ext.extend(Ext.form.ComboBox, {
      *  ``String``
      */
     maxRows: '20',
-	
+
     /** api: config[tpl]
      *  ``Ext.XTemplate or String`` Template for presenting the result in the
      *  list (see http://www.dev.sencha.com/deploy/dev/docs/output/Ext.XTemplate.html),
@@ -118,10 +118,10 @@ ux.form.CirbGeocoderComboBox = Ext.extend(Ext.form.ComboBox, {
 		this.map = this.map || Ext.getCmp("mymap").map;
         ux.form.CirbGeocoderComboBox.superclass.initComponent.apply(this, arguments);
 		var urlAppendString = '';
-		
+
 		var source = new Proj4js.Proj('EPSG:4326');
 		var dest = new Proj4js.Proj('EPSG:31370');
-		
+
         this.store = new Ext.data.Store({
             proxy: new Ext.data.ScriptTagProxy({
                 url: this.url + urlAppendString,
@@ -158,5 +158,5 @@ ux.form.CirbGeocoderComboBox = Ext.extend(Ext.form.ComboBox, {
         });
     }
 });
-    
+
 Ext.reg("ux_cirbgeocodercombo", ux.form.CirbGeocoderComboBox);

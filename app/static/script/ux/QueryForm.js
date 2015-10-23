@@ -1,8 +1,8 @@
 /**
- * Copyright (c) 2008-2011 The Open Planning Project
- * 
- * Published under the GPL license.
- * See https://github.com/opengeo/gxp/raw/master/license.txt for the full text
+ * Copyright (c) Brugis (S.P.R.B)
+ *
+ * Published under the GPL V3 license.
+ * See www.gnu.org/licences/gpl-3.0 for the full text
  * of the license.
  */
 
@@ -29,7 +29,7 @@ Ext.namespace("ux.plugins");
  *    more like filtering.
  */
 ux.plugins.QueryForm = Ext.extend(gxp.plugins.Tool, {
-    
+
     /** api: ptype = ux_queryform */
     ptype: "ux_queryform",
 
@@ -38,7 +38,7 @@ ux.plugins.QueryForm = Ext.extend(gxp.plugins.Tool, {
      *  with this tool.
      */
     featureManager: null,
-    
+
     /** api: config[autoHide]
      *  ``Boolean`` Set to true if the output of this tool goes into an
      *  ``Ext.Window`` that should be hidden when the query result is
@@ -50,13 +50,13 @@ ux.plugins.QueryForm = Ext.extend(gxp.plugins.Tool, {
      *  ``GeoExt.data.AttributeStore``
      */
     schema: null,
-    
+
     /** api: config[queryActionText]
      *  ``String``
      *  Text for query action (i18n).
      */
     queryActionText: "Query",
-    
+
     /** api: config[cancelButtonText]
      *  ``String``
      *  Text for cancel button (i18n).
@@ -92,13 +92,13 @@ ux.plugins.QueryForm = Ext.extend(gxp.plugins.Tool, {
      *  Text for query by attributes (i18n).
      */
     queryByAttributesText: "Query by attributes",
-    
+
     /** api: config[queryMsg]
      *  ``String``
      *  Text for query load mask (i18n).
      */
     queryMsg: "Querying...",
-    
+
     /** api: config[noFeaturesTitle]
      *  ``String``
      *  Text for no features alert title (i18n)
@@ -116,14 +116,14 @@ ux.plugins.QueryForm = Ext.extend(gxp.plugins.Tool, {
      *  the output of this tool's form. Set to null if you want to include
      *  the form permanently in your layout.
      */
-    
+
     /** api: config[outputAction]
      *  ``Number`` By default, the "Query" action will trigger this tool's
      *  form output. There is no need to change this unless you configure
      *  custom ``actions``.
      */
     outputAction: 0,
-    
+
     constructor: function(config) {
         Ext.applyIf(config, {
             actions: [{
@@ -138,7 +138,7 @@ ux.plugins.QueryForm = Ext.extend(gxp.plugins.Tool, {
         });
         ux.plugins.QueryForm.superclass.constructor.apply(this, arguments);
     },
-	
+
     /** api: method[addActions]
      */
     addActions: function(actions) {
@@ -149,12 +149,12 @@ ux.plugins.QueryForm = Ext.extend(gxp.plugins.Tool, {
                 for (var i=this.actions.length-1; i>=0; --i) {
 					if(this.target.authorizedRoles && this.target.authorizedRoles[0] == "ROLE_ADMINISTRATOR") {
 						this.actions[i].setDisabled(!schema);
-					} 
+					}
                 }
             }, this);
 			this.target.on("preferencesChange", function() {
 				for (var i=this.actions.length-1; i>=0; --i) {
-					var showButton = 
+					var showButton =
 						(localStorage.getItem("shwQrTl") && localStorage.getItem("shwQrTl") == '0')?
 						false:
 						(localStorage.getItem("shwQrTl") && localStorage.getItem("shwQrTl") == '1')?
@@ -242,7 +242,7 @@ ux.plugins.QueryForm = Ext.extend(gxp.plugins.Tool, {
             }]
         }, config || {});
         var queryForm = ux.plugins.QueryForm.superclass.addOutput.call(this, config);
-        
+
         var addFilterBuilder = function(mgr, rec, schema) {
             queryForm.attributeFieldset.removeAll();
             queryForm.setDisabled(!schema);
@@ -266,11 +266,11 @@ ux.plugins.QueryForm = Ext.extend(gxp.plugins.Tool, {
         addFilterBuilder(featureManager,
             featureManager.layerRecord, featureManager.schema
         );
-        
+
         this.target.mapPanel.map.events.register("moveend", this, function() {
             queryForm.extent.setValue(this.getFormattedMapExtent());
         });
-        
+
         featureManager.on({
             "beforequery": function() {
                 new Ext.LoadMask(queryForm.getEl(), {
@@ -295,15 +295,15 @@ ux.plugins.QueryForm = Ext.extend(gxp.plugins.Tool, {
             },
             scope: this
         });
-        
+
         return queryForm;
     },
-    
+
     getFormattedMapExtent: function() {
         var extent = this.target.mapPanel.map.getExtent();
         return extent && extent.toArray().join(", ");
     }
-        
+
 });
 
 Ext.preg(ux.plugins.QueryForm.prototype.ptype, ux.plugins.QueryForm);

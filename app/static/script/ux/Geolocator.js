@@ -1,10 +1,9 @@
 /**
- * Copyright (c) 2008-2011 The Open Planning Project
- * 
- * Published under the GPL license.
- * See https://github.com/opengeo/gxp/raw/master/license.txt for the full text
+ * Copyright (c) Brugis (S.P.R.B)
+ *
+ * Published under the GPL V3 license.
+ * See www.gnu.org/licences/gpl-3.0 for the full text
  * of the license.
- * developped by DocG
  */
 
 /**
@@ -32,34 +31,34 @@ ux.plugins.Geolocator = Ext.extend(gxp.plugins.Tool, {
 	menuText: "Geolocate me",
 	tooltip: "Geolocate me",
 	// End i18n.
-    
+
     /** api: ptype = ux_geolocator */
     ptype: "ux_geolocator",
-    
+
 
     /** private: property[iconCls]
      */
     iconCls: "ux-icon-geolocator",
-	
+
 	/** private: property[layerName]
 	 */
 	layerName: "geolocation",
-	
+
 	/** private: property[geolocateControl]
 	 */
 	geolocateControl : null,
-    
+
     /** private: method[constructor]
      */
     constructor: function(config) {
 		ux.plugins.Geolocator.superclass.constructor.apply(this, arguments);
     },
-	
+
 	onLocationFailed : function(message) {
 		//console.log("locationFailed");
 		//console.log(message);
 	},
-	
+
 	onLocationUpdated : function(infos) {
 		//console.log("locationUpdated");
 		//console.log(infos.position);
@@ -101,7 +100,7 @@ ux.plugins.Geolocator = Ext.extend(gxp.plugins.Tool, {
 		map.zoomToExtent(vector.getDataExtent());
 		this.geolocateControl.bind = true;
 	},
-	
+
 	onGeolocateCtrlActivate : function() {
 		//Add Layer to the map
 		var map = this.target.mapPanel.map;
@@ -109,14 +108,14 @@ ux.plugins.Geolocator = Ext.extend(gxp.plugins.Tool, {
 		map.addLayer(vector);
 		this.geolocateControl.watch = true;
 	},
-	
+
 	onGeolocateCtrlDeactivate : function() {
 		//Remove Layer to the map
 		var map = this.target.mapPanel.map;
 		map.removeLayer(map.getLayersByName(this.layerName)[0]);
 		this.geolocateControl.bind = false;
-	}, 
-	
+	},
+
     /** api: method[addActions]
      */
     addActions: function() {
@@ -133,24 +132,24 @@ ux.plugins.Geolocator = Ext.extend(gxp.plugins.Tool, {
             control: this.geolocateControl,
             map: this.target.mapPanel.map
 		})];
-		
+
 		actions[0].control.events.register("locationupdated", this, this.onLocationUpdated);
 		actions[0].control.events.register("locationfailed", this, this.onLocationFailed);
-		
+
 		actions[0].control.events.register("activate", this, this.onGeolocateCtrlActivate);
 		actions[0].control.events.register("deactivate", this, this.onGeolocateCtrlDeactivate);
-		
+
 		this.actions = actions;
-		
+
 		this.target.on("preferencesChange", function() {
 			for (var i=this.actions.length-1; i>=0; --i) {
-				var showButton = 
+				var showButton =
 					(localStorage.getItem("shwGlTl") && localStorage.getItem("shwGlTl") == '0')?
 					false:
 					(localStorage.getItem("shwGlTl") && localStorage.getItem("shwGlTl") == '1')?
 					true:
 					true;
-					
+
 				if (showButton == true) {
 					this.actions[i].show();
 				} else {
@@ -159,7 +158,7 @@ ux.plugins.Geolocator = Ext.extend(gxp.plugins.Tool, {
 			}
 		}, this);
 
-	
+
         return ux.plugins.Geolocator.superclass.addActions.apply(this, [actions]);
     }
 });
