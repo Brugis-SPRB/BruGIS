@@ -68,7 +68,7 @@ ux.plugins.BrugisSearcher = Ext.extend(gxp.plugins.Tool, {
 					if(this.typecombo.getValue() == "ADR") {
 						this.cadtext.hide();
 						this.combo.show();
-						console.log(this.combo);
+						//console.log(this.combo);
 					} else {
 						this.combo.hide();
 						this.cadtext.show();

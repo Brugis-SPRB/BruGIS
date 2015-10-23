@@ -436,6 +436,16 @@ ux.plugins.WMSGetFeatureInfo = Ext.extend(gxp.plugins.Tool, {
 										return '<A href="' + attrib + '" target="_blank"><img height=100 src="' + attrib + '"/></A>';
 									};
 									break;
+								case "date":
+									customRenderers[n_attribute.name] = function(attrib){
+										var date = attrib.split("-");
+										if (date){
+											if (date.lentgh == 3) {
+												return date[2].concat("/", date[1], "/", date[0]);
+											}
+										}
+									};
+									break;
 						}
 						labelTemplate = labelTemplate.replace(/\[(.*?)\]/g, "");
 						
@@ -620,6 +630,19 @@ ux.plugins.WMSGetFeatureInfo = Ext.extend(gxp.plugins.Tool, {
 								customRenderers[n_attribute.name] = function(attrib){
 									return '<A href="' + attrib + '" target="_blank"><img height=100 src="' + attrib + '"/></A>';
 								};
+								break;
+							case "date":
+								customRenderers[n_attribute.name] = function(attrib){
+									var date = attrib.split("-");
+										if (date){
+											//console.log(date.length);
+											if (date.length == 3) {
+												return date[2].concat("/", date[1], "/", date[0]);
+											}
+											else {
+												return attrib;
+											}
+										}								};
 								break;
 					}
 					labelTemplate = labelTemplate.replace(/\[(.*?)\]/g, "");
