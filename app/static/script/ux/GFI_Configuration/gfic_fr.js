@@ -128,7 +128,7 @@ ux.gfi.fr = {
 				{ "name": "Adresse"							, "label" : "[ADRESSE]"			, "type": "string"},
 				{ "name": "Demandeur"						, "label" : "[DEMANDEUR]"		, "type": "string"},
 				{ "name": "Date de notification"			, "label" : "[DATENOTIF]"		, "type": "date"},
-				{ "name": "Date de dernière notification"	, "label" : "[DATEPERMCOM]"		, "type": "date"},
+				{ "name": "Date de dernière notification"	, "label" : "[DATPERMCOM]"		, "type": "date"},
 				{ "name": "Permis"							, "label" : "[PERMISOCTROYE]"	, "type": "string"},
 				{ "name": "Date permis commune"				, "label" : "[DATECOM]"			, "type": "date"},
 				{ "name": "Référence communale"				, "label" : "[REFCOM]"			, "type": "string"},

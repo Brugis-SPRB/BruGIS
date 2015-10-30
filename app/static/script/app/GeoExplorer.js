@@ -430,7 +430,6 @@ var GeoExplorer = Ext.extend(gxp.Viewer, {
         var url = 
             document.location.href.split("?").shift() +
             "?" + Ext.urlEncode(params);
-        
         return url;
     },
 
