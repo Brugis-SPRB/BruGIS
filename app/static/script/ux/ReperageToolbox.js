@@ -72,7 +72,6 @@ ux.plugins.ReperageToolbox = Ext.extend(gxp.plugins.Tool, {
 	myReperageGridPanel_bbar_displayMsg: "Urbanalysis {0} - {1} of {2}",
 	myReperageGridPanel_bbar_emptyMsg: "No Urbanalysis",
 
-	parcelLayer : null,
 	// End i18n.
 
 	//UUID
@@ -435,7 +434,7 @@ ux.plugins.ReperageToolbox = Ext.extend(gxp.plugins.Tool, {
 		this.brugisUserHidden = brugisUserHidden;
 		this.copyParcelFeatBtn = copyParcelFeatBtn;
 		this.copyParcelControl = copyParcelControl;
-
+		this.parcelLayer = null;
 
 		this.showReperageButton = showReperageButton;
 		return ux.plugins.ReperageToolbox.superclass.init.apply(this, arguments);
@@ -482,30 +481,41 @@ ux.plugins.ReperageToolbox = Ext.extend(gxp.plugins.Tool, {
 		});
 
 		var map = this.target.mapPanel.map;
-		//var layerStore = this.target.mapPanel.map;
+		var layerStore = this.target.mapPanel.layers;
 		//The Urbanalysis layers
 		if(map.getLayersByName(this.reperageLayerName).length > 0){
 			console.error("urbanalysis working layer : " + this.reperageLayerName + " found ! Plugin is initialized multiple times");
 		} else {
 			map.addLayer(this.reperageLayer);
-			/*
-			var source = this.target.layerSources["BruGIS WMS - Geoserver"];
 
-			source.store.load({
-				callback:(function(){
-					var record = source.createLayerRecord({
-						name: 'AATL:Parcelle_2014',
-						title: 'Parcelle 2014',
-						source: source.id
-					})
-					layerStore.add(record);
-					this.copyParcelControl.layers = [record.get('layer')];
-					this.parcelLayer = record.get('layer');
-					this.parcelLayer.displayInLayerSwitcher = false;
-					this.parcelLayer.setVisibility(false);
-				}).createDelegate(this)
-			});
-			*/
+			var source = this.target.layerSources["BruGIS WMS - Geoserver"];
+			if(source.lazy) {
+				source.store.load({
+					callback:(function(){
+						var record = source.createLayerRecord({
+							name: 'AATL:Parcelle_2014',
+							title: 'Parcelle 2014',
+							source: source.id
+						})
+						layerStore.add(record);
+						this.copyParcelControl.layers = [record.get('layer')];
+						this.parcelLayer = record.get('layer');
+						this.parcelLayer.displayInLayerSwitcher = true;
+						this.parcelLayer.setVisibility(true);
+					}).createDelegate(this)
+				});
+		  } else {
+				var record = source.createLayerRecord({
+					name: 'AATL:Parcelle_2014',
+					title: 'Parcelle 2014',
+					source: source.id
+				})
+				layerStore.add(record);
+				this.copyParcelControl.layers = [record.get('layer')];
+				this.parcelLayer = record.get('layer');
+				this.parcelLayer.displayInLayerSwitcher = true;
+				this.parcelLayer.setVisibility(true);
+			}
 		}
 
 		//Adding OL Controls
@@ -852,8 +862,9 @@ ux.plugins.ReperageToolbox = Ext.extend(gxp.plugins.Tool, {
 	//Ajoute le(s) layer(s) au panel
 	raiseLayers: function() {
 		var map = this.target.mapPanel.map;
-
-		map.setLayerIndex(this.parcelLayer, 98);
+		if(this.parcelLayer) {
+	  	map.setLayerIndex(this.parcelLayer, 98);
+	  }
 		map.setLayerIndex(this.reperageLayer, 99);
 	},
 
