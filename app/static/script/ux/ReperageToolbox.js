@@ -231,22 +231,8 @@ ux.plugins.ReperageToolbox = Ext.extend(gxp.plugins.Tool, {
 				}
 			}
 		});
-		//TODO
 
-		//Copy 1 parcel
-		//Warning : the getfeatureInfo need a proxy defined in order to work
-  /*
-		var parcelLayer = new OpenLayers.Layer.WMS("ParcelleReperage",
-			this.brugisWmsHost,
-			{'layers': 'AATL:Parcelle_2014', transparent: true, format: 'image/png'},
-			{isBaseLayer: false}
-		);
-
-		parcelLayer.displayInLayerSwitcher = false;
-		parcelLayer.setVisibility(false);
-   */
 		var copyParcelControl = new OpenLayers.Control.WMSGetFeatureInfo({
-			url: this.brugisWmsHost,
 			title: 'Identify features by clicking',
 			layers: [],
 			queryVisible: true,
@@ -481,43 +467,17 @@ ux.plugins.ReperageToolbox = Ext.extend(gxp.plugins.Tool, {
 		});
 
 		var map = this.target.mapPanel.map;
-		var layerStore = this.target.mapPanel.layers;
+
 		//The Urbanalysis layers
 		if(map.getLayersByName(this.reperageLayerName).length > 0){
 			console.error("urbanalysis working layer : " + this.reperageLayerName + " found ! Plugin is initialized multiple times");
 		} else {
 			map.addLayer(this.reperageLayer);
 
-			var source = this.target.layerSources["BruGIS WMS - Geoserver"];
-			if(source.lazy) {
-				source.store.load({
-					callback:(function(){
-						var record = source.createLayerRecord({
-							name: 'AATL:Parcelle_2014',
-							title: 'Parcelle 2014',
-							source: source.id
-						})
-						layerStore.add(record);
-						this.copyParcelControl.layers = [record.get('layer')];
-						this.parcelLayer = record.get('layer');
-						this.parcelLayer.displayInLayerSwitcher = true;
-						this.parcelLayer.setVisibility(true);
-					}).createDelegate(this)
-				});
-		  } else {
-				var record = source.createLayerRecord({
-					name: 'AATL:Parcelle_2014',
-					title: 'Parcelle 2014',
-					source: source.id
-				})
-				layerStore.add(record);
-				this.copyParcelControl.layers = [record.get('layer')];
-				this.parcelLayer = record.get('layer');
-				this.parcelLayer.displayInLayerSwitcher = true;
-				this.parcelLayer.setVisibility(true);
-			}
-		}
 
+
+
+		}
 		//Adding OL Controls
 		map.addControl(this.drawReperageFeatureControl);
 		map.addControl(this.modifyReperageFeatureControl);
@@ -531,6 +491,35 @@ ux.plugins.ReperageToolbox = Ext.extend(gxp.plugins.Tool, {
 				actions[0].enable();
 			} else {
 				actions[0].disable();
+			}
+			var layerStore = this.target.mapPanel.layers;
+			var source = this.target.layerSources["BruGIS WMS - Geoserver"];
+			if(source.lazy) {
+				source.store.load({
+					callback:(function(){
+						var record = source.createLayerRecord({
+							name: 'AATL:Parcelle_2015',
+							title: 'Parcelle 2015',
+							source: source.id
+						});
+						this.parcelLayer = record.get('layer');
+						this.parcelLayer.displayInLayerSwitcher = false;
+						this.parcelLayer.setVisibility(false);
+						layerStore.add(record);
+						this.copyParcelControl.layers = [record.get('layer')];
+					}).createDelegate(this)
+				});
+		  } else {
+				var record = source.createLayerRecord({
+					name: 'AATL:Parcelle_2015',
+					title: 'Parcelle 2015',
+					source: source.id
+				});
+				this.parcelLayer = record.get('layer');
+				this.parcelLayer.displayInLayerSwitcher = false;
+				this.parcelLayer.setVisibility(false);
+				layerStore.add(record);
+				this.copyParcelControl.layers = [record.get('layer')];
 			}
 		}, this);
 
