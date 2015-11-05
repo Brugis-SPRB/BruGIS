@@ -703,7 +703,7 @@ ux.plugins.ReperageToolbox = Ext.extend(gxp.plugins.Tool, {
 				xtype: 'actioncolumn',
 				align: 'center',
 				sortable : false,
-				width: 35,
+				width: 40,
 				items: [
 					{
 						icon   : '../theme/app/img/down2.gif',	 // Use a URL in the icon config
@@ -834,7 +834,7 @@ ux.plugins.ReperageToolbox = Ext.extend(gxp.plugins.Tool, {
 			items: items,
 			layout: "border",
 			height: 450,
-			width: 725,
+			width: 801,
 			modal: true,
 			listeners: {
 				hide: function(win) {
