@@ -1,8 +1,8 @@
 /**
- * Copyright (c) 2008-2011 The Open Planning Project
- * 
- * Published under the GPL license.
- * See https://github.com/opengeo/gxp/raw/master/license.txt for the full text
+ * Copyright (c) Brugis (S.P.R.B)
+ *
+ * Published under the GPL V3 license.
+ * See www.gnu.org/licences/gpl-3.0 for the full text
  * of the license.
  */
 
@@ -28,9 +28,9 @@ Ext.namespace("ux.plugins");
  *
  *    Plugin for adding a tree of layers with their legend to a
  *    :class:`gxp.Viewer`. Also provides a context menu on layer nodes.
- */   
+ */
 /** api: example
- *  If you want to change the vendor-specific legend_options parameter that 
+ *  If you want to change the vendor-specific legend_options parameter that
  *  is sent to the WMS for GetLegendGraphic you can use ``baseAttrs`` on the
  *  ``loader`` config:
  *
@@ -48,7 +48,7 @@ Ext.namespace("ux.plugins");
  *
  */
 ux.plugins.LayerManager = Ext.extend(gxp.plugins.LayerTree, {
-    
+
     /** api: ptype = ux_layermanager */
     ptype: "ux_layermanager",
 
@@ -57,7 +57,7 @@ ux.plugins.LayerManager = Ext.extend(gxp.plugins.LayerTree, {
      *  Text for baselayer node of layer tree (i18n).
      */
     baseNodeText: "Base Maps",
-    
+
     /** api: config[groups]
      *  ``Object`` The groups to show in the layer tree. Keys are group names,
      *  and values are either group titles or an object with ``title`` and
@@ -75,7 +75,7 @@ ux.plugins.LayerManager = Ext.extend(gxp.plugins.LayerTree, {
      *          }
      *      }
      */
-    
+
     /** private: method[createOutputConfig] */
     createOutputConfig: function() {
         var tree = ux.plugins.LayerManager.superclass.createOutputConfig.apply(this, arguments);
@@ -87,10 +87,10 @@ ux.plugins.LayerManager = Ext.extend(gxp.plugins.LayerTree, {
                 ptype: "gx_treenodecomponent"
             }]
         }, this.treeConfig));
-        
-        return tree;        
+
+        return tree;
     },
-    
+
     /** private: method[configureLayerNode] */
     configureLayerNode: function(loader, attr) {
         ux.plugins.LayerManager.superclass.configureLayerNode.apply(this, arguments);
@@ -106,7 +106,7 @@ ux.plugins.LayerManager = Ext.extend(gxp.plugins.LayerTree, {
 			if (loader && loader.baseAttrs && loader.baseAttrs.baseParams) {
                 baseParams = loader.baseAttrs.baseParams;
             }
-			
+
             Ext.apply(attr, {
                 component: {
                     xtype: legendXType,
@@ -130,7 +130,7 @@ ux.plugins.LayerManager = Ext.extend(gxp.plugins.LayerTree, {
 			this;
         }
     }
-    
+
 });
 
 Ext.preg(ux.plugins.LayerManager.prototype.ptype, ux.plugins.LayerManager);

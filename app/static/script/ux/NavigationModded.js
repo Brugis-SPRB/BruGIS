@@ -1,8 +1,8 @@
 /**
- * Copyright (c) 2008-2011 The Open Planning Project
- * 
- * Published under the GPL license.
- * See https://github.com/opengeo/gxp/raw/master/license.txt for the full text
+ * Copyright (c) Brugis (S.P.R.B)
+ *
+ * Published under the GPL V3 license.
+ * See www.gnu.org/licences/gpl-3.0 for the full text
  * of the license.
  */
 
@@ -28,10 +28,10 @@ Ext.namespace("ux.plugins");
  *    a box. Optionally provide mousewheel zoom support.
  */
 ux.plugins.Navigation = Ext.extend(gxp.plugins.Tool, {
-    
+
     /** api: ptype = ux_navigation */
     ptype: "ux_navigation",
-    
+
     /** api: config[menuText]
      *  ``String``
      *  Text for navigation menu item (i18n).
@@ -67,7 +67,7 @@ ux.plugins.Navigation = Ext.extend(gxp.plugins.Tool, {
             toggleGroup: this.toggleGroup})];
         return ux.plugins.Navigation.superclass.addActions.apply(this, [actions]);
     }
-        
+
 });
 
 Ext.preg("ux_navigation", ux.plugins.Navigation);

@@ -1,3 +1,12 @@
+
+/**
+ * Copyright (c) Brugis (S.P.R.B)
+ *
+ * Published under the GPL V3 license.
+ * See www.gnu.org/licences/gpl-3.0 for the full text
+ * of the license.
+ */
+
 /**
  * //@requires gxp/plugins/Tool.js
  * @requires OpenLayers/Control/DrawFeature.js
@@ -62,6 +71,7 @@ ux.plugins.ReperageToolbox = Ext.extend(gxp.plugins.Tool, {
 
 	myReperageGridPanel_bbar_displayMsg: "Urbanalysis {0} - {1} of {2}",
 	myReperageGridPanel_bbar_emptyMsg: "No Urbanalysis",
+
 	// End i18n.
 
 	//UUID
@@ -159,10 +169,14 @@ ux.plugins.ReperageToolbox = Ext.extend(gxp.plugins.Tool, {
 			scope: this,
 			toggleHandler: function(btn,state){
 				if (state) {
-					this.parcelLayer.setVisibility(true);
+					if(this.parcelLayer) {
+						this.parcelLayer.setVisibility(true);
+				  }
 					this.drawReperageFeatureControl.activate();
 				} else {
-					this.parcelLayer.setVisibility(false);
+					if(this.parcelLayer){
+						this.parcelLayer.setVisibility(false);
+				  }
 					this.drawReperageFeatureControl.deactivate();
 				}
 			}
@@ -179,10 +193,14 @@ ux.plugins.ReperageToolbox = Ext.extend(gxp.plugins.Tool, {
 			scope: this,
 			toggleHandler: function(btn,state){
 				if (state) {
-					this.parcelLayer.setVisibility(true);
+					if(this.parcelLayer) {
+						this.parcelLayer.setVisibility(true);
+				  }
 					this.modifyReperageFeatureControl.activate();
 				} else {
-					this.parcelLayer.setVisibility(false);
+					if(this.parcelLayer) {
+						this.parcelLayer.setVisibility(false);
+					}
 					this.modifyReperageFeatureControl.deactivate();
 				}
 			}
@@ -201,30 +219,22 @@ ux.plugins.ReperageToolbox = Ext.extend(gxp.plugins.Tool, {
 			scope: this,
 			toggleHandler: function(btn,state){
 				if (state) {
-					this.parcelLayer.setVisibility(true);
+					if(this.parcelLayer) {
+						this.parcelLayer.setVisibility(true);
+					}
 					this.deleteOneFeatureControl.activate();
 				} else {
-					this.parcelLayer.setVisibility(false);
+					if(this.parcelLayer) {
+						this.parcelLayer.setVisibility(false);
+				  }
 					this.deleteOneFeatureControl.deactivate();
 				}
 			}
 		});
-		//TODO
-
-		//Copy 1 parcel
-		//Warning : the getfeatureInfo need a proxy defined in order to work
-		var parcelLayer = new OpenLayers.Layer.WMS("ParcelleReperage",
-			this.brugisWmsHost,
-			{'layers': 'AATL:Parcelle_2014', transparent: true, format: 'image/png8'},
-			{isBaseLayer: false}
-		);
-		parcelLayer.displayInLayerSwitcher = false;
-		parcelLayer.setVisibility(false);
 
 		var copyParcelControl = new OpenLayers.Control.WMSGetFeatureInfo({
-			url: this.brugisWmsHost,
 			title: 'Identify features by clicking',
-			layers: [parcelLayer],
+			layers: [],
 			queryVisible: true,
 			infoFormat: "application/vnd.ogc.gml"
 		});
@@ -240,10 +250,14 @@ ux.plugins.ReperageToolbox = Ext.extend(gxp.plugins.Tool, {
 			scope: this,
 			toggleHandler: function(btn,state){
 				if (state) {
-					this.parcelLayer.setVisibility(true);
+					if(this.parcelLayer) {
+						this.parcelLayer.setVisibility(true);
+					}
 					this.copyParcelControl.activate();
 				} else {
-					this.parcelLayer.setVisibility(false);
+					if(this.parcelLayer) {
+						this.parcelLayer.setVisibility(false);
+					}
 					this.copyParcelControl.deactivate();
 				}
 			}
@@ -406,7 +420,7 @@ ux.plugins.ReperageToolbox = Ext.extend(gxp.plugins.Tool, {
 		this.brugisUserHidden = brugisUserHidden;
 		this.copyParcelFeatBtn = copyParcelFeatBtn;
 		this.copyParcelControl = copyParcelControl;
-		this.parcelLayer = parcelLayer;
+		this.parcelLayer = null;
 
 		this.showReperageButton = showReperageButton;
 		return ux.plugins.ReperageToolbox.superclass.init.apply(this, arguments);
@@ -459,9 +473,11 @@ ux.plugins.ReperageToolbox = Ext.extend(gxp.plugins.Tool, {
 			console.error("urbanalysis working layer : " + this.reperageLayerName + " found ! Plugin is initialized multiple times");
 		} else {
 			map.addLayer(this.reperageLayer);
-			map.addLayer(this.parcelLayer);
-		}
 
+
+
+
+		}
 		//Adding OL Controls
 		map.addControl(this.drawReperageFeatureControl);
 		map.addControl(this.modifyReperageFeatureControl);
@@ -475,6 +491,35 @@ ux.plugins.ReperageToolbox = Ext.extend(gxp.plugins.Tool, {
 				actions[0].enable();
 			} else {
 				actions[0].disable();
+			}
+			var layerStore = this.target.mapPanel.layers;
+			var source = this.target.layerSources["BruGIS WMS - Geoserver"];
+			if(source.lazy) {
+				source.store.load({
+					callback:(function(){
+						var record = source.createLayerRecord({
+							name: 'AATL:Parcelle_2015',
+							title: 'Parcelle 2015',
+							source: source.id
+						});
+						this.parcelLayer = record.get('layer');
+						this.parcelLayer.displayInLayerSwitcher = false;
+						this.parcelLayer.setVisibility(false);
+						layerStore.add(record);
+						this.copyParcelControl.layers = [record.get('layer')];
+					}).createDelegate(this)
+				});
+		  } else {
+				var record = source.createLayerRecord({
+					name: 'AATL:Parcelle_2015',
+					title: 'Parcelle 2015',
+					source: source.id
+				});
+				this.parcelLayer = record.get('layer');
+				this.parcelLayer.displayInLayerSwitcher = false;
+				this.parcelLayer.setVisibility(false);
+				layerStore.add(record);
+				this.copyParcelControl.layers = [record.get('layer')];
 			}
 		}, this);
 
@@ -806,8 +851,9 @@ ux.plugins.ReperageToolbox = Ext.extend(gxp.plugins.Tool, {
 	//Ajoute le(s) layer(s) au panel
 	raiseLayers: function() {
 		var map = this.target.mapPanel.map;
-
-		map.setLayerIndex(this.parcelLayer, 98);
+		if(this.parcelLayer) {
+	  	map.setLayerIndex(this.parcelLayer, 98);
+	  }
 		map.setLayerIndex(this.reperageLayer, 99);
 	},
 

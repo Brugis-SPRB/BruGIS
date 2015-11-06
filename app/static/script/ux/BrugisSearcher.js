@@ -1,4 +1,11 @@
-
+/**
+ * Copyright (c) Brugis (S.P.R.B)
+ *
+ * Published under the GPL V3 license.
+ * See www.gnu.org/licences/gpl-3.0 for the full text
+ * of the license.
+ */
+ 
 /**
  * //@requires gxp/plugins/Tool.js
  * //@requires CirbGeocoderComboBox.js
@@ -18,11 +25,11 @@ Ext.namespace("ux.plugins");
  *  .. class:: CirbGeocoder(config)
  *
  *    Plugin for adding a CirbGeocoderComboBox to a viewer.  The underlying
- *    CirbGeocoderComboBox can be configured by setting this tool's 
- *    ``outputConfig`` property. 
+ *    CirbGeocoderComboBox can be configured by setting this tool's
+ *    ``outputConfig`` property.
  */
 ux.plugins.BrugisSearcher = Ext.extend(gxp.plugins.Tool, {
-    
+
     /** api: ptype = ux_BrugisSearcher */
     ptype: "ux_BrugisSearcher",
 
@@ -43,7 +50,7 @@ ux.plugins.BrugisSearcher = Ext.extend(gxp.plugins.Tool, {
      *  Default is "viewport".
      */
     updateField: "viewport",
-    
+
     init: function(target) {
 
         var combo = new ux.form.CirbGeocoderComboBox(Ext.apply({
@@ -52,7 +59,7 @@ ux.plugins.BrugisSearcher = Ext.extend(gxp.plugins.Tool, {
                 scope: this
             }
         }, this.outputConfig));
-		
+
 		var searchTypeCombo= new Ext.form.ComboBox({
 			id: "searchTypeCombo",
 			//store: ["ADR","CAD"],
@@ -77,7 +84,7 @@ ux.plugins.BrugisSearcher = Ext.extend(gxp.plugins.Tool, {
 			},
 			value : "ADR"
 		});
-		
+
 		var cadTextField = new Ext.form.TextField({
 			hidden : true,
 			width: 300,
@@ -93,13 +100,13 @@ ux.plugins.BrugisSearcher = Ext.extend(gxp.plugins.Tool, {
 				}
 			}
 		});
-		
+
 		this.wpsclient = new OpenLayers.WPSClient({
 			servers: {
 				brugisgeo: this.wpsserver
 			}
 		});
-		
+
         var bounds = target.mapPanel.map.restrictedExtent;
         if (bounds && !combo.bounds) {
             target.on({
@@ -114,10 +121,10 @@ ux.plugins.BrugisSearcher = Ext.extend(gxp.plugins.Tool, {
         this.combo = combo;
 		this.typecombo = searchTypeCombo;
         this.cadtext = cadTextField;
-		
+
         return ux.plugins.BrugisSearcher.superclass.init.apply(this, arguments);
     },
-	
+
     /** api: method[addOutput]
      */
     addOutput: function(config) {
@@ -146,9 +153,9 @@ ux.plugins.BrugisSearcher = Ext.extend(gxp.plugins.Tool, {
 			},
 			scope:this
 		});
-		
+
 	},
-	
+
 	onCapaKeyFound : function(result) {
 		if(result && result.length  > 0) {
 			var map = this.target.mapPanel.map;
@@ -167,7 +174,7 @@ ux.plugins.BrugisSearcher = Ext.extend(gxp.plugins.Tool, {
 				));
 				map.addLayer(vectorLayer);
 			}
-			
+
 			if(map.getLayersByName(this.searchLayerName).length > 0){
 				var vectorLayer = map.getLayersByName(this.searchLayerName)[0];
 				console.log(vectorLayer);
@@ -179,7 +186,7 @@ ux.plugins.BrugisSearcher = Ext.extend(gxp.plugins.Tool, {
 			Ext.Msg.alert('CAD Search', 'Your query did not return any result');
 		}
 	},
-	
+
     /** private: method[onComboSelect]
      *  Listener for combo's select event.
 	 *	DocG - 2014/02/20 update for zoom level based on extent returned by the CIRB webservice
@@ -187,23 +194,23 @@ ux.plugins.BrugisSearcher = Ext.extend(gxp.plugins.Tool, {
     onComboSelect: function(combo, record) {
         if (this.updateField) {
             var map 	= this.target.mapPanel.map;
-			var dest    = new Proj4js.Proj('EPSG:31370');			
+			var dest    = new Proj4js.Proj('EPSG:31370');
 			var myPoint = record.data.point;
 			var adnc 	= record.data.adNc;
 			var extent 	= record.json.extent;
 			var date	= new Date();
-			
+
 			//console.log(record);
 			//console.log(extent);
-			
-			// support pour paramètre de nombre de recherche (une seule ou plusieurs)
-			var uniqueSearch = 
+
+			// support pour paramï¿½tre de nombre de recherche (une seule ou plusieurs)
+			var uniqueSearch =
 			(localStorage.getItem("searchN") && localStorage.getItem("searchN") == '1')?true:
 			(localStorage.getItem("searchN") && localStorage.getItem("searchN") == '0')?false:false;
 			if (uniqueSearch && map.getLayersByName(this.searchLayerName).length > 0){
 				map.removeLayer(map.getLayersByName(this.searchLayerName)[0]);
-			}			
-			
+			}
+
 			if(map.getLayersByName(this.searchLayerName).length > 0){
 				var vectorLayer = map.getLayersByName(this.searchLayerName)[0];
 				vectorLayer.addFeatures(

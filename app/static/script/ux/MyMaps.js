@@ -1,8 +1,8 @@
-﻿/**
- * Copyright (c) 2013-2014 The Open Planning Project
- * 
- * Published under the GPL license.
- * See https://github.com/opengeo/gxp/raw/master/license.txt for the full text
+/**
+ * Copyright (c) Brugis (S.P.R.B)
+ *
+ * Published under the GPL V3 license.
+ * See www.gnu.org/licences/gpl-3.0 for the full text
  * of the license.
  */
 
@@ -26,10 +26,10 @@ Ext.namespace("ux.plugins");
  *    Plugin for creating and managing localstorage maps
  */
 ux.plugins.MyMaps = Ext.extend(gxp.plugins.Tool, {
-    
+
     /** api: ptype = ux_mymaps */
     ptype: "ux_mymaps",
-    
+
     /** api: config[...]
      *  ``String``
      *  Text for (i18n).
@@ -38,12 +38,12 @@ ux.plugins.MyMaps = Ext.extend(gxp.plugins.Tool, {
     myMapsText: "my maps text",
     myMapsMenuText: "my maps menu text",
 	availableMyMapsText: "My maps",
-	
+
 	mapsTitleText: "Maps",
 	dateTitleText: "Dates",
-	
+
     expanderTemplateText: "<p><b>Abstract:</b> {description}</p>",
-	
+
 	resetText: "reset",
 	importText: "Import",
 	exportText: "Link",
@@ -51,34 +51,34 @@ ux.plugins.MyMaps = Ext.extend(gxp.plugins.Tool, {
 	loadMapText: "Load",
 	deleteMapText: "Delete",
 	doneText: "Done",
-	
+
 	resetButtonTooltipText: "Reset the BruGIS map to its default state",
 	importButtonTooltipText: "Import maps from file",
 	exportButtonTooltipText: "Temporary link towards the map",
 	saveButtonTooltipText: "Save current map state",
 	deleteButtonTooltipText: "Delete selected map state",
 	loadButtonTooltipText: "Load selected map state",
-	
+
 	loadConfirmTitle: "Loading map",
 	loadConfirmMessage: "Are you sure to load this map?",
 	deleteConfirmTitle: "Deleting map",
 	deleteConfirmMessage: "Are you sure you want to delete this/these map(s)?",
 	resetConfirmTitle: "Resetting map",
 	resetConfirmMessage: "Do you want to reset BruGIS to its default map state?",
-	
+
 	namingText: "New map",
 	mapNameFieldText: "Name",
 	mapAbstractFieldText: "Description",
 	okText: "Ok",
-	
+
 	mapNameErrorText: "This map name is invalid.",
 	mapAbstractErrorText: "This map description is invalid.",
-	
+
 	sameMapNameTitle: "Warning",
 	sameMapNameMessage: "This name already exists. Do you want to overwrite this map?",
-	
+
 	exportMapPromptTitle: "Use this link to share your maps :",
-	
+
     /** api: config[myMaps]
      *  ``String``
      *  Text for the grid expander (i18n).
@@ -90,26 +90,26 @@ ux.plugins.MyMaps = Ext.extend(gxp.plugins.Tool, {
      *  name of the current map
      */
 	mapName: '',
-	
+
     /** api: config[myMaps]
      *  ``Ext.data.ArrayStore``
      *  Text for the grid expander (i18n).
      */
 	myMaps: false,
-	
+
     /** api: config[myMaps]
      *  ``String``
      *  Text for the grid expander (i18n).
      */
 	myMapsKeys: [],
-	
+
     /** private: method[constructor]
      */
     constructor: function(config) {
 		this.checkLocalStorage();
 		ux.plugins.MyMaps.superclass.constructor.apply(this, arguments);
     },
-    
+
     /** api: method[addActions]
      */
     addActions: function() {
@@ -125,7 +125,7 @@ ux.plugins.MyMaps = Ext.extend(gxp.plugins.Tool, {
 			scope: this
 		});
         var actions = ux.plugins.MyMaps.superclass.addActions.apply(this, [options]);
-        
+
         this.target.on("ready", function() {
 			if (this.checkLocalStorage()) {
             actions[0].enable();
@@ -144,9 +144,9 @@ ux.plugins.MyMaps = Ext.extend(gxp.plugins.Tool, {
 			if (localStorage.getItem("myMaps") !== null) {
 				this.myMapsKeys = eval(localStorage.getItem("myMaps"));
 				for (var key = 0; key < this.myMapsKeys.length; key++) {
-					var mapKey = this.myMapsKeys[key], 
-						mapContent = '', 
-						mapAbstract = '', 
+					var mapKey = this.myMapsKeys[key],
+						mapContent = '',
+						mapAbstract = '',
 						mapDate = '';
 					if (localStorage.getItem(mapKey) !== null) {
 						mapContent = localStorage.getItem(mapKey);
@@ -181,7 +181,7 @@ ux.plugins.MyMaps = Ext.extend(gxp.plugins.Tool, {
 		}
 		return this.validLocalStorage
 	},
-	
+
     /** api: method[showMyMapsGrid]
      * Shows the window with a MyMaps grid.
      */
@@ -195,14 +195,14 @@ ux.plugins.MyMaps = Ext.extend(gxp.plugins.Tool, {
 		this.deActivateButtons();
         this.myMapsGrid.show();
     },
-	
+
     /**
      * private: method[initMyMapsGrid]
      * Constructs a window with a MyMaps grid.
      */
     initMyMapsGrid: function() {
         var expander = this.createExpander();
-	
+
         var myMapsGridPanel = new Ext.grid.GridPanel({
 			id: "myMapsGridPanel",
             store: this.myMaps,
@@ -225,7 +225,7 @@ ux.plugins.MyMaps = Ext.extend(gxp.plugins.Tool, {
             },
 			forceLayout: true
         });
-	
+
         var items = {
             xtype: "container",
             region: "center",
@@ -233,7 +233,7 @@ ux.plugins.MyMaps = Ext.extend(gxp.plugins.Tool, {
 			//height: 'auto',
             items: [myMapsGridPanel]
         };
-		
+
         var bbarItems = [
 /* 			new Ext.Button({
 				id: "importButton",
@@ -242,7 +242,7 @@ ux.plugins.MyMaps = Ext.extend(gxp.plugins.Tool, {
 				tooltip: this.importButtonTooltipText,
                 scope : this
             }),
-*/			
+*/
 			new Ext.Button({
 				id: "exportButton",
                 text: this.exportText,
@@ -289,9 +289,9 @@ ux.plugins.MyMaps = Ext.extend(gxp.plugins.Tool, {
                 scope: this
             })
         ];
-		
+
         var Cls = this.outputTarget ? Ext.Panel : Ext.Window;
-		
+
         this.myMapsGrid = new Cls(Ext.apply({
 			id: "myMapsGrid",
             title: this.availableMyMapsText,
@@ -303,7 +303,7 @@ ux.plugins.MyMaps = Ext.extend(gxp.plugins.Tool, {
 			modal: true,
             //tbar: capGridToolbar,
             bbar: bbarItems,
-            listeners: { 
+            listeners: {
                 hide: function(win) {
                     myMapsGridPanel.getSelectionModel().clearSelections();
                 },
@@ -315,7 +315,7 @@ ux.plugins.MyMaps = Ext.extend(gxp.plugins.Tool, {
             this.addOutput(this.myMapsGrid);
         }
 	},
-	
+
     /** api: method[aFunction]
      * a dummy function.
      */
@@ -338,7 +338,7 @@ ux.plugins.MyMaps = Ext.extend(gxp.plugins.Tool, {
 		Ext.getCmp("deleteButton").enable();
 		Ext.getCmp("exportButton").enable();
 	},
-	
+
 	/**
 	 * deactivate the delete and load buttons
 	 */
@@ -347,7 +347,7 @@ ux.plugins.MyMaps = Ext.extend(gxp.plugins.Tool, {
 		Ext.getCmp("loadButton").disable();
 		Ext.getCmp("exportButton").disable();
 	},
-	
+
     /** private: method[saveMapState]
      * Show the naming dialog for the user.
      */
@@ -401,31 +401,31 @@ ux.plugins.MyMaps = Ext.extend(gxp.plugins.Tool, {
                 handler: submitName,
                 scope: this
             }],
-            keys: [{ 
-                key: [Ext.EventObject.ENTER], 
+            keys: [{
+                key: [Ext.EventObject.ENTER],
                 handler: submitName,
                 scope: this
             }]
         });
-		
+
         function submitName() {
 			this.mapName 		= panel.getForm().findField('mapName').getValue();
 			this.mapAbstract 	= panel.getForm().findField('mapAbstract').getValue();
 			this.mapDate		= new Date().toISOString();
 			var overwriteChoice = false;
-			
+
 			var applyValidMapName = function() {
 				var myMapsManager = this.target.tools.mymapsmanager;
-				
+
 				if (myMapsManager.mapName != "") {
 					//var mapAbstract = myMapsManager;
 					var mapAbsKey 	= myMapsManager.mapName + "_abstract";
 					var mapDateKey 	= myMapsManager.mapName + "_date";
-					
+
 					// sauvegarde du mapState courant
 					var myAppState = this.target.getState();
 					delete myAppState.map.controls;
-					
+
 					var configStr = Ext.util.JSON.encode(myAppState);
 					configStr = configStr.replace("/geoserver/www/wmsaatl/geoweb_brugis.xml", "/geoserver/gwc/service/wms");
 					configStr = configStr.replace("/geoserver/www/wmsaatl/wmsc_brugis.xml", "/geoserver/ows");
@@ -433,7 +433,7 @@ ux.plugins.MyMaps = Ext.extend(gxp.plugins.Tool, {
 					var myMapsData = [];
 					var myMapsNames = [];
 					if (myMapsManager.myMaps.data) {
-					
+
 						for (var i=0; i < myMapsManager.myMaps.data.length; i++) {
 							if (myMapsManager.myMaps.data.items[i] instanceof Ext.data.Record) {
 								// On skip le record s'il a le même nom que le nouveau
@@ -452,19 +452,19 @@ ux.plugins.MyMaps = Ext.extend(gxp.plugins.Tool, {
 					// si le nom déjà existant, remplacé
 					myMapsNames.push(myMapsManager.mapName);
 					myMapsData.push([myMapsManager.mapName, configStr, myMapsManager.mapAbstract, myMapsManager.mapDate]);
-					
+
 					// màj de this.myMaps
 					myMapsManager.myMaps = new Ext.data.ArrayStore({
 						fields: ["Maps", "content", "description", "date"],
 						data: myMapsData
 					});
-					
+
 					// màj du localStorage
 					localStorage.setItem(myMapsManager.mapName, configStr);
 					localStorage.setItem('myMaps', "['" + myMapsNames.toString().replace(/\,/g,"','") + "']");
 					localStorage.setItem(mapAbsKey, myMapsManager.mapAbstract);
 					localStorage.setItem(mapDateKey, myMapsManager.mapDate);
-					
+
 					// màj de this.myMapsGrid
 					myMapsManager.myMapsGrid.items.items[0].items.items[0].store.loadData(myMapsData);
 				}
@@ -475,8 +475,8 @@ ux.plugins.MyMaps = Ext.extend(gxp.plugins.Tool, {
 			}
 			if (this.myMapsKeys.indexOf(this.mapName) != -1) {
 				Ext.Msg.show({
-					title: this.sameMapNameTitle, 
-					msg: this.sameMapNameMessage, 
+					title: this.sameMapNameTitle,
+					msg: this.sameMapNameMessage,
 					buttons: Ext.Msg.YESNOCANCEL,
 					icon: Ext.MessageBox.WARNING,
 					fn: function(btn) {
@@ -496,7 +496,7 @@ ux.plugins.MyMaps = Ext.extend(gxp.plugins.Tool, {
 				applyValidMapName.call(this);
 			}
         }
-		
+
         var win = new Ext.Window({
             title: this.namingText,
             layout: "fit",
@@ -512,7 +512,7 @@ ux.plugins.MyMaps = Ext.extend(gxp.plugins.Tool, {
         });
         win.show();
 	},
-	
+
     /** api: method[deleteMapState]
      * delete the selected map state in the localStorage
      */
@@ -527,7 +527,7 @@ ux.plugins.MyMaps = Ext.extend(gxp.plugins.Tool, {
 				var mapAbstract 	= selectedMap.data.description;
 				var mapDate			= selectedMap.data.date;
 				var mapContent 		= selectedMap.data.content;
-			
+
 				if (localStorage.getItem(mapName) !== null) {
 					localStorage.removeItem(mapName);
 				}
@@ -555,10 +555,10 @@ ux.plugins.MyMaps = Ext.extend(gxp.plugins.Tool, {
 			//console.log(this);
 			this.target.fireEvent("mymapschange");
 		}
-		
+
 		Ext.Msg.show({
-            title: this.deleteConfirmTitle, 
-            msg: this.deleteConfirmMessage, 
+            title: this.deleteConfirmTitle,
+            msg: this.deleteConfirmMessage,
             buttons: Ext.Msg.YESNOCANCEL,
             icon: Ext.MessageBox.WARNING,
             fn: function(btn) {
@@ -570,7 +570,7 @@ ux.plugins.MyMaps = Ext.extend(gxp.plugins.Tool, {
             scope: this
         });
 	},
-	
+
     /** api: method[loadMapState]
      * load the selected map state in the map
      */
@@ -578,7 +578,7 @@ ux.plugins.MyMaps = Ext.extend(gxp.plugins.Tool, {
 		var myMapsGridPanel = Ext.getCmp("myMapsGridPanel");
 		var selectedMap 	= myMapsGridPanel.selModel.selections.items[0];
 		var mapContent 		= selectedMap.data.content;
-		
+
         var callback = function() {
 			var configStr = mapContent;
 			if (localStorage) {
@@ -588,10 +588,10 @@ ux.plugins.MyMaps = Ext.extend(gxp.plugins.Tool, {
 			//console.log("just before reload");
             window.location.reload();
         };
-		
+
         Ext.Msg.show({
-            title: this.loadConfirmTitle, 
-            msg: this.loadConfirmMessage, 
+            title: this.loadConfirmTitle,
+            msg: this.loadConfirmMessage,
             buttons: Ext.Msg.YESNOCANCEL,
             icon: Ext.MessageBox.WARNING,
             fn: function(btn) {
@@ -603,22 +603,22 @@ ux.plugins.MyMaps = Ext.extend(gxp.plugins.Tool, {
             scope: this
         });
 	},
-	
+
 	/** api: method[resetMapState]
 	 * reset the map at its defaults parameters
 	 */
 	resetMapState: function() {
-	
+
         var callback = function() {
 			if (localStorage) {
 				localStorage.setItem('reset', 'True');
 			}
             window.location.reload();
         };
-		
+
         Ext.Msg.show({
-            title: this.resetConfirmTitle, 
-            msg: this.resetConfirmMessage, 
+            title: this.resetConfirmTitle,
+            msg: this.resetConfirmMessage,
             buttons: Ext.Msg.YESNOCANCEL,
             icon: Ext.MessageBox.WARNING,
             fn: function(btn) {
@@ -628,9 +628,9 @@ ux.plugins.MyMaps = Ext.extend(gxp.plugins.Tool, {
                 }
             },
             scope: this
-        });	 
+        });
 	},
-	
+
     /** api: config[createExpander]
      *  ``Function`` Returns an ``Ext.grid.RowExpander``. Can be overridden
      *  by applications/subclasses to provide a custom expander.
@@ -640,12 +640,12 @@ ux.plugins.MyMaps = Ext.extend(gxp.plugins.Tool, {
             tpl: new Ext.Template(this.expanderTemplateText)
         });
     },
-	
-	exportMapState: function() {		
+
+	exportMapState: function() {
 		var myMapsGridPanel = Ext.getCmp("myMapsGridPanel");
 		var selectedMap = myMapsGridPanel.selModel.selections.items[0];
 		var mapContent = selectedMap.data.content;
-		
+
 	    OpenLayers.Request.issue({
             method: 'POST',
             url: 'http://mbr102.irisnet.be/MyBruGIS/sharemaps/',

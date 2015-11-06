@@ -1,8 +1,8 @@
 /**
- * Copyright (c) 2008-2011 The Open Planning Project
- * 
- * Published under the GPL license.
- * See https://github.com/opengeo/gxp/raw/master/license.txt for the full text
+ * Copyright (c) Brugis (S.P.R.B)
+ *
+ * Published under the GPL V3 license.
+ * See www.gnu.org/licences/gpl-3.0 for the full text
  * of the license.
  */
 
@@ -33,9 +33,9 @@ Ext.namespace("gxp.plugins");
  *
  *    Plugin for feature editing. Requires a
  *    :class:`gxp.plugins.FeatureManager`.
- */   
+ */
 gxp.plugins.FeatureEditor = Ext.extend(gxp.plugins.ClickableFeatures, {
-    
+
     /** api: ptype = gxp_featureeditor */
     ptype: "gxp_featureeditor",
 
@@ -89,7 +89,7 @@ gxp.plugins.FeatureEditor = Ext.extend(gxp.plugins.ClickableFeatures, {
      *  ``String``
      *  Create new feature text.
      */
-    
+
     /** api: config[editFeatureActionTip]
      *  ``String``
      *  Tooltip string for edit existing feature action (i18n).
@@ -105,13 +105,13 @@ gxp.plugins.FeatureEditor = Ext.extend(gxp.plugins.ClickableFeatures, {
      *  ``String`` By default, the FeatureEditPopup will be added to the map.
      */
     outputTarget: "map",
-    
+
     /** api: config[snappingAgent]
      *  ``String`` Optional id of the :class:`gxp.plugins.SnappingAgent` to use
      *  with this tool.
      */
     snappingAgent: null,
-    
+
     /** api: config[readOnly]
      *  ``Boolean`` Set to true to use the FeatureEditor merely as a feature
      *  info tool, without editing capabilities. Default is false.
@@ -123,14 +123,14 @@ gxp.plugins.FeatureEditor = Ext.extend(gxp.plugins.ClickableFeatures, {
      *  modify tool, i.e. there is no option to add new features.
      */
     modifyOnly: false,
-    
+
     /** api: config[showSelectedOnly]
      *  ``Boolean`` If set to true, only selected features will be displayed
      *  on the layer. If set to false, all features (on the current page) will
      *  be. Default is true.
      */
     showSelectedOnly: true,
-    
+
     /** api: config[fields]
      *  ``Array``
      *  List of field config names corresponding to feature attributes.  If
@@ -154,25 +154,25 @@ gxp.plugins.FeatureEditor = Ext.extend(gxp.plugins.ClickableFeatures, {
      *  ``OpenLayers.Control.DrawFeature``
      */
     drawControl: null,
-    
+
     /** private: property[popup]
      *  :class:`gxp.FeatureEditPopup` FeatureEditPopup for this tool
      */
     popup: null,
-    
+
     /** private: property[schema]
      *  ``GeoExt.data.AttributeStore``
      */
     schema: null,
-    
+
 
     /** private: method[constructor]
      */
     constructor: function(config) {
         this.addEvents(
             /** api: event[layereditable]
-             *  Fired when a layer is selected or unselected in the target 
-             *  viewer.  Listeners can use this method to determine when a 
+             *  Fired when a layer is selected or unselected in the target
+             *  viewer.  Listeners can use this method to determine when a
              *  layer is ready for editing.
              *
              *  Listener arguments:
@@ -185,9 +185,9 @@ gxp.plugins.FeatureEditor = Ext.extend(gxp.plugins.ClickableFeatures, {
             "layereditable",
 
             /** api: event[featureeditable]
-             *  Fired when a feature is selected or unselected for editing.  
-             *  Listeners can use this method to determine when a feature is 
-             *  ready for editing.  Beware that this event is fired multiple 
+             *  Fired when a feature is selected or unselected for editing.
+             *  Listeners can use this method to determine when a feature is
+             *  ready for editing.  Beware that this event is fired multiple
              *  times when a feature is unselected.
              *
              *  Listener arguments:
@@ -199,7 +199,7 @@ gxp.plugins.FeatureEditor = Ext.extend(gxp.plugins.ClickableFeatures, {
             "featureeditable"
 
         );
-        gxp.plugins.FeatureEditor.superclass.constructor.apply(this, arguments);        
+        gxp.plugins.FeatureEditor.superclass.constructor.apply(this, arguments);
     },
 
     /** private: method[init]
@@ -216,7 +216,7 @@ gxp.plugins.FeatureEditor = Ext.extend(gxp.plugins.ClickableFeatures, {
         this.target.un("authorizationchange", this.onAuthorizationChange, this);
         gxp.plugins.FeatureEditor.superclass.destroy.apply(this, arguments);
     },
-    
+
     /** private: method[onAuthorizationChange]
      */
     onAuthorizationChange: function() {
@@ -235,7 +235,7 @@ gxp.plugins.FeatureEditor = Ext.extend(gxp.plugins.ClickableFeatures, {
         var popup;
         var featureManager = this.getFeatureManager();
         var featureLayer = featureManager.featureLayer;
-        
+
         var intercepting = false;
         // intercept calls to methods that change the feature store - allows us
         // to persist unsaved changes before calling the original function
@@ -284,10 +284,10 @@ gxp.plugins.FeatureEditor = Ext.extend(gxp.plugins.ClickableFeatures, {
             "beforeclearfeatures": intercept.createDelegate(this, "clearFeatures", 1),
             scope: this
         });
-        
+
         this.drawControl = new OpenLayers.Control.DrawFeature(
             featureLayer,
-            OpenLayers.Handler.Point, 
+            OpenLayers.Handler.Point,
             {
                 eventListeners: {
                     featureadded: function(evt) {
@@ -309,7 +309,7 @@ gxp.plugins.FeatureEditor = Ext.extend(gxp.plugins.ClickableFeatures, {
                 }
             }
         );
-        
+
         // create a SelectFeature control
         // "fakeKey" will be ignord by the SelectFeature control, so only one
         // feature can be selected by clicking on the map, but allow for
@@ -363,7 +363,7 @@ gxp.plugins.FeatureEditor = Ext.extend(gxp.plugins.ClickableFeatures, {
                 scope: this
             }
         });
-        
+
         featureLayer.events.on({
             "beforefeatureremoved": function(evt) {
                 if (this.popup && evt.feature === this.popup.feature) {
@@ -468,10 +468,10 @@ gxp.plugins.FeatureEditor = Ext.extend(gxp.plugins.ClickableFeatures, {
                                                 msg = "Status: " + response.status;
                                             }
                                             // fire an event on the feature manager
-                                            featureManager.fireEvent("exception", featureManager, 
+                                            featureManager.fireEvent("exception", featureManager,
                                                 response.exceptionReport || {}, msg, records);
                                             // only show dialog if there is no listener registered
-                                            if (featureManager.hasListener("exception") === false && 
+                                            if (featureManager.hasListener("exception") === false &&
                                                 featureStore.hasListener("exception") === false) {
                                                     Ext.Msg.show({
                                                         title: this.exceptionTitle,
@@ -488,8 +488,8 @@ gxp.plugins.FeatureEditor = Ext.extend(gxp.plugins.ClickableFeatures, {
                                         single: true
                                     },
                                     scope: this
-                                });                                
-                                if(feature.state === OpenLayers.State.DELETE) {                                    
+                                });
+                                if(feature.state === OpenLayers.State.DELETE) {
                                     /**
                                      * If the feature state is delete, we need to
                                      * remove it from the store (so it is collected
@@ -629,8 +629,8 @@ gxp.plugins.FeatureEditor = Ext.extend(gxp.plugins.ClickableFeatures, {
         } else {
             actions.push(new GeoExt.Action(commonOptions));
         }
-       
-		
+
+
 	   actions.push(new GeoExt.Action({
             tooltip: this.editFeatureActionTip,
             text: this.editFeatureActionText,
@@ -670,16 +670,16 @@ gxp.plugins.FeatureEditor = Ext.extend(gxp.plugins.ClickableFeatures, {
         }
 
 		this.actions = actions;
-		
+
 		this.target.on("preferencesChange", function() {
 			for (var i=this.actions.length-1; i>=0; --i) {
-				var showButton = 
+				var showButton =
 					(localStorage.getItem("shwDeTl") && localStorage.getItem("shwDeTl") == '0')?
 					false:
 					(localStorage.getItem("shwDeTl") && localStorage.getItem("shwDeTl") == '1')?
 					true:
 					false;
-					
+
 				if (showButton == true) {
 					this.actions[i].show();
 				} else {
@@ -723,14 +723,14 @@ gxp.plugins.FeatureEditor = Ext.extend(gxp.plugins.ClickableFeatures, {
         if(active) {
             control.deactivate();
         }
-        control.handler.destroy(); 
+        control.handler.destroy();
         control.handler = new Handler(
             control, control.callbacks,
             Ext.apply(control.handlerOptions, {multi: multi})
         );
         if(active) {
             control.activate();
-        } 
+        }
     },
 
     /**
@@ -743,7 +743,7 @@ gxp.plugins.FeatureEditor = Ext.extend(gxp.plugins.ClickableFeatures, {
         this.actions[1].setDisabled(disable);
         return disable;
     },
-    
+
     /** private: method[onLayerChange]
      *  :arg mgr: :class:`gxp.plugins.FeatureManager`
      *  :arg layer: ``GeoExt.data.LayerRecord``
@@ -780,7 +780,7 @@ gxp.plugins.FeatureEditor = Ext.extend(gxp.plugins.ClickableFeatures, {
         }
         this.fireEvent("layereditable", this, layer, true);
     },
-    
+
     /** private: method[select]
      *  :arg feature: ``OpenLayers.Feature.Vector``
      */

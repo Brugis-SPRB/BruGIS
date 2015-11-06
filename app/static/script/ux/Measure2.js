@@ -1,9 +1,8 @@
 /**
- * Copyright (c) 2008-2011 The Open Planning Project
- * Copyright (c) 2012 MRBC-AATL-DAF-BRUGIS
- * 
- * Published under the GPL license.
- * See https://github.com/opengeo/gxp/raw/master/license.txt for the full text
+ * Copyright (c) Brugis (S.P.R.B)
+ *
+ * Published under the GPL V3 license.
+ * See www.gnu.org/licences/gpl-3.0 for the full text
  * of the license.
  */
 
@@ -30,7 +29,7 @@ Ext.namespace("GeoExt.ux");
  *    Provides two actions for measuring length and area.
  */
 GeoExt.ux.Measure = Ext.extend(gxp.plugins.Tool, {
-    
+
     /** api: ptype = gxux_measure */
     ptype: "gxux_measure",
 
@@ -41,7 +40,7 @@ GeoExt.ux.Measure = Ext.extend(gxp.plugins.Tool, {
     areaTooltip: "Measure area",
     measureTooltip: "Measure",
 	// End i18n.
-	
+
     /** api: config[outputTarget]
      *  ``String`` Popups created by this tool are added to the map by default.
      */
@@ -51,7 +50,7 @@ GeoExt.ux.Measure = Ext.extend(gxp.plugins.Tool, {
      */
     constructor: function(config) {
         gxp.plugins.Measure.superclass.constructor.apply(this, arguments);
-		
+
     },
 
     /** private: method[destroy]
@@ -190,7 +189,7 @@ GeoExt.ux.Measure = Ext.extend(gxp.plugins.Tool, {
 				}
 			});
 		};
-        var measureControl = new OpenLayers.Control.Measure(handlerType, 
+        var measureControl = new OpenLayers.Control.Measure(handlerType,
             controlOptions);
         return measureControl;
     },
@@ -278,7 +277,7 @@ GeoExt.ux.Measure = Ext.extend(gxp.plugins.Tool, {
 
         return GeoExt.ux.Measure.superclass.addActions.apply(this, [this.button]);
     }
-        
+
 });
 
 Ext.preg("gxux_measure", GeoExt.ux.Measure);

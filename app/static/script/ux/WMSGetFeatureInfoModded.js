@@ -1,8 +1,8 @@
 /**
- * Copyright (c) 2008-2011 The Open Planning Project
- * 
- * Published under the GPL license.
- * See https://github.com/opengeo/gxp/raw/master/license.txt for the full text
+ * Copyright (c) Brugis (S.P.R.B)
+ *
+ * Published under the GPL V3 license.
+ * See www.gnu.org/licences/gpl-3.0 for the full text
  * of the license.
  */
 
@@ -38,10 +38,10 @@ OpenLayers.Control.RightClick = OpenLayers.Class(OpenLayers.Control, {
              this, this.eventMethods, this.handlerOptions
            );
        },
-       CLASS_NAME: "OpenLayers.Control.RightClick" 
+       CLASS_NAME: "OpenLayers.Control.RightClick"
 });
 
- 
+
 /** api: (extends)
  *  plugins/Tool.js
  */
@@ -53,12 +53,12 @@ Ext.namespace("ux.plugins");
  *    This plugins provides an action which, when active, will issue a
  *    GetFeatureInfo request to the WMS of all layers on the map. The output
  *    will be displayed in a popup.
- */   
+ */
 ux.plugins.WMSGetFeatureInfo = Ext.extend(gxp.plugins.Tool, {
-    
+
     /** api: ptype = ux_wmsgetfeatureinfo */
     ptype: "ux_wmsgetfeatureinfo",
-    
+
     // Begin i18n.
     infoActionTip: "Get Feature Info",
     popupTitle: "Feature Info",
@@ -77,7 +77,7 @@ ux.plugins.WMSGetFeatureInfo = Ext.extend(gxp.plugins.Tool, {
      *  ``Object``
      */
     popupCache: null,
-    
+
     /** api: config[format]
      *  ``String`` Either "html" or "grid". If set to "grid", GML will be
      *  requested from the server and displayed in an Ext.PropertyGrid.
@@ -85,25 +85,25 @@ ux.plugins.WMSGetFeatureInfo = Ext.extend(gxp.plugins.Tool, {
      *  Default is "html".
      */
     format: "html",
-	
+
 	/** api: config[unique]
 	 * ``Boolean`` true or false. If set to True, only one popup window
 	 * is allowed at a time.
 	 * DocG - 05/11/2013
 	 */
 	unique: false,
-	 
+
 	onRightClick: false,
-    
+
 	blockContextMenu: function(e){
 		e.preventDefault();
 	},
-	
+
     /** api: method[addActions]
      */
     addActions: function() {
         this.popupCache = {};
-        
+
         var actions = ux.plugins.WMSGetFeatureInfo.superclass.addActions.call(this, [{
             tooltip: this.infoActionTip,
             iconCls: "gxp-icon-getfeatureinfo",
@@ -123,7 +123,7 @@ ux.plugins.WMSGetFeatureInfo = Ext.extend(gxp.plugins.Tool, {
         var infoButton = this.actions[0].items[0];
 
         var info = {controls: [], controls2: []};
-		
+
         var updateInfo = function() {
             var queryableLayers = this.target.mapPanel.layers.queryBy(function(x){
                 return x.get("queryable");
@@ -142,7 +142,7 @@ ux.plugins.WMSGetFeatureInfo = Ext.extend(gxp.plugins.Tool, {
                 control.deactivate();  // TODO: remove when http://trac.openlayers.org/ticket/2130 is closed
                 control.destroy();
             }
-			
+
             info.controls = [];
 			info.controls2 = [];
             queryableLayers.each(function(x){
@@ -160,9 +160,9 @@ ux.plugins.WMSGetFeatureInfo = Ext.extend(gxp.plugins.Tool, {
                     // TODO: this will not work for WMS 1.3 (text/xml instead for GML)
                     infoFormat = this.format == "html" ? "text/html" : "application/vnd.ogc.gml";
                 }
-				
+
 				vendorParams["buffer"] = 10;
-				
+
                 var control = new OpenLayers.Control.WMSGetFeatureInfo(Ext.applyIf({
 					url: layer.url,
                     queryVisible: true,
@@ -186,7 +186,7 @@ ux.plugins.WMSGetFeatureInfo = Ext.extend(gxp.plugins.Tool, {
 											this.redirect(evt,title,ux.gfi[currentLangage][layer_name]);
 											break;
 									}
-								} else {								
+								} else {
 									if (infoFormat == "text/html") {
 										var match = evt.text.match(/<body[^>]*>([\s\S]*)<\/body>/);
 										if (match && !match[1].match(/^\s*$/)) {
@@ -208,7 +208,7 @@ ux.plugins.WMSGetFeatureInfo = Ext.extend(gxp.plugins.Tool, {
                 if(infoButton.pressed) {
                     control.activate();
                 }
-				
+
 				// DOCG // Pour obtenir le GFI sur le clic droit //////////////
 				var oClick = new OpenLayers.Control.RightClick({ eventMethods: {
 					'rightclick': function (e) {
@@ -218,14 +218,14 @@ ux.plugins.WMSGetFeatureInfo = Ext.extend(gxp.plugins.Tool, {
 				map.addControl(oClick);
 				info.controls2.push(oClick);
             }, this);
-			
-			var getFeatureInfoOnRightClick = 
+
+			var getFeatureInfoOnRightClick =
 				(localStorage.getItem("shwPiRc") && localStorage.getItem("shwPiRc") == '0')?
 				false:
 				(localStorage.getItem("shwPiRc") && localStorage.getItem("shwPiRc") == '1')?
 				true:
 				false;
-				
+
 			for (var i = 0, len = info.controls2.length; i < len; i++){
 				var oClick = info.controls2[i];
 				if (getFeatureInfoOnRightClick == true) {
@@ -251,12 +251,12 @@ ux.plugins.WMSGetFeatureInfo = Ext.extend(gxp.plugins.Tool, {
 				}
 			}
         };
-		
+
 		this.target.on("preferencesChange", updateInfo, this);
         this.target.mapPanel.layers.on("update", updateInfo, this);
         this.target.mapPanel.layers.on("add", updateInfo, this);
         this.target.mapPanel.layers.on("remove", updateInfo, this);
-        
+
         return actions;
     },
 
@@ -307,24 +307,24 @@ ux.plugins.WMSGetFeatureInfo = Ext.extend(gxp.plugins.Tool, {
 		vectorLayer.removeAllFeatures();
 		vectorLayer.addFeatures([feature]);
 	},
-	
+
 	cleanHighlighting : function() {
 		var resLayers = this.target.mapPanel.map.getLayersByName("wmsgfihigh");
 		if(resLayers.length != 0 ) {
 			resLayers[0].removeAllFeatures();
-		} 
+		}
 	},
-	
+
 	removeHighlightLayer : function() {
 		var resLayers = this.target.mapPanel.map.getLayersByName("wmsgfihigh");
 		if(resLayers.length != 0 ) {
 			this.target.mapPanel.map.removeLayer(resLayers[0]);
-		} 
+		}
 	},
     /** private: method[displayPopup]
-     * :arg evt: the event object from a 
+     * :arg evt: the event object from a
      *     :class:`OpenLayers.Control.GetFeatureInfo` control
-     * :arg title: a String to use for the title of the results striggered before a layer has been added.  The event object will include a layerection 
+     * :arg title: a String to use for the title of the results striggered before a layer has been added.  The event object will include a layerection
      *     reporting the info to the user
      * :arg text: ``String`` Body text.
      */
@@ -336,7 +336,7 @@ ux.plugins.WMSGetFeatureInfo = Ext.extend(gxp.plugins.Tool, {
 			for (var each in this.popupCache) {
 				this.popupCache[each].close();
 			}
-		}	
+		}
         var popup;
         var popupKey = evt.xy.x + "." + evt.xy.y;
 		var NumberOfObjects = evt.features.length;
@@ -385,15 +385,15 @@ ux.plugins.WMSGetFeatureInfo = Ext.extend(gxp.plugins.Tool, {
             for (var i=0,ii=features.length; i<ii; ++i) {
                 feature = features[i];
 				var new_attributes = {};
-				var customRenderers = {};					
-				//Récupèrele nom de la feature
+				var customRenderers = {};
+				//Rï¿½cupï¿½rele nom de la feature
 				var layer_name = "";
 				if(feature.gml) {
 					layer_name = feature.gml.featureNSPrefix + ":" + feature.gml.featureType;
 				} else {
 					layer_name = feature.type;
 				}
-				
+
 				var currentLangage = GeoExt.Lang.locale;
 				var layerConfiguration = {};
 				if (layer_name && ux.gfi[currentLangage] && ux.gfi[currentLangage][layer_name]) {
@@ -403,7 +403,7 @@ ux.plugins.WMSGetFeatureInfo = Ext.extend(gxp.plugins.Tool, {
 					{
 						var n_attribute = layerConfiguration.attributes[cpt];
 						var labelTemplate = n_attribute.label;
-						
+
 						for(var attribute in feature.attributes)
 						{
 							var pattern = "\["+attribute+"\]";
@@ -448,19 +448,19 @@ ux.plugins.WMSGetFeatureInfo = Ext.extend(gxp.plugins.Tool, {
 									break;
 						}
 						labelTemplate = labelTemplate.replace(/\[(.*?)\]/g, "");
-						
+
 						new_attributes[n_attribute.name] = labelTemplate;
-						
-					}				
+
+					}
 				} else {
 					new_attributes = feature.attributes;
 				}
 				//Store the geometry for highlighting
 				new_attributes["geom"] = feature.geometry;
-				
-				// Calcul incompatible avec IE... le .getArea n'est pas accepté
+
+				// Calcul incompatible avec IE... le .getArea n'est pas acceptï¿½
 				if (OpenLayers.Util.getBrowserName() != 'msie'){
-				
+
 					if (feature.geometry && feature.geometry.getArea() > 0.0) {
 						feature.attributes[this.areaLabel] = String(feature.geometry.getArea().toFixed(2)) + " m2";
 						feature.attributes[this.centroidLabel] = "X/Y: " + String(feature.geometry.getCentroid().x.toFixed(2)) + " m / " + String(feature.geometry.getCentroid().y.toFixed(2)) + " m";
@@ -476,7 +476,7 @@ ux.plugins.WMSGetFeatureInfo = Ext.extend(gxp.plugins.Tool, {
 						}
 					}
 				}
-				
+
 
 				var customTitle = title;
 				if (layerConfiguration && layerConfiguration.title) {
@@ -488,12 +488,12 @@ ux.plugins.WMSGetFeatureInfo = Ext.extend(gxp.plugins.Tool, {
 					}
 					feature.customTitle = customTitle.replace(/\[(.*?)\]/g, "");
 				}
-				
+
                 config.push(Ext.apply({
                     xtype: "propertygrid",
                     listeners: {
-                        'beforeedit': function (e) { 
-                            return false; 
+                        'beforeedit': function (e) {
+                            return false;
                         },
 						'celldblclick': function (e, rowIndex, columnIndex) {
 							var name  = e.store.data.items[rowIndex].data.name;
@@ -519,22 +519,22 @@ ux.plugins.WMSGetFeatureInfo = Ext.extend(gxp.plugins.Tool, {
 					dateFormat: "d/m/Y",
 					customRenderers : customRenderers
                 }, this.itemConfig));
-				
+
             }
         } else if (text) {
             config.push(Ext.apply({
                 title: title,
                 html: text
             }, this.itemConfig));
-        }		
+        }
         popup.add(config);
         popup.doLayout();
     },
 
 	/** private: method[displayPopup]
-     * :arg evt: the event object from a 
+     * :arg evt: the event object from a
      *     :class:`OpenLayers.Control.GetFeatureInfo` control
-     * :arg title: a String to use for the title of the results section 
+     * :arg title: a String to use for the title of the results section
      *     reporting the info to the user
      * :arg text: ``String`` Body text.
      */
@@ -549,7 +549,7 @@ ux.plugins.WMSGetFeatureInfo = Ext.extend(gxp.plugins.Tool, {
 		}
         var popup;
         var popupKey = evt.xy.x + "." + evt.xy.y;
-		var NumberOfObjects = evt.features.length;		
+		var NumberOfObjects = evt.features.length;
         if (!(popupKey in this.popupCache)) {
             popup = this.addOutput({
                 xtype: "gx_popup",
@@ -646,13 +646,13 @@ ux.plugins.WMSGetFeatureInfo = Ext.extend(gxp.plugins.Tool, {
 								break;
 					}
 					labelTemplate = labelTemplate.replace(/\[(.*?)\]/g, "");
-					
+
 					new_attributes[n_attribute.name] = labelTemplate;
-					
+
 				}
-				// Calcul incompatible avec IE... le .getArea n'est pas accepté
+				// Calcul incompatible avec IE... le .getArea n'est pas acceptï¿½
 				if (OpenLayers.Util.getBrowserName() != 'msie'){
-				
+
 					if (feature.geometry && feature.geometry.getArea() > 0.0) {
 						new_attributes[this.areaLabel]     = String(feature.geometry.getArea().toFixed(2)) + " m2";
 						new_attributes[this.centroidLabel] = "X/Y: " + String(feature.geometry.getCentroid().x.toFixed(2)) + " m / " + String(feature.geometry.getCentroid().y.toFixed(2)) + " m";
@@ -670,7 +670,7 @@ ux.plugins.WMSGetFeatureInfo = Ext.extend(gxp.plugins.Tool, {
 				}
 
 				/* DOCG - 2014/01/22
-				 *Décoration du titre de l'accordion
+				 *Dï¿½coration du titre de l'accordion
 				 */
 				var customTitle = title;
 				if (layerConfiguration.title) {
@@ -684,11 +684,11 @@ ux.plugins.WMSGetFeatureInfo = Ext.extend(gxp.plugins.Tool, {
 				}
 
 				new_attributes["geom"] = feature.geometry;
-				
+
 				var p = new Ext.grid.PropertyGrid({
 					listeners: {
-						'beforeedit': function (e) { 
-							return false; 
+						'beforeedit': function (e) {
+							return false;
 						},
 						'celldblclick': function (e, rowIndex, columnIndex) {
 							var name  = e.store.data.items[rowIndex].data.name;
@@ -732,8 +732,8 @@ ux.plugins.WMSGetFeatureInfo = Ext.extend(gxp.plugins.Tool, {
 		popup.add(config);
         popup.doLayout();
     },
-	
-	redirect : function(evt, title, layerConfiguration) {	
+
+	redirect : function(evt, title, layerConfiguration) {
         var popup;
 		var features = evt.features, config = [];
         if (features) {
@@ -744,10 +744,10 @@ ux.plugins.WMSGetFeatureInfo = Ext.extend(gxp.plugins.Tool, {
 				for(var attribute in feature.attributes)
 				{
 					var pattern = "\["+attribute+"\]";;
-					templateUrl = templateUrl.replace(pattern,feature.attributes[attribute]);	
+					templateUrl = templateUrl.replace(pattern,feature.attributes[attribute]);
 				}
 				window.open(templateUrl,  '_blank');
-				break; // on n'effectue que la première redirection
+				break; // on n'effectue que la premiï¿½re redirection
 			}
 		}
 	}

@@ -1,8 +1,8 @@
 /**
- * Copyright (c) 2008-2012 The Open Source Geospatial Foundation
+ * Copyright (c) Brugis (S.P.R.B)
  *
- * Published under the BSD license.
- * See http://svn.geoext.org/core/trunk/geoext/license.txt for the full text
+ * Published under the GPL V3 license.
+ * See www.gnu.org/licences/gpl-3.0 for the full text
  * of the license.
  */
 
@@ -80,7 +80,7 @@ ux.plugins.WMSLegend = Ext.extend(GeoExt.LayerLegend, {
      *  `gx_legendimage`.
      */
     itemXType: "gx_legendimage",
-    
+
     /** private: method[initComponent]
      *  Initializes the WMS legend. For group layers it will create multiple
      *  image box components.

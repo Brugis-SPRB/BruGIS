@@ -476,12 +476,12 @@ ux.gfi.nl =  {
 				{ "name": "Referentie DML"			, "label" : "[NUMMER_DOSSIER]/[CODE_DOSSIER]"					, "type" : "string"}
 			]
 		},
-		"TAX:Observations": {
+		"TAX:Observaties": {
 			"actiontype" : "GRID",
 			"attributes" : [
 				{ "name": "C_OBSERV"			, "label" : "[C_OBSERV]"	, "type" : "string"},
 				{ "name": "DATE_REAL"			, "label" : "[DATE_REAL]"	, "type" : "date"},
-				{ "name": "LIEN_HTTP"			, "label" : "[LIEN_HTTP]"	, "type" : "link"},
+				{ "name": "LIEN_HTTP"			, "label" : "[LIEN_HTTP]"	, "type" : "file"},
 				{ "name": "ORIG_OBS"			, "label" : "[ORIG_OBS]"	, "type" : "string"},
 				{ "name": "PARCELLE"			, "label" : "[PARCELLE]"	, "type" : "string"}
 			]

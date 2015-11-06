@@ -1,8 +1,8 @@
 /**
- * Copyright (c) 2008-2011 The Open Planning Project
- * 
- * Published under the GPL license.
- * See https://github.com/opengeo/gxp/raw/master/license.txt for the full text
+ * Copyright (c) Brugis (S.P.R.B)
+ *
+ * Published under the GPL V3 license.
+ * See www.gnu.org/licences/gpl-3.0 for the full text
  * of the license.
  */
 
@@ -25,11 +25,11 @@ Ext.namespace("ux.plugins");
  *  .. class:: CirbGeocoder(config)
  *
  *    Plugin for adding a CirbGeocoderComboBox to a viewer.  The underlying
- *    CirbGeocoderComboBox can be configured by setting this tool's 
- *    ``outputConfig`` property. 
+ *    CirbGeocoderComboBox can be configured by setting this tool's
+ *    ``outputConfig`` property.
  */
 ux.plugins.CirbGeocoder = Ext.extend(gxp.plugins.Tool, {
-    
+
     /** api: ptype = ux_CirbGeocoder */
     ptype: "ux_CirbGeocoder",
 
@@ -45,7 +45,7 @@ ux.plugins.CirbGeocoder = Ext.extend(gxp.plugins.Tool, {
      *  Default is "viewport".
      */
     updateField: "viewport",
-    
+
     init: function(target) {
 
         var combo = new ux.form.CirbGeocoderComboBox(Ext.apply({
@@ -54,7 +54,7 @@ ux.plugins.CirbGeocoder = Ext.extend(gxp.plugins.Tool, {
                 scope: this
             }
         }, this.outputConfig));
-        
+
         var bounds = target.mapPanel.map.restrictedExtent;
         if (bounds && !combo.bounds) {
             target.on({
@@ -67,7 +67,7 @@ ux.plugins.CirbGeocoder = Ext.extend(gxp.plugins.Tool, {
             });
         }
         this.combo = combo;
-        
+
         return ux.plugins.CirbGeocoder.superclass.init.apply(this, arguments);
 
     },
@@ -77,20 +77,20 @@ ux.plugins.CirbGeocoder = Ext.extend(gxp.plugins.Tool, {
     addOutput: function(config) {
         return ux.plugins.CirbGeocoder.superclass.addOutput.call(this, this.combo);
     },
-    
+
     /** private: method[onComboSelect]
      *  Listener for combo's select event.
      */
     onComboSelect: function(combo, record) {
         if (this.updateField) {
             var map = this.target.mapPanel.map;
-			
+
 			console.log(record);
-			
-			var dest = new Proj4js.Proj('EPSG:31370');			
+
+			var dest = new Proj4js.Proj('EPSG:31370');
 			var myPoint = record.data.point;
 			var adnc    = record.data.adNc;
-			
+
 			//var p = new Proj4js.Point(myPoint.x, myPoint.y);
 			//Proj4js.transform(source, dest, p);
 
@@ -123,7 +123,7 @@ ux.plugins.CirbGeocoder = Ext.extend(gxp.plugins.Tool, {
 						myPoint.x, myPoint.y
 				 );
 				map.setCenter(position, this.zoomToPolNum);
-				
+
 			}
         }
     }
