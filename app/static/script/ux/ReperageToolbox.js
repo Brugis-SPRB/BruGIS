@@ -215,7 +215,7 @@ ux.plugins.ReperageToolbox = Ext.extend(gxp.plugins.Tool, {
 		//Warning : the getfeatureInfo need a proxy defined in order to work
 		var parcelLayer = new OpenLayers.Layer.WMS("ParcelleReperage",
 			this.brugisWmsHost,
-			{'layers': 'AATL:Parcelle_2014', transparent: true, format: 'image/png'},
+			{'layers': 'AATL:Parcelle_2014', transparent: true, format: 'image/png8'},
 			{isBaseLayer: false}
 		);
 		parcelLayer.displayInLayerSwitcher = false;
