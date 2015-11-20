@@ -118,6 +118,11 @@ Ext.onReady(function () {
 				url: "http://grb.agiv.be/geodiensten/raadpleegdiensten/GRB-basiskaart/wms?",
 				version: "1.3.0",
 				ptype: "gxp_wmssource"
+			},
+			'AGIV WMS - Historische kaarten': {
+				url: "http://geo.api.agiv.be/geodiensten/raadpleegdiensten/histcart/wms?",
+				version: "1.3.0",
+				ptype: "gxp_wmssource"
 			}
 		};
 
