@@ -335,6 +335,10 @@ ux.plugins.ReperageToolbox = Ext.extend(gxp.plugins.Tool, {
 			name: 'brugisuser'
 		});
 
+		var brugisUserLangHidden = new Ext.form.Hidden({
+			name: 'lang'
+		});
+
 		var reperageFormPanel = new Ext.FormPanel({
 			labelWidth: 100,
 			frame:true,
@@ -345,7 +349,8 @@ ux.plugins.ReperageToolbox = Ext.extend(gxp.plugins.Tool, {
 				reperageAdrText,
 				reperageTypeCombo,
 				reperageUserHidden,
-				brugisUserHidden],
+				brugisUserHidden,
+				brugisUserLangHidden],
 			buttons : [{
 				text: 'OK',
 				minWidth: '75',
@@ -418,6 +423,7 @@ ux.plugins.ReperageToolbox = Ext.extend(gxp.plugins.Tool, {
 		this.reperageUserHidden = reperageUserHidden;
 		this.reperageTypeCombo = reperageTypeCombo;
 		this.brugisUserHidden = brugisUserHidden;
+		this.brugisUserLangHidden = brugisUserLangHidden;
 		this.copyParcelFeatBtn = copyParcelFeatBtn;
 		this.copyParcelControl = copyParcelControl;
 		this.parcelLayer = null;
@@ -866,6 +872,14 @@ ux.plugins.ReperageToolbox = Ext.extend(gxp.plugins.Tool, {
 		return this.getCookieValue("geoexplorer-user");
 	},
 
+	getLang : function() {
+		var currentLang = GeoExt.Lang.locale;
+		if (localStorage && localStorage.getItem('BruGISLanguage')) {
+			currentLang = localStorage.getItem('BruGISLanguage');
+		}
+		return currentLang;
+	}
+
 	//affiche le formulaire d'envoi de l'urbanalyse
 	showReperageForm: function() {
 		this.showReperageFormDlg;
@@ -905,7 +919,8 @@ ux.plugins.ReperageToolbox = Ext.extend(gxp.plugins.Tool, {
 		this.reperageGeomHidden.setValue(reperageGeometry);
 		//Get the user
 		this.reperageUserHidden.setValue(this.username);
-
+		//Set the currentLang
+		this.brugisUserLangHidden.setValue(this.getLang());
 	},
 
 	serializeReperageArea: function() {
