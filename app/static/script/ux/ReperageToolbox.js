@@ -878,7 +878,7 @@ ux.plugins.ReperageToolbox = Ext.extend(gxp.plugins.Tool, {
 			currentLang = localStorage.getItem('BruGISLanguage');
 		}
 		return currentLang;
-	}
+	},
 
 	//affiche le formulaire d'envoi de l'urbanalyse
 	showReperageForm: function() {
