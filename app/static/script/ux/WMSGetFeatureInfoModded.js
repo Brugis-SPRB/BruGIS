@@ -424,10 +424,10 @@ ux.plugins.WMSGetFeatureInfo = Ext.extend(gxp.plugins.Tool, {
 									break;
 								case "file":
 									customRenderers[n_attribute.name] = function(attrib){
-										attrib = attrib.replace("\\\\", "/");
+										attrib = attrib.replace("\\", "/");
 										attrib = attrib.replace(/^\/\//g,'');
 										attrib = attrib.replace(/^\/ /g,'');
-										attrib = "file://///" + attrib;
+										attrib = "file://" + attrib;
 										return '<a href="' + attrib + '" target= "_blank">' + attrib + '</a>';
 									}
 									break;
@@ -622,7 +622,7 @@ ux.plugins.WMSGetFeatureInfo = Ext.extend(gxp.plugins.Tool, {
 								    attrib = attrib.replace("\\\\", "/");
 									attrib = attrib.replace(/^\/\//g,'');
 									attrib = attrib.replace(/^\/ /g,'');
-									attrib = "file://///" + attrib;
+									attrib = "file://" + attrib;
 									return '<a href="' + attrib + '" target= "_blank">' + attrib + '</a>';
 								}
 								break;
