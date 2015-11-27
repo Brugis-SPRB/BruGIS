@@ -493,6 +493,7 @@ ux.plugins.ReperageToolbox = Ext.extend(gxp.plugins.Tool, {
 		var actions = ux.plugins.ReperageToolbox.superclass.addActions.apply(this, [this.button]);
 
 		this.target.on("ready", function() {
+			// et de un
 			if (this.checkLocalStorage()) {
 				actions[0].enable();
 			} else {
@@ -500,6 +501,7 @@ ux.plugins.ReperageToolbox = Ext.extend(gxp.plugins.Tool, {
 			}
 			var layerStore = this.target.mapPanel.layers;
 			var source = this.target.layerSources["BruGIS WMS - Geoserver"];
+			// et de deux
 			if(source.lazy) {
 				source.store.load({
 					callback:(function(){
@@ -515,7 +517,7 @@ ux.plugins.ReperageToolbox = Ext.extend(gxp.plugins.Tool, {
 						this.copyParcelControl.layers = [record.get('layer')];
 					}).createDelegate(this)
 				});
-		  } else {
+			} else {
 				var record = source.createLayerRecord({
 					name: 'AATL:Parcelle_2015',
 					title: 'Parcelle 2015',
@@ -527,6 +529,21 @@ ux.plugins.ReperageToolbox = Ext.extend(gxp.plugins.Tool, {
 				layerStore.add(record);
 				this.copyParcelControl.layers = [record.get('layer')];
 			}
+			// et de trois
+			for (var i=actions.length-1; i>=0; --i) {
+				var showButton =
+					(localStorage.getItem("shwUaTb") && localStorage.getItem("shwUaTb") == '0')?
+					false:
+					(localStorage.getItem("shwUaTb") && localStorage.getItem("shwUaTb") == '1')?
+					true:
+					true;
+
+				if (showButton == true) {
+					actions[i].show();
+				} else {
+					actions[i].hide();
+				}
+			}
 		}, this);
 
 		this.actions = actions;
@@ -537,7 +554,7 @@ ux.plugins.ReperageToolbox = Ext.extend(gxp.plugins.Tool, {
 					false:
 					(localStorage.getItem("shwUaTb") && localStorage.getItem("shwUaTb") == '1')?
 					true:
-					false;
+					true;
 
 				if (showButton == true) {
 					this.actions[i].show();

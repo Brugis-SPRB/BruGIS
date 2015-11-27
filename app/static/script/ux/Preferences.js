@@ -170,7 +170,7 @@ ux.plugins.Preferences = Ext.extend(gxp.plugins.Tool, {
         this.target.on("ready", function() {
 			if (this.checkLocalStorage()) {
             this.initPreferences();
-            actions[0].enable();
+			actions[0].enable();
 			} else {
 			actions[0].disable();
 			}
@@ -212,6 +212,9 @@ ux.plugins.Preferences = Ext.extend(gxp.plugins.Tool, {
 	initPreferences: function() {
 		this.checkLocalStorage();
 		if (this.validLocalStorage) {
+		
+			console.log("in initPreferences- 01");
+			
 			var data = [];
 			// ! ne pas changer l'ordre dans les array !
 			// sessionChoicesData = la liste des champs de la combobox de session
@@ -252,15 +255,19 @@ ux.plugins.Preferences = Ext.extend(gxp.plugins.Tool, {
 				"shwDeTl" : this.showDataEditoToolsChoices,
 				"shwDmTl" : this.showDedicatedMapToolsChoices,
 				"shwPiRc" : this.showPopupInfoOnRightClick};
-
+				
 			// les prefs sont déjà en localstorage
 			if (localStorage.getItem("preferences") !== null) {
 				var preferencesKeysTemp = this.preferencesKeys;
 				for (key in this.preferencesKeys) {
 					if (key !== "remove") {
+						console.log("in initpreferences- key: " + key);
 						var preferenceKey = this.preferencesKeys[key],
 							preferenceContent = '';
+						console.log("in initpreferences- localStorage.getItem(preferenceKey): " + localStorage.getItem(preferenceKey));
+						console.log("in initpreferences- localStorage.getItem(preferenceKey) !== null: " + localStorage.getItem(preferenceKey) !== null);
 						if (localStorage.getItem(preferenceKey) !== null) {
+							
 							//La prefs existe en localstorage
 							preferenceContent = localStorage.getItem(preferenceKey);
 						} else {
@@ -302,7 +309,7 @@ ux.plugins.Preferences = Ext.extend(gxp.plugins.Tool, {
 				for (key in this.preferencesKeys) {
 					if (key !== "remove") {
 						localStorage.setItem(this.preferencesKeys[key], this.defaultPreferences[this.preferencesKeys[key]]);
-						data.append([this.preferencesKeys[key], this.defaultPreferences[this.preferencesKeys[key]]]);
+						data.push([this.preferencesKeys[key], this.defaultPreferences[this.preferencesKeys[key]]]);
 					}
 				}
 			}
@@ -327,7 +334,11 @@ ux.plugins.Preferences = Ext.extend(gxp.plugins.Tool, {
      */
 	checkLocalStorage: function() {
 		this.validLocalStorage = (localStorage)?true:false;
-		if (this.validLocalStorage) {} else {
+		if (this.validLocalStorage) {
+			console.log("checkLocalStorage " + this.validLocalStorage);
+		} 
+		else {
+			console.log("checkLocalStorage " + this.validLocalStorage);
 			this.deactivate();
 		}
 		return this.validLocalStorage;
@@ -336,7 +347,7 @@ ux.plugins.Preferences = Ext.extend(gxp.plugins.Tool, {
     /** api: method[showPreferencesGrid]
      * Shows the window with a Preferences grid.
      */
-  showPreferencesGrid: function() {
+    showPreferencesGrid: function() {
 		this.initPreferences();
 		if(!this.preferencesWindow) {
 			this.initPreferencesWindow();
@@ -531,7 +542,7 @@ ux.plugins.Preferences = Ext.extend(gxp.plugins.Tool, {
     /** api: method[updateChoice]
      * a very intelligent and advanced function.
      */
-  updateChoice: function(args) {
+    updateChoice: function(args) {
 		//console.log(args);
 		if (args.xtype == "combo"){
 			//console.log("combo");
