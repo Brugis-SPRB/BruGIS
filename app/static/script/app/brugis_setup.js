@@ -90,7 +90,7 @@ Ext.onReady(function () {
 				version: "1.1.1"
 			},
 			'CIRB WMS - Geoserver': {
-				url: "http://geoserver.gis.irisnet.be/geoserver/ows",
+				url: "http://geoservices-urbis.irisnet.be/geoserver/ows?",
 				version: "1.3.0",
 				ptype: "gxp_wmscsource"
 			},
@@ -115,12 +115,12 @@ Ext.onReady(function () {
 				ptype: "gxp_wmssource"
 			},
 			'AGIV WMS - Basiskaart': {
-				url: "http://grb.agiv.be/geodiensten/raadpleegdiensten/GRB-basiskaart/wms?",
+				url: "http://geoservices.informatievlaanderen.be/raadpleegdiensten/GRB-basiskaart/wms?",
 				version: "1.3.0",
 				ptype: "gxp_wmssource"
 			},
 			'AGIV WMS - Historische kaarten': {
-				url: "http://geo.api.agiv.be/geodiensten/raadpleegdiensten/histcart/wms?",
+				url: "http://geoservices.informatievlaanderen.be/raadpleegdiensten/histcart/wms?",
 				version: "1.3.0",
 				ptype: "gxp_wmssource"
 			}

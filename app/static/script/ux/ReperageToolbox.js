@@ -251,12 +251,19 @@ ux.plugins.ReperageToolbox = Ext.extend(gxp.plugins.Tool, {
 			toggleHandler: function(btn,state){
 				if (state) {
 					if(this.parcelLayer) {
+						if(this.target.mapPanel.layers.find("name","AATL:Parcelle_2015") == -1){
+							this.target.mapPanel.layers.add(this.parcelLayerRecord);
+						}
 						this.parcelLayer.setVisibility(true);
 					}
 					this.copyParcelControl.activate();
 				} else {
 					if(this.parcelLayer) {
 						this.parcelLayer.setVisibility(false);
+
+						if(this.target.mapPanel.layers.getById(this.parcelLayerRecord)){
+							this.target.mapPanel.layers.remove(this.parcelLayerRecord);
+						}
 					}
 					this.copyParcelControl.deactivate();
 				}
@@ -506,6 +513,7 @@ ux.plugins.ReperageToolbox = Ext.extend(gxp.plugins.Tool, {
 							title: 'Parcelle 2015',
 							source: source.id
 						});
+						this.parcelLayerRecord = record;
 						this.parcelLayer = record.get('layer');
 						this.parcelLayer.displayInLayerSwitcher = false;
 						this.parcelLayer.setVisibility(false);
@@ -520,6 +528,7 @@ ux.plugins.ReperageToolbox = Ext.extend(gxp.plugins.Tool, {
 					title: 'Parcelle 2015',
 					source: source.id
 				});
+				this.parcelLayerRecord = record;
 				this.parcelLayer = record.get('layer');
 				this.parcelLayer.displayInLayerSwitcher = false;
 				this.parcelLayer.setVisibility(false);
@@ -766,8 +775,8 @@ ux.plugins.ReperageToolbox = Ext.extend(gxp.plugins.Tool, {
                 sortable : false,
                 items: [{
                 	icon: '../theme/app/img/icon_refresh.png',
-					tooltip: this.myReperageGridPanel_recycle_tooltip,
-					scope: this,
+									tooltip: this.myReperageGridPanel_recycle_tooltip,
+									scope: this,
                 	getClass : function( v, meta, record ) {
                         if ( record.get('state') != "FAILED" && record.get('state') != "REMOVED" ) {
                             return 'x-hide-display';
@@ -784,25 +793,25 @@ ux.plugins.ReperageToolbox = Ext.extend(gxp.plugins.Tool, {
                             	success: function (){
                         			Ext.getCmp("myReperageGridPanel").getStore().reload();
                         			Ext.getCmp("myReperageGridPanel").reload();
-								},
-                    			error: function (msg, url, line) {
+											},
+                    	error: function (msg, url, line) {
                         			alert('Error: see console log');
                         			console.log('msg = ' + msg + ', url = ' + url + ', line = ' + line);
                         			Ext.getCmp("myReperageGridPanel").getStore().reload();
                         			Ext.getCmp("myReperageGridPanel").reload();
                         		}
-                            });
+                      });
                     	}
-						if(rec.get('state') == "REMOVED"){
-                            Ext.Ajax.request({
-                            	type: "GET",
-                            	url: this.reperageHost + '/resources/WorkItems/renew-'+rec.get('id'),
-                            	data: "{}",
-                            	contentType: "application/x-www-form-urlencoded; charset=utf-8",
-                            	success: function (){
-                        			Ext.getCmp("myReperageGridPanel").getStore().reload();
-                        			Ext.getCmp("myReperageGridPanel").reload();
-								},
+										if(rec.get('state') == "REMOVED"){
+				                            Ext.Ajax.request({
+				                            	type: "GET",
+				                            	url: this.reperageHost + '/resources/WorkItems/renew-'+rec.get('id'),
+				                            	data: "{}",
+				                            	contentType: "application/x-www-form-urlencoded; charset=utf-8",
+				                            	success: function (){
+				                        			Ext.getCmp("myReperageGridPanel").getStore().reload();
+				                        			Ext.getCmp("myReperageGridPanel").reload();
+												},
                     			error: function (msg, url, line) {
                         			alert('Error: see console log');
                         			console.log('msg = ' + msg + ', url = ' + url + ', line = ' + line);
