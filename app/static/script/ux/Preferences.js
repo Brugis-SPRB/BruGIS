@@ -213,7 +213,7 @@ ux.plugins.Preferences = Ext.extend(gxp.plugins.Tool, {
 		this.checkLocalStorage();
 		if (this.validLocalStorage) {
 		
-			console.log("in initPreferences- 01");
+			//console.log("in initPreferences- 01");
 			
 			var data = [];
 			// ! ne pas changer l'ordre dans les array !
@@ -261,11 +261,11 @@ ux.plugins.Preferences = Ext.extend(gxp.plugins.Tool, {
 				var preferencesKeysTemp = this.preferencesKeys;
 				for (key in this.preferencesKeys) {
 					if (key !== "remove") {
-						console.log("in initpreferences- key: " + key);
+						//console.log("in initpreferences- key: " + key);
 						var preferenceKey = this.preferencesKeys[key],
 							preferenceContent = '';
-						console.log("in initpreferences- localStorage.getItem(preferenceKey): " + localStorage.getItem(preferenceKey));
-						console.log("in initpreferences- localStorage.getItem(preferenceKey) !== null: " + localStorage.getItem(preferenceKey) !== null);
+						//console.log("in initpreferences- localStorage.getItem(preferenceKey): " + localStorage.getItem(preferenceKey));
+						//console.log("in initpreferences- localStorage.getItem(preferenceKey) !== null: " + localStorage.getItem(preferenceKey) !== null);
 						if (localStorage.getItem(preferenceKey) !== null) {
 							
 							//La prefs existe en localstorage
@@ -335,10 +335,10 @@ ux.plugins.Preferences = Ext.extend(gxp.plugins.Tool, {
 	checkLocalStorage: function() {
 		this.validLocalStorage = (localStorage)?true:false;
 		if (this.validLocalStorage) {
-			console.log("checkLocalStorage " + this.validLocalStorage);
+			//console.log("checkLocalStorage " + this.validLocalStorage);
 		} 
 		else {
-			console.log("checkLocalStorage " + this.validLocalStorage);
+			//console.log("checkLocalStorage " + this.validLocalStorage);
 			this.deactivate();
 		}
 		return this.validLocalStorage;
