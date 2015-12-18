@@ -479,10 +479,6 @@ ux.plugins.ReperageToolbox = Ext.extend(gxp.plugins.Tool, {
 			console.error("urbanalysis working layer : " + this.reperageLayerName + " found ! Plugin is initialized multiple times");
 		} else {
 			map.addLayer(this.reperageLayer);
-
-
-
-
 		}
 		//Adding OL Controls
 		map.addControl(this.drawReperageFeatureControl);
@@ -515,6 +511,7 @@ ux.plugins.ReperageToolbox = Ext.extend(gxp.plugins.Tool, {
 						this.parcelLayer.setVisibility(false);
 						layerStore.add(record);
 						this.copyParcelControl.layers = [record.get('layer')];
+						this.target.mapPanel.layers.remove(record);
 					}).createDelegate(this)
 				});
 			} else {
@@ -528,6 +525,7 @@ ux.plugins.ReperageToolbox = Ext.extend(gxp.plugins.Tool, {
 				this.parcelLayer.setVisibility(false);
 				layerStore.add(record);
 				this.copyParcelControl.layers = [record.get('layer')];
+				this.target.mapPanel.layers.remove(record);
 			}
 			// et de trois
 			for (var i=actions.length-1; i>=0; --i) {
