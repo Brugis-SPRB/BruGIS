@@ -778,7 +778,7 @@ ux.plugins.ReperageToolbox = Ext.extend(gxp.plugins.Tool, {
 									tooltip: this.myReperageGridPanel_recycle_tooltip,
 									scope: this,
                 	getClass : function( v, meta, record ) {
-                        if ( record.get('state') != "FAILED" && record.get('state') != "REMOVED" ) {
+                        if ( record.get('state') != "TIMEOUT" && record.get('state') != "FAILED" && record.get('state') != "REMOVED" ) {
                             return 'x-hide-display';
                         }
                     },
