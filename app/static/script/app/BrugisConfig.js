@@ -88,7 +88,7 @@ Brugis.Config = Ext.extend(Object,  {
 				url = "http://SVAPPMAVL101:8080/WebReperage";
 				break;
 			case this.STA:
-				url = "http://mbr64.irisnetlab.be/WebReperage";
+				url = "http://mbr127.irisnetlab.be/WebReperage";
 				break;
 			case this.PRD:
 				url = "http://mbr227.irisnet.be/WebReperage";
