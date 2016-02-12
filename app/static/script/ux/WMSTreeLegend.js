@@ -97,7 +97,7 @@ ux.plugins.WMSTreeLegend = Ext.extend(gxp.plugins.Tool, {
   			if(this.cheking == false){
   				this.reloading = true;
   				for(i=0, l=record.length; i<l; i++) {
-  					if (!(!(record[i].json))) {
+            if (record[i].json) {
   						var myLayerName = record[i].json.name;
   						this.checkAndExpandNodeFromLayerName(myLayerName,record[i]);
   					}
@@ -165,9 +165,58 @@ ux.plugins.WMSTreeLegend = Ext.extend(gxp.plugins.Tool, {
           //sldUrl = encodeURIComponent(sldUrl);
         }
       },this);
-      //console.log(sldUrl);
       return sldUrl;
     },
+
+  createAndAddLayerToMap: function(node,source,sldUrl) {
+    this.cheking = true;
+    var layer = node.attributes.layer; //type : Openlayer.WmsLayer
+
+    var record = source.createLayerRecord({
+      name : layer.params.LAYERS,
+      url: layer.url,
+      source: source.id,
+      queryable: true,
+      buffer: 0
+    });
+
+    if(record) {
+      //NDU 24/01/2014 Fix Geowecache HIT Alignement de grid
+      //12/02/2016 required if remote layer does not have bbox info
+      record.data.layer.addOptions({
+        tileOrigin: new OpenLayers.LonLat(140000, 160000)
+      });
+
+      // DOCG 15/09/2015 Hack to apply localized SLD to WMS layer out of our publication
+      if (sldUrl) {
+        record.data.layer.params.SLD = sldUrl;
+        //console.log("sldUrl present and applied to the layer");
+      };
+
+      // DOCG 19/07/2013 Hack pour afficher les symboles des arbres sans les tronquer en bord de tuile. voir bug #179
+      for (var i=this.noTileslayersList.length-1; i>=0; --i) {
+        if (record.data.name === this.noTileslayersList[i]){
+          record.data.layer.url = record.data.layer.url.replace("gwc/service/","");
+          record.data.layer.singleTile = true;
+          if (i < 5) {
+            record.data.layer.ratio = 3;
+          }
+        }
+      }
+      //remember the node id for unchecking the node
+      record["NodeId"] = node.id;
+      // remember the record in the node for removing
+      node.attributes["record"] = record;
+
+      this.target.mapPanel.layers.add(record);
+      this.cheking = false;
+    } else {
+      if(console) {
+        console.log("(Lazy) Record creation failed for " + layer.params.LAYERS)
+      }
+    }
+  },
+
 
   /** private: method[addOutput]
    *  :arg config: ``Object``
@@ -177,158 +226,74 @@ ux.plugins.WMSTreeLegend = Ext.extend(gxp.plugins.Tool, {
       text: 'WMS',
       loader: new GeoExt.tree.WMSCapabilitiesLoader({
           url: this.outputConfig.url,
-          layerOptions: { buffer: 0,
-					singleTile: true,
-					ratio: 1,
-					featureInfoFormat: "text/xml"},
+          layerOptions: {
+            buffer: 0,
+					  singleTile: true,
+  					ratio: 1,
+  					featureInfoFormat: "text/xml"
+          },
           layerParams: { 'TRANSPARENT': 'TRUE', 'INFO_FORMAT': "text/xml" },
           // customize the createNode method to add a checkbox to nodes
           createNode: function(attr) {
-		  //console.log(attr);
-      attr.checked = attr.leaf ? false : undefined;
-	    // Ceci déplie le premier Node appelé "AATL" ou "BROH"
-			attr.expanded = ((attr.text == "Bruxelles Développement urbain") ||
+               attr.checked = attr.leaf ? false : undefined;
+          	   // Ceci déplie le premier Node appelé "AATL" ou "BROH"
+			         attr.expanded = ((attr.text == "Bruxelles Développement urbain") ||
 							 (attr.text == "Brussel Stedelijke Ontwikkeling") ||
                (attr.text == "Brussels urban Development") ||
 							 (attr.text == "Fonds de plan") ||
                (attr.text == "Map backgrounds") ||
 							 (attr.text == "Basiskaart"));
-			        //attr.source = "machin";
                 return GeoExt.tree.WMSCapabilitiesLoader.prototype.createNode.apply(this, [attr]);
-            }
+          }
         })
     });
 
     return ux.plugins.WMSTreeLegend.superclass.addOutput.call(this, Ext.apply({
-    xtype: 'treepanel',
-    rootVisible: false,
-    root: root,
-    border : false,
-    listeners: {
-      // Add layers to the map when checked, remove when unchecked.
-      // Note that this does not take care of maintaining the layer
-      // order on the map.
-  		'load' : {
-  			fn : function() {
-  				this.reloading = true;
-  				this.target.mapPanel.layers.data.items.forEach(function(l){
-  					if(l.json) {
-  						var myLayerName = l.json.name;
-  						var layerid = l.id;
-  						var layerRecord = this.target.mapPanel.layers.getById(layerid);
-  						this.checkAndExpandNodeFromLayerName(myLayerName,layerRecord);
-  					}
-  				},this);
-  				this.reloading = false;
-  			}
-  			,scope : this
-  		},
-      'checkchange': function(node, checked) {
-  			this.cheking = true;
-  			if(this.reloading == false) {
-  				if (checked === true) {
-  					//console.log(node.attributes);
-  					var source = this.findSource.call(this,node.attributes.layer.metadata.keywords);
-            var sldUrl = this.findSldUrl.call(this,node.attributes.layer.metadata.keywords);
-  					var layer = node.attributes.layer; //type : Openlayer.WmsLayer
-  					if(source.lazy) {
-  						source.store.load({callback: (function() {
-                // DOCG 18/12/2012 createLayerRecord
-  							var record = source.createLayerRecord({
-  								name : layer.params.LAYERS,
-  								url: layer.url,
-  								source: source.id,
-  								queryable: true,
-  								buffer: 0
-  							});
-
-  							// DOCG 17/06/2013 On applique le resize au couches de fond, Alleluyah 3!!!!!!!!!!!!!!!
-  							//record.data.layer.transitionEffect = "resize";
-  							//record.data.layer.removeBackBufferDelay = 200;
-
-  							//NDU 24/01/2014 Fix Geowecache HIT Alignement de grid
-  							record.data.layer.addOptions({
-  								tileOrigin: new OpenLayers.LonLat(140000, 160000)
-  							});
-
-  							// NDU 19/07/2013 Hack forcant l'utilisation de l'url proposée dans le getcapabilities. voir bug #176
-  							// NDU 18/06/2015 Hack enlevé pour le multi-source. En attente de regression
-  							//record.data.layer.url = layer.url;
-
-                // DOCG 15/09/2015 Hack to apply localized SLD to WMS layer out of our publication
-                if (sldUrl) {
-                  record.data.layer.params.SLD = sldUrl;
-                  //console.log("sldUrl present and applied to the layer");
-                };
-
-  							// DOCG 19/07/2013 Hack pour afficher les symboles des arbres sans les tronquer en bord de tuile. voir bug #179
-  							for (var i=this.noTileslayersList.length-1; i>=0; --i) {
-  								if (record.data.name === this.noTileslayersList[i]){
-  									record.data.layer.url = record.data.layer.url.replace("gwc/service/","");
-  									record.data.layer.singleTile = true;
-                    if (i < 5) {
-          						record.data.layer.ratio = 3;
-          					}
-  								}
-  							}
-  							//remember the node id for unchecking the node
-  							record["NodeId"] = node.id;
-  							// remember the record in the node for removing
-  							node.attributes["record"] = record;
-
-  							//console.log(record);
-
-  							this.target.mapPanel.layers.add(record);
-  						}).createDelegate(this)});
-  					} else {
-  						//console.log(layer);
-  						var record = source.createLayerRecord({ // createLayerRecord GVDS 18/12/2012
-  							name : layer.params.LAYERS,
-  							source: source.id,
-  							queryable: true,
-  							buffer: 0,
-  							url: layer.url
-  						});
-  						// DOCG 17/06/2013 On applique le resize au couches de fond, Alleluyah 3!!!!!!!!!!!!!!!
-  						//record.data.layer.transitionEffect = "resize";
-  						//record.data.layer.removeBackBufferDelay = 200;
-
-  						// NDU 19/07/2013 Hack forcant l'utilisation de l'url du proposée dans le getcapabilities. voir bug #176
-  						// NDU 18/06/2015 Hack enlevé pour le multi-source. En attente de régression
-  						//record.data.layer.url = layer.url;
-
-              // DOCG 15/09/2015 Hack to apply localized SLD to WMS layer out of our publication
-              if (sldUrl) {
-                record.data.layer.params.SLD = sldUrl;
-                //console.log("sldUrl present and applied to the layer");
-              };
-
-              // DOCG 19/07/2013 Hack pour afficher les symboles des arbres sans les tronquer en bord de tuile. voir bug #179
-  						for (var i=this.noTileslayersList.length-1; i>=0; --i) {
-  							if (record.data.name === this.noTileslayersList[i]){
-  								record.data.layer.url = record.data.layer.url.replace("gwc/service/","");
-  								record.data.layer.singleTile = true;
-  								record.data.layer.ratio = 3;
-  							}
-  						}
-  						// remember the node id for unchecking the node
-  						record["NodeId"] = node.id;
-  						// remember the record in the node for removing
-  						node.attributes["record"] = record;
-
-              //console.log(record);
-
-  						this.target.mapPanel.layers.add(record);
-  					}
-  				} else {
-  					this.target.mapPanel.layers.remove(node.attributes.record);
-  				}
-  			}
-  			this.cheking = false;
-      },
-      scope: this
-      }
-    }, config));
+      xtype: 'treepanel',
+      rootVisible: false,
+      root: root,
+      border : false,
+      listeners: {
+        // Add layers to the map when checked, remove when unchecked.
+        // Note that this does not take care of maintaining the layer
+        // order on the map.
+    		'load' : {
+    			fn : function() {
+    				this.reloading = true;
+    				this.target.mapPanel.layers.data.items.forEach(function(l){
+    					if(l.json) {
+    						var myLayerName = l.json.name;
+    						var layerid = l.id;
+    						var layerRecord = this.target.mapPanel.layers.getById(layerid);
+    						this.checkAndExpandNodeFromLayerName(myLayerName,layerRecord);
+    					}
+    				},this);
+    				this.reloading = false;
+    			}
+    			,scope : this
+    		},
+        'checkchange': function(node, checked) {
+    			this.cheking = true;
+    			if(this.reloading == false) {
+    				if (checked === true) {
+    					var source = this.findSource.call(this,node.attributes.layer.metadata.keywords);
+              var sldUrl = this.findSldUrl.call(this,node.attributes.layer.metadata.keywords);
+    					if(source.lazy) {
+    						source.store.load({callback: (function() {
+                  this.createAndAddLayerToMap(node,source,sldUrl);
+    						}).createDelegate(this)});
+    					} else {
+                this.createAndAddLayerToMap(node,source,sldUrl);
+    					}
+    				} else {
+    					this.target.mapPanel.layers.remove(node.attributes.record);
+    				}
+    			}
+    			this.cheking = false;
+        },
+        scope: this
+        }
+      }, config));
   }
 });
 
