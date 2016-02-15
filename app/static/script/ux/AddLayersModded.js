@@ -29,15 +29,6 @@ Ext.namespace("ux.plugins");
  */
 ux.plugins.AddLayers = Ext.extend(gxp.plugins.Tool, {
 
-    noTileslayersList: ["AATL_DMS_SITE_ARBR:Arbres_remarquables",
-                        "AATL_DMS_SITE_ARBR:Arbres_remarquables_abattus_ou_disparus",
-                        "BROH_DML_LAND_BOOM:Opmerkelijke_bomen",
-                        "BROH_DML_LAND_BOOM:Gevelde_of_verdwenen_bomen",
-                        "bm_public_space:trees",
-                        "BDU_DLO_CLI:Sibelga_BC",
-                        "BDU_DLO_CLI:HydroBru_BC",
-                        "BDU_DLO_CLI:BCx2"],
-
     /** api: ptype = ux_addlayers */
     ptype: "ux_addlayers",
 
@@ -617,11 +608,12 @@ ux.plugins.AddLayers = Ext.extend(gxp.plugins.Tool, {
                 record.data.layer.addOptions({
                   tileOrigin: new OpenLayers.LonLat(140000, 160000)
                 });
-                //console.log(record.data.name);
-                for (var j=this.noTileslayersList.length-1; j>=0; --j) {
-                  if (record.data.name === this.noTileslayersList[j]){
+				var brugisConfig = new Brugis.Config();
+				//console.log(brugisConfig);
+                for (var j=brugisConfig.noTileslayersList.length-1; j>=0; --j) {
+                  if (record.data.name === brugisConfig.noTileslayersList[j]){
                     //console.log(record.data.name);
-                    //console.log(this.noTileslayersList[j]);
+                    //console.log(brugisConfig.noTileslayersList[j]);
                     if (record.data.layer.url) {
                       record.data.layer.url = record.data.layer.url.replace("gwc/service/","");
                     }

@@ -2,7 +2,7 @@
 Ext.namespace("ux.gfi");
 
 ux.gfi.nl =  {
-		"BROH:Bestemmingen" : {
+		"BSO:Bestemmingen" : {
 			"actiontype" : "GRID",
 			"title"      : "[NAME_NL]",
 			"attributes" : [
@@ -10,31 +10,31 @@ ux.gfi.nl =  {
 				{ "name" : "Link" 		 ,  "label" : "[URL_P_NL]", "type" : "link"   }
 			]
 		},
-		"BROH:Structurerende_ruimten" : {
+		"BSO:Structurerende_ruimten" : {
 			"actiontype" : "GRID",
 			"attributes" : [
 				 { "name" : "Bestemmingen"	, "label" : "[NAME_NL]"		, "type" : "string" },
 				 { "name" : "Link"			, "label" : "[URL_P_NL]"  	, "type" : "link" }
 			]
 		},
-		"BROH:Linten_voor_handelskern" : {
+		"BSO:Linten_voor_handelskern" : {
 			"actiontype" : "GRID",
 			"attributes" : [
 				{ "name": "Bestemmingen"		, "label" : "[AFFECTATION]" , "type" : "string" }
 			]
 		},
-		/*"BROH:Maas" : {
+		/*"BSO:Maas" : {
 			"actiontype" : "GRID",
 			"attributes" : [
 				{ "name": "Code"	, "label" : "[GMLINK]"			, "type" : "string" },
 				{ "name": "Link"	, "label" : "[PATH_INTER]"		, "type" : "link" }
 			]
 		},*/
-		"BROH:Maas": {
+		"BSO:Maas": {
 			"actiontype" : "REDIRECT",
 			"url"		 : "[PATH_INTER]"
 		},
-		"BROH:Toegankelijkheid" : {
+		"BSO:Toegankelijkheid" : {
 			"actiontype" : "GRID",
 			"title"		 : "Toegankelijkheid: [ZONE]",
 			"attributes" : [
@@ -111,6 +111,16 @@ ux.gfi.nl =  {
 			"attributes" : [
 				{ "name": "Omtrek"			, "label" : "[circonference] cm"	, "type" : "string"},
 				{ "name": "Afmetingenindex"	, "label" : "[ClassementTailles]"	, "type" : "string"}
+			]
+		},
+		"BROH_DML_BESC:Inventaris_gebouwen": {
+			"actiontype" : "GRID",
+			"title"		 : "Inventaris gebouwen: [address_results_nl]",
+			"attributes" : [
+				{ "name": "Adress"			, "label" : "[address_results_nl]"	, "type" : "string"},
+				{ "name": "PWNC"			, "label" : "[pwnc]"				, "type" : "string"},
+				{ "name": "Link"			, "label" : "[url_nl]"				, "type" : "link"},
+				{ "name": "Beeld"			, "label" : "[firstimage]"			, "type" : "picture"}
 			]
 		},
 		"BROH:Wijkcontract": {
@@ -486,7 +496,7 @@ ux.gfi.nl =  {
 				{ "name": "PARCELLE"			, "label" : "[PARCELLE]"	, "type" : "string"}
 			]
 		},
-		"BROH:Perceel_2013": {
+		"BSO:Perceel_2013": {
 			"actiontype" : "GRID",
 			"title"      : "Perceel 2013: [CAPAKEY]",
 			"attributes" : [
@@ -534,7 +544,7 @@ ux.gfi.nl =  {
 				{ "name": "SHAPE_AREA_IN_DB"	, "label" : "[SHAPE_AREA]"	, "type" : "string"}
 			]
 		},
-		"BROH:Perceel_2014": {
+		"BSO:Perceel_2014": {
 			"actiontype" : "GRID",
 			"title"      : "Perceel 2014: [CAPAKEY]",
 			"attributes" : [

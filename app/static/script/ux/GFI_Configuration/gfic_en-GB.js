@@ -2,7 +2,7 @@
 Ext.namespace("ux.gfi");
 
 ux.gfi["en-GB"] = {
-		"AATL:Affectations" : {
+		"BDU:Affectations" : {
 			"actiontype" : "GRID",
 			"title"		 : "Affectation: [NAME_FR]",
 			"attributes" : [
@@ -10,7 +10,7 @@ ux.gfi["en-GB"] = {
 				{ "name" : "Lien" 		 ,  "label" : "[URL_P_FR]", "type" : "link"   }
 			]
 		},
-		"AATL:Espaces_structurants" : {
+		"BDU:Espaces_structurants" : {
 			"actiontype" : "GRID",
 			"title"		 : "[NAME_FR]",
 			"attributes" : [
@@ -18,7 +18,7 @@ ux.gfi["en-GB"] = {
 				 { "name" : "Lien"			, "label" : "[URL_P_FR]"  	, "type" : "link" }
 			]
 		},
-		"AATL:Maille" : {
+		"BDU:Maille" : {
 			"actiontype" : "GRID",
 			"title"		 : "Maille: [GMLINK]",
 			"attributes" : [
@@ -26,7 +26,7 @@ ux.gfi["en-GB"] = {
 				{ "name": "Lien"	, "label" : "[PATH_INTER]"		, "type" : "string" }
 			]
 		},
-		"AATL:Accessibilite" : {
+		"BDU:Accessibilite" : {
 			"actiontype" : "GRID",
 			"title"		 : "Accessibilité: [ZONE]",
 			"attributes" : [
@@ -157,7 +157,7 @@ ux.gfi["en-GB"] = {
 				{ "name": "NB"				, "label" : "[NB]"				, "type" : "string"}
 			]
 		},
-		"AATL:Zones_de_protection_UNESCO": {
+		"BDU:Zones_de_protection_UNESCO": {
 			"actiontype" : "GRID",
 			"title"      : "Zone de protection UNESCO: [NOM_FR]",
 			"attributes" : [
@@ -240,7 +240,7 @@ ux.gfi["en-GB"] = {
 				{ "name": "PARCELLE"			, "label" : "[PARCELLE]"	, "type" : "string"}
 			]
 		},
-		"AATL:Parcelle_2013": {
+		"BDU:Parcelle_2013": {
 			"actiontype" : "GRID",
 			"title"      : "Parcelle 2013: [CAPAKEY]",
 			"attributes" : [
@@ -317,27 +317,27 @@ ux.gfi["en-GB"] = {
 			"title"      : "Commune: [MUFN]",
 			"attributes" : []
 		},
-		"AATL:Galeries_commercantes": {
+		"BDU:Galeries_commercantes": {
 			"actiontype" : "GRID",
 			"title"      : "Galeries commerçantes",
 			"attributes" : []
 		},
-		"AATL:Parking_de_transit": {
+		"BDU:Parking_de_transit": {
 			"actiontype" : "GRID",
 			"title"      : "Parking de transit",
 			"attributes" : []
 		},
-		"AATL:Points_de_variation_de_mixite": {
+		"BDU:Points_de_variation_de_mixite": {
 			"actiontype" : "GRID",
 			"title"      : "Points de variation de mixité",
 			"attributes" : []
 		},
-		"AATL:Liseres_de_noyau_commercial": {
+		"BDU:Liseres_de_noyau_commercial": {
 			"actiontype" : "GRID",
 			"title"      : "Liserés de noyau commercial",
 			"attributes" : []
 		},
-		"AATL:Zichee": {
+		"BDU:Zichee": {
 			"actiontype" : "GRID",
 			"title"      : "Zone d'intérêt culturel, historique et d'embellisement",
 			"attributes" : []

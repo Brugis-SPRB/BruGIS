@@ -68,18 +68,13 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
 	wmsTreeLegendSourceUrl: "/geoserver/www/wmsaatl/wmsaatl.xml",
 
     // End i18n.
-	noTileslayersList: ["AATL_DMS_SITE_ARBR:Arbres_remarquables",
-						"AATL_DMS_SITE_ARBR:Arbres_remarquables_abattus_ou_disparus",
-						"BROH_DML_LAND_BOOM:Opmerkelijke_bomen",
-						"BROH_DML_LAND_BOOM:Gevelde_of_verdwenen_bomen",
-						"bm_public_space:trees",
-						"BDU_DLO_CLI:Sibelga_BC",
-						"BDU_DLO_CLI:HydroBru_BC",
-						"BDU_DLO_CLI:BCx2"],
+
 	originalSourcesUrl : "",
 
     constructor: function(config) {
 
+		var brugisConfig = new Brugis.Config();
+	
 		// add any custom application events
         this.addEvents(
 			"preferencesChange"
@@ -376,7 +371,7 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
 			delete config.map;
 			addConfig.sources["BruGIS WMS - Geoserver"]=mSource;
 			addConfig.map.layers = mLayer;
-			addConfig = this.avoidTiledCacheUsage(addConfig, this.noTileslayersList);
+			addConfig = this.avoidTiledCacheUsage(addConfig, config.brugisGlobalConfig.noTileslayersList);
 			Ext.applyIf(config, addConfig);
 			this.applyConfig(config);
 			localStorage.removeItem('mapStateToLoad');
@@ -410,7 +405,7 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
 				delete config.map;
 				addConfig.sources["BruGIS WMS - Geoserver"]=mSource;
 				addConfig.map.layers = mLayer;
-				addConfig = this.avoidTiledCacheUsage(addConfig, this.noTileslayersList); //TODO NDU Still needed?
+				addConfig = this.avoidTiledCacheUsage(addConfig, config.brugisGlobalConfig.noTileslayersList); //TODO NDU Still needed?
 				Ext.applyIf(config, addConfig);
 				this.applyConfig(config);
 			} else {

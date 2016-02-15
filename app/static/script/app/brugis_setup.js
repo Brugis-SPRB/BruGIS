@@ -152,6 +152,8 @@ Ext.onReady(function () {
         	// layer sources
         	defaultSourceType: "gxp_wmssource",
 			sources: sources,
+			
+			brugisGlobalConfig : brugisConfig,
 
 		    map: {
 				id: "mymap", // id needed to reference map in portalConfig above

@@ -50,14 +50,14 @@ ux.plugins.WMSTreeLegend = Ext.extend(gxp.plugins.Tool, {
 
 	  sourceName : "",
 
-	  noTileslayersList: ["AATL_DMS_SITE_ARBR:Arbres_remarquables",
+	  /*noTileslayersList: ["AATL_DMS_SITE_ARBR:Arbres_remarquables",
 						            "AATL_DMS_SITE_ARBR:Arbres_remarquables_abattus_ou_disparus",
 						            "BROH_DML_LAND_BOOM:Opmerkelijke_bomen",
 						            "BROH_DML_LAND_BOOM:Gevelde_of_verdwenen_bomen",
                         "bm_public_space:trees",
                         "BDU_DLO_CLI:Sibelga_BC",
                         "BDU_DLO_CLI:HydroBru_BC",
-                        "BDU_DLO_CLI:BCx2"],
+                        "BDU_DLO_CLI:BCx2"],*/
 
     /** private: method[constructor]
      */
@@ -229,11 +229,11 @@ ux.plugins.WMSTreeLegend = Ext.extend(gxp.plugins.Tool, {
   				if (checked === true) {
   					//console.log(node.attributes);
   					var source = this.findSource.call(this,node.attributes.layer.metadata.keywords);
-            var sldUrl = this.findSldUrl.call(this,node.attributes.layer.metadata.keywords);
+					var sldUrl = this.findSldUrl.call(this,node.attributes.layer.metadata.keywords);
   					var layer = node.attributes.layer; //type : Openlayer.WmsLayer
   					if(source.lazy) {
   						source.store.load({callback: (function() {
-                // DOCG 18/12/2012 createLayerRecord
+							// DOCG 18/12/2012 createLayerRecord
   							var record = source.createLayerRecord({
   								name : layer.params.LAYERS,
   								url: layer.url,
@@ -255,30 +255,30 @@ ux.plugins.WMSTreeLegend = Ext.extend(gxp.plugins.Tool, {
   							// NDU 18/06/2015 Hack enlevé pour le multi-source. En attente de regression
   							//record.data.layer.url = layer.url;
 
-                // DOCG 15/09/2015 Hack to apply localized SLD to WMS layer out of our publication
-                if (sldUrl) {
-                  record.data.layer.params.SLD = sldUrl;
-                  //console.log("sldUrl present and applied to the layer");
-                };
+							// DOCG 15/09/2015 Hack to apply localized SLD to WMS layer out of our publication
+							if (sldUrl) {
+							  record.data.layer.params.SLD = sldUrl;
+							  //console.log("sldUrl present and applied to the layer");
+							};
+							var brugisConfig = new Brugis.Config();
+										// DOCG 19/07/2013 Hack pour afficher les symboles des arbres sans les tronquer en bord de tuile. voir bug #179
+							for (var i=brugisConfig.noTileslayersList.length-1; i>=0; --i) {
+								if (record.data.name === brugisConfig.noTileslayersList[i]){
+									record.data.layer.url = record.data.layer.url.replace("gwc/service/","");
+									record.data.layer.singleTile = true;
+									if (i < 5) {
+												record.data.layer.ratio = 3;
+											}
+								}
+							}
+							//remember the node id for unchecking the node
+							record["NodeId"] = node.id;
+							// remember the record in the node for removing
+							node.attributes["record"] = record;
 
-  							// DOCG 19/07/2013 Hack pour afficher les symboles des arbres sans les tronquer en bord de tuile. voir bug #179
-  							for (var i=this.noTileslayersList.length-1; i>=0; --i) {
-  								if (record.data.name === this.noTileslayersList[i]){
-  									record.data.layer.url = record.data.layer.url.replace("gwc/service/","");
-  									record.data.layer.singleTile = true;
-                    if (i < 5) {
-          						record.data.layer.ratio = 3;
-          					}
-  								}
-  							}
-  							//remember the node id for unchecking the node
-  							record["NodeId"] = node.id;
-  							// remember the record in the node for removing
-  							node.attributes["record"] = record;
+							//console.log(record);
 
-  							//console.log(record);
-
-  							this.target.mapPanel.layers.add(record);
+							this.target.mapPanel.layers.add(record);
   						}).createDelegate(this)});
   					} else {
   						//console.log(layer);
@@ -297,27 +297,26 @@ ux.plugins.WMSTreeLegend = Ext.extend(gxp.plugins.Tool, {
   						// NDU 18/06/2015 Hack enlevé pour le multi-source. En attente de régression
   						//record.data.layer.url = layer.url;
 
-              // DOCG 15/09/2015 Hack to apply localized SLD to WMS layer out of our publication
-              if (sldUrl) {
-                record.data.layer.params.SLD = sldUrl;
-                //console.log("sldUrl present and applied to the layer");
-              };
-
-              // DOCG 19/07/2013 Hack pour afficher les symboles des arbres sans les tronquer en bord de tuile. voir bug #179
-  						for (var i=this.noTileslayersList.length-1; i>=0; --i) {
-  							if (record.data.name === this.noTileslayersList[i]){
-  								record.data.layer.url = record.data.layer.url.replace("gwc/service/","");
-  								record.data.layer.singleTile = true;
-  								record.data.layer.ratio = 3;
-  							}
-  						}
-  						// remember the node id for unchecking the node
-  						record["NodeId"] = node.id;
-  						// remember the record in the node for removing
-  						node.attributes["record"] = record;
-
-              //console.log(record);
-
+						  // DOCG 15/09/2015 Hack to apply localized SLD to WMS layer out of our publication
+						if (sldUrl) {
+							record.data.layer.params.SLD = sldUrl;
+							//console.log("sldUrl present and applied to the layer");
+						};
+						//console.log(Brugis);
+						var brugisConfig = new Brugis.Config();
+						// DOCG 19/07/2013 Hack pour afficher les symboles des arbres sans les tronquer en bord de tuile. voir bug #179
+						for (var i=brugisConfig.noTileslayersList.length-1; i>=0; --i) {
+							if (record.data.name === brugisConfig.noTileslayersList[i]){
+								record.data.layer.url = record.data.layer.url.replace("gwc/service/","");
+								record.data.layer.singleTile = true;
+								record.data.layer.ratio = 3;
+							}
+						}
+						// remember the node id for unchecking the node
+						record["NodeId"] = node.id;
+						// remember the record in the node for removing
+						node.attributes["record"] = record;
+						//console.log(record);
   						this.target.mapPanel.layers.add(record);
   					}
   				} else {

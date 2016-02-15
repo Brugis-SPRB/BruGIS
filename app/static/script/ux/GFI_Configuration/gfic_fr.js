@@ -2,7 +2,7 @@
 Ext.namespace("ux.gfi");
 
 ux.gfi.fr = {
-		"AATL:Affectations" : {
+		"BDU:Affectations" : {
 			"actiontype" : "GRID",
 			"title"		 : "Affectation: [NAME_FR]",
 			"attributes" : [
@@ -10,7 +10,7 @@ ux.gfi.fr = {
 				{ "name" : "Lien" 		 ,  "label" : "[URL_P_FR]", "type" : "link"   }
 			]
 		},
-		"AATL:Espaces_structurants" : {
+		"BDU:Espaces_structurants" : {
 			"actiontype" : "GRID",
 			"title"		 : "[NAME_FR]",
 			"attributes" : [
@@ -18,7 +18,7 @@ ux.gfi.fr = {
 				 { "name" : "Lien"			, "label" : "[URL_P_FR]"  	, "type" : "link" }
 			]
 		},
-		/*"AATL:Maille" : {
+		/*"BDU:Maille" : {
 			"actiontype" : "GRID",
 			"title"		 : "Maille: [GMLINK]",
 			"attributes" : [
@@ -26,11 +26,11 @@ ux.gfi.fr = {
 				{ "name": "Lien"	, "label" : "[PATH_INTER]"		, "type" : "link" }
 			]
 		},*/
-		"AATL:Maille": {
+		"BDU:Maille": {
 			"actiontype" : "REDIRECT",
 			"url"		 : "[PATH_INTER]"
 		},
-		"AATL:Accessibilite" : {
+		"BDU:Accessibilite" : {
 			"actiontype" : "GRID",
 			"title"		 : "Accessibilité: [ZONE]",
 			"attributes" : [
@@ -139,7 +139,7 @@ ux.gfi.fr = {
 				{ "name": "Etat final"						, "label" : "[ETATFINAL]"		, "type": "string"}
 			]
 		},
-		"AATL:Zones_de_protection_UNESCO": {
+		"BDU:Zones_de_protection_UNESCO": {
 			"actiontype" : "GRID",
 			"title"      : "Zone de protection UNESCO: [NOM_FR]",
 			"attributes" : [
@@ -474,6 +474,16 @@ ux.gfi.fr = {
 				{ "name": "Photo"				, "label" : "http://arbres-inventaire.irisnet.be/medias/trees/[firstimage]", "type" : "link"}
 			]
 		},
+		"AATL_DMS_PROT:Inventaire_batiments": {
+			"actiontype" : "GRID",
+			"title"		 : "Inventaire bâtiments: [address_results_fr]",
+			"attributes" : [
+				{ "name": "Adresse"			, "label" : "[address_results_fr]"	, "type" : "string"},
+				{ "name": "PWNC"			, "label" : "[pwnc]"				, "type" : "string"},
+				{ "name": "Lien"			, "label" : "[url_fr]"				, "type" : "link"},
+				{ "name": "Image"			, "label" : "[firstimage]"			, "type" : "picture"}
+			]
+		},
 		"AED:Zones_de_preemption": {
 			"actiontype" : "GRID",
 			"title"		 : "Zone de préemption: [NOM_FR]",
@@ -511,7 +521,7 @@ ux.gfi.fr = {
 				{ "name": "PARCELLE"			, "label" : "[PARCELLE]"	, "type" : "string"}
 			]
 		},
-		"AATL:Parcelle_2013": {
+		"BDU:Parcelle_2013": {
 			"actiontype" : "GRID",
 			"title"      : "Parcelle 2013: [CAPAKEY]",
 			"attributes" : [
@@ -559,7 +569,7 @@ ux.gfi.fr = {
 				{ "name": "SHAPE_AREA_IN_DB"	, "label" : "[SHAPE_AREA]"	, "type" : "string"}
 			]
 		},
-		"AATL:Parcelle_2014": {
+		"BDU:Parcelle_2014": {
 			"actiontype" : "GRID",
 			"title"      : "Parcelle 2014: [CAPAKEY]",
 			"attributes" : [
@@ -588,27 +598,27 @@ ux.gfi.fr = {
 			"title"      : "Commune: [MUFN]",
 			"attributes" : []
 		},
-		"AATL:Galeries_commercantes": {
+		"BDU:Galeries_commercantes": {
 			"actiontype" : "GRID",
 			"title"      : "Galeries commerçantes",
 			"attributes" : []
 		},
-		"AATL:Parking_de_transit": {
+		"BDU:Parking_de_transit": {
 			"actiontype" : "GRID",
 			"title"      : "Parking de transit",
 			"attributes" : []
 		},
-		"AATL:Points_de_variation_de_mixite": {
+		"BDU:Points_de_variation_de_mixite": {
 			"actiontype" : "GRID",
 			"title"      : "Points de variation de mixité",
 			"attributes" : []
 		},
-		"AATL:Liseres_de_noyau_commercial": {
+		"BDU:Liseres_de_noyau_commercial": {
 			"actiontype" : "GRID",
 			"title"      : "Liserés de noyau commercial",
 			"attributes" : []
 		},
-		"AATL:Zichee": {
+		"BDU:Zichee": {
 			"actiontype" : "GRID",
 			"title"      : "Zone d'intérêt culturel, historique et d'embellisement",
 			"attributes" : []
