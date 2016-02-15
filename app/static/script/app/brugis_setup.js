@@ -1,3 +1,7 @@
+if (typeof console == "undefined") {
+    this.console = {log: function() {}};
+}
+
 Ext.onReady(function () {
 
         // optionally set locale based on query string parameter

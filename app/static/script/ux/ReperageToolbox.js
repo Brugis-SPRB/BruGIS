@@ -505,37 +505,43 @@ ux.plugins.ReperageToolbox = Ext.extend(gxp.plugins.Tool, {
 			var layerStore = this.target.mapPanel.layers;
 			var source = this.target.layerSources["BruGIS WMS - Geoserver"];
 			// et de deux
-			if(source.lazy) {
-				source.store.load({
-					callback:(function(){
-						var record = source.createLayerRecord({
-							name: 'AATL:Parcelle_2015',
-							title: 'Parcelle 2015',
-							source: source.id
-						});
-						this.parcelLayerRecord = record;
-						this.parcelLayer = record.get('layer');
-						this.parcelLayer.displayInLayerSwitcher = false;
-						this.parcelLayer.setVisibility(false);
-						layerStore.add(record);
-						this.copyParcelControl.layers = [record.get('layer')];
-						this.target.mapPanel.layers.remove(record);
-					}).createDelegate(this)
-				});
-			} else {
-				var record = source.createLayerRecord({
-					name: 'AATL:Parcelle_2015',
-					title: 'Parcelle 2015',
-					source: source.id
-				});
-				this.parcelLayerRecord = record;
-				this.parcelLayer = record.get('layer');
-				this.parcelLayer.displayInLayerSwitcher = false;
-				this.parcelLayer.setVisibility(false);
-				layerStore.add(record);
-				this.copyParcelControl.layers = [record.get('layer')];
-				this.target.mapPanel.layers.remove(record);
-			}
+      try {
+  			if(source.lazy) {
+  				source.store.load({
+  					callback:(function(){
+  						var record = source.createLayerRecord({
+  							name: 'AATL:Parcelle_2015',
+  							title: 'Parcelle 2015',
+  							source: source.id
+  						});
+  						this.parcelLayerRecord = record;
+  						this.parcelLayer = record.get('layer');
+  						this.parcelLayer.displayInLayerSwitcher = false;
+  						this.parcelLayer.setVisibility(false);
+  						layerStore.add(record);
+  						this.copyParcelControl.layers = [record.get('layer')];
+  						this.target.mapPanel.layers.remove(record);
+  					}).createDelegate(this)
+  				});
+  			} else {
+  				var record = source.createLayerRecord({
+  					name: 'AATL:Parcelle_2015',
+  					title: 'Parcelle 2015',
+  					source: source.id
+  				});
+  				this.parcelLayerRecord = record;
+  				this.parcelLayer = record.get('layer');
+  				this.parcelLayer.displayInLayerSwitcher = false;
+  				this.parcelLayer.setVisibility(false);
+  				layerStore.add(record);
+  				this.copyParcelControl.layers = [record.get('layer')];
+  				this.target.mapPanel.layers.remove(record);
+  			}
+      } catch(e) {
+        if(console) {
+          console.log("ReperageToolbox:onready get parcelle layer failed",e)
+        }
+      }
 			// et de trois
 			for (var i=actions.length-1; i>=0; --i) {
 				var showButton =

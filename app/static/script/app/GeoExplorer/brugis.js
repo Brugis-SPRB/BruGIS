@@ -945,7 +945,10 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
 			if(window.history && window.history.pushState) {
 				window.history.pushState('','',window.location.pathname);
 			} else {
-				window.location.href = windows.location.href.replace(/#.*$/, '#');
+        //ON Internet Explorer.
+        if( /#.*$/.test(window.location.href) ){
+          window.location.href = window.location.href.replace(/#.*$/, '#');
+        }
 			}
 		});
 
