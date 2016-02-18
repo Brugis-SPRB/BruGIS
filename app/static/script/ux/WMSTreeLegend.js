@@ -50,15 +50,6 @@ ux.plugins.WMSTreeLegend = Ext.extend(gxp.plugins.Tool, {
 
 	  sourceName : "",
 
-	  /*noTileslayersList: ["AATL_DMS_SITE_ARBR:Arbres_remarquables",
-						            "AATL_DMS_SITE_ARBR:Arbres_remarquables_abattus_ou_disparus",
-						            "BROH_DML_LAND_BOOM:Opmerkelijke_bomen",
-						            "BROH_DML_LAND_BOOM:Gevelde_of_verdwenen_bomen",
-                        "bm_public_space:trees",
-                        "BDU_DLO_CLI:Sibelga_BC",
-                        "BDU_DLO_CLI:HydroBru_BC",
-                        "BDU_DLO_CLI:BCx2"],*/
-
     /** private: method[constructor]
      */
     constructor: function(config) {
@@ -181,12 +172,13 @@ ux.plugins.WMSTreeLegend = Ext.extend(gxp.plugins.Tool, {
     });
 
     if(record) {
+		//console.log(record.data.layer);
       //NDU 24/01/2014 Fix Geowecache HIT Alignement de grid
       //12/02/2016 required if remote layer does not have bbox info
       record.data.layer.addOptions({
         tileOrigin: new OpenLayers.LonLat(140000, 160000)
       });
-
+		//console.log(record.data.layer);
       // DOCG 15/09/2015 Hack to apply localized SLD to WMS layer out of our publication
       if (sldUrl) {
         record.data.layer.params.SLD = sldUrl;
@@ -194,8 +186,9 @@ ux.plugins.WMSTreeLegend = Ext.extend(gxp.plugins.Tool, {
       };
 
       // DOCG 19/07/2013 Hack pour afficher les symboles des arbres sans les tronquer en bord de tuile. voir bug #179
-      for (var i=this.noTileslayersList.length-1; i>=0; --i) {
-        if (record.data.name === this.noTileslayersList[i]){
+	  brugisConfig = this.target.brugisGlobalConfig;
+      for (var i=brugisConfig.noTileslayersList.length-1; i>=0; --i) {
+        if (record.data.name === brugisConfig.noTileslayersList[i]){
           record.data.layer.url = record.data.layer.url.replace("gwc/service/","");
           record.data.layer.singleTile = true;
           if (i < 5) {
@@ -277,13 +270,13 @@ ux.plugins.WMSTreeLegend = Ext.extend(gxp.plugins.Tool, {
     			if(this.reloading == false) {
     				if (checked === true) {
     					var source = this.findSource.call(this,node.attributes.layer.metadata.keywords);
-              var sldUrl = this.findSldUrl.call(this,node.attributes.layer.metadata.keywords);
+						var sldUrl = this.findSldUrl.call(this,node.attributes.layer.metadata.keywords);
     					if(source.lazy) {
     						source.store.load({callback: (function() {
-                  this.createAndAddLayerToMap(node,source,sldUrl);
+								this.createAndAddLayerToMap(node,source,sldUrl);
     						}).createDelegate(this)});
     					} else {
-                this.createAndAddLayerToMap(node,source,sldUrl);
+							this.createAndAddLayerToMap(node,source,sldUrl);
     					}
     				} else {
     					this.target.mapPanel.layers.remove(node.attributes.record);

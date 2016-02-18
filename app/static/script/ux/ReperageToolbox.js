@@ -251,7 +251,7 @@ ux.plugins.ReperageToolbox = Ext.extend(gxp.plugins.Tool, {
 			toggleHandler: function(btn,state){
 				if (state) {
 					if(this.parcelLayer) {
-						if(this.target.mapPanel.layers.find("name","AATL:Parcelle_2015") == -1){
+						if(this.target.mapPanel.layers.find("name","BDU:Parcelle_2015") == -1){
 							this.target.mapPanel.layers.add(this.parcelLayerRecord);
 						}
 						this.parcelLayer.setVisibility(true);
@@ -510,7 +510,7 @@ ux.plugins.ReperageToolbox = Ext.extend(gxp.plugins.Tool, {
   				source.store.load({
   					callback:(function(){
   						var record = source.createLayerRecord({
-  							name: 'AATL:Parcelle_2015',
+  							name: 'BDU:Parcelle_2015',
   							title: 'Parcelle 2015',
   							source: source.id
   						});
@@ -525,7 +525,7 @@ ux.plugins.ReperageToolbox = Ext.extend(gxp.plugins.Tool, {
   				});
   			} else {
   				var record = source.createLayerRecord({
-  					name: 'AATL:Parcelle_2015',
+  					name: 'BDU:Parcelle_2015',
   					title: 'Parcelle 2015',
   					source: source.id
   				});

@@ -589,5 +589,35 @@ ux.gfi.nl =  {
 				{ "name": "Vrijwaringszone"			, "label" : "['Nee','Ja'][[VRIJWARINGSZONE]]"					, "type" : "eval"},
 				{ "name": "Referentie DML"			, "label" : "[NUMMER_DOSSIER]/[CODE_DOSSIER]"					, "type" : "string"}
 			]
+		},
+		"DEP_BP:BXLPROJECTS_PMNR": {
+			"actiontype" : "GRID",
+			"title"		 : "Projet: [Project_ID]",
+			"attributes" : [
+				{ "name": "Category"		, "label" : "[PROJECTCATEGORYDESC]"	,"type" : "string"},
+				{ "name": "Project Type"	, "label" : "[PROJECTTYPE]"			,"type" : "string"},
+				{ "name": "Street Name F"	, "label" : "[STREETNAME_F]"		,"type" : "string"},
+				{ "name": "Street Name N"	, "label" : "[STREETNAME_N]"		,"type" : "string"},
+				{ "name": "Street Number"	, "label" : "[STREETNUMBER]"		,"type" : "string"},
+				{ "name": "Street Box"		, "label" : "[STREETBOX]"			,"type" : "string"},
+				{ "name": "Postal Code"		, "label" : "[POSTALCODE]"			,"type" : "string"},
+				{ "name": "Project Title F"	, "label" : "[PROJECTTITLE_F]"		,"type" : "string"},
+				{ "name": "Description F"	, "label" : "[DESCRIPTION_F]"		,"type" : "string"},
+				{ "name": "Project Title N"	, "label" : "[PROJECTTITLE_N]"		,"type" : "string"},
+				{ "name": "Description N"	, "label" : "[DESCRIPTION_N]"		,"type" : "string"},
+				{ "name": "Project Title E"	, "label" : "[PROJECTTITLE_E]"		,"type" : "string"},
+				{ "name": "Weblink"			, "label" : "[WEBLINK]"				,"type" : "string"},
+				{ "name": "Project Status F", "label" : "[REMARKS_F]"			,"type" : "string"},
+				{ "name": "Project Status N", "label" : "[REMARKS_N]"			,"type" : "string"},
+				{ "name": "Project Owner F"	, "label" : "[PROJECTOWNER_F]"		,"type" : "string"},
+				{ "name": "Project Owner N"	, "label" : "[PROJECTOWNER_N]"		,"type" : "string"},
+				{ "name": "Project Contact"	, "label" : "[PROJECTCONTACT]"		,"type" : "string"},
+				{ "name": "Contact Phone"	, "label" : "[CONTACTPHONE]"		,"type" : "string"},
+				{ "name": "Contact Mail"	, "label" : "[CONTACTMAIL]"			,"type" : "string"},
+				{ "name": "Public/Private/Mix"	, "label" : "[PUBLICPRIVATEMIXDESC]"	,"type" : "string"},
+				{ "name": "Source"			, "label" : "[SOURCE]"				,"type" : "string"},
+				{ "name": "File Manager"	, "label" : "[FILEMANAGER]"			,"type" : "string"},
+				{ "name": "Permit Number"	, "label" : "[PERMITNUMBER]"		,"type" : "string"}
+			]
 		}
 };

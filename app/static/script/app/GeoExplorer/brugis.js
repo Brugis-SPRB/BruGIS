@@ -167,7 +167,7 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
 				autoActivate: false,
 				targets: [{
 					source: 'BruGIS WMS - Geoserver',
-					name: "AATL:Parcelle_2014",
+					name: "BDU:Parcelle_2015",
 					minResolution: 0.014000028082733494,		// 1/50
 					maxResolution: 14.000028082733494,			// 1/5.000
 					restrictedLayers: [
@@ -274,6 +274,8 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
 		var matchShareMaps = mapUrl.match(/^sharemaps\/(\d+)$/);
 	    var query = Ext.urlDecode(document.location.search.substr(1));
 		var preUrl = "";
+		
+		var tileOriginContent = new OpenLayers.LonLat(140000, 160000);
 
 		if (match) {
 			preUrl = "../";
@@ -306,6 +308,8 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
 						newLayer["fixed"] = addConfig.map.layers[ll].fixed;
 						newLayer["visibility"] = addConfig.map.layers[ll].visibility;
 						newLayer["url"] 		= addConfig.map.layers[ll].url;
+						newLayer["tileOrigin"] = tileOriginContent;
+						newLayer["options"] = {tileOrigin : tileOriginContent};
 						mLayer[ll] = newLayer;
 					}
 					delete config.sources;
@@ -365,6 +369,8 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
 					newLayer["fixed"] = addConfig.map.layers[ll].fixed;
 					newLayer["visibility"] = addConfig.map.layers[ll].visibility;
 					newLayer["url"] 		= addConfig.map.layers[ll].url;
+					newLayer["tileOrigin"] = tileOriginContent;
+					newLayer["options"] = {tileOrigin : tileOriginContent};
 					mLayer[ll] = newLayer;
 				}
 			delete config.sources;
@@ -375,7 +381,7 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
 			Ext.applyIf(config, addConfig);
 			this.applyConfig(config);
 			localStorage.removeItem('mapStateToLoad');
-        } else if (localStorage && localStorage.getItem('currentMapState')) {
+        } else if (!localStorage && !localStorage.getItem('currentMapState')) {
 			/** DocG - 13/03/2014
 			 *  Non chargement du currentMapState en cas de nouvelle version
 			 */
@@ -399,6 +405,8 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
 					newLayer["fixed"] 		= addConfig.map.layers[ll].fixed;
 					newLayer["visibility"] 	= addConfig.map.layers[ll].visibility;
 					newLayer["url"] 		= addConfig.map.layers[ll].url;
+					newLayer["tileOrigin"] = tileOriginContent;
+					newLayer["options"] = {tileOrigin : tileOriginContent};
 					mLayer[ll] 				= newLayer;
 				}
 				delete config.sources;
@@ -945,10 +953,10 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
 			if(window.history && window.history.pushState) {
 				window.history.pushState('','',window.location.pathname);
 			} else {
-        //ON Internet Explorer.
-        if( /#.*$/.test(window.location.href) ){
-          window.location.href = window.location.href.replace(/#.*$/, '#');
-        }
+				//ON Internet Explorer.
+				if( /#.*$/.test(window.location.href) ){
+				  window.location.href = window.location.href.replace(/#.*$/, '#');
+				}
 			}
 		});
 
