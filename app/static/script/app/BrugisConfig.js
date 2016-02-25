@@ -17,15 +17,15 @@ Brugis.Config = Ext.extend(Object,  {
 	STA : 'STA',
 	PRD : 'PRD',
 
-	noTileslayersList: ["AATL_DMS_SITE_ARBR:Arbres_remarquables",
-						"AATL_DMS_SITE_ARBR:Arbres_remarquables_abattus_ou_disparus",
-						"BROH_DML_LAND_BOOM:Opmerkelijke_bomen",
-						"BROH_DML_LAND_BOOM:Gevelde_of_verdwenen_bomen",
+	noTileslayersList: ["BDU_DMS_PROT:Arbres_remarquables",
+						"BDU_DMS_PROT:Arbres_remarquables_abattus_ou_disparus",
+						"BSO_DML_BESC:Opmerkelijke_bomen",
+						"BSO_DML_BESC:Gevelde_of_verdwenen_bomen",
 						"bm_public_space:trees",
 						"BDU_DLO_CLI:Sibelga_BC",
 						"BDU_DLO_CLI:HydroBru_BC",
 						"BDU_DLO_CLI:BCx2",
-						"AATL_DMS_PROT:Inventaire_batiments"],
+						"BDU_DMS_PROT:Inventaire_batiments"],
 
 	getCookieValue : function(param) {
 		var i, x, y, cookies = document.cookie.split(";");

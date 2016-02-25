@@ -37,21 +37,21 @@ ux.gfi.fr = {
 				{ "name": "Type de zone"	, "label" : "[ZONE]"		, "type" : "string" }
 			]
 		},
-		"AATL:Enseignes" : {
+		"BDU:Enseignes" : {
 			"actiontype" : "GRID",
 			"title"		 : "Enseignes: [ZONE]",
 			"attributes" : [
 				{ "name": "Type de zone"	, "label" : "[ZONE]"		, "type" : "string" }
 			]
 		},
-		"AATL:Publicite" : {
+		"BDU:Publicite" : {
 			"actiontype" : "GRID",
 			"title"		 : "Publicité: [ZONE]",
 			"attributes" : [
 				{ "name": "Type de zone"	, "label" : "[ZONE]"		, "type" : "string" }
 			]
 		},
-		"AATL_DMS_SITE_ARBR:Arbres_remarquables": {
+		"BDU_DMS_PROT:Arbres_remarquables": {
 			"actiontype" : "GRID",
 			"title"		 : "[tax_fr]",
 			"attributes" : [
@@ -67,7 +67,7 @@ ux.gfi.fr = {
 				{ "name": "statut"				, "label" : "[Legendefr]"			, "type" : "string"}
 			]
 		},
-		"AATL_DMS_SITE_ARBR:Arbres_remarquables_abattus_ou_disparus": {
+		"BDU_DMS_PROT:Arbres_remarquables_abattus_ou_disparus": {
 			"actiontype" : "GRID",
 			"title"		 : "[tax_fr]",
 			"attributes" : [
@@ -83,7 +83,7 @@ ux.gfi.fr = {
 				{ "name": "statut"				, "label" : "[Legendefr]"			, "type" : "string"}
 			]
 		},
-		"AATL_DMS_SITE_ARBR:Arbres_remarquables_rarete": {
+		"BDU_DMS_PROT:Arbres_remarquables_rarete": {
 			"actiontype" : "GRID",
 			"title"		 : "[tax_la]: [rarete]",
 			"attributes" : [
@@ -92,7 +92,7 @@ ux.gfi.fr = {
 				{ "name": "rareté"				, "label" : "[rarete]"				, "type" : "string"}
 			]
 		},
-		"AATL_DMS_SITE_ARBR:Arbres_remarquables_100_biggest": {
+		"BDU_DMS_PROT:Arbres_remarquables_100_biggest": {
 			"actiontype" : "GRID",
 			"title"		 : "[tax_fr]",
 			"attributes" : [
@@ -100,7 +100,7 @@ ux.gfi.fr = {
 				{ "name": "Classement des tailles"	, "label" : "[ClassementTailles]"	, "type" : "string"}
 			]
 		},
-		"AATL:Contrats_de_quartier": {
+		"BDU:Contrats_de_quartier": {
 			"actiontype" : "GRID",
 			"title"		 : "Contrat de quartier: [NOMCQ]",
 			"attributes" : [
@@ -109,7 +109,7 @@ ux.gfi.fr = {
 				{ "name": "Date d'arrêté du gouvernement"		, "label" : "[ARRET_GVT]"				, "type": "date"},
 				{ "name": "Date de notification à la commune"	, "label" : "[NOTIF_COMM]"				, "type": "date"},
 				{ "name": "Date de fin"							, "label" : "[DATE_FIN]"				, "type": "date"},
-				{ "name": "Actif"								, "label" : "['Non','Oui'][[STATUT]]"	, "type": "eval"},
+				{ "name": "Actif"								, "label" : "['Non','Oui'][[ACTIF]]"	, "type": "eval"},
 				{ "name": "Bureau d'étude"						, "label" : "[NOM_BE]"					, "type": "string"},
 				{ "name": "Bureau d'étude (responsable)"		, "label" : "[RESP_BE]"					, "type": "string"},
 				{ "name": "Série"								, "label" : "[SERIE]"					, "type": "string"},
@@ -120,7 +120,7 @@ ux.gfi.fr = {
 				{ "name": "ID"									, "label" : "[ID]"						, "type": "string"}
 			]
 		},
-		"AATL:Lotissements": {
+		"BDU:Lotissements": {
 			"actiontype" : "GRID",
 			"title"		 : "[REFSITEX]",
 			"attributes" : [
@@ -146,7 +146,7 @@ ux.gfi.fr = {
 				{ "name": "Dénomination"	, "label" : "[NOM_FR]"			, "type" : "string"}
 			]
 		},
-		"AATL:Patrimoine": {
+		"BDU:Patrimoine": {
 			"actiontype" : "GRID",
 			"title"      : "[BESCHERMD_ALS_FR]: [BENAMING_PAT_VW_FR]",
 			"attributes" : [
@@ -163,7 +163,7 @@ ux.gfi.fr = {
 				{ "name": "Référence DMS"			, "label" : "[NUMMER_DOSSIER]/[CODE_DOSSIER]"					, "type" : "string"}
 			]
 		},
-		"AATL:MONUMENT_CLASSEMENT_ARRETE_DEFINITIF": {
+		"BDU:MONUMENT_CLASSEMENT_ARRETE_DEFINITIF": {
 			"actiontype" : "GRID",
 			"title"      : "[BESCHERMD_ALS_FR]: [BENAMING_PAT_VW_FR]",
 			"attributes" : [
@@ -180,7 +180,7 @@ ux.gfi.fr = {
 				{ "name": "Référence DMS"			, "label" : "[NUMMER_DOSSIER]/[CODE_DOSSIER]"					, "type" : "string"}
 			]
 		},
-		"AATL:MONUMENT_CLASSEMENT_OUVERTURE_DE_PROCEDURE": {
+		"BDU:MONUMENT_CLASSEMENT_OUVERTURE_DE_PROCEDURE": {
 			"actiontype" : "GRID",
 			"title"      : "[BESCHERMD_ALS_FR]: [BENAMING_PAT_VW_FR]",
 			"attributes" : [
@@ -197,7 +197,7 @@ ux.gfi.fr = {
 				{ "name": "Référence DMS"			, "label" : "[NUMMER_DOSSIER]/[CODE_DOSSIER]"					, "type" : "string"}
 			]
 		},
-		"AATL:MONUMENT_SAUVEGARDE_ARRETE_DEFINITIF": {
+		"BDU:MONUMENT_SAUVEGARDE_ARRETE_DEFINITIF": {
 			"actiontype" : "GRID",
 			"title"      : "[BESCHERMD_ALS_FR]: [BENAMING_PAT_VW_FR]",
 			"attributes" : [
@@ -214,7 +214,7 @@ ux.gfi.fr = {
 				{ "name": "Référence DMS"			, "label" : "[NUMMER_DOSSIER]/[CODE_DOSSIER]"					, "type" : "string"}
 			]
 		},
-		"AATL:MONUMENT_SAUVEGARDE_OUVERTURE_DE_PROCEDURE": {
+		"BDU:MONUMENT_SAUVEGARDE_OUVERTURE_DE_PROCEDURE": {
 			"actiontype" : "GRID",
 			"title"      : "[BESCHERMD_ALS_FR]: [BENAMING_PAT_VW_FR]",
 			"attributes" : [
@@ -231,7 +231,7 @@ ux.gfi.fr = {
 				{ "name": "Référence DMS"			, "label" : "[NUMMER_DOSSIER]/[CODE_DOSSIER]"					, "type" : "string"}
 			]
 		},
-		"AATL:ENSEMBLE_CLASSEMENT_ARRETE_DEFINITIF": {
+		"BDU:ENSEMBLE_CLASSEMENT_ARRETE_DEFINITIF": {
 			"actiontype" : "GRID",
 			"title"      : "[BESCHERMD_ALS_FR]: [BENAMING_PAT_VW_FR]",
 			"attributes" : [
@@ -248,7 +248,7 @@ ux.gfi.fr = {
 				{ "name": "Référence DMS"			, "label" : "[NUMMER_DOSSIER]/[CODE_DOSSIER]"					, "type" : "string"}
 			]
 		},
-		"AATL:ENSEMBLE_CLASSEMENT_OUVERTURE_DE_PROCEDURE": {
+		"BDU:ENSEMBLE_CLASSEMENT_OUVERTURE_DE_PROCEDURE": {
 			"actiontype" : "GRID",
 			"title"      : "[BESCHERMD_ALS_FR]: [BENAMING_PAT_VW_FR]",
 			"attributes" : [
@@ -265,7 +265,7 @@ ux.gfi.fr = {
 				{ "name": "Référence DMS"			, "label" : "[NUMMER_DOSSIER]/[CODE_DOSSIER]"					, "type" : "string"}
 			]
 		},
-		"AATL:ENSEMBLE_SAUVEGARDE_ARRETE_DEFINITIF": {
+		"BDU:ENSEMBLE_SAUVEGARDE_ARRETE_DEFINITIF": {
 			"actiontype" : "GRID",
 			"title"      : "[BESCHERMD_ALS_FR]: [BENAMING_PAT_VW_FR]",
 			"attributes" : [
@@ -282,7 +282,7 @@ ux.gfi.fr = {
 				{ "name": "Référence DMS"			, "label" : "[NUMMER_DOSSIER]/[CODE_DOSSIER]"					, "type" : "string"}
 			]
 		},
-		"AATL:ENSEMBLE_SAUVEGARDE_OUVERTURE_DE_PROCEDURE": {
+		"BDU:ENSEMBLE_SAUVEGARDE_OUVERTURE_DE_PROCEDURE": {
 			"actiontype" : "GRID",
 			"title"      : "[BESCHERMD_ALS_FR]: [BENAMING_PAT_VW_FR]",
 			"attributes" : [
@@ -299,7 +299,7 @@ ux.gfi.fr = {
 				{ "name": "Référence DMS"			, "label" : "[NUMMER_DOSSIER]/[CODE_DOSSIER]"					, "type" : "string"}
 			]
 		},
-		"AATL:SITE_CLASSEMENT_ARRETE_DEFINITIF": {
+		"BDU:SITE_CLASSEMENT_ARRETE_DEFINITIF": {
 			"actiontype" : "GRID",
 			"title"      : "[BESCHERMD_ALS_FR]: [BENAMING_PAT_VW_FR]",
 			"attributes" : [
@@ -316,7 +316,7 @@ ux.gfi.fr = {
 				{ "name": "Référence DMS"			, "label" : "[NUMMER_DOSSIER]/[CODE_DOSSIER]"					, "type" : "string"}
 			]
 		},
-		"AATL:SITE_CLASSEMENT_OUVERTURE_DE_PROCEDURE": {
+		"BDU:SITE_CLASSEMENT_OUVERTURE_DE_PROCEDURE": {
 			"actiontype" : "GRID",
 			"title"      : "[BESCHERMD_ALS_FR]: [BENAMING_PAT_VW_FR]",
 			"attributes" : [
@@ -333,7 +333,7 @@ ux.gfi.fr = {
 				{ "name": "Référence DMS"			, "label" : "[NUMMER_DOSSIER]/[CODE_DOSSIER]"					, "type" : "string"}
 			]
 		},
-		"AATL:SITE_SAUVEGARDE_ARRETE_DEFINITIF": {
+		"BDU:SITE_SAUVEGARDE_ARRETE_DEFINITIF": {
 			"actiontype" : "GRID",
 			"title"      : "[BESCHERMD_ALS_FR]: [BENAMING_PAT_VW_FR]",
 			"attributes" : [
@@ -350,7 +350,7 @@ ux.gfi.fr = {
 				{ "name": "Référence DMS"			, "label" : "[NUMMER_DOSSIER]/[CODE_DOSSIER]"					, "type" : "string"}
 			]
 		},
-		"AATL:SITE_SAUVEGARDE_OUVERTURE_DE_PROCEDURE": {
+		"BDU:SITE_SAUVEGARDE_OUVERTURE_DE_PROCEDURE": {
 			"actiontype" : "GRID",
 			"title"      : "[BESCHERMD_ALS_FR]: [BENAMING_PAT_VW_FR]",
 			"attributes" : [
@@ -367,7 +367,7 @@ ux.gfi.fr = {
 				{ "name": "Référence DMS"			, "label" : "[NUMMER_DOSSIER]/[CODE_DOSSIER]"					, "type" : "string"}
 			]
 		},
-		"AATL:SITE_ARCHEOLOGIQUE_CLASSEMENT_ARRETE_DEFINITIF": {
+		"BDU:SITE_ARCHEOLOGIQUE_CLASSEMENT_ARRETE_DEFINITIF": {
 			"actiontype" : "GRID",
 			"title"      : "[BESCHERMD_ALS_FR]: [BENAMING_PAT_VW_FR]",
 			"attributes" : [
@@ -384,7 +384,7 @@ ux.gfi.fr = {
 				{ "name": "Référence DMS"			, "label" : "[NUMMER_DOSSIER]/[CODE_DOSSIER]"					, "type" : "string"}
 			]
 		},
-		"AATL:SITE_ARCHEOLOGIQUE_CLASSEMENT_OUVERTURE_DE_PROCEDURE": {
+		"BDU:SITE_ARCHEOLOGIQUE_CLASSEMENT_OUVERTURE_DE_PROCEDURE": {
 			"actiontype" : "GRID",
 			"title"      : "[BESCHERMD_ALS_FR]: [BENAMING_PAT_VW_FR]",
 			"attributes" : [
@@ -401,7 +401,7 @@ ux.gfi.fr = {
 				{ "name": "Référence DMS"			, "label" : "[NUMMER_DOSSIER]/[CODE_DOSSIER]"					, "type" : "string"}
 			]
 		},
-		"AATL:SITE_ARCHEOLOGIQUE_SAUVEGARDE_ARRETE_DEFINITIF": {
+		"BDU:SITE_ARCHEOLOGIQUE_SAUVEGARDE_ARRETE_DEFINITIF": {
 			"actiontype" : "GRID",
 			"title"      : "[BESCHERMD_ALS_FR]: [BENAMING_PAT_VW_FR]",
 			"attributes" : [
@@ -418,7 +418,7 @@ ux.gfi.fr = {
 				{ "name": "Référence DMS"			, "label" : "[NUMMER_DOSSIER]/[CODE_DOSSIER]"					, "type" : "string"}
 			]
 		},
-		"AATL:SITE_ARCHEOLOGIQUE_SAUVEGARDE_OUVERTURE_DE_PROCEDURE": {
+		"BDU:SITE_ARCHEOLOGIQUE_SAUVEGARDE_OUVERTURE_DE_PROCEDURE": {
 			"actiontype" : "GRID",
 			"title"      : "[BESCHERMD_ALS_FR]: [BENAMING_PAT_VW_FR]",
 			"attributes" : [
@@ -435,7 +435,7 @@ ux.gfi.fr = {
 				{ "name": "Référence DMS"			, "label" : "[NUMMER_DOSSIER]/[CODE_DOSSIER]"					, "type" : "string"}
 			]
 		},
-		"AATL:Zones_de_protection": {
+		"BDU:Zones_de_protection": {
 			"actiontype" : "GRID",
 			"title"      : "Zone de protection de [BESCHERMD_ALS_FR]: [BENAMING_PAT_VW_FR]",
 			"attributes" : [
@@ -452,7 +452,7 @@ ux.gfi.fr = {
 				{ "name": "Référence DMS"			, "label" : "[NUMMER_DOSSIER]/[CODE_DOSSIER]"					, "type" : "string"}
 			]
 		},
-		"AATL_DMS_SITE_ARBR:Visites_arbres": {
+		"BDU_DMS_PROT:Visites_arbres": {
 			"actiontype" : "GRID",
 			"attributes" : [
 				{ "name": "Date de la dernière visite"	, "label" : "[date]"	, "type" : "date"},
@@ -463,7 +463,7 @@ ux.gfi.fr = {
 				{ "name": "Photo"				, "label" : "http://arbres-inventaire.irisnet.be/medias/trees/[firstimage]", "type" : "link"}
 			]
 		},
-		"AATL_DMS_SITE_ARBR_PRIVATE:Arbres_remarquables_valeur_patrimoniale": {
+		"BDU_DMS_PROT_PRIVATE:Arbres_remarquables_valeur_patrimoniale": {
 			"actiontype" : "GRID",
 			"attributes" : [
 				{ "name": "Valeur patrimoniale"	, "label" : "[VP]"	, "type" : "string"},
@@ -474,7 +474,7 @@ ux.gfi.fr = {
 				{ "name": "Photo"				, "label" : "http://arbres-inventaire.irisnet.be/medias/trees/[firstimage]", "type" : "link"}
 			]
 		},
-		"AATL_DMS_PROT:Inventaire_batiments": {
+		"BDU_DMS_PROT:Inventaire_batiments": {
 			"actiontype" : "GRID",
 			"title"		 : "Inventaire bâtiments: [address_results_fr]",
 			"attributes" : [
@@ -493,7 +493,7 @@ ux.gfi.fr = {
 				{ "name": "Statut"		, "label" : "['Inactif','Actif'][[ACTIF]]"				, "type" : "eval"}
 			]
 		},
-		"AATL:PPAS":{
+		"BDU:PPAS":{
 			"actiontype" : "GRID",
 			"title"		 : "Plan particulier d'affection du sol: [OBJET]",
 			"attributes" : [
@@ -545,7 +545,7 @@ ux.gfi.fr = {
 				{ "name": "SHAPE_AREA_IN_DB"	, "label" : "[SHAPE_AREA]"	, "type" : "string"}
 			]
 		},
-		"AATL:Parcelle_2012": {
+		"BDU:Parcelle_2012": {
 			"actiontype" : "GRID",
 			"title"      : "Parcelle 2012: [CAPAKEY]",
 			"attributes" : [
@@ -593,7 +593,7 @@ ux.gfi.fr = {
 				{ "name": "SHAPE_AREA_IN_DB"	, "label" : "[SHAPE_AREA]"	, "type" : "string"}
 			]
 		},
-		"AATL:Limites_communales": {
+		"BDU:Limites_communales": {
 			"actiontype" : "GRID",
 			"title"      : "Commune: [MUFN]",
 			"attributes" : []
@@ -623,7 +623,7 @@ ux.gfi.fr = {
 			"title"      : "Zone d'intérêt culturel, historique et d'embellisement",
 			"attributes" : []
 		},
-		"AATL:Biens_classes_ou_en_sauvegarde": {
+		"BDU:Biens_classes_ou_en_sauvegarde": {
 			"actiontype" : "GRID",
 			"title"      : "Biens: [BENAMING_PAT_VW_FR]",
 			"attributes" : [
@@ -640,34 +640,18 @@ ux.gfi.fr = {
 				{ "name": "Référence DMS"			, "label" : "[NUMMER_DOSSIER]/[CODE_DOSSIER]"					, "type" : "string"}
 			]
 		},
-		"DEP_BP:BXLPROJECTS_PMNR": {
+		"BPL:Infrastructures_sportives": {
 			"actiontype" : "GRID",
-			"title"		 : "Projet: [Project_ID]",
+			"title"			 : "Infrastructure: [Nom]",
 			"attributes" : [
-				{ "name": "Category"		, "label" : "[PROJECTCATEGORYDESC]"	,"type" : "string"},
-				{ "name": "Project Type"	, "label" : "[PROJECTTYPE]"			,"type" : "string"},
-				{ "name": "Street Name F"	, "label" : "[STREETNAME_F]"		,"type" : "string"},
-				{ "name": "Street Name N"	, "label" : "[STREETNAME_N]"		,"type" : "string"},
-				{ "name": "Street Number"	, "label" : "[STREETNUMBER]"		,"type" : "string"},
-				{ "name": "Street Box"		, "label" : "[STREETBOX]"			,"type" : "string"},
-				{ "name": "Postal Code"		, "label" : "[POSTALCODE]"			,"type" : "string"},
-				{ "name": "Project Title F"	, "label" : "[PROJECTTITLE_F]"		,"type" : "string"},
-				{ "name": "Description F"	, "label" : "[DESCRIPTION_F]"		,"type" : "string"},
-				{ "name": "Project Title N"	, "label" : "[PROJECTTITLE_N]"		,"type" : "string"},
-				{ "name": "Description N"	, "label" : "[DESCRIPTION_N]"		,"type" : "string"},
-				{ "name": "Project Title E"	, "label" : "[PROJECTTITLE_E]"		,"type" : "string"},
-				{ "name": "Weblink"			, "label" : "[WEBLINK]"				,"type" : "string"},
-				{ "name": "Project Status F", "label" : "[REMARKS_F]"			,"type" : "string"},
-				{ "name": "Project Status N", "label" : "[REMARKS_N]"			,"type" : "string"},
-				{ "name": "Project Owner F"	, "label" : "[PROJECTOWNER_F]"		,"type" : "string"},
-				{ "name": "Project Owner N"	, "label" : "[PROJECTOWNER_N]"		,"type" : "string"},
-				{ "name": "Project Contact"	, "label" : "[PROJECTCONTACT]"		,"type" : "string"},
-				{ "name": "Contact Phone"	, "label" : "[CONTACTPHONE]"		,"type" : "string"},
-				{ "name": "Contact Mail"	, "label" : "[CONTACTMAIL]"			,"type" : "string"},
-				{ "name": "Public/Private/Mix"	, "label" : "[PUBLICPRIVATEMIXDESC]"	,"type" : "string"},
-				{ "name": "Source"			, "label" : "[SOURCE]"				,"type" : "string"},
-				{ "name": "File Manager"	, "label" : "[FILEMANAGER]"			,"type" : "string"},
-				{ "name": "Permit Number"	, "label" : "[PERMITNUMBER]"		,"type" : "string"}
+				{ "name": "Projet"	, "label" : "[Projet]"	,"type" : "string"},
+				{ "name": "Lieu"	, "label" : "[Lieu]"	,"type" : "string"},
+				{ "name": "Subsides"	, "label" : "[Subsides]"	,"type" : "string"},
+				{ "name": "Type"	, "label" : "[Type]"	,"type" : "string"},
+				{ "name": "Commune"	, "label" : "[Commune]"	,"type" : "string"},
+				{ "name": "Année", "label" : "[Annee]"	,"type" : "string"},
+				{ "name": "Photo, avant"	, "label" : "[Photo_A]"	,"type" : "picture"},
+				{ "name": "Photo, après"	, "label" : "[Photo_P]"	,"type" : "picture"}
 			]
 		}
 	};

@@ -179,7 +179,7 @@ ux.plugins.WMSTreeLegend = Ext.extend(gxp.plugins.Tool, {
         tileOrigin: new OpenLayers.LonLat(140000, 160000)
       });
 		//console.log(record.data.layer);
-      // DOCG 15/09/2015 Hack to apply localized SLD to WMS layer out of our publication
+		// DOCG 15/09/2015 Hack to apply localized SLD to WMS layer out of our publication
       if (sldUrl) {
         record.data.layer.params.SLD = sldUrl;
         //console.log("sldUrl present and applied to the layer");

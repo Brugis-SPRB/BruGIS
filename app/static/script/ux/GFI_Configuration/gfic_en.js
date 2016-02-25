@@ -33,7 +33,7 @@ ux.gfi.en = {
 				{ "name": "Type de zone"	, "label" : "[ZONE]"		, "type" : "string" }
 			]
 		},
-		"AATL:Enseignes" : {
+		"BDU:Enseignes" : {
 			"actiontype" : "GRID",
 			"title"		 : "Enseignes: [ZONE]",
 			"attributes" : [
@@ -88,7 +88,7 @@ ux.gfi.en = {
 				{ "name": "Classement des tailles"	, "label" : "[ClassementTailles]"	, "type" : "string"}
 			]
 		},
-		"AATL:Contrats_de_quartier": {
+		"BDU:Contrats_de_quartier": {
 			"actiontype" : "GRID",
 			"title"		 : "Contrat de quartier: [NOMCQ]",
 			"attributes" : [
@@ -108,7 +108,7 @@ ux.gfi.en = {
 				{ "name": "ID"									, "label" : "[ID]"						, "type": "string"}
 			]
 		},
-		"AATL:Lotissements": {
+		"BDU:Lotissements": {
 			"actiontype" : "GRID",
 			"title"		 : "[REFSITEX]",
 			"attributes" : [
@@ -123,7 +123,7 @@ ux.gfi.en = {
 				{ "name": "ID"						, "label" : "[ID]"				, "type": "string"}
 			]
 		},
-		"AATL:Patrimoine": {
+		"BDU:Patrimoine": {
 			"actiontype" : "GRID",
 			"title"      : "[MS]: [DENOMINATION]",
 			"attributes" : [
@@ -140,7 +140,7 @@ ux.gfi.en = {
 				{ "name": "NB"				, "label" : "[NB]"				, "type" : "string"}
 			]
 		},
-		"AATL:Zones_de_protection": {
+		"BDU:Zones_de_protection": {
 			"actiontype" : "GRID",
 			"title"      : "[MS] en [CLSV]: [DENOMINATION]",
 			"attributes" : [
@@ -164,7 +164,7 @@ ux.gfi.en = {
 				{ "name": "Dénomination"	, "label" : "[NOM_FR]"			, "type" : "string"}
 			]
 		},
-		"AATL:Patrimoine_New": {
+		"BDU:Patrimoine_New": {
 			"actiontype" : "GRID",
 			"title"      : "[BESCHERMD_ALS_FR]: [BENAMING_PAT_VW_FR]",
 			"attributes" : [
@@ -212,7 +212,7 @@ ux.gfi.en = {
 				{ "name": "actif/inactif"		, "label" : "[ACTIF]"				, "type" : "string"}
 			]
 		},
-		"AATL:PPAS":{
+		"BDU:PPAS":{
 			"actiontype" : "GRID",
 			"title"		 : "Plan particulier d'affection du sol: [OBJET]",
 			"attributes" : [
@@ -312,7 +312,7 @@ ux.gfi.en = {
 				{ "name": "SHAPE_AREA_IN_DB"	, "label" : "[SHAPE_AREA]"	, "type" : "string"}
 			]
 		},
-		"AATL:Limites_communales": {
+		"BDU:Limites_communales": {
 			"actiontype" : "GRID",
 			"title"      : "Commune: [MUFN]",
 			"attributes" : []
@@ -342,7 +342,7 @@ ux.gfi.en = {
 			"title"      : "Zone d'intérêt culturel, historique et d'embellisement",
 			"attributes" : []
 		},
-		"AATL:Biens_classes_ou_en_sauvegarde": {
+		"BDU:Biens_classes_ou_en_sauvegarde": {
 			"actiontype" : "GRID",
 			"title"      : "Biens: [DENOMINATION]",
 			"attributes" : [

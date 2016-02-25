@@ -41,14 +41,14 @@ ux.gfi.nl =  {
 				{ "name": "Soort zone"	, "label" : "[ZONE]"		, "type" : "string" }
 			]
 		},
-		"BROH:Uithangborden" : {
+		"BSO:Uithangborden" : {
 			"actiontype" : "GRID",
 			"title"		 : "Uithangborden: [ZONE]",
 			"attributes" : [
 				{ "name": "Soort zone"	, "label" : "[ZONE]"		, "type" : "string" }
 			]
 		},
-		"BROH:Reclame" : {
+		"BSO:Reclame" : {
 			"actiontype" : "GRID",
 			"title"		 : "Reclame: [ZONE]",
 			"attributes" : [
@@ -64,7 +64,7 @@ ux.gfi.nl =  {
 				{ "name": "Status"		, "label" : "['Niet actief','Actief'][[ACTIF]]"				, "type" : "eval"}
 			]
 		},
-		"BROH_DML_LAND_BOOM:Opmerkelijke_bomen": {
+		"BSO_DML_BESC:Opmerkelijke_bomen": {
 			"actiontype" : "GRID",
 			"title"		 : "[tax_nl]",
 			"attributes" : [
@@ -80,7 +80,7 @@ ux.gfi.nl =  {
 				{ "name": "Toestand"			, "label" : "[Legendenl]"			, "type" : "string"}
 			]
 		},
-		"BROH_DML_LAND_BOOM:Gevelde_ofverdwenen_bomen": {
+		"BSO_DML_BESC:Gevelde_ofverdwenen_bomen": {
 			"actiontype" : "GRID",
 			"title"		 : "[tax_nl]",
 			"attributes" : [
@@ -96,7 +96,7 @@ ux.gfi.nl =  {
 				{ "name": "Toestand"			, "label" : "[Legendenl]"			, "type" : "string"}
 			]
 		},
-		"BROH_DML_LAND_BOOM:Opmerkelijke_bomen_zeldzaamheid": {
+		"BSO_DML_BESC:Opmerkelijke_bomen_zeldzaamheid": {
 			"actiontype" : "GRID",
 			"title"		 : "[tax_la]: [rarete]",
 			"attributes" : [
@@ -105,7 +105,7 @@ ux.gfi.nl =  {
 				{ "name": "Zeldzaamheid"		, "label" : "[rarete]"				, "type" : "string"}
 			]
 		},
-		"BROH_DML_LAND_BOOM:Opmerkelijke_bomen_100_biggest": {
+		"BSO_DML_BESC:Opmerkelijke_bomen_100_biggest": {
 			"actiontype" : "GRID",
 			"title"		 : "[tax_nl]",
 			"attributes" : [
@@ -113,7 +113,7 @@ ux.gfi.nl =  {
 				{ "name": "Afmetingenindex"	, "label" : "[ClassementTailles]"	, "type" : "string"}
 			]
 		},
-		"BROH_DML_BESC:Inventaris_gebouwen": {
+		"BSO_DML_BESC:Inventaris_gebouwen": {
 			"actiontype" : "GRID",
 			"title"		 : "Inventaris gebouwen: [address_results_nl]",
 			"attributes" : [
@@ -123,7 +123,7 @@ ux.gfi.nl =  {
 				{ "name": "Beeld"			, "label" : "[firstimage]"			, "type" : "picture"}
 			]
 		},
-		"BROH:Wijkcontract": {
+		"BSO:Wijkcontract": {
 			"actiontype" : "GRID",
 			"title"		 : "Wijkcontract: [WIJKNAAM]",
 			"attributes" : [
@@ -132,7 +132,7 @@ ux.gfi.nl =  {
 				{ "name": "Date d'arrêté du gouvernement"		, "label" : "[ARRET_GVT]"				, "type": "date"},
 				{ "name": "Date de notification à la commune"	, "label" : "[NOTIF_COMM]"				, "type": "date"},
 				{ "name": "End datum"							, "label" : "[END_DATUM]"				, "type": "date"},
-				{ "name": "Actief"								, "label" : "['Nee','Ja'][[STATUT]]"	, "type": "eval"},
+				{ "name": "Actief"								, "label" : "['Nee','Ja'][[ACTIF]]"	, "type": "eval"},
 				{ "name": "Bureau d'étude"						, "label" : "[NOM_BE]"					, "type": "string"},
 				{ "name": "Bureau d'étude (responsable)"		, "label" : "[RESP_BE]"					, "type": "string"},
 				{ "name": "Reeks"								, "label" : "[REEKS]"					, "type": "string"},
@@ -143,7 +143,7 @@ ux.gfi.nl =  {
 				{ "name": "ID"									, "label" : "[ID]"						, "type": "string"}
 			]
 		},
-		"BROH:Verkavelingen": {
+		"BSO:Verkavelingen": {
 			"actiontype" : "GRID",
 			"title"		 : "[REFSITEX]",
 			"attributes" : [
@@ -162,7 +162,7 @@ ux.gfi.nl =  {
 				{ "name": "Uiteindelijke toestand"				, "label" : "[EINDTOESTAND]"	, "type": "string"}
 			]
 		},
-		"BROH:BBP":{
+		"BSO:BBP":{
 			"actiontype" : "GRID",
 			"title"		 : "BBP: [OBJET]",
 			"attributes" : [
@@ -180,7 +180,7 @@ ux.gfi.nl =  {
 				{ "name": "ID"							, "label" : "[ID]"				, "type" : "string"}
 			]
 		},
-		"BROH:Vrijwaringzone": {
+		"BSO:Vrijwaringzone": {
 			"actiontype" : "GRID",
 			"title"      : "Vrijwaringzone van [BESCHERMD_ALS_NL]: [BENAMING_PAT_VW_NL]",
 			"attributes" : [
@@ -197,7 +197,7 @@ ux.gfi.nl =  {
 				{ "name": "Referentie DML"			, "label" : "[NUMMER_DOSSIER]/[CODE_DOSSIER]"					, "type" : "string"}
 			]
 		},
-		"BROH:Patrimonium": {
+		"BSO:Patrimonium": {
 			"actiontype" : "GRID",
 			"title"      : "[BESCHERMD_ALS_NL]: [BENAMING_PAT_VW_NL]",
 			"attributes" : [
@@ -214,7 +214,7 @@ ux.gfi.nl =  {
 				{ "name": "Referentie DML"			, "label" : "[NUMMER_DOSSIER]/[CODE_DOSSIER]"					, "type" : "string"}
 			]
 		},
-		"BROH:ARCHEOLOGISCHE_LANDSCHAP_BESCHERMING_AANVRAAG_PROCEDURE": {
+		"BSO:ARCHEOLOGISCHE_LANDSCHAP_BESCHERMING_AANVRAAG_PROCEDURE": {
 			"actiontype" : "GRID",
 			"title"      : "[BESCHERMD_ALS_NL]: [BENAMING_PAT_VW_NL]",
 			"attributes" : [
@@ -231,7 +231,7 @@ ux.gfi.nl =  {
 				{ "name": "Referentie DML"			, "label" : "[NUMMER_DOSSIER]/[CODE_DOSSIER]"					, "type" : "string"}
 			]
 		},
-		"BROH:ARCHEOLOGISCHE_LANDSCHAP_BESCHERMING_DEFINITIEF_BESLUIT": {
+		"BSO:ARCHEOLOGISCHE_LANDSCHAP_BESCHERMING_DEFINITIEF_BESLUIT": {
 			"actiontype" : "GRID",
 			"title"      : "[BESCHERMD_ALS_NL]: [BENAMING_PAT_VW_NL]",
 			"attributes" : [
@@ -248,7 +248,7 @@ ux.gfi.nl =  {
 				{ "name": "Referentie DML"			, "label" : "[NUMMER_DOSSIER]/[CODE_DOSSIER]"					, "type" : "string"}
 			]
 		},
-		"BROH:ARCHEOLOGISCHE_LANDSCHAP_BEWAARLIJST_AANVRAAG_PROCEDURE": {
+		"BSO:ARCHEOLOGISCHE_LANDSCHAP_BEWAARLIJST_AANVRAAG_PROCEDURE": {
 			"actiontype" : "GRID",
 			"title"      : "[BESCHERMD_ALS_NL]: [BENAMING_PAT_VW_NL]",
 			"attributes" : [
@@ -265,7 +265,7 @@ ux.gfi.nl =  {
 				{ "name": "Referentie DML"			, "label" : "[NUMMER_DOSSIER]/[CODE_DOSSIER]"					, "type" : "string"}
 			]
 		},
-		"BROH:ARCHEOLOGISCHE_LANDSCHAP_BEWAARLIJST_DEFINITIEF_BESLUIT": {
+		"BSO:ARCHEOLOGISCHE_LANDSCHAP_BEWAARLIJST_DEFINITIEF_BESLUIT": {
 			"actiontype" : "GRID",
 			"title"      : "[BESCHERMD_ALS_NL]: [BENAMING_PAT_VW_NL]",
 			"attributes" : [
@@ -282,7 +282,7 @@ ux.gfi.nl =  {
 				{ "name": "Referentie DML"			, "label" : "[NUMMER_DOSSIER]/[CODE_DOSSIER]"					, "type" : "string"}
 			]
 		},
-		"BROH:GEHEEL_BESCHERMING_AANVRAAG_PROCEDURE": {
+		"BSO:GEHEEL_BESCHERMING_AANVRAAG_PROCEDURE": {
 			"actiontype" : "GRID",
 			"title"      : "[BESCHERMD_ALS_NL]: [BENAMING_PAT_VW_NL]",
 			"attributes" : [
@@ -299,7 +299,7 @@ ux.gfi.nl =  {
 				{ "name": "Referentie DML"			, "label" : "[NUMMER_DOSSIER]/[CODE_DOSSIER]"					, "type" : "string"}
 			]
 		},
-		"BROH:GEHEEL_BESCHERMING_DEFINITIEF_BESLUIT": {
+		"BSO:GEHEEL_BESCHERMING_DEFINITIEF_BESLUIT": {
 			"actiontype" : "GRID",
 			"title"      : "[BESCHERMD_ALS_NL]: [BENAMING_PAT_VW_NL]",
 			"attributes" : [
@@ -316,7 +316,7 @@ ux.gfi.nl =  {
 				{ "name": "Referentie DML"			, "label" : "[NUMMER_DOSSIER]/[CODE_DOSSIER]"					, "type" : "string"}
 			]
 		},
-		"BROH:GEHEEL_BEWAARLIJST_AANVRAAG_PROCEDURE": {
+		"BSO:GEHEEL_BEWAARLIJST_AANVRAAG_PROCEDURE": {
 			"actiontype" : "GRID",
 			"title"      : "[BESCHERMD_ALS_NL]: [BENAMING_PAT_VW_NL]",
 			"attributes" : [
@@ -333,7 +333,7 @@ ux.gfi.nl =  {
 				{ "name": "Referentie DML"			, "label" : "[NUMMER_DOSSIER]/[CODE_DOSSIER]"					, "type" : "string"}
 			]
 		},
-		"BROH:GEHEEL_BEWAARLIJST_DEFINITIEF_BESLUIT": {
+		"BSO:GEHEEL_BEWAARLIJST_DEFINITIEF_BESLUIT": {
 			"actiontype" : "GRID",
 			"title"      : "[BESCHERMD_ALS_NL]: [BENAMING_PAT_VW_NL]",
 			"attributes" : [
@@ -350,7 +350,7 @@ ux.gfi.nl =  {
 				{ "name": "Referentie DML"			, "label" : "[NUMMER_DOSSIER]/[CODE_DOSSIER]"					, "type" : "string"}
 			]
 		},
-		"BROH:LANDSCHAP_BESCHERMING_AANVRAAG_PROCEDURE": {
+		"BSO:LANDSCHAP_BESCHERMING_AANVRAAG_PROCEDURE": {
 			"actiontype" : "GRID",
 			"title"      : "[BESCHERMD_ALS_NL]: [BENAMING_PAT_VW_NL]",
 			"attributes" : [
@@ -367,7 +367,7 @@ ux.gfi.nl =  {
 				{ "name": "Referentie DML"			, "label" : "[NUMMER_DOSSIER]/[CODE_DOSSIER]"					, "type" : "string"}
 			]
 		},
-		"BROH:LANDSCHAP_BESCHERMING_DEFINITIEF_BESLUIT": {
+		"BSO:LANDSCHAP_BESCHERMING_DEFINITIEF_BESLUIT": {
 			"actiontype" : "GRID",
 			"title"      : "[BESCHERMD_ALS_NL]: [BENAMING_PAT_VW_NL]",
 			"attributes" : [
@@ -384,7 +384,7 @@ ux.gfi.nl =  {
 				{ "name": "Referentie DML"			, "label" : "[NUMMER_DOSSIER]/[CODE_DOSSIER]"					, "type" : "string"}
 			]
 		},
-		"BROH:LANDSCHAP_BEWAARLIJST_AANVRAAG_PROCEDURE": {
+		"BSO:LANDSCHAP_BEWAARLIJST_AANVRAAG_PROCEDURE": {
 			"actiontype" : "GRID",
 			"title"      : "[BESCHERMD_ALS_NL]: [BENAMING_PAT_VW_NL]",
 			"attributes" : [
@@ -401,7 +401,7 @@ ux.gfi.nl =  {
 				{ "name": "Referentie DML"			, "label" : "[NUMMER_DOSSIER]/[CODE_DOSSIER]"					, "type" : "string"}
 			]
 		},
-		"BROH:LANDSCHAP_BEWAARLIJST_DEFINITIEF_BESLUIT": {
+		"BSO:LANDSCHAP_BEWAARLIJST_DEFINITIEF_BESLUIT": {
 			"actiontype" : "GRID",
 			"title"      : "[BESCHERMD_ALS_NL]: [BENAMING_PAT_VW_NL]",
 			"attributes" : [
@@ -418,7 +418,7 @@ ux.gfi.nl =  {
 				{ "name": "Referentie DML"			, "label" : "[NUMMER_DOSSIER]/[CODE_DOSSIER]"					, "type" : "string"}
 			]
 		},
-		"BROH:MONUMENT_BESCHERMING_AANVRAAG_PROCEDURE": {
+		"BSO:MONUMENT_BESCHERMING_AANVRAAG_PROCEDURE": {
 			"actiontype" : "GRID",
 			"title"      : "[BESCHERMD_ALS_NL]: [BENAMING_PAT_VW_NL]",
 			"attributes" : [
@@ -435,7 +435,7 @@ ux.gfi.nl =  {
 				{ "name": "Referentie DML"			, "label" : "[NUMMER_DOSSIER]/[CODE_DOSSIER]"					, "type" : "string"}
 			]
 		},
-		"BROH:MONUMENT_BESCHERMING_DEFINITIEF_BESLUIT": {
+		"BSO:MONUMENT_BESCHERMING_DEFINITIEF_BESLUIT": {
 			"actiontype" : "GRID",
 			"title"      : "[BESCHERMD_ALS_NL]: [BENAMING_PAT_VW_NL]",
 			"attributes" : [
@@ -452,7 +452,7 @@ ux.gfi.nl =  {
 				{ "name": "Referentie DML"			, "label" : "[NUMMER_DOSSIER]/[CODE_DOSSIER]"					, "type" : "string"}
 			]
 		},
-		"BROH:MONUMENT_BEWAARLIJST_AANVRAAG_PROCEDURE": {
+		"BSO:MONUMENT_BEWAARLIJST_AANVRAAG_PROCEDURE": {
 			"actiontype" : "GRID",
 			"title"      : "[BESCHERMD_ALS_NL]: [BENAMING_PAT_VW_NL]",
 			"attributes" : [
@@ -469,7 +469,7 @@ ux.gfi.nl =  {
 				{ "name": "Referentie DML"			, "label" : "[NUMMER_DOSSIER]/[CODE_DOSSIER]"					, "type" : "string"}
 			]
 		},
-		"BROH:MONUMENT_BEWAARLIJST_DEFINITIEF_BESLUIT": {
+		"BSO:MONUMENT_BEWAARLIJST_DEFINITIEF_BESLUIT": {
 			"actiontype" : "GRID",
 			"title"      : "[BESCHERMD_ALS_NL]: [BENAMING_PAT_VW_NL]",
 			"attributes" : [
@@ -520,7 +520,7 @@ ux.gfi.nl =  {
 				{ "name": "SHAPE_AREA_IN_DB"	, "label" : "[SHAPE_AREA]"	, "type" : "string"}
 			]
 		},
-		"BROH:Perceel_2012": {
+		"BSO:Perceel_2012": {
 			"actiontype" : "GRID",
 			"title"      : "Perceel 2012: [CAPAKEY]",
 			"attributes" : [
@@ -568,12 +568,12 @@ ux.gfi.nl =  {
 				{ "name": "SHAPE_AREA_IN_DB"	, "label" : "[SHAPE_AREA]"	, "type" : "string"}
 			]
 		},
-		"BROH:Gemeentegrenzen": {
+		"BSO:Gemeentegrenzen": {
 			"actiontype" : "GRID",
 			"title"      : "Commune: [MUDN]",
 			"attributes" : []
 		},
-		"BROH:Goed_dat_beschermd_is_of_ingeschreven_op_de_bewaarlijst": {
+		"BSO:Goed_dat_beschermd_is_of_ingeschreven_op_de_bewaarlijst": {
 			"actiontype" : "GRID",
 			"title"      : "Goed: [BENAMING_PAT_VW_NL]",
 			"attributes" : [
@@ -588,36 +588,6 @@ ux.gfi.nl =  {
 				{ "name": "Foto"					, "label" : "[FOTO]"											, "type" : "picture"},
 				{ "name": "Vrijwaringszone"			, "label" : "['Nee','Ja'][[VRIJWARINGSZONE]]"					, "type" : "eval"},
 				{ "name": "Referentie DML"			, "label" : "[NUMMER_DOSSIER]/[CODE_DOSSIER]"					, "type" : "string"}
-			]
-		},
-		"DEP_BP:BXLPROJECTS_PMNR": {
-			"actiontype" : "GRID",
-			"title"		 : "Projet: [Project_ID]",
-			"attributes" : [
-				{ "name": "Category"		, "label" : "[PROJECTCATEGORYDESC]"	,"type" : "string"},
-				{ "name": "Project Type"	, "label" : "[PROJECTTYPE]"			,"type" : "string"},
-				{ "name": "Street Name F"	, "label" : "[STREETNAME_F]"		,"type" : "string"},
-				{ "name": "Street Name N"	, "label" : "[STREETNAME_N]"		,"type" : "string"},
-				{ "name": "Street Number"	, "label" : "[STREETNUMBER]"		,"type" : "string"},
-				{ "name": "Street Box"		, "label" : "[STREETBOX]"			,"type" : "string"},
-				{ "name": "Postal Code"		, "label" : "[POSTALCODE]"			,"type" : "string"},
-				{ "name": "Project Title F"	, "label" : "[PROJECTTITLE_F]"		,"type" : "string"},
-				{ "name": "Description F"	, "label" : "[DESCRIPTION_F]"		,"type" : "string"},
-				{ "name": "Project Title N"	, "label" : "[PROJECTTITLE_N]"		,"type" : "string"},
-				{ "name": "Description N"	, "label" : "[DESCRIPTION_N]"		,"type" : "string"},
-				{ "name": "Project Title E"	, "label" : "[PROJECTTITLE_E]"		,"type" : "string"},
-				{ "name": "Weblink"			, "label" : "[WEBLINK]"				,"type" : "string"},
-				{ "name": "Project Status F", "label" : "[REMARKS_F]"			,"type" : "string"},
-				{ "name": "Project Status N", "label" : "[REMARKS_N]"			,"type" : "string"},
-				{ "name": "Project Owner F"	, "label" : "[PROJECTOWNER_F]"		,"type" : "string"},
-				{ "name": "Project Owner N"	, "label" : "[PROJECTOWNER_N]"		,"type" : "string"},
-				{ "name": "Project Contact"	, "label" : "[PROJECTCONTACT]"		,"type" : "string"},
-				{ "name": "Contact Phone"	, "label" : "[CONTACTPHONE]"		,"type" : "string"},
-				{ "name": "Contact Mail"	, "label" : "[CONTACTMAIL]"			,"type" : "string"},
-				{ "name": "Public/Private/Mix"	, "label" : "[PUBLICPRIVATEMIXDESC]"	,"type" : "string"},
-				{ "name": "Source"			, "label" : "[SOURCE]"				,"type" : "string"},
-				{ "name": "File Manager"	, "label" : "[FILEMANAGER]"			,"type" : "string"},
-				{ "name": "Permit Number"	, "label" : "[PERMITNUMBER]"		,"type" : "string"}
 			]
 		}
 };
