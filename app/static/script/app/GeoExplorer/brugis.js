@@ -83,6 +83,7 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
 			"mymapschange"
 		);
     brugisConfig.fixOldMaps();
+    brugisConfig.showAlert();
 		var user = this.getCookieValue(this.cookieParamName);
 		if(user) {
 			this.authorizedRoles = ["ROLE_ADMINISTRATOR"];
@@ -779,6 +780,7 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
         });
 		///////////////////////DOCG////////////////////////////////////////////
         this.on("ready", function() {
+
 			/* NDU - 2014/02/14
 			 *	Restauration des sources à leur définition originale afin de sauvegarder
 			 *	l'usage du xml et de sa rapidité, perdu en cas de rechargement de mybrugis

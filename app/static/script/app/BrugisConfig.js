@@ -106,6 +106,24 @@ Brugis.Config = Ext.extend(Object,  {
 		}
 		return url;
 	},
+  showAlert : function() {
+    if(localStorage) {
+      var alertCount = localStorage.getItem('alter_count');
+      if(alertCount == null){
+        alertCount = 0;
+      }
+      if(alertCount < 3) {
+        alertCount++;
+        Ext.Msg.show({
+          title: 'Maintenance/Onderhoud',
+          msg:"Suite à la migration de l'ensemble des données de BDU, les définitions de carte sauvegardées sont devenues obsolètes.<br /> Celles-ci vont être supprimées automatiquement et doivent être recrées. <br /> Merci de votre compréhension.<br /> Pour toutes vos questions et remarques, merci de nous contacter: <a href='mailto:brugis@sprb.brussels'>brugis@sprb.brussels</a> <hr>  Tegenvolge de migratie van de gegevens van BSO,  zijn de definities van de opgeslagen kaarten verouderd. <br/> Deze worden automatish verwijderd en moeten du worden heraangemaakt. <br /> Wij danken U voor uw begrip. <br /> Voor alle vragen en opmerkingen kunt u terecht bij <a href='mailto:brugis@gob.brussels'>brugis@gob.brussels</a>",
+          buttons : Ext.Msg.OK,
+          icon: Ext.MessageBox.QUESTION
+        });
+        localStorage.setItem('alter_count', alertCount);
+      }
+    }
+  },
   fixOldMaps : function() {
     if(localStorage) {
       if (localStorage.getItem('myMaps')) {
