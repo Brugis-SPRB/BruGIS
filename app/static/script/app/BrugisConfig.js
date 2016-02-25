@@ -106,7 +106,7 @@ Brugis.Config = Ext.extend(Object,  {
 		}
 		return url;
 	},
-  fixOldMaps : function() {
+    fixOldMaps : function() {
     if(localStorage) {
       if (localStorage.getItem('myMaps')) {
         var MyMapsKeys = eval(localStorage.getItem("myMaps"));
@@ -114,7 +114,7 @@ Brugis.Config = Ext.extend(Object,  {
 
         for(var i=0; i < MyMapsKeys.length; i++) {
           var mapToTest = localStorage.getItem(MyMapsKeys[i]);
-          if(mapToTest.match(/AATL:/) != null){
+          if((mapToTest.match(/AATL:/) != null) or (mapToTest.match(/BROH:/) != null)){
             localStorage.removeItem(MyMapsKeys[i])
             localStorage.removeItem(MyMapsKeys[i] + "_abstract")
             localStorage.removeItem(MyMapsKeys[i] + "_date")
