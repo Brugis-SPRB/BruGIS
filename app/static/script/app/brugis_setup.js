@@ -89,7 +89,7 @@ Ext.onReady(function () {
 				ptype: "ux_brugiswmssource"
 			},
 			'IBGE WMS - Mapserver': {
-				url: "http://wms.ibgebim.be/ibgewms?",
+				url: "/geoserver/www/wmsaatl/ibgewms.xml",
 				ptype: "gxp_wmscsource",
 				version: "1.1.1"
 			},

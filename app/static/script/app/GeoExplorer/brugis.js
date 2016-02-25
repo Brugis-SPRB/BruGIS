@@ -381,7 +381,7 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
 			Ext.applyIf(config, addConfig);
 			this.applyConfig(config);
 			localStorage.removeItem('mapStateToLoad');
-        } else if (!localStorage && !localStorage.getItem('currentMapState')) {
+        } else if (localStorage && localStorage.getItem('currentMapState')) {
 			/** DocG - 13/03/2014
 			 *  Non chargement du currentMapState en cas de nouvelle version
 			 */
