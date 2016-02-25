@@ -16,7 +16,7 @@ Brugis.Config = Ext.extend(Object,  {
 	DEV : 'DEV',
 	STA : 'STA',
 	PRD : 'PRD',
-	
+
 	noTileslayersList: ["AATL_DMS_SITE_ARBR:Arbres_remarquables",
 						"AATL_DMS_SITE_ARBR:Arbres_remarquables_abattus_ou_disparus",
 						"BROH_DML_LAND_BOOM:Opmerkelijke_bomen",
@@ -105,5 +105,29 @@ Brugis.Config = Ext.extend(Object,  {
 				break;
 		}
 		return url;
-	}
+	},
+  fixOldMaps : function() {
+    if(localStorage) {
+      if (localStorage.getItem('myMaps')) {
+        var MyMapsKeys = eval(localStorage.getItem("myMaps"));
+        var newMyMapsKeys = [];
+
+        for(var i=0; i < MyMapsKeys.lenght; i++) {
+          var mapToTest = localStorage.getItem(MyMapsKeys[i]);
+          if(mapToTest.match(/AATL:/) != null){
+            localStorage.removeItem(MyMapsKeys[i])
+            localStorage.removeItem(MyMapsKeys[i] + "_abstract")
+            localStorage.removeItem(MyMapsKeys[i] + "_date")
+          } else {
+            newMyMapsKeys.append(MyMapsKeys[i]);
+          }
+        }
+        if(newMyMapsKeys.lenght > 0 ) {
+          localStorage.setItem("myMaps", newMyMapsKeys)
+        } else {
+          localStorage.removeItem("myMaps");
+        }
+      }
+    }
+  }
 });

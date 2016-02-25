@@ -74,15 +74,15 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
     constructor: function(config) {
 
 		var brugisConfig = new Brugis.Config();
-	
+
 		// add any custom application events
-        this.addEvents(
+    this.addEvents(
 			"preferencesChange"
 		);
 		this.addEvents(
 			"mymapschange"
 		);
-
+    brugisConfig.fixOldMaps();
 		var user = this.getCookieValue(this.cookieParamName);
 		if(user) {
 			this.authorizedRoles = ["ROLE_ADMINISTRATOR"];
@@ -269,28 +269,28 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
 	 *	DocG - 2013/11/21
 	 */
     loadConfig: function(config) {
-        var mapUrl = window.location.hash.substr(1);
-        var match = mapUrl.match(/^maps\/(\d+)$/);
-		var matchShareMaps = mapUrl.match(/^sharemaps\/(\d+)$/);
+      var mapUrl = window.location.hash.substr(1);
+      var match = mapUrl.match(/^maps\/(\d+)$/);
+      var matchShareMaps = mapUrl.match(/^sharemaps\/(\d+)$/);
 	    var query = Ext.urlDecode(document.location.search.substr(1));
-		var preUrl = "";
-		
-		var tileOriginContent = new OpenLayers.LonLat(140000, 160000);
+		  var preUrl = "";
 
-		if (match) {
-			preUrl = "../";
-		}
-		else if (matchShareMaps) {
-			preUrl = "http://mbr102.irisnet.be/MyBruGIS/";
-		}
+  		var tileOriginContent = new OpenLayers.LonLat(140000, 160000);
+
+  		if (match) {
+  			preUrl = "../";
+  		}
+  		else if (matchShareMaps) {
+  			preUrl = "http://mbr102.irisnet.be/MyBruGIS/";
+  		}
 	    if (match || matchShareMaps) {
 			this.id = matchShareMaps ? Number(matchShareMaps[1]) : Number(match[1]);
 
 			OpenLayers.Request.issue({
 				method: 'GET',
-                url: preUrl + mapUrl,
+        url: preUrl + mapUrl,
 				proxy : "../proxy/?url=",
-                success: function(request) {
+        success: function(request) {
 					var addConfig = Ext.util.JSON.decode(request.responseText);
 					this.originalSourcesUrl = config.sources["BruGIS WMS - Geoserver"].url;
 					var mSource = config.sources["BruGIS WMS - Geoserver"];
@@ -309,13 +309,13 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
 						newLayer["visibility"] = addConfig.map.layers[ll].visibility;
 						newLayer["url"] 		= addConfig.map.layers[ll].url;
 						newLayer["tileOrigin"] = tileOriginContent;
-						newLayer["options"] = {tileOrigin : tileOriginContent};
+						//newLayer["options"] = {tileOrigin : tileOriginContent};
 						mLayer[ll] = newLayer;
 					}
 					delete config.sources;
 					delete config.map;
 					// Don't use persisted tool configurations from old maps
-                    delete addConfig.tools;
+          delete addConfig.tools;
 					addConfig.sources["BruGIS WMS - Geoserver"]=mSource;
 					addConfig.map.layers = mLayer;
 
@@ -369,8 +369,8 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
 					newLayer["fixed"] = addConfig.map.layers[ll].fixed;
 					newLayer["visibility"] = addConfig.map.layers[ll].visibility;
 					newLayer["url"] 		= addConfig.map.layers[ll].url;
-					newLayer["tileOrigin"] = tileOriginContent;
-					newLayer["options"] = {tileOrigin : tileOriginContent};
+          newLayer["tileOrigin"] = tileOriginContent;
+					//newLayer["options"] = {tileOrigin : tileOriginContent};
 					mLayer[ll] = newLayer;
 				}
 			delete config.sources;
@@ -406,7 +406,7 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
 					newLayer["visibility"] 	= addConfig.map.layers[ll].visibility;
 					newLayer["url"] 		= addConfig.map.layers[ll].url;
 					newLayer["tileOrigin"] = tileOriginContent;
-					newLayer["options"] = {tileOrigin : tileOriginContent};
+					//newLayer["options"] = {tileOrigin : tileOriginContent};
 					mLayer[ll] 				= newLayer;
 				}
 				delete config.sources;
