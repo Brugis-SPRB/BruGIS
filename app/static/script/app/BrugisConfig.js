@@ -117,7 +117,7 @@ Brugis.Config = Ext.extend(Object,  {
         Ext.Msg.show({
           title: 'BeGeo Awards',
           minWidth : 450,
-          msg:"<div style='text-align: center'>Nous sommes très heureux de vous annoncer que le<br /> <h2> GeoSpatial Award 2016 </h2> <h4>Professional Award</h4> a été décerné ce 03 mars 2016 au <br /> <b>Service Public Régional de Bruxelles</b> <br /> Pour <br /> <i>L'Urbanalyse BruGIS : les renseignements urbanistiques</i> <br /> à la portée de tous en 1(3) clics</div> <hr /><div style='text-align: center'> Wij zijn zeer verheugd om u mee te delen dat de <br /> <h2>GeoSpatial Award 2016</h2> <h4>Professional Award</h4> op 3 maart werd toegekend aan <br /> <b>Gewestelijke Overheidsdienst Brussel</b> <br /> voor <br /> <i>BruGIS Urbanalyse : steedenbouwkundige inlichtingen voor iedereen in 1(3) klikken</i></div>",
+          msg:"<div style='text-align: center'>Nous sommes très heureux de vous annoncer que le<br /> <h2> GeoSpatial Award 2016 </h2> <h4>Professional Award</h4> a été décerné ce 03 mars 2016 au <br /> <b>Service Public Régional de Bruxelles</b> <br /> Pour <br /> <i>L'Urbanalyse BruGIS : les renseignements urbanistiques</i> <br /> à la portée de tous en 1(3) clics</div> <hr /><div style='text-align: center'> Wij zijn zeer verheugd om u mee te delen dat de <br /> <h2>GeoSpatial Award 2016</h2> <h4>Professional Award</h4> op 3 maart werd toegekend aan <br /> <b>Gewestelijke Overheidsdienst Brussel</b> <br /> voor <br /> <i>BruGIS Urbanalyse : stedenbouwkundige inlichtingen voor iedereen in 1(3) klikken</i></div>",
           buttons : Ext.Msg.OK
 
         });
