@@ -164,41 +164,41 @@ ux.plugins.WMSGetFeatureInfo = Ext.extend(gxp.plugins.Tool, {
 				vendorParams["buffer"] = 10;
 
                 var control = new OpenLayers.Control.WMSGetFeatureInfo(Ext.applyIf({
-					url: layer.url,
+                    url: layer.url,
                     queryVisible: true,
                     layers: [layer],
-					infoFormat: infoFormat,
+                    infoFormat: infoFormat,
                     vendorParams: vendorParams,
-					drillDown: true,
+                    drillDown: true,
                     eventListeners: {
                         getfeatureinfo: function(evt) {
-							var title = x.get("title") || x.get("name");
-							var layer_name = x.get("name");
-							var currentLangage = GeoExt.Lang.locale;
-							if(layer_name) {
-								if (layer_name && ux.gfi[currentLangage] && ux.gfi[currentLangage][layer_name]) {
-									var actiontype = ux.gfi[currentLangage][layer_name].actiontype;
-									switch(actiontype) {
-										case "GRID":
-											this.displaySmartPopup(evt, title, ux.gfi[currentLangage][layer_name]);
-											break;
-										case "REDIRECT":
-											this.redirect(evt,title,ux.gfi[currentLangage][layer_name]);
-											break;
-									}
-								} else {
-									if (infoFormat == "text/html") {
-										var match = evt.text.match(/<body[^>]*>([\s\S]*)<\/body>/);
-										if (match && !match[1].match(/^\s*$/)) {
-											this.displayPopup(evt, title, match[1]);
-										}
-									} else if (infoFormat == "text/plain") {
-										this.displayPopup(evt, title, '<pre>' + evt.text + '</pre>');
-									} else if (evt.features && evt.features.length > 0) {
-										this.displayPopup(evt, title);
-									}
-								}
-							}
+                            var title = x.get("title") || x.get("name");
+                            var layer_name = x.get("name");
+                            var currentLangage = GeoExt.Lang.locale;
+                            if(layer_name) {
+                                if (layer_name && ux.gfi[currentLangage] && ux.gfi[currentLangage][layer_name]) {
+                                    var actiontype = ux.gfi[currentLangage][layer_name].actiontype;
+                                    switch(actiontype) {
+                                        case "GRID":
+                                            this.displaySmartPopup(evt, title,ux.gfi[currentLangage][layer_name]);
+                                            break;
+                                        case "REDIRECT":
+                                            this.redirect(evt,title,ux.gfi[currentLangage][layer_name]);
+                                            break;
+                                    }
+                                } else {
+                                    if (infoFormat == "text/html") {
+                                        var match = evt.text.match(/<body[^>]*>([\s\S]*)<\/body>/);
+                                        if (match && !match[1].match(/^\s*$/)) {
+                                            this.displayPopup(evt, title, match[1]);
+                                        }
+                                    } else if (infoFormat == "text/plain") {
+                                        this.displayPopup(evt, title, '<pre>' + evt.text + '</pre>');
+                                    } else if (evt.features && evt.features.length > 0) {
+                                        this.displayPopup(evt, title);
+                                    }
+                                }
+                            }
                         },
                         scope: this
                     }
@@ -209,47 +209,47 @@ ux.plugins.WMSGetFeatureInfo = Ext.extend(gxp.plugins.Tool, {
                     control.activate();
                 }
 
-				// DOCG // Pour obtenir le GFI sur le clic droit //////////////
-				var oClick = new OpenLayers.Control.RightClick({ eventMethods: {
-					'rightclick': function (e) {
-						control.request(e.xy);
-					}
-				}});
-				map.addControl(oClick);
-				info.controls2.push(oClick);
+                // DOCG // Pour obtenir le GFI sur le clic droit //////////////
+                var oClick = new OpenLayers.Control.RightClick({ eventMethods: {
+                    'rightclick': function (e) {
+                        control.request(e.xy);
+                    }
+                }});
+                map.addControl(oClick);
+                info.controls2.push(oClick);
             }, this);
 
-			var getFeatureInfoOnRightClick =
-				(localStorage.getItem("shwPiRc") && localStorage.getItem("shwPiRc") == '0')?
-				false:
-				(localStorage.getItem("shwPiRc") && localStorage.getItem("shwPiRc") == '1')?
-				true:
-				false;
+            var getFeatureInfoOnRightClick =
+            (localStorage.getItem("shwPiRc") && localStorage.getItem("shwPiRc") == '0')?
+            false:
+            (localStorage.getItem("shwPiRc") && localStorage.getItem("shwPiRc") == '1')?
+            true:
+            false;
 
-			for (var i = 0, len = info.controls2.length; i < len; i++){
-				var oClick = info.controls2[i];
-				if (getFeatureInfoOnRightClick == true) {
-					var controlActive = false;
-					for (var i = 0, len = info.controls.length; i < len; i++){
-						var control = info.controls[i];
-						var controlActive = control.active;
-						if (!controlActive) {
-							control.activate();
-						}
-					}
-					oClick.activate();
-					Ext.getDoc().on("contextmenu", this.blockContextMenu);
-					for (var i = 0, len = info.controls.length; i < len; i++){
-						var control = info.controls[i];
-						if (!controlActive) {
-							control.deactivate();
-						}
-					}
-				} else {
-					oClick.deactivate();
-					Ext.getDoc().un("contextmenu", this.blockContextMenu);
-				}
-			}
+            for (var i = 0, len = info.controls2.length; i < len; i++){
+                var oClick = info.controls2[i];
+                if (getFeatureInfoOnRightClick == true) {
+                    var controlActive = false;
+                    for (var i = 0, len = info.controls.length; i < len; i++){
+                        var control = info.controls[i];
+                        var controlActive = control.active;
+                        if (!controlActive) {
+                            control.activate();
+                        }
+                    }
+                    oClick.activate();
+                    Ext.getDoc().on("contextmenu", this.blockContextMenu);
+                    for (var i = 0, len = info.controls.length; i < len; i++){
+                        var control = info.controls[i];
+                        if (!controlActive) {
+                            control.deactivate();
+                        }
+                    }
+                } else {
+                    oClick.deactivate();
+                    Ext.getDoc().un("contextmenu", this.blockContextMenu);
+                }
+            }
         };
 
 		this.target.on("preferencesChange", updateInfo, this);
@@ -260,13 +260,13 @@ ux.plugins.WMSGetFeatureInfo = Ext.extend(gxp.plugins.Tool, {
         return actions;
     },
 
-	/*
-	*	Display the feture geometry on map
-	*    there will be only one (geometry)
-	*   ALL OUR BASE ARE BELONG TO US NEWS
-	*/
-	highlightFeature : function(feature) {
-		var styleMap = new OpenLayers.StyleMap({
+    /*
+    *	Display the feture geometry on map
+    *    there will be only one (geometry)
+    *   ALL OUR BASE ARE BELONG TO US NEWS
+    */
+    highlightFeature : function(feature) {
+        var styleMap = new OpenLayers.StyleMap({
             "default": new OpenLayers.Style(null, {
                 rules: [new OpenLayers.Rule({
                     symbolizer: {
@@ -294,33 +294,33 @@ ux.plugins.WMSGetFeatureInfo = Ext.extend(gxp.plugins.Tool, {
                 })]
             })
         });
-		var resLayers = this.target.mapPanel.map.getLayersByName("wmsgfihigh");
-		var vectorLayer;
-		if(resLayers.length == 0 ) {
-			vectorLayer = new OpenLayers.Layer.Vector("wmsgfihigh");
-			vectorLayer.styleMap = styleMap;
-			vectorLayer.displayInLayerSwitcher = false;
-			this.target.mapPanel.map.addLayer(vectorLayer);
-		} else {
-			vectorLayer = resLayers[0];
-		}
-		vectorLayer.removeAllFeatures();
-		vectorLayer.addFeatures([feature]);
-	},
+        var resLayers = this.target.mapPanel.map.getLayersByName("wmsgfihigh");
+        var vectorLayer;
+        if(resLayers.length == 0 ) {
+            vectorLayer = new OpenLayers.Layer.Vector("wmsgfihigh");
+            vectorLayer.styleMap = styleMap;
+            vectorLayer.displayInLayerSwitcher = false;
+            this.target.mapPanel.map.addLayer(vectorLayer);
+        } else {
+            vectorLayer = resLayers[0];
+        }
+        vectorLayer.removeAllFeatures();
+        vectorLayer.addFeatures([feature]);
+    },
 
-	cleanHighlighting : function() {
-		var resLayers = this.target.mapPanel.map.getLayersByName("wmsgfihigh");
-		if(resLayers.length != 0 ) {
-			resLayers[0].removeAllFeatures();
-		}
-	},
+    cleanHighlighting : function() {
+        var resLayers = this.target.mapPanel.map.getLayersByName("wmsgfihigh");
+        if(resLayers.length != 0 ) {
+            resLayers[0].removeAllFeatures();
+        }
+    },
 
-	removeHighlightLayer : function() {
-		var resLayers = this.target.mapPanel.map.getLayersByName("wmsgfihigh");
-		if(resLayers.length != 0 ) {
-			this.target.mapPanel.map.removeLayer(resLayers[0]);
-		}
-	},
+    removeHighlightLayer : function() {
+        var resLayers = this.target.mapPanel.map.getLayersByName("wmsgfihigh");
+        if(resLayers.length != 0 ) {
+            this.target.mapPanel.map.removeLayer(resLayers[0]);
+        }
+    },
     /** private: method[displayPopup]
      * :arg evt: the event object from a
      *     :class:`OpenLayers.Control.GetFeatureInfo` control
@@ -328,18 +328,18 @@ ux.plugins.WMSGetFeatureInfo = Ext.extend(gxp.plugins.Tool, {
      *     reporting the info to the user
      * :arg text: ``String`` Body text.
      */
-    displayPopup: function(evt, title, text) {
-		/** DocG
-		 *	Gestion des popup uniques ou non
-		 */
-		if (this.unique) {
-			for (var each in this.popupCache) {
-				this.popupCache[each].close();
-			}
-		}
+     displayPopup: function(evt, title, text) {
+         /** DocG
+         *	Gestion des popup uniques ou non
+         */
+         if (this.unique) {
+             for (var each in this.popupCache) {
+                 this.popupCache[each].close();
+             }
+         }
         var popup;
         var popupKey = evt.xy.x + "." + evt.xy.y;
-		var NumberOfObjects = evt.features.length;
+        var NumberOfObjects = evt.features.length;
         if (!(popupKey in this.popupCache)) {
             popup = this.addOutput({
                 xtype: "gx_popup",
@@ -357,26 +357,26 @@ ux.plugins.WMSGetFeatureInfo = Ext.extend(gxp.plugins.Tool, {
                     autoHeight: true,
                     autoWidth: true,
                     collapsible: true,
-					collapsed: true
+                    collapsed: true
                 },
                 listeners: {
                     close: (function(key) {
                         return function(panel){
-							this.removeHighlightLayer();
+                            this.removeHighlightLayer();
                             delete this.popupCache[key];
                         };
                     })(popupKey),
                     scope: this
                 },
-				numberOfEntries: NumberOfObjects
+                numberOfEntries: NumberOfObjects
             });
             this.popupCache[popupKey] = popup;
         } else {
             popup = this.popupCache[popupKey];
-			if (NumberOfObjects) {
-				popup.numberOfEntries += NumberOfObjects;
-				popup.setTitle(this.popupTitle.concat(" (".concat(popup.numberOfEntries.toString().concat(")"))));
-			}
+            if (NumberOfObjects) {
+                popup.numberOfEntries += NumberOfObjects;
+                popup.setTitle(this.popupTitle.concat(" (".concat(popup.numberOfEntries.toString().concat(")"))));
+            }
         }
 
         var features = evt.features, config = [];
@@ -384,110 +384,110 @@ ux.plugins.WMSGetFeatureInfo = Ext.extend(gxp.plugins.Tool, {
             var feature;
             for (var i=0,ii=features.length; i<ii; ++i) {
                 feature = features[i];
-				var new_attributes = {};
-				var customRenderers = {};
-				//R�cup�rele nom de la feature
-				var layer_name = "";
-				if(feature.gml) {
-					layer_name = feature.gml.featureNSPrefix + ":" + feature.gml.featureType;
-				} else {
-					layer_name = feature.type;
-				}
+                var new_attributes = {};
+                var customRenderers = {};
+                //R�cup�rele nom de la feature
+                var layer_name = "";
+                if(feature.gml) {
+                    layer_name = feature.gml.featureNSPrefix + ":" + feature.gml.featureType;
+                } else {
+                    layer_name = feature.type;
+                }
 
-				var currentLangage = GeoExt.Lang.locale;
-				var layerConfiguration = {};
-				if (layer_name && ux.gfi[currentLangage] && ux.gfi[currentLangage][layer_name]) {
-					layerConfiguration = ux.gfi[currentLangage][layer_name];
+                var currentLangage = GeoExt.Lang.locale;
+                var layerConfiguration = {};
+                if (layer_name && ux.gfi[currentLangage] && ux.gfi[currentLangage][layer_name]) {
+                    layerConfiguration = ux.gfi[currentLangage][layer_name];
 
-					for(var cpt=0; cpt<layerConfiguration.attributes.length; cpt++)
-					{
-						var n_attribute = layerConfiguration.attributes[cpt];
-						var labelTemplate = n_attribute.label;
+                    for(var cpt=0; cpt<layerConfiguration.attributes.length; cpt++)
+                    {
+                        var n_attribute = layerConfiguration.attributes[cpt];
+                        var labelTemplate = n_attribute.label;
 
-						for(var attribute in feature.attributes)
-						{
-							var pattern = "\["+attribute+"\]";
-							labelTemplate = labelTemplate.replace(pattern,feature.attributes[attribute]);
-						}
-						var type = n_attribute.type;
-						switch(type) {
-								case "eval":
-									labelTemplate = eval(labelTemplate);
-									break;
-								case "string":
-									//do nothing
-									break;
-								case "link":
-									customRenderers[n_attribute.name] = function(attrib){
-										return '<a href="' + attrib + '" target= "_blank">' + attrib + '</a>';
-									}
-									break;
-								case "file":
-									customRenderers[n_attribute.name] = function(attrib){
-										attrib = attrib.replace("\\", "/");
-										attrib = attrib.replace(/^\/\//g,'');
-										attrib = attrib.replace(/^\/ /g,'');
-										attrib = "file://" + attrib;
-										return '<a href="' + attrib + '" target= "_blank">' + attrib + '</a>';
-									}
-									break;
-								case "picture":
-									customRenderers[n_attribute.name] = function(attrib){
-										return '<A href="' + attrib + '" target="_blank"><img height=100 src="' + attrib + '"/></A>';
-									};
-									break;
-								case "date":
-									customRenderers[n_attribute.name] = function(attrib){
-										var date = attrib.split("-");
-										if (date){
-											if (date.lentgh == 3) {
-												return date[2].concat("/", date[1], "/", date[0]);
-											}
-										}
-									};
-									break;
-						}
-						labelTemplate = labelTemplate.replace(/\[(.*?)\]/g, "");
+                        for(var attribute in feature.attributes)
+                        {
+                            var pattern = "\["+attribute+"\]";
+                            labelTemplate = labelTemplate.replace(pattern,feature.attributes[attribute]);
+                        }
+                        var type = n_attribute.type;
+                        switch(type) {
+                            case "eval":
+                            labelTemplate = eval(labelTemplate);
+                            break;
+                            case "string":
+                            //do nothing
+                            break;
+                            case "link":
+                            customRenderers[n_attribute.name] = function(attrib){
+                                return '<a href="' + attrib + '" target= "_blank">' + attrib + '</a>';
+                            }
+                            break;
+                            case "file":
+                            customRenderers[n_attribute.name] = function(attrib){
+                                attrib = attrib.replace("\\", "/");
+                                attrib = attrib.replace(/^\/\//g,'');
+                                attrib = attrib.replace(/^\/ /g,'');
+                                attrib = "file://" + attrib;
+                                return '<a href="' + attrib + '" target= "_blank">' + attrib + '</a>';
+                            }
+                            break;
+                            case "picture":
+                            customRenderers[n_attribute.name] = function(attrib){
+                                return '<A href="' + attrib + '" target="_blank"><img height=100 src="' + attrib + '"/></A>';
+                            };
+                            break;
+                            case "date":
+                            customRenderers[n_attribute.name] = function(attrib){
+                                var date = attrib.split("-");
+                                if (date){
+                                    if (date.lentgh == 3) {
+                                        return date[2].concat("/", date[1], "/", date[0]);
+                                    }
+                                }
+                            };
+                            break;
+                        }
+                        labelTemplate = labelTemplate.replace(/\[(.*?)\]/g, "");
 
-						new_attributes[n_attribute.name] = labelTemplate;
+                        new_attributes[n_attribute.name] = labelTemplate;
 
-					}
-				} else {
-					new_attributes = feature.attributes;
-				}
-				//Store the geometry for highlighting
-				new_attributes["geom"] = feature.geometry;
+                    }
+                } else {
+                    new_attributes = feature.attributes;
+                }
+                //Store the geometry for highlighting
+                new_attributes["geom"] = feature.geometry;
 
-				// Calcul incompatible avec IE... le .getArea n'est pas accept�
-				if (OpenLayers.Util.getBrowserName() != 'msie'){
+                // Calcul incompatible avec IE... le .getArea n'est pas accept�
+                if (OpenLayers.Util.getBrowserName() != 'msie'){
 
-					if (feature.geometry && feature.geometry.getArea() > 0.0) {
-						feature.attributes[this.areaLabel] = String(feature.geometry.getArea().toFixed(2)) + " m2";
-						feature.attributes[this.centroidLabel] = "X/Y: " + String(feature.geometry.getCentroid().x.toFixed(2)) + " m / " + String(feature.geometry.getCentroid().y.toFixed(2)) + " m";
-					}
-					else {
-						if (feature.geometry && feature.geometry.getLength() > 0.0) {
-							feature.attributes[this.lengthLabel] = String(feature.geometry.getLength().toFixed(2)) + " m" ;
-							feature.attributes[this.centroidLabel] = "X/Y: " + String(feature.geometry.getCentroid().x.toFixed(2)) + " m / " + String(feature.geometry.getCentroid().y.toFixed(2)) + " m";
-						}
-						else if (feature.geometry)
-						{
-							feature.attributes[this.positionLabel] = "X/Y: " + String(feature.geometry.x) + " m / " + String(feature.geometry.y) + " m";
-						}
-					}
-				}
+                    if (feature.geometry && feature.geometry.getArea() > 0.0) {
+                        feature.attributes[this.areaLabel] = String(feature.geometry.getArea().toFixed(2)) + " m2";
+                        feature.attributes[this.centroidLabel] = "X/Y: " + String(feature.geometry.getCentroid().x.toFixed(2)) + " m / " + String(feature.geometry.getCentroid().y.toFixed(2)) + " m";
+                    }
+                    else {
+                        if (feature.geometry && feature.geometry.getLength() > 0.0) {
+                            feature.attributes[this.lengthLabel] = String(feature.geometry.getLength().toFixed(2)) + " m" ;
+                            feature.attributes[this.centroidLabel] = "X/Y: " + String(feature.geometry.getCentroid().x.toFixed(2)) + " m / " + String(feature.geometry.getCentroid().y.toFixed(2)) + " m";
+                        }
+                        else if (feature.geometry)
+                        {
+                            feature.attributes[this.positionLabel] = "X/Y: " + String(feature.geometry.x) + " m / " + String(feature.geometry.y) + " m";
+                        }
+                    }
+                }
 
 
-				var customTitle = title;
-				if (layerConfiguration && layerConfiguration.title) {
-					customTitle = layerConfiguration.title;
-					for(var attribute in feature.attributes)
-					{
-						var pattern = "\["+attribute+"\]";
-						customTitle = customTitle.replace(pattern,feature.attributes[attribute]);
-					}
-					feature.customTitle = customTitle.replace(/\[(.*?)\]/g, "");
-				}
+                var customTitle = title;
+                if (layerConfiguration && layerConfiguration.title) {
+                    customTitle = layerConfiguration.title;
+                    for(var attribute in feature.attributes)
+                    {
+                        var pattern = "\["+attribute+"\]";
+                        customTitle = customTitle.replace(pattern,feature.attributes[attribute]);
+                    }
+                    feature.customTitle = customTitle.replace(/\[(.*?)\]/g, "");
+                }
 
                 config.push(Ext.apply({
                     xtype: "propertygrid",
@@ -495,29 +495,29 @@ ux.plugins.WMSGetFeatureInfo = Ext.extend(gxp.plugins.Tool, {
                         'beforeedit': function (e) {
                             return false;
                         },
-						'celldblclick': function (e, rowIndex, columnIndex) {
-							var name  = e.store.data.items[rowIndex].data.name;
-							var value = e.store.data.items[rowIndex].data.value;
-							window.prompt (name + ': ', value);
-						},
-						'expand' : {
-							fn: function(p) {
-								var myFeature = new OpenLayers.Feature.Vector(p.source.geom);
-								this.highlightFeature(myFeature);
-							},
-							scope : this
-						},
-						'collapse' : {
-							fn : function(p) {
-								this.cleanHighlighting();
-							},
-							scope : this
-						}
+                        'celldblclick': function (e, rowIndex, columnIndex) {
+                            var name  = e.store.data.items[rowIndex].data.name;
+                            var value = e.store.data.items[rowIndex].data.value;
+                            window.prompt (name + ': ', value);
+                        },
+                        'expand' : {
+                            fn: function(p) {
+                                var myFeature = new OpenLayers.Feature.Vector(p.source.geom);
+                                this.highlightFeature(myFeature);
+                            },
+                            scope : this
+                        },
+                        'collapse' : {
+                            fn : function(p) {
+                                this.cleanHighlighting();
+                            },
+                            scope : this
+                        }
                     },
                     title: feature.customTitle ? feature.customTitle : feature.fid? feature.fid.replace('.',' ') : title,
                     source: new_attributes,
-					dateFormat: "d/m/Y",
-					customRenderers : customRenderers
+                    dateFormat: "d/m/Y",
+                    customRenderers : customRenderers
                 }, this.itemConfig));
 
             }
@@ -538,20 +538,20 @@ ux.plugins.WMSGetFeatureInfo = Ext.extend(gxp.plugins.Tool, {
      *     reporting the info to the user
      * :arg text: ``String`` Body text.
      */
-    displaySmartPopup: function(evt, title, layerConfiguration, text) {
-		/** DocG
-		 *	Gestion des popup uniques ou non
-		 */
-		if (this.unique) {
-			for (var each in this.popupCache) {
-				this.popupCache[each].close();
-			}
-		}
-        var popup;
-        var popupKey = evt.xy.x + "." + evt.xy.y;
-		var NumberOfObjects = evt.features.length;
-        if (!(popupKey in this.popupCache)) {
-            popup = this.addOutput({
+     displaySmartPopup: function(evt, title, layerConfiguration, text) {
+         /** DocG
+         *	Gestion des popup uniques ou non
+         */
+         if (this.unique) {
+             for (var each in this.popupCache) {
+                 this.popupCache[each].close();
+             }
+         }
+         var popup;
+         var popupKey = evt.xy.x + "." + evt.xy.y;
+         var NumberOfObjects = evt.features.length;
+         if (!(popupKey in this.popupCache)) {
+             popup = this.addOutput({
                 xtype: "gx_popup",
                 title: this.popupTitle.concat(" (".concat(NumberOfObjects.toString().concat(")"))),
                 layout: "accordion",
@@ -567,190 +567,190 @@ ux.plugins.WMSGetFeatureInfo = Ext.extend(gxp.plugins.Tool, {
                     autoHeight: true,
                     autoWidth: true,
                     collapsible: true,
-					collapsed: true
+                    collapsed: true
                 },
                 listeners: {
                     close: (function(key) {
                         return function(panel){
-							this.removeHighlightLayer();
+                            this.removeHighlightLayer();
                             delete this.popupCache[key];
                         };
                     })(popupKey),
                     scope: this
                 },
-				numberOfEntries: NumberOfObjects
+                numberOfEntries: NumberOfObjects
             });
             this.popupCache[popupKey] = popup;
         } else {
             popup = this.popupCache[popupKey];
-			if (NumberOfObjects) {
-				popup.numberOfEntries += NumberOfObjects;
-				popup.setTitle(this.popupTitle.concat(" (".concat(popup.numberOfEntries.toString().concat(")"))));
-			}
+            if (NumberOfObjects) {
+                popup.numberOfEntries += NumberOfObjects;
+                popup.setTitle(this.popupTitle.concat(" (".concat(popup.numberOfEntries.toString().concat(")"))));
+            }
         }
 
         var features = evt.features, config = [];
         if (!text && features.length > 0) {
-			for (var i=0; i<features.length; ++i) {
-				var feature = features[i];
-				var new_attributes = {};
-				customRenderers = {};
-				for(var cpt=0; cpt<layerConfiguration.attributes.length; cpt++)
-				{
-					var n_attribute = layerConfiguration.attributes[cpt];
-					var labelTemplate = n_attribute.label;
-					for(var attribute in feature.attributes)
-					{
-						var pattern = "\["+attribute+"\]";
-						labelTemplate = labelTemplate.replace(pattern,feature.attributes[attribute]);
-					}
-					var type = n_attribute.type;
-					switch(type) {
-							case "eval":
-								labelTemplate = eval(labelTemplate);
-								break;
-							case "string":
-								//do nothing
-								break;
-							case "link":
-								customRenderers[n_attribute.name] = function(attrib){
-									return '<a href="' + attrib + '" target= "_blank">' + attrib + '</a>';
-								}
-								break;
-							case "file":
-								customRenderers[n_attribute.name] = function(attrib){
-								    attrib = attrib.replace("\\\\", "/");
-									attrib = attrib.replace(/^\/\//g,'');
-									attrib = attrib.replace(/^\/ /g,'');
-									attrib = "file://" + attrib;
-									return '<a href="' + attrib + '" target= "_blank">' + attrib + '</a>';
-								}
-								break;
-							case "picture":
-								customRenderers[n_attribute.name] = function(attrib){
-									return '<A href="' + attrib + '" target="_blank"><img height=100 src="' + attrib + '"/></A>';
-								};
-								break;
-							case "date":
-								customRenderers[n_attribute.name] = function(attrib){
-									var date = attrib.split("-");
-										if (date){
-											//console.log(date.length);
-											if (date.length == 3) {
-												return date[2].concat("/", date[1], "/", date[0]);
-											}
-											else {
-												return attrib;
-											}
-										}								};
-								break;
-					}
-					labelTemplate = labelTemplate.replace(/\[(.*?)\]/g, "");
+            for (var i=0; i<features.length; ++i) {
+                var feature = features[i];
+                var new_attributes = {};
+                customRenderers = {};
+                for(var cpt=0; cpt<layerConfiguration.attributes.length; cpt++)
+                {
+                    var n_attribute = layerConfiguration.attributes[cpt];
+                    var labelTemplate = n_attribute.label;
+                    for(var attribute in feature.attributes)
+                    {
+                        var pattern = "\["+attribute+"\]";
+                        labelTemplate = labelTemplate.replace(pattern,feature.attributes[attribute]);
+                    }
+                    var type = n_attribute.type;
+                    switch(type) {
+                        case "eval":
+                        labelTemplate = eval(labelTemplate);
+                        break;
+                        case "string":
+                        //do nothing
+                        break;
+                        case "link":
+                        customRenderers[n_attribute.name] = function(attrib){
+                            return '<a href="' + attrib + '" target= "_blank">' + attrib + '</a>';
+                        }
+                        break;
+                        case "file":
+                        customRenderers[n_attribute.name] = function(attrib){
+                            attrib = attrib.replace("\\\\", "/");
+                            attrib = attrib.replace(/^\/\//g,'');
+                            attrib = attrib.replace(/^\/ /g,'');
+                            attrib = "file://" + attrib;
+                            return '<a href="' + attrib + '" target= "_blank">' + attrib + '</a>';
+                        }
+                        break;
+                        case "picture":
+                        customRenderers[n_attribute.name] = function(attrib){
+                            return '<A href="' + attrib + '" target="_blank"><img height=100 src="' + attrib + '"/></A>';
+                        };
+                        break;
+                        case "date":
+                        customRenderers[n_attribute.name] = function(attrib){
+                            var date = attrib.split("-");
+                            if (date){
+                                //console.log(date.length);
+                                if (date.length == 3) {
+                                    return date[2].concat("/", date[1], "/", date[0]);
+                                }
+                                else {
+                                    return attrib;
+                                }
+                            }								};
+                            break;
+                        }
+                        labelTemplate = labelTemplate.replace(/\[(.*?)\]/g, "");
 
-					new_attributes[n_attribute.name] = labelTemplate;
+                        new_attributes[n_attribute.name] = labelTemplate;
 
-				}
-				// Calcul incompatible avec IE... le .getArea n'est pas accept�
-				if (OpenLayers.Util.getBrowserName() != 'msie'){
+                    }
+                    // Calcul incompatible avec IE... le .getArea n'est pas accept�
+                    if (OpenLayers.Util.getBrowserName() != 'msie'){
 
-					if (feature.geometry && feature.geometry.getArea() > 0.0) {
-						new_attributes[this.areaLabel]     = String(feature.geometry.getArea().toFixed(2)) + " m2";
-						new_attributes[this.centroidLabel] = "X/Y: " + String(feature.geometry.getCentroid().x.toFixed(2)) + " m / " + String(feature.geometry.getCentroid().y.toFixed(2)) + " m";
-					}
-					else {
-						if (feature.geometry && feature.geometry.getLength() > 0.0) {
-							new_attributes[this.lengthLabel] = String(feature.geometry.getLength().toFixed(2)) + " m";
-							new_attributes[this.centroidLabel] = "X/Y: " + String(feature.geometry.getCentroid().x.toFixed(2)) + " m / " + String(feature.geometry.getCentroid().y.toFixed(2)) + " m";
-						}
-						else if (feature.geometry)
-						{
-							new_attributes[this.positionLabel] = "X/Y: " + String(feature.geometry.x) + " m " + String(feature.geometry.y) + " m";
-						}
-					}
-				}
+                        if (feature.geometry && feature.geometry.getArea() > 0.0) {
+                            new_attributes[this.areaLabel]     = String(feature.geometry.getArea().toFixed(2)) + " m2";
+                            new_attributes[this.centroidLabel] = "X/Y: " + String(feature.geometry.getCentroid().x.toFixed(2)) + " m / " + String(feature.geometry.getCentroid().y.toFixed(2)) + " m";
+                        }
+                        else {
+                            if (feature.geometry && feature.geometry.getLength() > 0.0) {
+                                new_attributes[this.lengthLabel] = String(feature.geometry.getLength().toFixed(2)) + " m";
+                                new_attributes[this.centroidLabel] = "X/Y: " + String(feature.geometry.getCentroid().x.toFixed(2)) + " m / " + String(feature.geometry.getCentroid().y.toFixed(2)) + " m";
+                            }
+                            else if (feature.geometry)
+                            {
+                                new_attributes[this.positionLabel] = "X/Y: " + String(feature.geometry.x) + " m " + String(feature.geometry.y) + " m";
+                            }
+                        }
+                    }
 
-				/* DOCG - 2014/01/22
-				 *D�coration du titre de l'accordion
-				 */
-				var customTitle = title;
-				if (layerConfiguration.title) {
-					customTitle = layerConfiguration.title;
-					for(var attribute in feature.attributes)
-					{
-						var pattern = "\["+attribute+"\]";
-						customTitle = customTitle.replace(pattern,feature.attributes[attribute]);
-					}
-					feature.customTitle = customTitle.replace(/\[(.*?)\]/g, "");
-				}
+                    /* DOCG - 2014/01/22
+                    *Decoration du titre de l'accordion
+                    */
+                    var customTitle = title;
+                    if (layerConfiguration.title) {
+                        customTitle = layerConfiguration.title;
+                        for(var attribute in feature.attributes)
+                        {
+                            var pattern = "\["+attribute+"\]";
+                            customTitle = customTitle.replace(pattern,feature.attributes[attribute]);
+                        }
+                        feature.customTitle = customTitle.replace(/\[(.*?)\]/g, "");
+                    }
 
-				new_attributes["geom"] = feature.geometry;
+                    new_attributes["geom"] = feature.geometry;
 
-				var p = new Ext.grid.PropertyGrid({
-					listeners: {
-						'beforeedit': function (e) {
-							return false;
-						},
-						'celldblclick': function (e, rowIndex, columnIndex) {
-							var name  = e.store.data.items[rowIndex].data.name;
-							var value = e.store.data.items[rowIndex].data.value;
-							window.prompt(name + ': ', value);
-						},
-						'expand' : {
-							fn: function(p) {
-								var myFeature = new OpenLayers.Feature.Vector(p.source.geom);
-								this.highlightFeature(myFeature);
-							},
-							scope : this
-						},
-						'collapse' : {
-							fn : function(p) {
-								this.cleanHighlighting();
-							},
-							scope : this
-						},
-						'hide' : function() {
-							console.log("HIIIDE");
-						},
-						'show' : function() {
-							console.log("SHOW");
-						}
-					},
-					title: feature.customTitle ? feature.customTitle : feature.fid? feature.fid.replace('.',' ') : title,
-					dateFormat: "d/m/Y",
-					customRenderers : customRenderers,
-					source : new_attributes
-				});
-				delete p.getStore().sortInfo;
-				config.push(Ext.apply(p, this.itemConfig));
-			}
-        } else if (text) {
-            config.push(Ext.apply({
-                title: title,
-                html: text
-            }, this.itemConfig));
+                    var p = new Ext.grid.PropertyGrid({
+                        listeners: {
+                            'beforeedit': function (e) {
+                                return false;
+                            },
+                            'celldblclick': function (e, rowIndex, columnIndex) {
+                                var name  = e.store.data.items[rowIndex].data.name;
+                                var value = e.store.data.items[rowIndex].data.value;
+                                window.prompt(name + ': ', value);
+                            },
+                            'expand' : {
+                                fn: function(p) {
+                                    var myFeature = new OpenLayers.Feature.Vector(p.source.geom);
+                                    this.highlightFeature(myFeature);
+                                },
+                                scope : this
+                            },
+                            'collapse' : {
+                                fn : function(p) {
+                                    this.cleanHighlighting();
+                                },
+                                scope : this
+                            },
+                            'hide' : function() {
+                                console.log("HIIIDE");
+                            },
+                            'show' : function() {
+                                console.log("SHOW");
+                            }
+                        },
+                        title: feature.customTitle ? feature.customTitle : feature.fid? feature.fid.replace('.',' ') : title,
+                        dateFormat: "d/m/Y",
+                        customRenderers : customRenderers,
+                        source : new_attributes
+                    });
+                    delete p.getStore().sortInfo;
+                    config.push(Ext.apply(p, this.itemConfig));
+                }
+            } else if (text) {
+                config.push(Ext.apply({
+                    title: title,
+                    html: text
+                }, this.itemConfig));
+            }
+            popup.add(config);
+            popup.doLayout();
+        },
+
+        redirect : function(evt, title, layerConfiguration) {
+            var popup;
+            var features = evt.features, config = [];
+            if (features) {
+                var feature;
+                for (var i=0,ii=features.length; i<ii; ++i) {
+                    feature = features[i];
+                    var templateUrl = layerConfiguration.url;
+                    for(var attribute in feature.attributes)
+                    {
+                        var pattern = "\["+attribute+"\]";;
+                        templateUrl = templateUrl.replace(pattern,feature.attributes[attribute]);
+                    }
+                    window.open(templateUrl,  '_blank');
+                    break; // on n'effectue que la premi�re redirection
+                }
+            }
         }
-		popup.add(config);
-        popup.doLayout();
-    },
-
-	redirect : function(evt, title, layerConfiguration) {
-        var popup;
-		var features = evt.features, config = [];
-        if (features) {
-		    var feature;
-            for (var i=0,ii=features.length; i<ii; ++i) {
-                feature = features[i];
-				var templateUrl = layerConfiguration.url;
-				for(var attribute in feature.attributes)
-				{
-					var pattern = "\["+attribute+"\]";;
-					templateUrl = templateUrl.replace(pattern,feature.attributes[attribute]);
-				}
-				window.open(templateUrl,  '_blank');
-				break; // on n'effectue que la premi�re redirection
-			}
-		}
-	}
-});
+    });
 
 Ext.preg("ux_wmsgetfeatureinfo", ux.plugins.WMSGetFeatureInfo);

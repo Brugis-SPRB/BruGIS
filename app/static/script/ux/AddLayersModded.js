@@ -603,8 +603,8 @@ ux.plugins.AddLayers = Ext.extend(gxp.plugins.Tool, {
             });
             if (record) {
                 // DOCG 17/06/2013 On applique le resize au couches de fond, Alleluyah 2!!!!!!!!!!!!!!!
-          			record.data.layer.transitionEffect = "resize";
-          			record.data.layer.removeBackBufferDelay = 200;
+          		record.data.layer.transitionEffect = "resize";
+          		record.data.layer.removeBackBufferDelay = 200;
                 record.data.layer.addOptions({
                   tileOrigin: new OpenLayers.LonLat(140000, 160000)
                 });
@@ -630,10 +630,12 @@ ux.plugins.AddLayers = Ext.extend(gxp.plugins.Tool, {
                         extent.extend(record.getLayer().maxExtent);
                     }
                 }
-                if (record.get("group") === "background") {
-                    layerStore.insert(0, [record]);
-                } else {
-                    layerStore.add([record]);
+                if(layerStore.findExact("name", layer.params.LAYERS) < 0) {
+                    if (record.get("group") === "background") {
+                        layerStore.insert(0, [record]);
+                    } else {
+                        layerStore.add([record]);
+                    }
                 }
             }
       			//record.data.layer.legendTitle = records[i].get("title");
