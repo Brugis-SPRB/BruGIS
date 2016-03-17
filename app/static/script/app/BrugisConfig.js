@@ -149,16 +149,21 @@ Brugis.Config = Ext.extend(Object,  {
         var MyMapsKeys = eval(localStorage.getItem("myMaps"));
         var newMyMapsKeys = [];
         for(var i=0; i < MyMapsKeys.length; i++) {
-          var mapToTest = localStorage.getItem(MyMapsKeys[i]);
-		  var containsAATL = (mapToTest.match(/AATL:/) != null);
-		  var containsBROH = (mapToTest.match(/BROH:/) != null);
-          if(containsAATL || containsBROH){
-            localStorage.removeItem(MyMapsKeys[i]);
-            localStorage.removeItem(MyMapsKeys[i] + "_abstract");
-            localStorage.removeItem(MyMapsKeys[i] + "_date");
-          } else {
-            newMyMapsKeys.push(MyMapsKeys[i]);
-          }
+            var containsAATL = false;
+            var containsBROH = false;
+            var mapToTest = localStorage.getItem(MyMapsKeys[i]);
+            
+            if (mapToTest != null) {
+                containsAATL = (mapToTest.match(/AATL:/) != null);
+                containsBROH = (mapToTest.match(/BROH:/) != null);
+            }
+            if(containsAATL || containsBROH){
+                localStorage.removeItem(MyMapsKeys[i]);
+                localStorage.removeItem(MyMapsKeys[i] + "_abstract");
+                localStorage.removeItem(MyMapsKeys[i] + "_date");
+            } else {
+                newMyMapsKeys.push(MyMapsKeys[i]);
+            }
         }
         if(newMyMapsKeys.length > 0 ) {
           localStorage.setItem("myMaps", "['" + newMyMapsKeys.toString().replace(/\,/g,"','") + "']");

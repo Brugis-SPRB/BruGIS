@@ -481,11 +481,12 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
 					}
 				} else {
 					// saving current map state
-          if(localStorage.getItem('currentMapState').match(/AATL:/) != null) {
-            localStorage.removeItem("currentMapState");
-          } else {
-            localStorage.setItem('currentMapState', configStr);
-          }
+                    // if(localStorage.getItem('currentMapState').match(/AATL:/) != null) {
+                    if(localStorage.getItem('currentMapState') != null) {
+                        localStorage.removeItem("currentMapState");
+                    } else {
+                        localStorage.setItem('currentMapState', configStr);
+                    }
 				}
 			} else if(session == '1') {
 				//console.log("session = 1");
