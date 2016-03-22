@@ -630,13 +630,13 @@ ux.plugins.AddLayers = Ext.extend(gxp.plugins.Tool, {
                         extent.extend(record.getLayer().maxExtent);
                     }
                 }
-                if(layerStore.findExact("name", layer.params.LAYERS) < 0) {
+                //if(layerStore.findExact("name", layer.params.LAYERS) < 0) {
                     if (record.get("group") === "background") {
                         layerStore.insert(0, [record]);
                     } else {
                         layerStore.add([record]);
                     }
-                }
+                //}
             }
       			//record.data.layer.legendTitle = records[i].get("title");
         }
