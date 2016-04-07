@@ -651,7 +651,7 @@ ux.plugins.WMSGetFeatureInfo = Ext.extend(gxp.plugins.Tool, {
                         new_attributes[n_attribute.name] = labelTemplate;
 
                     }
-                    // Calcul incompatible avec IE... le .getArea n'est pas accept�
+                    // Calcul incompatible avec IE... le .getArea n'est pas accepté
                     if (OpenLayers.Util.getBrowserName() != 'msie'){
 
                         if (feature.geometry && feature.geometry.getArea() > 0.0) {
@@ -665,8 +665,9 @@ ux.plugins.WMSGetFeatureInfo = Ext.extend(gxp.plugins.Tool, {
                             }
                             else if (feature.geometry)
                             {
-                                new_attributes[this.positionLabel] = "X/Y: " + String(feature.geometry.x) + " m " + String(feature.geometry.y) + " m";
-                            }
+                                // new_attributes[this.positionLabel] = "X/Y: " + String(feature.geometry.x) + " m " + String(feature.geometry.y) + " m";
+                                console.log(feature.geometry);
+                                new_attributes[this.positionLabel] = "X/Y: " + String(feature.geometry.components[0].x) + " m / " + String(feature.geometry.components[0].y) + " m";                            }
                         }
                     }
 
