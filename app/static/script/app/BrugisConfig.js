@@ -43,11 +43,11 @@ Brugis.Config = Ext.extend(Object,  {
 	getBrugisGeoserverUrl : function() {
 		var isAuthenticatedAsTax = this.isAuthenticatedAs(this, "tax");
 		var isAuthenticatedAsFieldCheckTax = this.isAuthenticatedAs(this, "fieldchecktax");
-		var isAuthenticatedAsProtec = this.isAuthenticatedAs(this, "protec");
+		var isAuthenticatedAsIrl = this.isAuthenticatedAs(this, "irl");
 		var isAuthenticated = this.isAuthenticated.call(this);
 		var url = isAuthenticatedAsTax ? "/geoserver/www/wmsaatl/wmsc_brugis_tax.xml"
 				: isAuthenticatedAsFieldCheckTax ? "/geoserver/www/wmsaatl/wmsc_brugis_tax.xml"
-				: isAuthenticatedAsProtec ? "/geoserver/www/wmsaatl/wmsc_brugis_anon.xml"
+				: isAuthenticatedAsIrl ? "/geoserver/www/wmsaatl/wmsc_brugis_irl.xml"
 				: isAuthenticated ? "/geoserver/ows"
 				: "/geoserver/www/wmsaatl/wmsc_brugis_anon.xml";
 		return url;

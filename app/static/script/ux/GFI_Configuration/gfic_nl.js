@@ -619,7 +619,7 @@ ux.gfi.nl =  {
                 {"name": "Permit Number",    "label": "[PERMITNUMBER]",    "type": "string"}
             ]
         },
-        "DEP_BP:BXLPROJECTS_PMNR_ORDERED": {
+        "DEP_BP:BXLPROJECTS_PMNR_ALL": {
             "actiontype" : "GRID",
             "title"      : "Projet [PROJECT_ID]",
             "attributes" : [

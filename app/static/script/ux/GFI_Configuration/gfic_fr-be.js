@@ -711,6 +711,34 @@ ux.gfi.fr = {
                 {"name": "File Manager",     "label": "[FILEMANAGER]",     "type": "string"},
                 {"name": "Permit Number",    "label": "[PERMITNUMBER]",    "type": "string"}
             ]
+        },
+        "BDU_DMS_PROT:Inventaire_des_rocailles": {
+            "actiontype" : "GRID",
+            "title"      : "Rocaille [ID_XLS]",
+            "attributes" : [
+                {"name": "Adresse",                 "label": "[POLNUMBR] [STREET], [COMMUNE]"   , "type": "string"},
+                {"name": "Nom du site",             "label": "[SITENAME]"                       , "type": "string"},
+                {"name": "Remarquable par",         "label": "[REASON]"                         , "type": "string"},
+                {"name": "Elément(s) succints",     "label": "[RESUELEM]"                       , "type": "string"},
+                {"name": "Eléments",                "label": "[ELEMENTS]"                       , "type": "string"},
+                {"name": "Autres éléments",         "label": "[OTHERELE]"                       , "type": "string"},
+                {"name": "Type de rocaille",        "label": "[TYPE]"                           , "type": "string"},
+                {"name": "Description",             "label": "[DESCRIPT]"                       , "type": "string"},
+                {"name": "Construction",            "label": "[BUILTECH]"                       , "type": "string"},
+                {"name": "Finition",                "label": "[FINITION]"                       , "type": "string"},
+                {"name": "Identifiant CMS DMS",     "label": "[ID_CMS]"                         , "type": "string"},
+                {"name": "Présence de Fiche DMS",   "label": "[FICHECMS]"                       , "type": "string"},
+                {"name": "Présence de photo DMS",   "label": "[PHOTO]"                          , "type": "string"},
+                {"name": "Identifiant xls",         "label": "[ID_XLS]"                         , "type": "string"},
+                {"name": "Fiche DEF",               "label": "[FICHEDEF]"                       , "type": "string"},
+                {"name": "Référence du site",       "label": "[SITENUMB]"                       , "type": "string"},
+                {"name": "Date de visite",          "label": "[VIEWDATE]"                       , "type": "string"},
+                {"name": "Date de visite DMS",      "label": "[VIDMSDAT]"                       , "type": "string"},
+                {"name": "Rocaille",                "label": "[ROCAILLE]"                       , "type": "string"},
+                {"name": "Propriétaire",            "label": "[OF_OWNER]"                       , "type": "string"},
+                {"name": "Gestionnaire",            "label": "[OF_MANAG]"                       , "type": "string"},
+                {"name": "Accès",                   "label": "[ACCESS]"                         , "type": "string"}
+            ]
         }
 	};
 

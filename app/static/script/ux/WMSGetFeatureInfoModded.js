@@ -386,7 +386,7 @@ ux.plugins.WMSGetFeatureInfo = Ext.extend(gxp.plugins.Tool, {
                 feature = features[i];
                 var new_attributes = {};
                 var customRenderers = {};
-                //R�cup�rele nom de la feature
+                //Récupère le nom de la feature
                 var layer_name = "";
                 if(feature.gml) {
                     layer_name = feature.gml.featureNSPrefix + ":" + feature.gml.featureType;
@@ -472,7 +472,8 @@ ux.plugins.WMSGetFeatureInfo = Ext.extend(gxp.plugins.Tool, {
                         }
                         else if (feature.geometry)
                         {
-                            feature.attributes[this.positionLabel] = "X/Y: " + String(feature.geometry.x) + " m / " + String(feature.geometry.y) + " m";
+                            console.log(feature.geometry);
+                            feature.attributes[this.positionLabel] = "X/Y: " + String(feature.geometry.components[0].x) + " m / " + String(feature.geometry.components[0].y) + " m";
                         }
                     }
                 }
