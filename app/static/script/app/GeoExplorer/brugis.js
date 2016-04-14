@@ -159,11 +159,10 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
                 ptype: "gxp_featureeditor",
                 featureManager: "featuremanager",
                 autoLoadFeature: true,
-				snappingAgent: "snapping-agent",
 				showSelectedOnly: false,
                 toggleGroup: this.toggleGroup,
                 actionTarget: {target: "paneltbar", index: 9}
-            }, {
+            }, /*{
 				ptype: "ux_snappingagent",
 				id: "snapping-agent",
 				autoActivate: false,
@@ -179,7 +178,7 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
 						{ source: 'BruGIS WMS - Geoserver' , name: "BROH_DML_BESC:Besluit_tot_niet_bescherming" }
 					]
 				}]
-			}, {
+			},*/ {
 				ptype: "ux_BrugisSearcher",
 				id: "ux_BrugisSearcher",
 				outputTarget: "paneltbar",

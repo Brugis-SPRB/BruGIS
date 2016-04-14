@@ -25,7 +25,11 @@ Brugis.Config = Ext.extend(Object,  {
 						"BDU_DLO_CLI:Sibelga_BC",
 						"BDU_DLO_CLI:HydroBru_BC",
 						"BDU_DLO_CLI:BCx2",
-						"BDU_DMS_PROT:Inventaire_batiments"],
+						"BDU_DMS_PROT:Inventaire_batiments",
+                        "BDU_IRL:Dossiers",
+                        "BDU_IRL:Dossiers_infos",
+                        "BSO_GHI:Dossiers",
+                        "BSO_GHI:Dossiers_infos"],
 
 	getCookieValue : function(param) {
 		var i, x, y, cookies = document.cookie.split(";");

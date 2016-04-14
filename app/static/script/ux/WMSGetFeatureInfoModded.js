@@ -472,7 +472,6 @@ ux.plugins.WMSGetFeatureInfo = Ext.extend(gxp.plugins.Tool, {
                         }
                         else if (feature.geometry)
                         {
-                            console.log(feature.geometry);
                             feature.attributes[this.positionLabel] = "X/Y: " + String(feature.geometry.components[0].x) + " m / " + String(feature.geometry.components[0].y) + " m";
                         }
                     }
@@ -665,8 +664,6 @@ ux.plugins.WMSGetFeatureInfo = Ext.extend(gxp.plugins.Tool, {
                             }
                             else if (feature.geometry)
                             {
-                                // new_attributes[this.positionLabel] = "X/Y: " + String(feature.geometry.x) + " m " + String(feature.geometry.y) + " m";
-                                console.log(feature.geometry);
                                 new_attributes[this.positionLabel] = "X/Y: " + String(feature.geometry.components[0].x) + " m / " + String(feature.geometry.components[0].y) + " m";                            }
                         }
                     }
