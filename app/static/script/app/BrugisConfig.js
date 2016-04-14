@@ -1,6 +1,24 @@
 
 Ext.namespace("Brugis");
 
+Brugis.Configuration = (function () {
+    var instance;
+
+    function createInstance() {
+        var object = new Brugis.Config();
+        return object;
+    }
+
+    return {
+        getInstance: function () {
+            if (!instance) {
+                instance = createInstance();
+            }
+            return instance;
+        }
+    };
+})();
+
 Brugis.Config = Ext.extend(Object,  {
 	localeHelp : "<a href='http://www.developpement-urbain.irisnet.be/cartographie/brugis/mode-demploi'target= '_blank'>Click here</a>",
 	abstractText : "BruGIS, Geographic Information Portal for Brussels Urban Development (BRPS).",
@@ -152,7 +170,7 @@ Brugis.Config = Ext.extend(Object,  {
             var containsAATL = false;
             var containsBROH = false;
             var mapToTest = localStorage.getItem(MyMapsKeys[i]);
-            
+
             if (mapToTest != null) {
                 containsAATL = (mapToTest.match(/AATL:/) != null);
                 containsBROH = (mapToTest.match(/BROH:/) != null);
@@ -172,5 +190,8 @@ Brugis.Config = Ext.extend(Object,  {
         }
       }
     }
-  }
+ },
+ getWFSDownloadGeoServerUrl : function() {
+     return "http://mbr225.irisnet.be/geoserver";
+ }
 });
