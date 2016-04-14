@@ -739,6 +739,26 @@ ux.gfi.fr = {
                 {"name": "Gestionnaire",            "label": "[OF_MANAG]"                       , "type": "string"},
                 {"name": "Accès",                   "label": "[ACCESS]"                         , "type": "string"}
             ]
+        },
+        "BDU_IRL:Dossiers_infos": {
+            "actiontype" : "GRID",
+            "title"      : "Infos dossier: [N_DOSSIER] [PROCEDURE]",
+            "attributes" : [
+            {"name":"Interdiction actuelle",                "label":"[INTERDICTION_ACTUELLE]"           ,"type":"string"},
+            {"name":"Rue",                                  "label":"[RUE]"                             ,"type":"string"},
+            {"name":"N° de rue - début",                    "label":"[NO_RUE_DEBUT]"                    ,"type":"string"},
+            {"name":"N° de rue - Fin",                      "label":"[NO_RUE_FIN]"                      ,"type":"string"},
+            {"name":"Etage",                                "label":"[ETAGE]"                           ,"type":"string"},
+            {"name":"Commune",                              "label":"[CODE_POSTAL] [COMMUNE]"           ,"type":"string"},
+            {"name":"---------------------------------",    "label":""                                  ,"type":"string"},
+            {"name":"N° de dossier",                        "label":"[N_DOSSIER]"                       ,"type":"string"},
+            {"name":"Procedure",                            "label":"[PROCEDURE]"                       ,"type":"string"},
+            {"name":"Gestionnaire",                         "label":"[GESTIONNAIRE]"                    ,"type":"string"},
+            {"name":"Première décision",                    "label":"[PREMIERE_DECISION]"               ,"type":"string"},
+            {"name":"Date de première décision",            "label":"[DATE_PREMIERE_DECISION]"          ,"type":"string"},
+            {"name":"Dernière décision",                    "label":"[DERNIERE_DECISION]"               ,"type":"string"},
+            {"name":"Date de dernière décision",            "label":"[DATE_DERNIERE_DECISION]"          ,"type":"string"}
+            ]
         }
 	};
 

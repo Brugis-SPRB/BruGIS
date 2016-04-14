@@ -647,5 +647,25 @@ ux.gfi.nl =  {
                 {"name": "File Manager",     "label": "[FILEMANAGER]",     "type": "string"},
                 {"name": "Permit Number",    "label": "[PERMITNUMBER]",    "type": "string"}
             ]
+        },
+        "BSO_GHI:Dossiers_infos": {
+            "actiontype" : "GRID",
+            "title"      : "Infos dossier: [DOSSIER_NR] [PROCEDURE]",
+            "attributes" : [
+            {"name":"Actueel verbod",                       "label":"[ACTUEEL_VERBOD]"                  ,"type":"string"},
+            {"name":"Straat",                               "label":"[STRAAT]"                          ,"type":"string"},
+            {"name":"Huisnummer - begin",                   "label":"[HUISNUMMER_BEGIN]"                ,"type":"string"},
+            {"name":"Huisnummer - einde",                   "label":"[HUISNUMMER_EINDE]"                ,"type":"string"},
+            {"name":"Verdieping",                           "label":"[VERDIEPING]"                      ,"type":"string"},
+            {"name":"Gemeente",                             "label":"[POSTCODE] [GEMEENTE]"             ,"type":"string"},
+            {"name":"---------------------------------",    "label":""                                  ,"type":"string"},
+            {"name":"Dossiernummer",                        "label":"[DOSSIER_NR]"                      ,"type":"string"},
+            {"name":"Procedure",                            "label":"[PROCEDURE]"                       ,"type":"string"},
+            {"name":"Beheerder",                            "label":"[BEHEERDER]"                       ,"type":"string"},
+            {"name":"Eerste beslissing",                    "label":"[EERSTE_BESLISSING]"               ,"type":"string"},
+            {"name":"Datum van eerste beslissing",          "label":"[DATUM_EERSTE_BESLISSING]"         ,"type":"string"},
+            {"name":"Laatste beslissing",                   "label":"[LAATSTE_BESLISSING]"              ,"type":"string"},
+            {"name":"Datum van laatste beslissing",         "label":"[DATUM_LAATSTE_BESLISSING]"        ,"type":"string"}
+            ]
         }
     };
