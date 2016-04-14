@@ -119,14 +119,14 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
                 actionTarget: "layers.tbar",
                 upload: true,
 				search: false
-            }, {
-                ptype: "gxp_downloadlayer",
-                actionTarget: ["layers.tbar", "layers.contextMenu"]
-            }, {
+            },  {
                 ptype: "gxp_removelayer",
                 actionTarget: ["layers.tbar", "layers.contextMenu"]
             }, {
                 ptype: "gxp_layerproperties",
+                actionTarget: ["layers.tbar", "layers.contextMenu"]
+            }, {
+                ptype: "gxp_downloadlayer",
                 actionTarget: ["layers.tbar", "layers.contextMenu"]
             }, {
                 ptype: "gxp_zoomtolayerextent",
