@@ -5,7 +5,7 @@
 
 /** api: (define)
  *  module = gxp.plugins
- *  class = RemoveLayer
+ *  class = DownloadLayer
  */
 
 /** api: (extends)
@@ -61,7 +61,9 @@ gxp.plugins.DownloadLayer = Ext.extend(gxp.plugins.Tool, {
             downloadLayerAction.setDisabled(
                 this.target.mapPanel.layers.getCount() <= 1 || !record
             );
-            this.isLayerDownloadable(record, downloadLayerAction);
+            if(record) {
+                this.isLayerDownloadable(record, downloadLayerAction);
+            }
         }, this);
 
         var enforceOne = function(store) {
