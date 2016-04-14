@@ -9,28 +9,36 @@ Ext.onReady(function () {
 			GeoExt.Lang.locale = localStorage.getItem('BruGISLanguage');
 		}
 
-		var geoextLangFr = ((GeoExt.Lang.locale == "fr")||(GeoExt.Lang.locale == "fr-be")||(GeoExt.Lang.locale == "fr-BE")||(GeoExt.Lang.locale == "fr-fr"))?true:false;
-		var geoextLangNl = ((GeoExt.Lang.locale == "nl")||(GeoExt.Lang.locale == "nl-be")||(GeoExt.Lang.locale == "nl-BE")||(GeoExt.Lang.locale == "nl-nl"))?true:false;
-		var geoextLangEn = ((GeoExt.Lang.locale == "en")||(GeoExt.Lang.locale == "en-gb")||(GeoExt.Lang.locale == "en-us")||(GeoExt.Lang.locale == "en-US")||(GeoExt.Lang.locale == "en-en"))?true:false;
-
-
+        var geoextLangFr = (!(GeoExt.Lang.locale.toLowerCase().match(/fr/g) == null))?true:false;
+        var geoextLangNl = (!(GeoExt.Lang.locale.toLowerCase().match(/nl/g) == null))?true:false;
+        var geoextLangEn = (!(GeoExt.Lang.locale.toLowerCase().match(/en/g) == null))?true:false;
+        
+		if (!(geoextLangFr) == true && !(geoextLangNl) == true && !(geoextLangEn) == true){
+			geoextLangFr = true;
+		}
+        
 		if (GeoExt.Lang) {
             GeoExt.Lang.set(OpenLayers.Util.getParameters()["locale"] || GeoExt.Lang.locale);
 		}
-
+        
 		var brugisConfig = new Brugis.Config();
 
         Ext.BLANK_IMAGE_URL = "../theme/app/img/blank.gif";
         OpenLayers.ImgPath = "../theme/app/img/";
 				OpenLayers.IMAGE_RELOAD_ATTEMPTS = 2;
-        // optionally set locale based on query string parameter
 
-        if (GeoExt.Lang) {
-            GeoExt.Lang.set(OpenLayers.Util.getParameters()["locale"] || GeoExt.Lang.locale);
+        if ((geoextLangFr) == true) {
+            GeoExt.Lang.locale = "fr";
+        } else
+        if ((geoextLangNl) == true) {
+            GeoExt.Lang.locale = "nl";
+        } else
+        if ((geoextLangEn) == true) {
+            GeoExt.Lang.locale = "en";
         }
-
-		if (!(geoextLangFr) == true && !(geoextLangNl) == true && !(geoextLangEn) == true){
-			geoextLangFr = true;
+        
+		if (GeoExt.Lang) {
+            GeoExt.Lang.set(OpenLayers.Util.getParameters()["locale"] || GeoExt.Lang.locale);
 		}
 
 		var baseMap = [{

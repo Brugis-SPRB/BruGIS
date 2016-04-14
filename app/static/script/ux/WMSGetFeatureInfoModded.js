@@ -175,6 +175,7 @@ ux.plugins.WMSGetFeatureInfo = Ext.extend(gxp.plugins.Tool, {
                             var title = x.get("title") || x.get("name");
                             var layer_name = x.get("name");
                             var currentLangage = GeoExt.Lang.locale;
+                            console.log(currentLangage);
                             if(layer_name) {
                                 if (layer_name && ux.gfi[currentLangage] && ux.gfi[currentLangage][layer_name]) {
                                     var actiontype = ux.gfi[currentLangage][layer_name].actiontype;
