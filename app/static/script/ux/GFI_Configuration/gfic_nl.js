@@ -590,7 +590,7 @@ ux.gfi.nl =  {
 				{ "name": "Referentie DML"			, "label" : "[NUMMER_DOSSIER]/[CODE_DOSSIER]"					, "type" : "string"}
 			]
 		},
-        "DEP_BP:BXLPROJECTS_PMNR_ORDERED": {
+        "DEP_BP:BXLPROJECTS_PMNR": {
             "actiontype" : "GRID",
             "title"      : "Projet [PROJECT_ID]",
             "attributes" : [
@@ -619,7 +619,7 @@ ux.gfi.nl =  {
                 {"name": "Permit Number",    "label": "[PERMITNUMBER]",    "type": "string"}
             ]
         },
-        "DEP_BP:BXLPROJECTS_PMNR_ALL": {
+        "DEP_BP:BXLPROJECTS_ALL": {
             "actiontype" : "GRID",
             "title"      : "Projet [PROJECT_ID]",
             "attributes" : [
