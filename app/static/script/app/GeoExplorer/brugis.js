@@ -125,10 +125,10 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
             }, {
                 ptype: "gxp_layerproperties",
                 actionTarget: ["layers.tbar", "layers.contextMenu"]
-            }, {
+            },/* {
                 ptype: "gxp_downloadlayer",
                 actionTarget: ["layers.tbar", "layers.contextMenu"]
-            }, {
+            },*/ {
                 ptype: "gxp_zoomtolayerextent",
                 actionTarget: {target: "layers.contextMenu", index: 0}
             }, {
@@ -165,23 +165,7 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
 				showSelectedOnly: false,
                 toggleGroup: this.toggleGroup,
                 actionTarget: {target: "paneltbar", index: 9}
-            }, /*{
-				ptype: "ux_snappingagent",
-				id: "snapping-agent",
-				autoActivate: false,
-				targets: [{
-					source: 'BruGIS WMS - Geoserver',
-					name: "BDU:Parcelle_2015",
-					minResolution: 0.014000028082733494,		// 1/50
-					maxResolution: 14.000028082733494,			// 1/5.000
-					restrictedLayers: [
-						{ source: 'BruGIS WMS - Geoserver' , name: "AATL_DMS_PROT:Prises_actes" },
-						{ source: 'BruGIS WMS - Geoserver' , name: "AATL_DMS_PROT:Arretes_de_non_classement" },
-						{ source: 'BruGIS WMS - Geoserver' , name: "BROH_DML_BESC:Akteneming" },
-						{ source: 'BruGIS WMS - Geoserver' , name: "BROH_DML_BESC:Besluit_tot_niet_bescherming" }
-					]
-				}]
-			},*/ {
+            }, {
 				ptype: "ux_BrugisSearcher",
 				id: "ux_BrugisSearcher",
 				outputTarget: "paneltbar",
@@ -491,13 +475,13 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
 						localStorage.removeItem('currentMapState');
 					}
 				} else {
+                    console.log()
 					// saving current map state
                     // if(localStorage.getItem('currentMapState').match(/AATL:/) != null) {
                     if(localStorage.getItem('currentMapState') != null) {
                         localStorage.removeItem("currentMapState");
-                    } else {
-                        localStorage.setItem('currentMapState', configStr);
                     }
+                    localStorage.setItem('currentMapState', configStr);
 				}
 			} else if(session == '1') {
 				//console.log("session = 1");
@@ -1100,7 +1084,8 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
                 //border: true
             }
         });
-
+        
+        
         this.portalItems = [{
             region: "center",
             layout: "border",
