@@ -119,7 +119,7 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
                 actionTarget: "layers.tbar",
                 upload: true,
 				search: false
-            },  {
+            }, {
                 ptype: "gxp_removelayer",
                 actionTarget: ["layers.tbar", "layers.contextMenu"]
             }, {
@@ -194,7 +194,7 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
 				ptype: "ux_preferences",
 				id: "preferencesmanager",
 				actionTarget: {target: "paneltbar", index: 19}
-			},{
+			}, {
 				ptype: "ux_wmstreelegend",
 				id: "wmsTreeLegendManager",
 				outputTarget: "treeTab",
@@ -230,7 +230,7 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
 					spatialQuery: false,
 					width: 320
 				},
-				needsAuthorization: true,
+				needsAuthorization: false,
 				actionTarget: ["layers.tbar", "layers.contextMenu"],
 				appendActions: false
 			}, {
@@ -363,7 +363,7 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
 					newLayer["url"] 		= addConfig.map.layers[ll].url;
                     newLayer["tiled"] 		= addConfig.map.layers[ll].tiled;
                     newLayer["cached"] 		= addConfig.map.layers[ll].cached;
-          newLayer["tileOrigin"] = tileOriginContent;
+					newLayer["tileOrigin"] = tileOriginContent;
 					//newLayer["options"] = {tileOrigin : tileOriginContent};
 					mLayer[ll] = newLayer;
 				}
@@ -486,6 +486,9 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
 			} else if(session == '1') {
 				//console.log("session = 1");
 				// removing any currentMapState
+                if (localStorage.getItem("reset")){
+                    localStorage.removeItem('reset');
+                }
 				if (localStorage.getItem('currentMapState')) {
 						localStorage.removeItem('currentMapState');
 				}
@@ -810,8 +813,7 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
                 item.disable();
             });
 
-			if(this.tools.featuremanager)
-			{
+			if(this.tools.featuremanager) {
 				var params = Ext.urlDecode(location.search.substring(1));
 
 				var currentLangage = GeoExt.Lang.locale;

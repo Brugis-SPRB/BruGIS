@@ -667,5 +667,46 @@ ux.gfi.nl =  {
             {"name":"Laatste beslissing",                   "label":"[LAATSTE_BESLISSING]"              ,"type":"string"},
             {"name":"Datum van laatste beslissing",         "label":"[DATUM_LAATSTE_BESLISSING]"        ,"type":"string"}
             ]
+        },
+        "BSO_DSV:Wijkcontracten_Programmas": {
+            "actiontype" : "GRID",
+            "title"      : "Wijkcontract (Programma): [NOM_NL]",
+            "attributes" : [
+                {"name": "Wijkcontract",            "label": "[NOM_NL]",                "type":"string"},
+                {"name": "Actief",                  "label": "[ACTIF]",                 "type":"string"},
+                {"name": "Webfiche",                "label": "http://wijken.brussels/1/q/[ID]",   "type":"link"},
+                {"name": "Begindatum",              "label": "[DT_DEBUT]",              "type":"date"},
+                {"name": "Einddatum",               "label": "[DT_FIN]",                "type":"date"},
+                {"name": "Jaar",                    "label": "[ANNEE]",                 "type":"string"},
+                {"name": "Postcode",                "label": "[CP]",                    "type":"string"},
+                {"name": "studiebureau",            "label": "[BUREAU]",                "type":"string"},
+                {"name": "Comptabiliteit",          "label": "[REF_COMPTA]",            "type":"string"}
+            ]
+        },
+        "BSO_DSV:Wijkcontracten_Projecten": {
+            "actiontype" : "GRID",
+            "title"      : "Wijkcontract (Project): [PROJ_NL]",
+            "attributes" : [
+                {"name": "Project",                 "label": "[PROJ_NL]",               "type":"string"},
+                {"name": "Wijkcontract",            "label": "[CQD_NL]",                "type":"string"},
+                {"name": "Serie",                   "label": "[SERIE]",                 "type":"string"},
+                {"name": "Adres",                   "label": "[NUM] [RUE_NL] - [CP]",   "type":"string"},
+                {"name": "Webfiche",                "label": "http://wijken.brussels/1/qp/[ID]",   "type":"link"},
+                {"name": "Beeld",                   "label": "[IMG]",                   "type":"picture"},
+                {"name": "Fotocredit",              "label": "[IMG_COPY]",              "type":"string"},
+                {"name": "studiebureau",            "label": "[BUREAU]",                "type":"string"},
+                {"name": "Toewijzing van SB",       "label": "[DT_BUREAU]",             "type":"date"},
+                {"name": "Entrepreneur",            "label": "[ENTREP]",                "type":"string"},
+                {"name": "Verguningnummer",         "label": "[PU_NUM]",                "type":"string"},
+                {"name": "Aflevering",              "label": "[DT_RECEP]",              "type":"date"}
+            ]
+        },
+        "BSO_DSV:Voorlopige_Stadsvernieuwingscontracten": {
+            "actiontype" : "GRID",
+            "title"      : "Contrat de rénovation urbaine: [NOM_NL]",
+            "attributes" : [
+                {"name": "Contrat de RU",           "label": "[NOM_NL]",                "type":"string"},
+                {"name": "Serie",                   "label": "[SERIE]",                 "type":"string"}
+            ]
         }
     };

@@ -433,7 +433,8 @@ ux.plugins.WMSGetFeatureInfo = Ext.extend(gxp.plugins.Tool, {
                             break;
                             case "picture":
                             customRenderers[n_attribute.name] = function(attrib){
-                                return '<A href="' + attrib + '" target="_blank"><img height=100 src="' + attrib + '"/></A>';
+                                // max height
+                                return '<A href="' + attrib + '" target="_blank"><img style="max-height:200px" src="' + attrib + '"/></A>';
                             };
                             break;
                             case "date":
@@ -460,9 +461,12 @@ ux.plugins.WMSGetFeatureInfo = Ext.extend(gxp.plugins.Tool, {
 
                 // Calcul incompatible avec IE... le .getArea n'est pas accept�
                 if (OpenLayers.Util.getBrowserName() != 'msie'){
-
                     if (feature.geometry && feature.geometry.getArea() > 0.0) {
-                        feature.attributes[this.areaLabel] = String(feature.geometry.getArea().toFixed(2)) + " m2";
+                        if (feature.geometry.getArea() > 100000.0) {
+                            feature.attributes[this.areaLabel] = String((feature.geometry.getArea()/10000.0).toFixed(0)) + " hectares";
+                        } else {
+                            feature.attributes[this.areaLabel] = String(feature.geometry.getArea().toFixed(0)) + " m2";
+                        }
                         feature.attributes[this.centroidLabel] = "X/Y: " + String(feature.geometry.getCentroid().x.toFixed(2)) + " m / " + String(feature.geometry.getCentroid().y.toFixed(2)) + " m";
                     }
                     else {
@@ -628,7 +632,7 @@ ux.plugins.WMSGetFeatureInfo = Ext.extend(gxp.plugins.Tool, {
                         break;
                         case "picture":
                         customRenderers[n_attribute.name] = function(attrib){
-                            return '<A href="' + attrib + '" target="_blank"><img height=100 src="' + attrib + '"/></A>';
+                            return '<A href="' + attrib + '" target="_blank"><img style="max-height:200px" src="' + attrib + '"/></A>';
                         };
                         break;
                         case "date":
@@ -654,7 +658,11 @@ ux.plugins.WMSGetFeatureInfo = Ext.extend(gxp.plugins.Tool, {
                     if (OpenLayers.Util.getBrowserName() != 'msie'){
 
                         if (feature.geometry && feature.geometry.getArea() > 0.0) {
-                            new_attributes[this.areaLabel]     = String(feature.geometry.getArea().toFixed(2)) + " m2";
+                            if (feature.geometry.getArea() > 100000.0) {
+                                new_attributes[this.areaLabel] = String((feature.geometry.getArea()/10000.0).toFixed(0)) + " hectares";
+                            } else {
+                                new_attributes[this.areaLabel] = String(feature.geometry.getArea().toFixed(0)) + " m2";
+                            }
                             new_attributes[this.centroidLabel] = "X/Y: " + String(feature.geometry.getCentroid().x.toFixed(2)) + " m / " + String(feature.geometry.getCentroid().y.toFixed(2)) + " m";
                         }
                         else {

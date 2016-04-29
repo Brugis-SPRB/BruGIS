@@ -18,14 +18,6 @@ ux.gfi.fr = {
 				 { "name" : "Lien"			, "label" : "[URL_P_FR]"  	, "type" : "link" }
 			]
 		},
-		/*"BDU:Maille" : {
-			"actiontype" : "GRID",
-			"title"		 : "Maille: [GMLINK]",
-			"attributes" : [
-				{ "name": "Code"	, "label" : "[GMLINK]"			, "type" : "string" },
-				{ "name": "Lien"	, "label" : "[PATH_INTER]"		, "type" : "link" }
-			]
-		},*/
 		"BDU:Maille": {
 			"actiontype" : "REDIRECT",
 			"url"		 : "[PATH_INTER]"
@@ -545,9 +537,9 @@ ux.gfi.fr = {
 				{ "name": "SHAPE_AREA_IN_DB"	, "label" : "[SHAPE_AREA]"	, "type" : "string"}
 			]
 		},
-		"BDU:Parcelle_2012": {
+		"BDU:Parcelle_2015": {
 			"actiontype" : "GRID",
-			"title"      : "Parcelle 2012: [CAPAKEY]",
+			"title"      : "Parcelle 2015: [CAPAKEY]",
 			"attributes" : [
 				{ "name": "APNC_MAPC"			, "label" : "[APNC_MAPC]"	, "type" : "string"},
 				{ "name": "APNC_CADC"			, "label" : "[APNC_CADC]"	, "type" : "string"},
@@ -758,6 +750,47 @@ ux.gfi.fr = {
             {"name":"Date de première décision",            "label":"[DATE_PREMIERE_DECISION]"          ,"type":"string"},
             {"name":"Dernière décision",                    "label":"[DERNIERE_DECISION]"               ,"type":"string"},
             {"name":"Date de dernière décision",            "label":"[DATE_DERNIERE_DECISION]"          ,"type":"string"}
+            ]
+        },
+        "BDU_DRU:Contrats_de_quartiers_Programmes": {
+            "actiontype" : "GRID",
+            "title"      : "Contrat de Quartier (Programme): [NOM_FR]",
+            "attributes" : [
+                {"name": "Contrat de quartier",     "label": "[NOM_FR]",                "type":"string"},
+                {"name": "Actif",                   "label": "[ACTIF]",                 "type":"string"},
+                {"name": "Fiche web",               "label": "http://quartiers.brussels/1/q/[ID]",   "type":"link"},
+                {"name": "Date de début",           "label": "[DT_DEBUT]",              "type":"date"},
+                {"name": "Date de fin",             "label": "[DT_FIN]",                "type":"date"},
+                {"name": "Année",                   "label": "[ANNEE]",                 "type":"string"},
+                {"name": "Code postal",             "label": "[CP]",                    "type":"string"},
+                {"name": "Bureau",                  "label": "[BUREAU]",                "type":"string"},
+                {"name": "Référence compta.",       "label": "[REF_COMPTA]",            "type":"string"}
+            ]
+        },
+        "BDU_DRU:Contrats_de_quartiers_Projets": {
+            "actiontype" : "GRID",
+            "title"      : "Contrat de Quartier (Projet): [PROJ_FR]",
+            "attributes" : [
+                {"name": "Projet",                  "label": "[PROJ_FR]",               "type":"string"},
+                {"name": "Contrat de quartier",     "label": "[CQD_FR]",                "type":"string"},
+                {"name": "Série",                   "label": "[SERIE]",                 "type":"string"},
+                {"name": "Adresse",                 "label": "[NUM] [RUE_FR] - [CP]",   "type":"string"},
+                {"name": "Fiche web",               "label": "http://quartiers.brussels/1/qp/[ID]",   "type":"link"},
+                {"name": "Image",                   "label": "[IMG]",                   "type":"picture"},
+                {"name": "Crédit photo",            "label": "[IMG_COPY]",              "type":"string"},
+                {"name": "Bureau",                  "label": "[BUREAU]",                "type":"string"},
+                {"name": "Désignation du BE",       "label": "[DT_BUREAU]",             "type":"date"},
+                {"name": "Entrepreneur",            "label": "[ENTREP]",                "type":"string"},
+                {"name": "N° de permis",            "label": "[PU_NUM]",                "type":"string"},
+                {"name": "Date réception",          "label": "[DT_RECEP]",              "type":"date"}
+            ]
+        },
+        "BDU_DRU:Contrats_de_renovation_urbaine_provisoires": {
+            "actiontype" : "GRID",
+            "title"      : "Contrat de rénovation urbaine provisoire: [NOM_FR]",
+            "attributes" : [
+                {"name": "Contrat de RU",           "label": "[NOM_FR]",                "type":"string"},
+                {"name": "Série",                   "label": "[SERIE]",                 "type":"string"}
             ]
         }
 	};
