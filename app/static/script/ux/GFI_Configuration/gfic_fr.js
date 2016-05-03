@@ -480,9 +480,9 @@ ux.gfi.fr = {
 			"actiontype" : "GRID",
 			"title"		 : "Zone de préemption: [NOM_FR]",
 			"attributes" : [
-				{ "name": "Nom de zone"			, "label" : "[NOM_FR]"	, "type" : "string"},
-				{ "name": "Lien"				, "label" : "[URL_FR]"				, "type" : "link"},
-				{ "name": "Statut"		, "label" : "['Inactif','Actif'][[ACTIF]]"				, "type" : "eval"}
+				{ "name": "Nom de zone"			, "label" : "[NOM_FR]"	                                , "type" : "string"},
+				{ "name": "Lien"				, "label" : "[URL_FR]"				                    , "type" : "link"},
+				{ "name": "Statut"		        , "label" : "['Inactif','Actif'][[ACTIF]]"				, "type" : "eval"}
 			]
 		},
 		"BDU:PPAS":{
@@ -738,9 +738,10 @@ ux.gfi.fr = {
             "attributes" : [
             {"name":"Interdiction actuelle",                "label":"[INTERDICTION_ACTUELLE]"           ,"type":"string"},
             {"name":"Rue",                                  "label":"[RUE]"                             ,"type":"string"},
-            {"name":"N° de rue - début",                    "label":"[NO_RUE_DEBUT]"                    ,"type":"string"},
-            {"name":"N° de rue - Fin",                      "label":"[NO_RUE_FIN]"                      ,"type":"string"},
+            {"name":"N° de rue - début",                    "label":"if ('[N_DE_POLICE_DEBUT]'.length > 0 && '[BOITE]'.length > 0){'[N_DE_POLICE_DEBUT] bte [BOITE]'} else if ('[N_DE_POLICE_DEBUT]'.length > 0 && '[BOITE]'.length == 0){'[N_DE_POLICE_DEBUT]'} else {''}"                    ,"type":"eval"},
+            {"name":"N° de rue - Fin",                      "label":"[N_DE_POLICE_FIN]"                 ,"type":"string"},
             {"name":"Etage",                                "label":"[ETAGE]"                           ,"type":"string"},
+			{"name":"Situation exacte",						"label":"[SITUATION_EXACTE]"				,"type":"string"},
             {"name":"Commune",                              "label":"[CODE_POSTAL] [COMMUNE]"           ,"type":"string"},
             {"name":"---------------------------------",    "label":""                                  ,"type":"string"},
             {"name":"N° de dossier",                        "label":"[N_DOSSIER]"                       ,"type":"string"},

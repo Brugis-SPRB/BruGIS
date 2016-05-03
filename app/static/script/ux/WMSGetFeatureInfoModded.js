@@ -407,11 +407,16 @@ ux.plugins.WMSGetFeatureInfo = Ext.extend(gxp.plugins.Tool, {
                         for(var attribute in feature.attributes)
                         {
                             var pattern = "\["+attribute+"\]";
-                            labelTemplate = labelTemplate.replace(pattern,feature.attributes[attribute]);
+							while (labelTemplate.includes(pattern)) {
+								labelTemplate = labelTemplate.replace(pattern,feature.attributes[attribute]);
+							}
                         }
                         var type = n_attribute.type;
                         switch(type) {
                             case "eval":
+							//console.log(labelTemplate);
+							labelTemplate = labelTemplate.replace(/\[(.*?)\]/g, "");
+							//console.log(labelTemplate);
                             labelTemplate = eval(labelTemplate);
                             break;
                             case "string":
@@ -606,11 +611,16 @@ ux.plugins.WMSGetFeatureInfo = Ext.extend(gxp.plugins.Tool, {
                     for(var attribute in feature.attributes)
                     {
                         var pattern = "\["+attribute+"\]";
-                        labelTemplate = labelTemplate.replace(pattern,feature.attributes[attribute]);
+						while (labelTemplate.includes(pattern)) {
+							labelTemplate = labelTemplate.replace(pattern,feature.attributes[attribute]);
+						}
                     }
                     var type = n_attribute.type;
                     switch(type) {
                         case "eval":
+						//console.log(labelTemplate);
+						labelTemplate = labelTemplate.replace(/\[(.*?)\]/g, "");
+						//console.log(labelTemplate);
                         labelTemplate = eval(labelTemplate);
                         break;
                         case "string":

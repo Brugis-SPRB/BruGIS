@@ -654,9 +654,10 @@ ux.gfi.nl =  {
             "attributes" : [
             {"name":"Actueel verbod",                       "label":"[ACTUEEL_VERBOD]"                  ,"type":"string"},
             {"name":"Straat",                               "label":"[STRAAT]"                          ,"type":"string"},
-            {"name":"Huisnummer - begin",                   "label":"[HUISNUMMER_BEGIN]"                ,"type":"string"},
+            {"name":"Huisnummer - begin",                   "label":"if ('[HUISNUMMER_BEGIN]'.length > 0 && '[BUS]'.length > 0){'[HUISNUMMER_BEGIN] bus [BUS]'} else if ('[HUISNUMMER_BEGIN]'.length > 0 && '[BUS]'.length == 0){'[HUISNUMMER_BEGIN]'} else {''}"                    ,"type":"eval"},
             {"name":"Huisnummer - einde",                   "label":"[HUISNUMMER_EINDE]"                ,"type":"string"},
             {"name":"Verdieping",                           "label":"[VERDIEPING]"                      ,"type":"string"},
+			{"name":"Exacte ligging",						"label":"[EXACTE_LIGGING]"					,"type":"string"},
             {"name":"Gemeente",                             "label":"[POSTCODE] [GEMEENTE]"             ,"type":"string"},
             {"name":"---------------------------------",    "label":""                                  ,"type":"string"},
             {"name":"Dossiernummer",                        "label":"[DOSSIER_NR]"                      ,"type":"string"},
