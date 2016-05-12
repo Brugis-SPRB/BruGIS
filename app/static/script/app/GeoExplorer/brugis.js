@@ -231,7 +231,7 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
 					width: 320
 				},
 				needsAuthorization: false,
-				actionTarget: ["layers.tbar", "layers.contextMenu"],
+				actionTarget: ["layers.tbar"],
 				appendActions: false
 			}, {
 				ptype: "ux_ReperageToolbox",
@@ -1086,8 +1086,8 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
                 //border: true
             }
         });
-        
-        
+
+
         this.portalItems = [{
             region: "center",
             layout: "border",
