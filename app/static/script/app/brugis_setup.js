@@ -41,6 +41,17 @@ Ext.onReady(function () {
             GeoExt.Lang.set(OpenLayers.Util.getParameters()["locale"] || GeoExt.Lang.locale);
 		}
 
+		//polyfill 1 for string.prototype.includes unsupported by IE
+		
+		if (!String.prototype.includes) {
+			String.prototype.includes = function() {
+				'use strict';
+				return String.prototype.indexOf.apply(this, arguments) !== -1;
+			};
+		}
+		
+		// end of Polyfill
+		
 		var baseMap = [{
 			source: "BruGIS WMS - Geoserver",
 			name:   brugisConfig.baseLayerName,

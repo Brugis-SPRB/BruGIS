@@ -406,7 +406,7 @@ ux.plugins.WMSGetFeatureInfo = Ext.extend(gxp.plugins.Tool, {
 
                         for(var attribute in feature.attributes)
                         {
-                            var pattern = "\["+attribute+"\]";
+                            var pattern = "\[%"+attribute+"%\]";
 							while (labelTemplate.includes(pattern)) {
 								labelTemplate = labelTemplate.replace(pattern,feature.attributes[attribute]);
 							}
@@ -415,7 +415,7 @@ ux.plugins.WMSGetFeatureInfo = Ext.extend(gxp.plugins.Tool, {
                         switch(type) {
                             case "eval":
 							//console.log(labelTemplate);
-							labelTemplate = labelTemplate.replace(/\[(.*?)\]/g, "");
+							labelTemplate = labelTemplate.replace(/\[%(.*?)%\]/g, "");
 							//console.log(labelTemplate);
                             labelTemplate = eval(labelTemplate);
                             break;
@@ -453,7 +453,7 @@ ux.plugins.WMSGetFeatureInfo = Ext.extend(gxp.plugins.Tool, {
                             };
                             break;
                         }
-                        labelTemplate = labelTemplate.replace(/\[(.*?)\]/g, "");
+                        labelTemplate = labelTemplate.replace(/\[%(.*?)%\]/g, "");
 
                         new_attributes[n_attribute.name] = labelTemplate;
 
@@ -492,10 +492,10 @@ ux.plugins.WMSGetFeatureInfo = Ext.extend(gxp.plugins.Tool, {
                     customTitle = layerConfiguration.title;
                     for(var attribute in feature.attributes)
                     {
-                        var pattern = "\["+attribute+"\]";
+                        var pattern = "\[%"+attribute+"%\]";
                         customTitle = customTitle.replace(pattern,feature.attributes[attribute]);
                     }
-                    feature.customTitle = customTitle.replace(/\[(.*?)\]/g, "");
+                    feature.customTitle = customTitle.replace(/\[%(.*?)%\]/g, "");
                 }
 
                 config.push(Ext.apply({
@@ -610,7 +610,7 @@ ux.plugins.WMSGetFeatureInfo = Ext.extend(gxp.plugins.Tool, {
                     var labelTemplate = n_attribute.label;
                     for(var attribute in feature.attributes)
                     {
-                        var pattern = "\["+attribute+"\]";
+                        var pattern = "\[%"+attribute+"%\]";
 						while (labelTemplate.includes(pattern)) {
 							labelTemplate = labelTemplate.replace(pattern,feature.attributes[attribute]);
 						}
@@ -619,7 +619,7 @@ ux.plugins.WMSGetFeatureInfo = Ext.extend(gxp.plugins.Tool, {
                     switch(type) {
                         case "eval":
 						//console.log(labelTemplate);
-						labelTemplate = labelTemplate.replace(/\[(.*?)\]/g, "");
+						labelTemplate = labelTemplate.replace(/\[%(.*?)%\]/g, "");
 						//console.log(labelTemplate);
                         labelTemplate = eval(labelTemplate);
                         break;
@@ -657,9 +657,9 @@ ux.plugins.WMSGetFeatureInfo = Ext.extend(gxp.plugins.Tool, {
                                     return attrib;
                                 }
                             }								};
-                            break;
+                        break;
                         }
-                        labelTemplate = labelTemplate.replace(/\[(.*?)\]/g, "");
+                        labelTemplate = labelTemplate.replace(/\[%(.*?)%\]/g, "");
 
                         new_attributes[n_attribute.name] = labelTemplate;
 
@@ -694,10 +694,10 @@ ux.plugins.WMSGetFeatureInfo = Ext.extend(gxp.plugins.Tool, {
                         customTitle = layerConfiguration.title;
                         for(var attribute in feature.attributes)
                         {
-                            var pattern = "\["+attribute+"\]";
+                            var pattern = "\[%"+attribute+"%\]";
                             customTitle = customTitle.replace(pattern,feature.attributes[attribute]);
                         }
-                        feature.customTitle = customTitle.replace(/\[(.*?)\]/g, "");
+                        feature.customTitle = customTitle.replace(/\[%(.*?)%\]/g, "");
                     }
 
                     new_attributes["geom"] = feature.geometry;
