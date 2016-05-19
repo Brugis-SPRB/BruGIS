@@ -700,7 +700,7 @@ ux.plugins.ReperageToolbox = Ext.extend(gxp.plugins.Tool, {
 				header: this.myReperageGridPanel_type_header,
 				dataIndex: 'reperageTypeTitle',
 				width: 70,
-				sortable: true
+				sortable: false
 			},
 			{
 				header: this.myReperageGridPanel_startdate_header,
