@@ -83,8 +83,8 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
 			"mymapschange"
 		);
     brugisConfig.fixOldMaps();
-    brugisConfig.showAlert();
-    brugisConfig.showAwardsBegeo();
+    //brugisConfig.showAlert();
+    //brugisConfig.showAwardsBegeo();
 		var user = this.getCookieValue(this.cookieParamName);
 		if(user) {
 			this.authorizedRoles = ["ROLE_ADMINISTRATOR"];
