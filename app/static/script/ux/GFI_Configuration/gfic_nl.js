@@ -709,5 +709,15 @@ ux.gfi.nl =  {
                 {"name": "Contrat de RU",           "label": "[%NOM_NL%]",                "type":"string"},
                 {"name": "Serie",                   "label": "[%SERIE%]",                 "type":"string"}
             ]
+        },
+        "BSO:Zones_met_verhoogde_huurprijs": {
+            "actiontype" : "GRID",
+            "title"      : "Zone nr [%MDRC%] - [%NAME_NL%]",
+            "attributes" : [
+                {"name": "Naam van zone",             "label": "[%NAME_NL%]",                "type":"string"},
+                {"name": "Naam van zone (tweetaalig)","label": "[%NAME_BIL%]",               "type":"string"},
+                {"name": "Nummer van zone",           "label": "[%MDRC%]",                   "type":"string"},
+								{"name": "Staat",                     "label": "if ('[%SCENARIO%]'.length > 0 && '[%SCENARIO%]'=='2' ){'In een verhoogde zone'} else {'Buiten een verhoogde zone'}"                    ,"type":"eval"}
+            ]
         }
     };

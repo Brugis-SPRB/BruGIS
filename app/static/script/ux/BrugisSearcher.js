@@ -5,7 +5,7 @@
  * See www.gnu.org/licences/gpl-3.0 for the full text
  * of the license.
  */
- 
+
 /**
  * //@requires gxp/plugins/Tool.js
  * //@requires CirbGeocoderComboBox.js
@@ -35,7 +35,7 @@ ux.plugins.BrugisSearcher = Ext.extend(gxp.plugins.Tool, {
 
     // Begin i18n.
     // End i18n.
-	wpsserver : '/geoserver/wps',
+	wpsserver : 'http://mbr225.irisnet.be/geoserver/wps',
 	zoom : 9,
 	zoomToPolNum: 12,
 	searchLayerName: "search",
@@ -62,8 +62,8 @@ ux.plugins.BrugisSearcher = Ext.extend(gxp.plugins.Tool, {
 
 		var searchTypeCombo= new Ext.form.ComboBox({
 			id: "searchTypeCombo",
-			//store: ["ADR","CAD"],
-			store: ["ADR"],
+			store: ["ADR","CAD"],
+			//store: ["ADR"],
 			typeAhead: true,
 			forceSelection: true,
 			width: 75,
@@ -101,7 +101,7 @@ ux.plugins.BrugisSearcher = Ext.extend(gxp.plugins.Tool, {
 			}
 		});
 
-		this.wpsclient = new OpenLayers.WPSClient({
+		  this.wpsclient = new OpenLayers.WPSClient({
 			servers: {
 				brugisgeo: this.wpsserver
 			}
@@ -119,7 +119,7 @@ ux.plugins.BrugisSearcher = Ext.extend(gxp.plugins.Tool, {
             });
         }
         this.combo = combo;
-		this.typecombo = searchTypeCombo;
+		    this.typecombo = searchTypeCombo;
         this.cadtext = cadTextField;
 
         return ux.plugins.BrugisSearcher.superclass.init.apply(this, arguments);
@@ -129,8 +129,8 @@ ux.plugins.BrugisSearcher = Ext.extend(gxp.plugins.Tool, {
      */
     addOutput: function(config) {
 		 this.btGroup = new Ext.ButtonGroup({
-			//items : [this.combo,this.cadtext,this.typecombo]
-			items : [this.combo]
+			items : [this.combo,this.cadtext,this.typecombo]
+			//items : [this.combo]
 		 });
 
         return ux.plugins.BrugisSearcher.superclass.addOutput.call(this, this.btGroup);
