@@ -35,7 +35,7 @@ ux.plugins.BrugisSearcher = Ext.extend(gxp.plugins.Tool, {
 
     // Begin i18n.
     // End i18n.
-	wpsserver : '/geoserver/wps',
+	wpsserver : 'http://mbr225.irisnet.be/geoserver/wps',
 	zoom : 9,
 	zoomToPolNum: 12,
 	searchLayerName: "search",
@@ -101,7 +101,7 @@ ux.plugins.BrugisSearcher = Ext.extend(gxp.plugins.Tool, {
 			}
 		});
 
-		this.wpsclient = new OpenLayers.WPSClient({
+		  this.wpsclient = new OpenLayers.WPSClient({
 			servers: {
 				brugisgeo: this.wpsserver
 			}
@@ -119,7 +119,7 @@ ux.plugins.BrugisSearcher = Ext.extend(gxp.plugins.Tool, {
             });
         }
         this.combo = combo;
-		this.typecombo = searchTypeCombo;
+		    this.typecombo = searchTypeCombo;
         this.cadtext = cadTextField;
 
         return ux.plugins.BrugisSearcher.superclass.init.apply(this, arguments);
