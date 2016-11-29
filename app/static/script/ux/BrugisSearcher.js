@@ -184,8 +184,18 @@ ux.plugins.BrugisSearcher = Ext.extend(gxp.plugins.Tool, {
                 console.log("Success");
                 console.log(response);
                 var payload = response.responseXML;
-                var parser = new OpenLayers.Format.GML();
-                var data = parser.read(payload);
+                //var payload = response.responseText;
+                //var start = payload.indexOf('<BDU:GEOMETRY>') + 14;
+                //var end = payload.indexOf('</BDU:GEOMETRY>');
+                var gmlOptions= {
+                    featureType: "Parcelle_2015",
+                    featureNS: "www.brugis.be/bdu/"
+                }
+                var gmlOptionsIn = OpenLayers.Util.extend(
+                    OpenLayers.Util.extent({}, gmlOptions)
+                );
+                var parser = OpenLayers.Format.GML.v3(gmlOptionsIn);
+                var features = parser.read(payload);
                 console.log(data);
             },
             failure: function(response, otps) {
