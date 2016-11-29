@@ -177,7 +177,7 @@ ux.plugins.BrugisSearcher = Ext.extend(gxp.plugins.Tool, {
         var wfsQuery = wfsQueryTemplate.replace("%place_holder%", keyText);
 
         Ext.Ajax.request({
-            url: 'http://svappmavw019:8080/geoserver/wfs',
+            url: 'http://localhost:8080/geoserver/wfs',
             params: wfsQuery,
             method: 'POST',
             success: function(response, opts) {
