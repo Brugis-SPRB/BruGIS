@@ -192,7 +192,7 @@ ux.plugins.BrugisSearcher = Ext.extend(gxp.plugins.Tool, {
                     featureNS: "www.brugis.be/bdu/"
                 }
                 var gmlOptionsIn = OpenLayers.Util.extend(
-                    OpenLayers.Util.extent({}, gmlOptions)
+                    OpenLayers.Util.extend({}, gmlOptions)
                 );
                 var parser = OpenLayers.Format.GML.v3(gmlOptionsIn);
                 var features = parser.read(payload);
