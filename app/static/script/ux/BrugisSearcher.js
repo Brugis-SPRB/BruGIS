@@ -158,7 +158,7 @@ ux.plugins.BrugisSearcher = Ext.extend(gxp.plugins.Tool, {
 
     onCapaKeySelect: function(keyText){
         var wfsQueryTemplate = "<wfs:GetFeature service=\"WFS\" version=\"1.1.0\" \
-          xmlns:BDU=\"www.brugis.be/bdu\" \
+          xmlns:BDU=\"www.brugis.be/bdu/\" \
           xmlns:wfs=\"http://www.opengis.net/wfs\" \
           xmlns:ogc=\"http://www.opengis.net/ogc\" \
           xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" \
@@ -178,7 +178,7 @@ ux.plugins.BrugisSearcher = Ext.extend(gxp.plugins.Tool, {
 
         Ext.Ajax.request({
             url: 'http://localhost:8080/geoserver/wfs',
-            params: wfsQuery,
+            xmlData: wfsQuery,
             method: 'POST',
             success: function(response, opts) {
                 console.log("Success");
