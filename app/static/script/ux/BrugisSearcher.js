@@ -5,7 +5,7 @@
  * See www.gnu.org/licences/gpl-3.0 for the full text
  * of the license.
  */
- 
+
 /**
  * //@requires gxp/plugins/Tool.js
  * //@requires CirbGeocoderComboBox.js
@@ -62,8 +62,8 @@ ux.plugins.BrugisSearcher = Ext.extend(gxp.plugins.Tool, {
 
 		var searchTypeCombo= new Ext.form.ComboBox({
 			id: "searchTypeCombo",
-			//store: ["ADR","CAD"],
-			store: ["ADR"],
+			store: ["ADR","CAD"],
+			//store: ["ADR"],
 			typeAhead: true,
 			forceSelection: true,
 			width: 75,
@@ -129,14 +129,14 @@ ux.plugins.BrugisSearcher = Ext.extend(gxp.plugins.Tool, {
      */
     addOutput: function(config) {
 		 this.btGroup = new Ext.ButtonGroup({
-			//items : [this.combo,this.cadtext,this.typecombo]
-			items : [this.combo]
+			items : [this.combo,this.cadtext,this.typecombo]
+			//items : [this.combo]
 		 });
 
         return ux.plugins.BrugisSearcher.superclass.addOutput.call(this, this.btGroup);
     },
 
-	onCapaKeySelect: function(keyText){
+	onCapaKeySelect2: function(keyText){
 
 		 this.wpsclient.execute({
 			server: "brugisgeo",
@@ -155,6 +155,46 @@ ux.plugins.BrugisSearcher = Ext.extend(gxp.plugins.Tool, {
 		});
 
 	},
+
+    onCapaKeySelect: function(keyText){
+        var wfsQueryTemplate = "<wfs:GetFeature service=\"WFS\" version=\"1.1.0\" \
+          xmlns:topp=\"http://www.openplans.org/topp\" \
+          xmlns:wfs=\"http://www.opengis.net/wfs\" \
+          xmlns:ogc=\"http://www.opengis.net/ogc\" \
+          xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" \
+          xsi:schemaLocation=\"http://www.opengis.net/wfs \
+                              http://schemas.opengis.net/wfs/1.1.0/wfs.xsd\"> \
+          <wfs:Query typeName=\"topp:states\"> \
+            <ogc:Filter> \
+                <PropertyIsEqualTo> \
+                 <PropertyName>CAPAKEY</PropertyName> \
+                 <Literal>%place_holder%</Literal> \
+                </PropertyIsEqualTo> \
+            </ogc:Filter> \
+        </wfs:Query> \
+        </wfs:GetFeature>";
+
+        var wfsQuery = wfsQueryTemplate.replace("%place_holder%", keyText);
+
+        Ext.Ajax.request({
+            url: 'http://svappmavw019:8080/geoserver/wfs',
+            params: wfsQuery,
+            method: 'POST',
+            success: function(response, opts) {
+                console.log("Success");
+                console.log(response);
+                var payload = response.responseXML;
+                var parser = new OpenLayers.Format.GML();
+                var data = parser.read(payload);
+                console.log(data);
+            },
+            failure: function(response, otps) {
+                console.log("Failure");
+                console.log(response);
+            },
+            scope: this
+        });
+    },
 
 	onCapaKeyFound : function(result) {
 		if(result && result.length  > 0) {
