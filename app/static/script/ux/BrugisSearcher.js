@@ -119,9 +119,9 @@ ux.plugins.BrugisSearcher = Ext.extend(gxp.plugins.Tool, {
             });
         }
         this.combo = combo;
-		    this.typecombo = searchTypeCombo;
+		this.typecombo = searchTypeCombo;
         this.cadtext = cadTextField;
-
+        this.brugisConfig = new Brugis.Config();
         return ux.plugins.BrugisSearcher.superclass.init.apply(this, arguments);
     },
 
@@ -187,7 +187,7 @@ ux.plugins.BrugisSearcher = Ext.extend(gxp.plugins.Tool, {
         var parser = new OpenLayers.Format.GML.v3(gmlOptionsIn);
 
         Ext.Ajax.request({
-            url: 'http://localhost:8080/geoserver/wfs',
+            url: this.brugisConfig.getCapaKeyBaseUrl(),
             xmlData: wfsQuery,
             method: 'POST',
             success: function(response, opts) {
