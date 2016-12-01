@@ -206,20 +206,27 @@ ux.plugins.BrugisSearcher = Ext.extend(gxp.plugins.Tool, {
 	onCapaKeyFound : function(result) {
 		if(result && result.length  > 0) {
 			var map = this.target.mapPanel.map;
-			myPoint =  result[0].geometry;
 
 			if(map.getLayersByName(this.searchLayerName).length > 0){
 				var vectorLayer = map.getLayersByName(this.searchLayerName)[0];
+                vectorLayer.destroyFeatures();
 				vectorLayer.addFeatures(new OpenLayers.Feature.Vector(
-					new OpenLayers.Geometry.Point(myPoint.x, myPoint.y)
+					//new OpenLayers.Geometry.Point(myPoint.x, myPoint.y)
+                    result[0].geometry
 				));
+                var dataExtent = vectorLayer.getDataExtent();
+                map.zoomToExtent(dataExtent);
 			}
 			else{
 				var vectorLayer = new OpenLayers.Layer.Vector(this.searchLayerName);
+                vectorLayer.destroyFeatures();
 				vectorLayer.addFeatures(new OpenLayers.Feature.Vector(
-					new OpenLayers.Geometry.Point(myPoint.x, myPoint.y)
+					//new OpenLayers.Geometry.Point(myPoint.x, myPoint.y)
+                    result[0].geometry
 				));
 				map.addLayer(vectorLayer);
+                var dataExtent = vectorLayer.getDataExtent();
+                map.zoomToExtent(dataExtent);
 			}
 
 			if(map.getLayersByName(this.searchLayerName).length > 0){
@@ -227,7 +234,7 @@ ux.plugins.BrugisSearcher = Ext.extend(gxp.plugins.Tool, {
 				console.log(vectorLayer);
 			}
 			//the array should consist of four values (left, bottom, right, top)
-			map.zoomToExtent(result[0].data.bounds);
+			//map.zoomToExtent(result[0].data.bounds);
 		}
 		else {
 			Ext.Msg.alert('CAD Search', 'Your query did not return any result');
