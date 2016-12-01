@@ -191,13 +191,8 @@ ux.plugins.BrugisSearcher = Ext.extend(gxp.plugins.Tool, {
             xmlData: wfsQuery,
             method: 'POST',
             success: function(response, opts) {
-                console.log("Success");
-                console.log(response);
-                //var payload = response.responseText;
-                //var start = payload.indexOf('<BDU:GEOMETRY>') + 14;
-                //var end = payload.indexOf('</BDU:GEOMETRY>');
                 var features = parser.read(response.responseXML);
-                console.log(features);
+                this.onCapaKeyFound(features);
             },
             failure: function(response, otps) {
                 console.log("Failure");
