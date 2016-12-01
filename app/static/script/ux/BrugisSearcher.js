@@ -185,9 +185,7 @@ ux.plugins.BrugisSearcher = Ext.extend(gxp.plugins.Tool, {
             OpenLayers.Util.extend({}, gmlOptions)
         );
         var parser = new OpenLayers.Format.GML.v3(gmlOptionsIn);
-        var stub = '<?xml version="1.0" encoding="UTF-8"?><wfs:FeatureCollection xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:BDU_DMS_ARCH_PRIVATE="http://www.brugis.be/BDU_DMS_ARCH_PRIVATE" xmlns:RF="www.brugis.be/rf/" xmlns:test="http://test.bdu.org" xmlns:BDU_DRU="www.mybrugis.irisnet.be/bdu_dru" xmlns:BDU_DEP="http://www.brugis.be/BDU_DEP" xmlns:BDU="www.brugis.be/bdu/" xmlns:BSO_DSV="www.mybrugis.irisnet.be/bso_dsv" xmlns:BSO_DSP="http://www.brugis.be/BSO_DSP" xmlns:BSO_DML_ARCH="http://www.brugis.be/BSO_DML_ARCH" xmlns:BUV="www.irisfoncier.irisnet.be/buv/" xmlns:ogc="http://www.opengis.net/ogc" xmlns:NOVA="www.mybrugis.irisnet.be/nova" xmlns:BDU_DMS_PROT="http://www.brugis.be/BDU_DMS_PROT" xmlns:BSO_DML_BESC="http://www.brugis.be/BSO_DML_BESC" xmlns:BSO_GHI="www.mybrugis.irisnet.be/bso_ghi" xmlns:DEP_BP="www.brugis.be/DEP_BP/" xmlns:AED="www.irisfoncier.irisnet.be" xmlns:AEE="www.brugis.be/aee/" xmlns:TAX="www.brugis.be" xmlns:BEW="www.brugis.be/bew/" xmlns:BDU_DMS_ARCH="http://www.brugis.be/BDU_DMS_ARCH" xmlns:SG_AGR="www.brugis.be/agr/" xmlns:BSO="http://www.brugis.be/BSO" xmlns:BDU_IRL="www.brugis.be/bdu_irl/" xmlns:URBANALYSIS="wps.brugis.irisnet.be" xmlns:wfs="http://www.opengis.net/wfs" xmlns:ows="http://www.opengis.net/ows" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:gml="http://www.opengis.net/gml" xmlns:REPERAGE="www.brugis.be/reperage" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" numberOfFeatures="1" timeStamp="2016-11-29T14:39:28.850Z" xsi:schemaLocation="http://www.opengis.net/wfs http://localhost:8080/geoserver/schemas/wfs/1.1.0/wfs.xsd www.brugis.be/bdu/ http://localhost:8080/geoserver/wfs?service=WFS&amp;version=1.1.0&amp;request=DescribeFeatureType&amp;typeName=BDU%3AParcelle_2015"><gml:featureMembers><BDU:Parcelle_2015 gml:id="Parcelle_2015.fid-5e16dc86_158b083a137_-7ff1"><BDU:ID>43315</BDU:ID><BDU:CAPATY>PR</BDU:CAPATY><BDU:CAPAKEY>21811M1857/00M000</BDU:CAPAKEY><BDU:SHAPE_AREA>104.0</BDU:SHAPE_AREA><BDU:SHEET>21811M070002</BDU:SHEET><BDU:MUNC>21004</BDU:MUNC><BDU:CD5C>21811</BDU:CD5C><BDU:CDNC>2100411</BDU:CDNC><BDU:CSNC>M</BDU:CSNC><BDU:SHNC>070002</BDU:SHNC><BDU:SHNC_FILE>21811M070002</BDU:SHNC_FILE><BDU:RAD_NUM>1857</BDU:RAD_NUM><BDU:EXP_ALPHA>M</BDU:EXP_ALPHA><BDU:APNC_MAPC>21811_M_1857_M_000_00</BDU:APNC_MAPC><BDU:APNC_CADC>21811M1857/00M000</BDU:APNC_CADC><BDU:APNC_CAD>M1857M</BDU:APNC_CAD><BDU:APNC_MAP>1857M</BDU:APNC_MAP><BDU:GEOMETRY><gml:MultiSurface srsName="urn:x-ogc:def:crs:EPSG:31370" srsDimension="2"><gml:surfaceMember><gml:Polygon><gml:exterior><gml:LinearRing><gml:posList>148367.192 170498.075 148371.39 170503.616 148383.48 170495.843 148379.414 170489.657 148367.192 170498.075</gml:posList></gml:LinearRing></gml:exterior></gml:Polygon></gml:surfaceMember></gml:MultiSurface></BDU:GEOMETRY></BDU:Parcelle_2015></gml:featureMembers></wfs:FeatureCollection>';
-        var features = parser.read(stub);
-        /*
+
         Ext.Ajax.request({
             url: 'http://localhost:8080/geoserver/wfs',
             xmlData: wfsQuery,
@@ -195,12 +193,11 @@ ux.plugins.BrugisSearcher = Ext.extend(gxp.plugins.Tool, {
             success: function(response, opts) {
                 console.log("Success");
                 console.log(response);
-                var payload = response.responseXML;
                 //var payload = response.responseText;
                 //var start = payload.indexOf('<BDU:GEOMETRY>') + 14;
                 //var end = payload.indexOf('</BDU:GEOMETRY>');
-                ;
-                console.log(data);
+                var features = parser.read(response.responseXML);
+                console.log(features);
             },
             failure: function(response, otps) {
                 console.log("Failure");
@@ -208,7 +205,7 @@ ux.plugins.BrugisSearcher = Ext.extend(gxp.plugins.Tool, {
             },
             scope: this
         });
-        */
+
     },
 
 	onCapaKeyFound : function(result) {
