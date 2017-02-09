@@ -8,11 +8,12 @@ GeoExt.Lang.add("en", {
         localeHelp : "<a href='http://www.developpement-urbain.irisnet.be/cartographie/brugis/mode-demploi'target= '_blank'>Click here</a>",
         abstractText : "BruGIS, Geographic Information Portal for Brussels Urban Development (BRPS).",
         contactText : "e-mail: <a href='mailto:brugis@sprb.brussels'>brugis@sprb.brussels</a>.",
-        baseGrayLayerName : "URBIS:urbisFRGray",
         baseLayerName     : "URBIS:urbisFR",
-        baseLayerTitle    : "Urbis coloré",
+        baseLayerTitle    : "Urbis colored basemap",
         baseGrayLayerName : "URBIS:urbisFRGray",
-        baseGrayLayerTitle: "Urbis grisé",
+        baseGrayLayerTitle: "Urbis greyscale basemap",
+        baseAquaLayerName : "BCR:Aquarelle",
+        baseAquaLayerTitle: "Watercolor basemap",
         BMBWMSUrl : "http://data-mobility.irisnet.be/geoserver/ows"
     },
     "GeoExplorer.prototype": {

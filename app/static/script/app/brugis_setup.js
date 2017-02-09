@@ -53,9 +53,17 @@ Ext.onReady(function () {
 
 		var baseMap = [{
 			source: "BruGIS WMS - Geoserver",
+			name:   brugisConfig.baseAquaLayerName,
+			title:  brugisConfig.baseAquaLayerTitle,
+			id: "aquaBackground",
+			group:  "background",
+			visibility: true,
+			buffer: 0
+		},{
+			source: "BruGIS WMS - Geoserver",
 			name:   brugisConfig.baseLayerName,
 			title:  brugisConfig.baseLayerTitle,
-			id: "frBackground",
+			id: "colorBackground",
 			group:  "background",
 			visibility: false,
 			buffer: 0
@@ -63,7 +71,7 @@ Ext.onReady(function () {
 			source: "BruGIS WMS - Geoserver",
 			name:   brugisConfig.baseGrayLayerName,
 			title:  brugisConfig.baseGrayLayerTitle,
-			id: "frBackground",
+			id: "greyBackground",
 			group:  "background",
 			visibility: true,
 			buffer: 0

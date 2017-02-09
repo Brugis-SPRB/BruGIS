@@ -32,7 +32,6 @@
         <exec executable="${git}" failonerror="true">
             <arg line="submodule update"/>
         </exec>
-
         <echo message="building ringo jars"/>
         <ant dir="${ringo}" target="jar"/>
         <copy todir="${ringo}/lib" flatten="true" includeEmptyDirs="false">

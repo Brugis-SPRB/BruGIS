@@ -12,6 +12,8 @@ GeoExt.Lang.add("fr", {
         baseLayerTitle    : "Urbis coloré",
         baseGrayLayerName : "URBIS:urbisFRGray",
         baseGrayLayerTitle: "Urbis grisé",
+        baseAquaLayerName : "BCR:Aquarelle",
+        baseAquaLayerTitle: "Fond de plan Aquarelle",
         BMBWMSUrl : "http://data-mobility.irisnet.be/geoserver/ows"
     },
     "GeoExplorer.prototype": {
