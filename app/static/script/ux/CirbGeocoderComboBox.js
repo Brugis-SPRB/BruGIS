@@ -109,7 +109,7 @@ ux.form.CirbGeocoderComboBox = Ext.extend(Ext.form.ComboBox, {
     /** private: property[url]
      *  Url of the Google Geocoding service
      */
-	url: 'http://service.gis.irisnet.be/urbis/Rest/Localize/getaddresses?',
+	url: 'http://geoservices.irisnet.be/localization/Rest/Localize/getaddresses?',
 
     /** private: method[initComponent]
      *  Override
