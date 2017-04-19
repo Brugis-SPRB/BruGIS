@@ -71,7 +71,7 @@ GeoExt.Lang.add("nl", {
 	"ux.form.CirbGeocoderComboBox.prototype" : {
 		loadingText: "Lopend onderzoek...",
         emptyText: "Zoeken",
-		language: 'en'
+		language: ''
 	},
 
 	"ux.plugins.BrugisSearcher.prototype" : {

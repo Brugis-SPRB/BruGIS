@@ -74,7 +74,7 @@ GeoExt.Lang.add("fr", {
 	"ux.form.CirbGeocoderComboBox.prototype" : {
 		loadingText: "Recherche en cours...",
         emptyText: "Rechercher",
-		language: 'en'
+		language: ''
 	},
 
 	"ux.plugins.BrugisSearcher.prototype" : {

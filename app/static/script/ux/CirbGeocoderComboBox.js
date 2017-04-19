@@ -33,7 +33,7 @@ ux.form.CirbGeocoderComboBox = Ext.extend(Ext.form.ComboBox, {
     // Begin i18n.
 	loadingText: 'Searching...',
     emptyText: 'Search location',
-    language: 'en',
+    language: '',
     // End i18n.
 
     /** api: config[map]
@@ -130,7 +130,7 @@ ux.form.CirbGeocoderComboBox = Ext.extend(Ext.form.ComboBox, {
             baseParams: {
 				language: this.language,
 				address: this.queryParam,
-        spatialReference: 'EPSG:31370'
+				spatialReference: '31370'
             },
             reader: new Ext.data.JsonReader({
                 root: "result",

@@ -120,8 +120,7 @@ Ext.onReady(function () {
 				version: "1.1.1"
 			},
 			'CIRB WMS - Geoserver': {
-				url: "http://geoservices-urbis.irisnet.be/geoserver/ows?",
-				version: "1.3.0",
+				url: "http://geoservices-urbis.irisnet.be/geoserver/Urbis/ows?",
 				ptype: "gxp_wmscsource"
 			},
 			'STIB WMS - Geoserver': {
