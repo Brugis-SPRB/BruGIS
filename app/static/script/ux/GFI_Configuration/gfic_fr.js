@@ -793,6 +793,37 @@ ux.gfi.fr = {
                 {"name": "Contrat de RU",           "label": "[%NOM_FR%]",                "type":"string"},
                 {"name": "Série",                   "label": "[%SERIE%]",                 "type":"string"}
             ]
-        }
+        },
+        "BDU:Quartiers_a_loyers_majores": {
+            "actiontype" : "GRID",
+            "title"      : "Quartier n°[%MDRC%] - [%NAME_FR%]",
+            "attributes" : [
+                {"name": "Nom du quartier",           "label": "[%NAME_FR%]",                "type":"string"},
+                {"name": "Nom du quartier (bilingue)","label": "[%NAME_BIL%]",               "type":"string"},
+                {"name": "Numéro de quartier",        "label": "[%MDRC%]",                   "type":"string"},
+								{"name": "Statut",                    "label": "if ('[%SCENARIO%]'.length > 0 && '[%SCENARIO%]'=='2' ){'Dans une zone majorée'} else {'Hors de zone majorée'}"                    ,"type":"eval"}
+            ]
+        },
+				"BEE:Hebergements_touristiques": {
+					  "actiontype" : "GRID",
+					  "title"      : "[%ROOM_TYPE%]: [%NAME%] proposé par [%HOST_NAME%]",
+						"attributes" : [
+							{"name": "Nom AirBnB du bien", 									"label": "[%NAME%]", 																	"type":"string"},
+							{"name": "Lien AirBnB", 												"label": "https://www.airbnb.com/rooms/[%RBNB_ID%]", 	"type":"link"},
+							{"name": "Type de bien", 												"label": "[%ROOM_TYPE%]", 														"type":"string"},
+							{"name": "Environs / situation", 								"label": "[%NEIGHBOURHOOD%]", 												"type":"string"},
+							{"name": "Nombre de nuits minimum", 						"label": "[%MINIMUM_NIGHTS%]", 												"type":"string"},
+							{"name": "Prix/nuit", 													"label": "[%PRICE%]€", 																"type":"string"},
+							{"name": "Disponibilité", 											"label": "[%AVAILABILITY_365%]/365", 									"type":"string"},
+							{"name": "Nom AirBnB de l'hôte", 								"label": "[%HOST_NAME%]", 														"type":"string"},
+							{"name": "Nombre de biens listés par l'hôte", 	"label": "[%CALCULATED_HOST_LISTINGS_COUNT%]", 				"type":"string"},
+							{"name": "Identifiant AirBnB de l'hôte",        "label": "[%HOST_ID%]", 															"type":"string"},
+							{"name": "Nombre d'évaluations", 								"label": "[%NUMBER_OF_REVIEWS%]", 										"type":"string"},
+							{"name": "Date de la dernière évaluation", 			"label": "[%LAST_REVIEW%]", 													"type":"string"},
+							{"name": "Nombre d'évaluations par mois", 			"label": "[%REVIEWS_PER_MONTH%]", 										"type":"string"},
+							{"name": "Catégorie BEE", 											"label": "[%CATEGORY%]", 															"type":"string"},
+							{"name": "Vérifié BEE", 												"label": "[%CHECKED%]", 															"type":"string"},
+							{"name": "CAPAKEY", 														"label": "[%CAPAKEY%]", 															"type":"string"}
+						]
+				}
 	};
-

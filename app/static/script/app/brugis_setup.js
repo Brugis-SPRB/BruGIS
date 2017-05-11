@@ -3,7 +3,6 @@ if (typeof console == "undefined") {
 }
 
 Ext.onReady(function () {
-
         // optionally set locale based on query string parameter
 		if (localStorage && localStorage.getItem('BruGISLanguage')) {
 			GeoExt.Lang.locale = localStorage.getItem('BruGISLanguage');
@@ -12,15 +11,15 @@ Ext.onReady(function () {
         var geoextLangFr = (!(GeoExt.Lang.locale.toLowerCase().match(/fr/g) == null))?true:false;
         var geoextLangNl = (!(GeoExt.Lang.locale.toLowerCase().match(/nl/g) == null))?true:false;
         var geoextLangEn = (!(GeoExt.Lang.locale.toLowerCase().match(/en/g) == null))?true:false;
-        
+
 		if (!(geoextLangFr) == true && !(geoextLangNl) == true && !(geoextLangEn) == true){
 			geoextLangFr = true;
 		}
-        
+
 		if (GeoExt.Lang) {
             GeoExt.Lang.set(OpenLayers.Util.getParameters()["locale"] || GeoExt.Lang.locale);
 		}
-        
+
 		var brugisConfig = new Brugis.Config();
 
         Ext.BLANK_IMAGE_URL = "../theme/app/img/blank.gif";
@@ -36,27 +35,35 @@ Ext.onReady(function () {
         if ((geoextLangEn) == true) {
             GeoExt.Lang.locale = "en";
         }
-        
+
 		if (GeoExt.Lang) {
             GeoExt.Lang.set(OpenLayers.Util.getParameters()["locale"] || GeoExt.Lang.locale);
 		}
 
 		//polyfill 1 for string.prototype.includes unsupported by IE
-		
+
 		if (!String.prototype.includes) {
 			String.prototype.includes = function() {
 				'use strict';
 				return String.prototype.indexOf.apply(this, arguments) !== -1;
 			};
 		}
-		
+
 		// end of Polyfill
-		
+
 		var baseMap = [{
+			source: "BruGIS WMS - Geoserver",
+			name:   brugisConfig.baseAquaLayerName,
+			title:  brugisConfig.baseAquaLayerTitle,
+			id: "aquaBackground",
+			group:  "background",
+			visibility: true,
+			buffer: 0
+		},{
 			source: "BruGIS WMS - Geoserver",
 			name:   brugisConfig.baseLayerName,
 			title:  brugisConfig.baseLayerTitle,
-			id: "frBackground",
+			id: "colorBackground",
 			group:  "background",
 			visibility: false,
 			buffer: 0
@@ -64,7 +71,7 @@ Ext.onReady(function () {
 			source: "BruGIS WMS - Geoserver",
 			name:   brugisConfig.baseGrayLayerName,
 			title:  brugisConfig.baseGrayLayerTitle,
-			id: "frBackground",
+			id: "greyBackground",
 			group:  "background",
 			visibility: true,
 			buffer: 0
@@ -113,8 +120,7 @@ Ext.onReady(function () {
 				version: "1.1.1"
 			},
 			'CIRB WMS - Geoserver': {
-				url: "http://geoservices-urbis.irisnet.be/geoserver/ows?",
-				version: "1.3.0",
+				url: "http://geoservices-urbis.irisnet.be/geoserver/Urbis/ows?",
 				ptype: "gxp_wmscsource"
 			},
 			'STIB WMS - Geoserver': {
@@ -175,7 +181,7 @@ Ext.onReady(function () {
         	// layer sources
         	defaultSourceType: "gxp_wmssource",
 			sources: sources,
-			
+
 			brugisGlobalConfig : brugisConfig,
 
 		    map: {

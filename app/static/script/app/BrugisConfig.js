@@ -28,6 +28,8 @@ Brugis.Config = Ext.extend(Object,  {
 	baseLayerTitle    : "Urbis coloré",
 	baseGrayLayerName : "URBIS:urbisFRGray",
 	baseGrayLayerTitle: "Urbis grisé",
+  baseAquaLayerName : "BCR:Aquarelle",
+  baseAquaLayerTitle: "Fond de plan Aquarelle",
 
 	BMBWMSUrl 	: "http://data-mobility.irisnet.be/geoserver/ows",
 
@@ -112,6 +114,22 @@ Brugis.Config = Ext.extend(Object,  {
 		}
 		return url;
 	},
+    getCapaKeyBaseUrl : function() {
+        var env = this.getEnvironment.call(this);
+        var url = "/";
+        switch(env) {
+            case this.DEV:
+                url = "http://svappmavw115:8080/geoserver/wfs";
+                break;
+            case this.STA:
+                url = "http://mbr66.irisnetlab.be/geoserver/wfs";
+                break;
+            case this.PRD:
+                url = "http://mbr225.irisnet.be/geoserver/wfs";
+                break;
+        }
+        return url;
+    },
 	getReperageHost : function() {
 		var env = this.getEnvironment.call(this);
 		var url = "/";

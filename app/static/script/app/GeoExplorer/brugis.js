@@ -1,5 +1,5 @@
 ///////////////////////////////////////////////////////////////////////////////
-// DocG - Nouveau contrôleur pour intercepter le click même sur une tablette //
+// DocG - Nouveau contrÃ´leur pour intercepter le click mÃªme sur une tablette //
 
 OpenLayers.Control.Click = OpenLayers.Class(OpenLayers.Control, {
 	defaultHandlerOptions: {
@@ -83,8 +83,8 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
 			"mymapschange"
 		);
     brugisConfig.fixOldMaps();
-    brugisConfig.showAlert();
-    brugisConfig.showAwardsBegeo();
+    //brugisConfig.showAlert();
+    //brugisConfig.showAwardsBegeo();
 		var user = this.getCookieValue(this.cookieParamName);
 		if(user) {
 			this.authorizedRoles = ["ROLE_ADMINISTRATOR"];
@@ -125,10 +125,10 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
             }, {
                 ptype: "gxp_layerproperties",
                 actionTarget: ["layers.tbar", "layers.contextMenu"]
-            },/* {
+            }, {
                 ptype: "gxp_downloadlayer",
                 actionTarget: ["layers.tbar", "layers.contextMenu"]
-            },*/ {
+            }, {
                 ptype: "gxp_zoomtolayerextent",
                 actionTarget: {target: "layers.contextMenu", index: 0}
             }, {
@@ -580,7 +580,7 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
         var panel = new Ext.FormPanel({
             url: "../login/",
             frame: true,
-            labelWidth: 60,
+            labelWidth: 90,
             defaultType: "textfield",
             errorReader: {
                 read: function(response) {
@@ -667,7 +667,7 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
         var win = new Ext.Window({
             title: this.loginText,
             layout: "fit",
-            width: 235,
+            width: 265,
             height: 130,
             plain: true,
             border: false,
@@ -782,9 +782,9 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
         this.on("ready", function() {
 
 			/* NDU - 2014/02/14
-			 *	Restauration des sources à leur définition originale afin de sauvegarder
-			 *	l'usage du xml et de sa rapidité, perdu en cas de rechargement de mybrugis
-			 *	d'une session précédente
+			 *	Restauration des sources Ã  leur dÃ©finition originale afin de sauvegarder
+			 *	l'usage du xml et de sa rapiditÃ©, perdu en cas de rechargement de mybrugis
+			 *	d'une session prÃ©cÃ©dente
 			 */
 			if(this.originalSourcesUrl != "" && this.layerSources["BruGIS WMS - Geoserver"].url != this.originalSourcesUrl) {
 				this.layerSources["BruGIS WMS - Geoserver"].url = this.originalSourcesUrl;
@@ -837,6 +837,30 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
 					if (params.scale) {
 						this.mapPanel.map.zoomToScale(params.scale, true);
 					}
+                    /** DocG 2016/09/15
+                     *  Add a + cross on the coordinates received
+                     */
+                    if(this.mapPanel.map.getLayersByName("search").length > 0){
+                        var vectorLayer = this.mapPanel.map.getLayersByName("search")[0];
+                        vectorLayer.addFeatures(new OpenLayers.Feature.Vector(
+                            new OpenLayers.Geometry.Point(lambert72CoordinatesX, lambert72CoordinatesY)
+                        ));
+                    }
+                    else{
+                        var myStyle = new OpenLayers.Symbolizer.Point({
+         							graphicName: 'cross',
+         							strokeColor: '#000000',
+         							strokeWidth: 0.8,
+         							fillOpacity: 0,
+         							pointRadius: 7
+         						});
+         				var myStyleMap = new OpenLayers.StyleMap(myStyle, {extendDefault: true});
+                        var vectorLayer = new OpenLayers.Layer.Vector("search", {style: myStyle, styleMap: myStyleMap});
+                        vectorLayer.addFeatures(new OpenLayers.Feature.Vector(
+                            new OpenLayers.Geometry.Point(lambert72CoordinatesX, lambert72CoordinatesY)
+                        ));
+                        this.mapPanel.map.addLayer(vectorLayer);
+                    }
 				} else if(params.qry && params.val && ux.qry && ux.qry[currentLangage] && ux.qry[currentLangage][params.qry]) {
 					var sourceName = ux.qry[currentLangage][params.qry]["source_name"];
 					var layerName = ux.qry[currentLangage][params.qry]["layer_name"];
@@ -878,7 +902,7 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
 
 									theFeatureManager.loadFeatures(ogcFilter, function(features){
 										//console.log("tugudu");
-										//Features sélectionnée et chargée, on zoom sur le résultat
+										//Features sÃ©lectionnÃ©e et chargÃ©e, on zoom sur le rÃ©sultat
 										var bounds, geom;
 										//console.log(bounds);
 										for (var i=features.length-1; i>=0; --i) {
@@ -923,7 +947,7 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
 			///////////////////////DOCG////////////////////////////////////////////
 			// On applique le resize aux couches de la carte
 			/**
-			 *	On tente de checker les couches ajoutées à la carte
+			 *	On tente de checker les couches ajoutÃ©es Ã  la carte
 			 */
 
 			if (this.initialConfig.map) {
@@ -1026,7 +1050,7 @@ GeoExplorer.Brugis = Ext.extend(GeoExplorer, {
 		///////////////////////DOCG////////////////////////////////////////////
 
 		///////////////////////DOCG////////////////////////////////////////////
-		// Qui l'eût cru! Il fallait encore un control.click...
+		// Qui l'eÃ»t cru! Il fallait encore un control.click...
 		var click = new OpenLayers.Control.Click({trigger: showPosition});
 		this.mapPanel.map.addControl(click);
 		click.activate();

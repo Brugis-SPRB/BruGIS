@@ -12,6 +12,8 @@ GeoExt.Lang.add("fr", {
         baseLayerTitle    : "Urbis coloré",
         baseGrayLayerName : "URBIS:urbisFRGray",
         baseGrayLayerTitle: "Urbis grisé",
+        baseAquaLayerName : "BCR:Aquarelle",
+        baseAquaLayerTitle: "Fond de plan Aquarelle",
         BMBWMSUrl : "http://data-mobility.irisnet.be/geoserver/ows"
     },
     "GeoExplorer.prototype": {
@@ -72,7 +74,7 @@ GeoExt.Lang.add("fr", {
 	"ux.form.CirbGeocoderComboBox.prototype" : {
 		loadingText: "Recherche en cours...",
         emptyText: "Rechercher",
-		language: 'en'
+		language: ''
 	},
 
 	"ux.plugins.BrugisSearcher.prototype" : {

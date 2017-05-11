@@ -12,6 +12,8 @@ GeoExt.Lang.add("nl", {
         baseLayerTitle    : "Urbis gekleurd",
         baseGrayLayerName : "URBIS:urbisNLGray",
         baseGrayLayerTitle: "Urbis grijs",
+        baseAquaLayerName : "BCR:Aquarelle",
+        baseAquaLayerTitle: "Aqua basiskaart",
         BMBWMSUrl : "http://data-mobility.irisnet.be/geoserver/ows"
     },
     "GeoExplorer.prototype": {
@@ -69,7 +71,7 @@ GeoExt.Lang.add("nl", {
 	"ux.form.CirbGeocoderComboBox.prototype" : {
 		loadingText: "Lopend onderzoek...",
         emptyText: "Zoeken",
-		language: 'en'
+		language: ''
 	},
 
 	"ux.plugins.BrugisSearcher.prototype" : {

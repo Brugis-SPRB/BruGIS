@@ -5,7 +5,7 @@
  * See www.gnu.org/licences/gpl-3.0 for the full text
  * of the license.
  */
- 
+
 /**
  * //@requires gxp/plugins/Tool.js
  * //@requires CirbGeocoderComboBox.js
@@ -35,7 +35,7 @@ ux.plugins.BrugisSearcher = Ext.extend(gxp.plugins.Tool, {
 
     // Begin i18n.
     // End i18n.
-	wpsserver : '/geoserver/wps',
+	wpsserver : 'http://mbr225.irisnet.be/geoserver/wps',
 	zoom : 9,
 	zoomToPolNum: 12,
 	searchLayerName: "search",
@@ -62,8 +62,8 @@ ux.plugins.BrugisSearcher = Ext.extend(gxp.plugins.Tool, {
 
 		var searchTypeCombo= new Ext.form.ComboBox({
 			id: "searchTypeCombo",
-			//store: ["ADR","CAD"],
-			store: ["ADR"],
+			store: ["ADR","CAD"],
+			//store: ["ADR"],
 			typeAhead: true,
 			forceSelection: true,
 			width: 75,
@@ -101,7 +101,7 @@ ux.plugins.BrugisSearcher = Ext.extend(gxp.plugins.Tool, {
 			}
 		});
 
-		this.wpsclient = new OpenLayers.WPSClient({
+		  this.wpsclient = new OpenLayers.WPSClient({
 			servers: {
 				brugisgeo: this.wpsserver
 			}
@@ -121,7 +121,7 @@ ux.plugins.BrugisSearcher = Ext.extend(gxp.plugins.Tool, {
         this.combo = combo;
 		this.typecombo = searchTypeCombo;
         this.cadtext = cadTextField;
-
+        this.brugisConfig = new Brugis.Config();
         return ux.plugins.BrugisSearcher.superclass.init.apply(this, arguments);
     },
 
@@ -129,14 +129,14 @@ ux.plugins.BrugisSearcher = Ext.extend(gxp.plugins.Tool, {
      */
     addOutput: function(config) {
 		 this.btGroup = new Ext.ButtonGroup({
-			//items : [this.combo,this.cadtext,this.typecombo]
-			items : [this.combo]
+			items : [this.combo,this.cadtext,this.typecombo]
+			//items : [this.combo]
 		 });
 
         return ux.plugins.BrugisSearcher.superclass.addOutput.call(this, this.btGroup);
     },
 
-	onCapaKeySelect: function(keyText){
+	onCapaKeySelect2: function(keyText){
 
 		 this.wpsclient.execute({
 			server: "brugisgeo",
@@ -156,23 +156,77 @@ ux.plugins.BrugisSearcher = Ext.extend(gxp.plugins.Tool, {
 
 	},
 
+    onCapaKeySelect: function(keyText){
+        var wfsQueryTemplate = "<wfs:GetFeature service=\"WFS\" version=\"1.1.0\" \
+          xmlns:BDU=\"www.brugis.be/bdu/\" \
+          xmlns:wfs=\"http://www.opengis.net/wfs\" \
+          xmlns:ogc=\"http://www.opengis.net/ogc\" \
+          xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" \
+          xsi:schemaLocation=\"http://www.opengis.net/wfs \
+                              http://schemas.opengis.net/wfs/1.1.0/wfs.xsd\"> \
+          <wfs:Query typeName=\"BDU:Parcelle_2015\"> \
+            <ogc:Filter> \
+                <PropertyIsEqualTo> \
+                 <PropertyName>CAPAKEY</PropertyName> \
+                 <Literal>%place_holder%</Literal> \
+                </PropertyIsEqualTo> \
+            </ogc:Filter> \
+        </wfs:Query> \
+        </wfs:GetFeature>";
+
+        var wfsQuery = wfsQueryTemplate.replace("%place_holder%", keyText);
+
+        var gmlOptions= {
+            "featureType": "Parcelle_2015",
+            "featureNS": "www.brugis.be/bdu/",
+            "geometryName": "GEOMETRY"
+        }
+        var gmlOptionsIn = OpenLayers.Util.extend(
+            OpenLayers.Util.extend({}, gmlOptions)
+        );
+        var parser = new OpenLayers.Format.GML.v3(gmlOptionsIn);
+
+        Ext.Ajax.request({
+            url: this.brugisConfig.getCapaKeyBaseUrl(),
+            xmlData: wfsQuery,
+            method: 'POST',
+            success: function(response, opts) {
+                var features = parser.read(response.responseXML);
+                this.onCapaKeyFound(features);
+            },
+            failure: function(response, otps) {
+                console.log("Failure");
+                console.log(response);
+            },
+            scope: this
+        });
+
+    },
+
 	onCapaKeyFound : function(result) {
 		if(result && result.length  > 0) {
 			var map = this.target.mapPanel.map;
-			myPoint =  result[0].geometry;
 
 			if(map.getLayersByName(this.searchLayerName).length > 0){
 				var vectorLayer = map.getLayersByName(this.searchLayerName)[0];
+                vectorLayer.destroyFeatures();
 				vectorLayer.addFeatures(new OpenLayers.Feature.Vector(
-					new OpenLayers.Geometry.Point(myPoint.x, myPoint.y)
+					//new OpenLayers.Geometry.Point(myPoint.x, myPoint.y)
+                    result[0].geometry
 				));
+                var dataExtent = vectorLayer.getDataExtent();
+                map.zoomToExtent(dataExtent);
 			}
 			else{
 				var vectorLayer = new OpenLayers.Layer.Vector(this.searchLayerName);
+                vectorLayer.destroyFeatures();
 				vectorLayer.addFeatures(new OpenLayers.Feature.Vector(
-					new OpenLayers.Geometry.Point(myPoint.x, myPoint.y)
+					//new OpenLayers.Geometry.Point(myPoint.x, myPoint.y)
+                    result[0].geometry
 				));
 				map.addLayer(vectorLayer);
+                var dataExtent = vectorLayer.getDataExtent();
+                map.zoomToExtent(dataExtent);
 			}
 
 			if(map.getLayersByName(this.searchLayerName).length > 0){
@@ -180,7 +234,7 @@ ux.plugins.BrugisSearcher = Ext.extend(gxp.plugins.Tool, {
 				console.log(vectorLayer);
 			}
 			//the array should consist of four values (left, bottom, right, top)
-			map.zoomToExtent(result[0].data.bounds);
+			//map.zoomToExtent(result[0].data.bounds);
 		}
 		else {
 			Ext.Msg.alert('CAD Search', 'Your query did not return any result');
