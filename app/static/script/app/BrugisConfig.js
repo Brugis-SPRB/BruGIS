@@ -101,13 +101,13 @@ Brugis.Config = Ext.extend(Object,  {
 		var url = "/";
 		switch(env) {
 			case this.DEV:
-				url = "http://svappmavw019:8080";
+				url = "http://mbr227.irisnet.be";
 				break;
 			case this.STA:
-				url = "http://mbr66.irisnetlab.be";
+				url = "http://mbr227.irisnet.be";
 				break;
 			case this.PRD:
-				url = "http://mbr102.irisnet.be";
+				url = "http://mbr227.irisnet.be";
 				break;
 		}
 		return url;
