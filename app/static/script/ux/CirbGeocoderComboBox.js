@@ -128,7 +128,7 @@ ux.form.CirbGeocoderComboBox = Ext.extend(Ext.form.ComboBox, {
 				callbackParam :  'callback'
             }),
             baseParams: {
-				language: this.language,
+				language: this.language === "en" ? "fr" : this.language,
 				address: this.queryParam,
 				spatialReference: '31370'
             },
