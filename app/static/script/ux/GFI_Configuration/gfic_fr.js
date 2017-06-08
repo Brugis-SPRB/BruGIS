@@ -786,7 +786,7 @@ ux.gfi.fr = {
                 {"name": "Date réception",          "label": "[%DT_RECEP%]",              "type":"date"}
             ]
         },
-        "BDU_DRU:Contrats_de_renovation_urbaine_programmes": {
+        "BDU_DRU:Contrats_de_renovation_urbaine_Programmes": {
             "actiontype" : "GRID",
             "title"      : "Contrat de rénovation urbaine (Programmes)): [%NOM_FR%]",
             "attributes" : [
