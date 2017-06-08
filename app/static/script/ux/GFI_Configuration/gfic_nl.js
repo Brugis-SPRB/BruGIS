@@ -702,12 +702,13 @@ ux.gfi.nl =  {
                 {"name": "Aflevering",              "label": "[%DT_RECEP%]",              "type":"date"}
             ]
         },
-        "BSO_DSV:Voorlopige_Stadsvernieuwingscontracten": {
+        "BSO_DSV:Stadsvernieuwingscontracten_Programmas": {
             "actiontype" : "GRID",
-            "title"      : "Contrat de rénovation urbaine: [%NOM_NL%]",
+            "title"      : "Stadsvernieuwingscontracten (Programmas): [%NOM_NL%]",
             "attributes" : [
-                {"name": "Contrat de RU",           "label": "[%NOM_NL%]",                "type":"string"},
-                {"name": "Serie",                   "label": "[%SERIE%]",                 "type":"string"}
+                {"name": "SV Contrat",              "label": "[%NOM_NL%]",                "type":"string"},
+                {"name": "Serie",                   "label": "[%SERIE%]",                 "type":"string"},
+								{"name": "Documenten",							"label": "[%DOC%]",										"type":"link"}
             ]
         },
         "BSO:Zones_met_verhoogde_huurprijs": {

@@ -786,12 +786,13 @@ ux.gfi.fr = {
                 {"name": "Date réception",          "label": "[%DT_RECEP%]",              "type":"date"}
             ]
         },
-        "BDU_DRU:Contrats_de_renovation_urbaine_provisoires": {
+        "BDU_DRU:Contrats_de_renovation_urbaine_programmes": {
             "actiontype" : "GRID",
-            "title"      : "Contrat de rénovation urbaine provisoire: [%NOM_FR%]",
+            "title"      : "Contrat de rénovation urbaine (Programmes)): [%NOM_FR%]",
             "attributes" : [
                 {"name": "Contrat de RU",           "label": "[%NOM_FR%]",                "type":"string"},
-                {"name": "Série",                   "label": "[%SERIE%]",                 "type":"string"}
+                {"name": "Série",                   "label": "[%SERIE%]",                 "type":"string"},
+								{"name": "Documentation",					  "label": "[%DOC%]",										"type":"link"}
             ]
         },
         "BDU:Quartiers_a_loyers_majores": {
