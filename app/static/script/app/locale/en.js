@@ -14,7 +14,7 @@ GeoExt.Lang.add("en", {
         baseGrayLayerTitle: "Urbis greyscale basemap",
         baseAquaLayerName : "BCR:Aquarelle",
         baseAquaLayerTitle: "Watercolor basemap",
-        BMBWMSUrl : "http://data-mobility.irisnet.be/geoserver/ows"
+        BMBWMSUrl : "http://data-mobility.brussels/geoserver/bm_inspire_en/ows"
     },
     "GeoExplorer.prototype": {
         zoomSliderText: "<div>Zoom Level: {zoom}</div><div>Scale: 1:{scale}</div>",

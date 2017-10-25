@@ -31,7 +31,7 @@ Brugis.Config = Ext.extend(Object,  {
   baseAquaLayerName : "BCR:Aquarelle",
   baseAquaLayerTitle: "Fond de plan Aquarelle",
 
-	BMBWMSUrl 	: "http://data-mobility.irisnet.be/geoserver/ows",
+	BMBWMSUrl 	: "http://data-mobility.brussels/geoserver/bm_inspire_fr/ows",
 
 	DEV : 'DEV',
 	STA : 'STA',
