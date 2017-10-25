@@ -480,9 +480,12 @@ ux.gfi.fr = {
 			"actiontype" : "GRID",
 			"title"		 : "Zone de préemption: [%NOM_FR%]",
 			"attributes" : [
-				{ "name": "Nom de zone"			, "label" : "[%NOM_FR%]"	                                , "type" : "string"},
-				{ "name": "Lien"				, "label" : "[%URL_FR%]"				                    , "type" : "link"},
-				{ "name": "Statut"		        , "label" : "['Inactif','Actif'][[%ACTIF%]]"				, "type" : "eval"}
+				{ "name": "Nom de zone"			, "label" : "[%NOM_FR%]"	                          , "type" : "string"},
+				{ "name": "Lien"				    , "label" : "[%URL_FR%]"				                    , "type" : "link"},
+				{ "name": "Statut"		      , "label" : "['Inactif','Actif'][[%ACTIF%]]"				, "type" : "eval"},
+				{ "name": "Date de promulgation"			, "label" : "[%PROMULGATION%]"		        , "type" : "date"},
+				{ "name": "Date de publication"				, "label" : "[%PUBLICATION%]"		          , "type" : "date"},
+				{ "name": "Date d'échéance"				    , "label" : "[%ECHEANCE%]"		            , "type" : "date"}
 			]
 		},
 		"BDU:PPAS":{

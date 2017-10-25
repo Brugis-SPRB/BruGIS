@@ -60,8 +60,11 @@ ux.gfi.nl =  {
 			"title"		 : "Voorkooprecht: [%NOM_NL%]",
 			"attributes" : [
 				{ "name": "Naam "				, "label" : "[%NOM_NL%]"	, "type" : "string"},
-				{ "name": "Lien"				, "label" : "[%URL_NL%]"				, "type" : "link"},
-				{ "name": "Status"		, "label" : "['Niet actief','Actief'][[%ACTIF%]]"				, "type" : "eval"}
+				{ "name": "Link"				, "label" : "[%URL_NL%]"				, "type" : "link"},
+				{ "name": "Status"		, "label" : "['Niet actief','Actief'][[%ACTIF%]]"				, "type" : "eval"},
+				{ "name": "Datum van bekendmaking"			, "label" : "[%PROMULGATION%]"		        , "type" : "date"},
+				{ "name": "Publicatie datum"				, "label" : "[%PUBLICATION%]"		          , "type" : "date"},
+				{ "name": "Vervaldag"				    , "label" : "[%ECHEANCE%]"		            , "type" : "date"}
 			]
 		},
 		"BSO_DML_BESC:Opmerkelijke_bomen": {
