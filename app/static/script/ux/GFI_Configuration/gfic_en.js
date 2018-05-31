@@ -209,7 +209,10 @@ ux.gfi.en = {
 			"attributes" : [
 				{ "name": "Nom de zone"			, "label" : "[%NOM_FR%]"	, "type" : "string"},
 				{ "name": "Lien"				, "label" : "[%URL_FR%]"				, "type" : "link"},
-				{ "name": "actif/inactif"		, "label" : "[%ACTIF%]"				, "type" : "string"}
+				{ "name": "actif/inactif"		, "label" : "[%ACTIF%]"				, "type" : "string"},
+				{ "name": "Promulgation date"			, "label" : "[%PROMULGATION%]"		        , "type" : "date"},
+				{ "name": "Publication date"				, "label" : "[%PUBLICATION%]"		          , "type" : "date"},
+				{ "name": "End of validity date"				    , "label" : "[%ECHEANCE%]"		            , "type" : "date"}
 			]
 		},
 		"BDU:PPAS":{
@@ -389,4 +392,3 @@ ux.gfi.en = {
             ]
         }
 	};
-

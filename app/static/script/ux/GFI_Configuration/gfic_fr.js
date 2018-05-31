@@ -480,9 +480,12 @@ ux.gfi.fr = {
 			"actiontype" : "GRID",
 			"title"		 : "Zone de préemption: [%NOM_FR%]",
 			"attributes" : [
-				{ "name": "Nom de zone"			, "label" : "[%NOM_FR%]"	                                , "type" : "string"},
-				{ "name": "Lien"				, "label" : "[%URL_FR%]"				                    , "type" : "link"},
-				{ "name": "Statut"		        , "label" : "['Inactif','Actif'][[%ACTIF%]]"				, "type" : "eval"}
+				{ "name": "Nom de zone"			, "label" : "[%NOM_FR%]"	                          , "type" : "string"},
+				{ "name": "Lien"				    , "label" : "[%URL_FR%]"				                    , "type" : "link"},
+				{ "name": "Statut"		      , "label" : "['Inactif','Actif'][[%ACTIF%]]"				, "type" : "eval"},
+				{ "name": "Date de promulgation"			, "label" : "[%PROMULGATION%]"		        , "type" : "date"},
+				{ "name": "Date de publication"				, "label" : "[%PUBLICATION%]"		          , "type" : "date"},
+				{ "name": "Date d'échéance"				    , "label" : "[%ECHEANCE%]"		            , "type" : "date"}
 			]
 		},
 		"BDU:PPAS":{
@@ -786,12 +789,13 @@ ux.gfi.fr = {
                 {"name": "Date réception",          "label": "[%DT_RECEP%]",              "type":"date"}
             ]
         },
-        "BDU_DRU:Contrats_de_renovation_urbaine_provisoires": {
+        "BDU_DRU:Contrats_de_renovation_urbaine_Programmes": {
             "actiontype" : "GRID",
-            "title"      : "Contrat de rénovation urbaine provisoire: [%NOM_FR%]",
+            "title"      : "Contrat de rénovation urbaine (Programmes): [%NOM_FR%]",
             "attributes" : [
                 {"name": "Contrat de RU",           "label": "[%NOM_FR%]",                "type":"string"},
-                {"name": "Série",                   "label": "[%SERIE%]",                 "type":"string"}
+                {"name": "Série",                   "label": "[%SERIE%]",                 "type":"string"},
+								{"name": "Documentation",					  "label": "[%DOC%]",										"type":"link"}
             ]
         },
         "BDU:Quartiers_a_loyers_majores": {

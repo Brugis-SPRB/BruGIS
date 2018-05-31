@@ -31,7 +31,7 @@ Brugis.Config = Ext.extend(Object,  {
   baseAquaLayerName : "BCR:Aquarelle",
   baseAquaLayerTitle: "Fond de plan Aquarelle",
 
-	BMBWMSUrl 	: "http://data-mobility.irisnet.be/geoserver/ows",
+	BMBWMSUrl 	: "http://data-mobility.brussels/geoserver/bm_inspire_fr/ows",
 
 	DEV : 'DEV',
 	STA : 'STA',
@@ -103,13 +103,13 @@ Brugis.Config = Ext.extend(Object,  {
 		var url = "/";
 		switch(env) {
 			case this.DEV:
-				url = "http://svappmavw115:8080";
+				url = "http://mbr227.irisnet.be";
 				break;
 			case this.STA:
-				url = "http://mbr66.irisnetlab.be";
+				url = "http://mbr227.irisnet.be";
 				break;
 			case this.PRD:
-				url = "http://mbr102.irisnet.be";
+				url = "http://mbr227.irisnet.be";
 				break;
 		}
 		return url;

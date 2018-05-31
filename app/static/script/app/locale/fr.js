@@ -14,7 +14,7 @@ GeoExt.Lang.add("fr", {
         baseGrayLayerTitle: "Urbis grisé",
         baseAquaLayerName : "BCR:Aquarelle",
         baseAquaLayerTitle: "Fond de plan Aquarelle",
-        BMBWMSUrl : "http://data-mobility.irisnet.be/geoserver/ows"
+        BMBWMSUrl : "http://data-mobility.brussels/geoserver/bm_inspire_fr/ows"
     },
     "GeoExplorer.prototype": {
         zoomSliderText: "<div> Niveau de zoom: {zoom}</div><div Echelle: 1:{scale}</div>",
