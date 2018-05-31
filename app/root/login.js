@@ -17,7 +17,7 @@ exports.app = function(request) {
     return {
         status: status,
         headers: {
-            "Set-Cookie": cookie + ";Path=/geoserver/;" 
+            "Set-Cookie": cookie + ";Path=/geoserver/; HttpOnly" 
         },
         body: []
     };

@@ -105,7 +105,7 @@ ux.plugins.ReperageToolbox = Ext.extend(gxp.plugins.Tool, {
 	/** api: config[myReperage]
 	 *  ``String``
 	 */
-	brugisWmsHost : "http://www.mybrugis.irisnet.be/geoserver/wms",
+	brugisWmsHost : "https://mybrugis.irisnet.be/geoserver/wms",
 
 	/** api: config[myReperage]
 	 *  ``String``

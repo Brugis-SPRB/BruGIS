@@ -41,7 +41,7 @@ exports.getStatus = function(request) {
     var status = 401;
     var headers = new Headers(request.headers);
     var token = headers.get("Cookie");
-	
+
     var exchange = clientRequest({
         url: url,
         method: "GET",
@@ -60,6 +60,7 @@ exports.authenticate = function(request) {
     var token;
     if (params.username && params.password) {
         var url = getLoginUrl(request);
+        log.info("url {}",url);
         var exchange = clientRequest({
             url: url,
             method: "post",
@@ -75,11 +76,12 @@ exports.authenticate = function(request) {
 
         if (status === 200) {
             var cookie = exchange.headers.get("Set-Cookie");
-			//log.info("cookie {}",cookie);
+			      log.info("cookie {}",cookie);
+            //- cookie JSESSIONID=B5C07BAC68D130AE0CD986336B446A52; Path=/geoserver/; HttpOnly
             if (cookie) {
-                token = cookie.split(";").shift();
+              //  token = cookie.split(";").shift();
 				// CHange because of httponly cookie
-				//token = cookie.split(";")[0];
+				      token = cookie.split(";")[0];
             }
         }
     }
@@ -88,4 +90,3 @@ exports.authenticate = function(request) {
         status: status
     }
 };
-
